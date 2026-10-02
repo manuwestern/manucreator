@@ -1,0 +1,13 @@
+import { MessageCircle, FileText, Settings, ArrowRight, Send, Clock3, Check, Heart } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Reveal } from './Reveal';
+
+const steps = [
+  { icon: MessageCircle, title: 'Idee teilen', text: <>Du erzählst mir von deiner Idee.<br />Ich kümmere mich um die Details.</> },
+  { icon: FileText, title: 'Angebot erhalten', text: <>Du bekommst ein persönliches,<br />maßgeschneidertes Angebot.</> },
+  { icon: Settings, title: 'Umsetzung', text: <>Ich fertige dein Unikat<br />mit modernster Lasertechnik.</> },
+];
+
+export const Process = () => <section className="process-section" id="ablauf" data-testid="process-section"><div className="wrap"><Reveal><h2 className="eyebrow section-eyebrow" data-testid="process-heading">SO EINFACH GEHT’S</h2></Reveal><div className="process-grid">{steps.map(({ icon: Icon, title, text }, i) => <Reveal key={title} className="process-step" delay={i * 0.1}><div className="process-icon"><Icon size={36} strokeWidth={1.1} /><span>0{i + 1}</span></div><h3 data-testid={`process-step-title-${i}`}>{i + 1}. {title}</h3><p data-testid={`process-step-description-${i}`}>{text}</p>{i < 2 && <ArrowRight className="process-arrow" size={29} strokeWidth={1} />}</Reveal>)}</div></div></section>;
+
+export const ContactBanner = ({ onRequest }) => <section className="contact-section" id="kontakt" data-testid="contact-section"><img className="contact-image" src="/images/contact.jpg" alt="Holzwürfel mit Make it Real-Gravur" loading="lazy" /><div className="contact-wash" /><div className="wrap contact-inner"><Reveal className="contact-copy"><p className="eyebrow" data-testid="contact-eyebrow">AUS DEINER IDEE WIRD EIN UNIKAT.</p><h2 data-testid="contact-heading">Was möchtest du<br />gestalten lassen?</h2><p data-testid="contact-description">Ob Geschenk, Einzelstück oder Firmenprojekt –<br />ich freue mich auf deine Anfrage.</p><Button className="pill" data-testid="contact-inquiry-button" onClick={onRequest}><Send size={16} fill="currentColor" />Jetzt unverbindlich anfragen</Button></Reveal><Reveal className="contact-promises" delay={0.1}>{[[Clock3, 'Persönliche Rückmeldung'], [Check, 'Individuelle Beratung'], [Heart, 'Mit Liebe zum Detail']].map(([Icon, text], i) => <div data-testid={`contact-promise-${i}`} key={text}><Icon size={21} strokeWidth={1.4} /><span>{text}</span></div>)}</Reveal></div></section>;

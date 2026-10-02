@@ -1,0 +1,79 @@
+import logging
+import os
+from contextlib import asynccontextmanager
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Literal
+from uuid import UUID
+
+from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException
+from motor.motor_asyncio import AsyncIOMotorClient
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pymongo.errors import DuplicateKeyError, PyMongoError
+from starlette.middleware.cors import CORSMiddleware
+
+load_dotenv(Path(__file__).parent / '.env')
+client = AsyncIOMotorClient(os.environ['MONGO_URL'], serverSelectionTimeoutMS=5000)
+db = client[os.environ['DB_NAME']]
+logger = logging.getLogger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await db.inquiries.create_index('id', unique=True)
+    yield
+    client.close()
+
+
+app = FastAPI(title='ManuCreator', lifespan=lifespan)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=os.environ['CORS_ORIGINS'].split(','),
+    allow_credentials=False,
+    allow_methods=['GET', 'POST'],
+    allow_headers=['Content-Type'],
+)
+
+
+class InquiryCreate(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
+    request_id: UUID
+    name: str = Field(min_length=2, max_length=120)
+    email: EmailStr = Field(max_length=254)
+    material: Literal['holz', 'kunststoff', 'glas', 'metall', 'schiefer', 'textil', 'offen']
+    quantity: int = Field(ge=1, le=100000)
+    message: str = Field(min_length=10, max_length=5000)
+    consent: Literal[True]
+    website: str = Field(default='', max_length=0)
+
+
+class InquiryReceipt(BaseModel):
+    id: str
+    message: str
+
+
+@app.get('/api/health')
+async def health():
+    try:
+        await db.command('ping')
+    except PyMongoError:
+        raise HTTPException(503, 'Der Dienst ist vorübergehend nicht erreichbar.')
+    return {'status': 'ok'}
+
+
+@app.post('/api/inquiries', response_model=InquiryReceipt, status_code=201)
+async def create_inquiry(inquiry: InquiryCreate):
+    inquiry_id = str(inquiry.request_id)
+    document = inquiry.model_dump(exclude={'request_id', 'website'})
+    document.update(id=inquiry_id, created_at=datetime.now(timezone.utc).isoformat(), status='new')
+    try:
+        await db.inquiries.insert_one(document)
+    except DuplicateKeyError:
+        # A repeated submission returns the same receipt, never duplicate customer data.
+        pass
+    except PyMongoError:
+        logger.exception('Inquiry could not be saved')
+        raise HTTPException(503, 'Deine Anfrage konnte nicht gespeichert werden. Bitte versuche es noch einmal.')
+    # Never expose the MongoDB document or customer data through a public read endpoint.
+    return InquiryReceipt(id=inquiry_id, message='Deine Anfrage wurde erfolgreich gespeichert.')

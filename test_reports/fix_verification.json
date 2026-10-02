@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-02",
+  "source_report": "/app/test_reports/iteration_1.json",
+  "verification_method": "External preview Playwright screenshot tool after fixes",
+  "fixes": {
+    "localized_consent_validation": "PASS: filled required fields, submitted without consent, asserted German app-level error",
+    "dialog_transition_race": "PASS: immediate inquiry close to about, about close to gallery, gallery close to services anchor",
+    "scroll_container_warning": "PASS: html position relative; no container position warning in subsequent console log",
+    "reduced_motion": "PASS: emulated reduced motion, reloaded, verified hero image computed transform none"
+  },
+  "additional_checks": ["Hero screenshot with full crystal visible", "Services screenshot and anchor scroll position > 200", "Contact and footer screenshot", "Production build compiled successfully"],
+  "console_note": "Expected Framer reduced-motion notice under explicit emulation; platform telemetry aborted on reload. No app errors.",
+  "remaining_functional_bugs": []
+}
