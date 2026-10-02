@@ -12,6 +12,7 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 - Aktuell: geliefertes Video als Hero-Hintergrund nutzen; Scrollen abwärts steuert die Bilder vorwärts, aufwärts rückwärts. Kein zeitgesteuertes Autoplay.
 - Nach Fehlermeldung des Nutzers wird derselbe Effekt mit echten extrahierten Video-Einzelbildern statt browserabhängigem Video-Seeking dargestellt. Bewegungsreduktion bleibt standardmäßig respektiert, kann ausdrücklich im Hero übersteuert werden.
 - Neueste Klarstellung: Die Seite muss ab dem ersten Scrollschritt normal mitscrollen. Der Hero darf NICHT festgehalten werden und darf keine zusätzliche Scrollstrecke für das Video erzeugen. Frames bewegen sich nur begleitend zum normalen Scrollen.
+- Betreiber: Manuel Bayer, ManuCreator, Büttgerwald 16, 47877 Willich, info@manucreator.de. Einzelunternehmer ohne Handelsregistereintrag; Kleinunternehmer nach § 19 UStG. Privat- und Geschäftskunden, personalisierte und Standardwaren sowie kundeneigene Gegenstände. Vertrag erst durch ausdrückliche Auftragsbestätigung; Vorkasse/Überweisung und PayPal als außerwebsitebezogene Zahlungsarten.
 
 ## Nutzergruppen
 - Privatpersonen auf der Suche nach individuellen Geschenken und Einzelstücken.
@@ -34,12 +35,12 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 - API-URL ausschließlich aus `REACT_APP_BACKEND_URL`. Keine Änderungen geschützter Umgebungswerte.
 - Kein Login, Adminbereich, Dateiupload oder E-Mail-Versand angefragt oder implementiert. Anfragen werden tatsächlich gespeichert, keine gemockte API.
 - Keine öffentliche Liste oder Abrufmöglichkeit für personenbezogene Anfragedaten.
-- Pydantic validiert UUID, Name, E-Mail, Material, Stückzahl, Nachricht, Einwilligung und Honeypot. Einmalige Request-ID verhindert doppelte Speicherung bei Retry.
-- Einwilligungszeitpunkt entspricht `created_at`, gespeichert als UTC-ISO-Zeitstempel; Status initial `new`.
+- Pydantic validiert UUID, Name, E-Mail, Material, Stückzahl, Nachricht und Honeypot. Einmalige Request-ID verhindert doppelte Speicherung bei Retry. Seit Rechtsanpassung ist keine gesonderte Einwilligung für die vorvertragliche Anfrage erforderlich; alte `consent`-Felder werden optional akzeptiert, aber nicht als neue Einwilligung gespeichert.
+- `created_at` ist der Eingang als UTC-ISO-Zeitstempel, Status initial `new`; neue Anfragen enthalten `privacy_notice_version`. Dies ist kein Einwilligungsnachweis. Alte Bestandsdaten wurden nicht nachträglich verändert.
 - Statische Bilder unter `frontend/public/images/`, Materialdaten zentral unter `src/data/services.js`.
 - Vom Nutzer bereitgestellte Vorlage ist Designgrundlage, deshalb kein eigener Design-Agent benötigt. Palette Anthrazit, gebrochenes Weiß, warmer heller CTA-Akzent; lokal gehostete variable Schrift Manrope.
 - Stockbilder waren nicht passend zur Materialdarstellung. Vorläufige Produktmotive wurden generiert. Original-Logo aus der vom Nutzer bereitgestellten Mockup-Bilddatei extrahiert.
-- Kontakt-, Material-, Beispiel-, Über-mich- und Rechtstext-Ansichten als zugängliche Dialoge, keine unnötigen Unterseiten.
+- Kontakt-, Material-, Beispiel- und Über-mich-Ansichten als zugängliche Dialoge. Rechtstexte seit neuestem als eigene direkt verlinkbare, druckbare React-Router-Seiten `/impressum`, `/agb`, `/datenschutz`, `/widerruf`.
 
 ## Implementiert — 2026-10-02
 - Vollständige responsive One-Page entsprechend dem Mockup.
@@ -64,7 +65,10 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 
 ## Priorisierter Backlog
 ### P0 — Nutzerangaben erforderlich
-- Vollständigen Namen/Firmenbezeichnung, Anschrift und Kontaktdaten für Impressum erhalten; Datenschutz anhand tatsächlicher Betreiber-/Hostingangaben vervollständigen.
+- Geschäftliche Telefonnummer für vollständige Fernabsatzinformationen und Widerrufsmuster erhalten. Ggf. bereits zugeteilte USt-ID/Wirtschafts-ID erfragen, nicht persönliche Steuernummer veröffentlichen.
+- Rechtstext-Entwürfe anwaltlich prüfen; Annahmen zur Nichtteilnahme an Schlichtung und vom Kunden getragenen Widerrufs-Rücksendekosten bestätigen.
+- Konkrete Hosting-/Datenbank-/E-Mail-Anbieter, Vertrags- und Datenregionen, Protokoll-/Aufbewahrungsfristen, AV-Verträge und Löschkonzept final bestätigen. Öffentliches DPA ist recherchiert, konkrete Kontokonfiguration nicht geprüft.
+- Verlässlichen Prozess zur Bearbeitung gespeicherter Anfragen sicherstellen: weiterhin KEINE automatische E-Mail-Weiterleitung vorhanden.
 ### P1 — Vom Nutzer angekündigt
 - Noch ausstehende Originalbilder für Holzgravuren und Kunststoffgravuren einbauen, sobald hochgeladen. Glas, Metall, Schiefer, Textildruck und Kontaktmotiv sind bereits ersetzt.
 - Ursprünglich angekündigte separate Hero-Ebenen sind durch den später gewünschten, gelieferten Scroll-Video-Hero ersetzt; keine weiteren Hero-Bilder für den aktuellen Effekt erforderlich.
@@ -75,7 +79,7 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 
 ## Nächste Aufgaben
 1. Weitere Originalbilder für Holz/Kunststoff vom Nutzer entgegennehmen.
-2. Rechtliche Anbieterangaben ergänzen.
+2. Fehlende Telefonnummer und Betriebsdetails ergänzen; Rechtstext-Entwürfe nach fachlicher Prüfung freigeben.
 3. Optional interaktive Gravurvorschau anbieten.
 
 ## Bildaktualisierung — 2026-10-02
@@ -174,3 +178,41 @@ Nutzerpräzisierung: „Die Seite soll aber trotzdem schon scrollen also nicht e
 - Gezielter Testing-Agent-Nachtest: normale Bewegung, fehlende Zusatzstrecke, Frame-Vorwärts/Rückwärtslauf, stabiler Seitenumfang beim Umschalten und Leistungen-Anker bestanden. Desktop, Mobilviewport 390 × 844 und echte WebKit-Engine geprüft.
 - Bericht: `/app/test_reports/iteration_7.json`; wiederholbarer Test `/app/tests/webkit_quick_hero_scroll.py`; Messwerte `/app/test_reports/artifacts/iteration_7/webkit_quick_results.json`.
 - Keine offenen Fehler dieses Änderungsumfangs. Keine Backend-, Integrations- oder weiteren Designänderungen.
+
+## Impressum, AGB und rechtliche Grundlagen — 2026-10-02
+Originalauftrag: „Impresssum Manuel Bayer Büttgerwald 16 47877 Willich info@manucreator.de Erzeuge auch eine sinnvolle AGB und was mich rechtlich wichtig ist“.
+
+Klärung durch Nutzer: „1a, 2a, 3b, 4a,c,d,e,f Paypal“ = Einzelunternehmer ohne Handelsregister, Kleinunternehmer §19 UStG, ausdrückliche Auftragsbestätigung als Vertragsschluss, Privat-/Geschäftskunden, personalisierte/Standardwaren und kundeneigene Gegenstände, Überweisung/Vorkasse und PayPal.
+
+### Implementiert
+- Anbieterkennzeichnung mit den tatsächlichen Nutzerangaben auf `/impressum`, keine erfundenen Register-/Steuer-/Telefonangaben.
+- Individueller AGB-Entwurf `/agb`: klare unverbindliche Anfrage und Vertrag erst durch ausdrückliche Auftragsbestätigung; Gestaltung/Freigaben, Kundengegenstände, Motivrechte, Kleinunternehmerpreise, Vorkasse/PayPal, Lieferung, Verbraucherwiderruf, Werkvertragsrechte, Mängelrechte, ausgewogene Haftung und keine Zwangs-Gerichtsstandsklausel für Verbraucher.
+- Datenschutz-Entwurf `/datenschutz` anhand tatsächlicher Datenflüsse, Betreiber, Anfrage-DB, lokal ausgelieferter Schrift/Medien, PayPal nur bei separat vereinbarter Zahlung, Betroffenenrechte/LDI NRW. Hostingdaten und Drittlandsbezug aus offiziellem DPA übernommen, konkrete Betriebsdetails ausdrücklich noch offen.
+- Widerrufs-Entwurf `/widerruf`: getrennte Abschnitte für Standardwaren und Dienst-/Bearbeitungsleistungen; personalisierte Waren nur bei gesetzlichen Voraussetzungen ausgenommen. Keine pauschale Ausnahme für mitgebrachte Gegenstände; kein Erlöschen bei bloßem Arbeitsbeginn. Freiwilliges Musterformular mit Download.
+- Alle Rechtsseiten mit direkter URL, Titel, Inhaltsnavigation, Druck-/PDF-Funktion und Volltextdownload; Footerlinks, Rückkehr zur Startseite, mobile Lesbarkeit.
+- Alle Rechtstexte sichtbar als nicht abschließend geprüfte Entwürfe markiert. Fehlende Telefonnummer im Impressum/Widerruf ausdrücklich genannt. Keine Garantie der Rechtskonformität.
+- Betreiber-Checkliste unter `/downloads/ManuCreator-Rechtliche-Checkliste.txt`: AGB-Einbeziehung vor verbindlicher Kundenerklärung, Vertragsunterlagen, vollständige Verbraucherinformationen, vorzeitiger Leistungsbeginn, Widerrufsfunktion bei späterem Onlinevertrag, Datenschutz-/Löschprozesse, PayPal-Gewerbenutzung, Rechnungen, GPSR, Lebensmittelkontakt, Textilkennzeichnung, VerpackG/LUCID, Kammer-/Gewerberecht, Haftpflicht, Nutzungsrechte und BFSG-Prüfung.
+- Kein Online-Bestell-/Zahlungs-/Vertragsabschluss implementiert. PayPal ist rechtlich beschriebene externe Zahlungsoption, keine neue Integration. Download/Mailkontakt wird nicht als gesetzliche elektronische Widerrufsfunktion ausgegeben.
+
+### Datenschutzbezogene technische Anpassungen
+- Explizite PostHog-/Session-Recording-Einbindung und `emergent-main.js` aus `frontend/public/index.html` entfernt. Keine neuen Analyse-/Cookie-Dienste hinzugefügt. Keine pauschale Behauptung völliger Infrastruktur-Cookie-Freiheit.
+- Obligatorische Einwilligungscheckbox im Anfrageformular entfernt; stattdessen vor Absenden transparenter Datenschutzhinweis mit Link in neuem Tab, Verantwortlichem und Rechtsgrundlage für vorvertragliche Bearbeitung. Ausdrücklicher Hinweis: keine Bestellung, Vertrag erst mit Auftragsbestätigung.
+- Backend benötigt keine Einwilligung mehr. Kompatibilitätsfeld `consent` optional und ausgeschlossen von neuer Speicherung; `privacy_notice_version='2026-10-02'` wird festgehalten. Historische Datensätze unverändert. Kein automatischer E-Mail-Versand hinzugefügt.
+
+### Wichtige juristische Grenzen/noch offene Angaben
+- Geschäftliche Telefonnummer noch nicht geliefert; gesetzliche Fernabsatzinformationen/Muster daher noch nicht vollständig. Vor verbindlichen Verbraucheraufträgen ergänzen.
+- Nichtteilnahme an Verbraucherschlichtung und unmittelbare Rücksendekosten beim Kunden sind gewählte Entwurfsannahmen, vom Betreiber zu bestätigen.
+- Keine persönliche Steuernummer veröffentlicht; vorhandene USt-ID/W-ID trotz Kleinunternehmerstatus ggf. nachtragen.
+- Öffentliches Hosting-DPA nennt Emergent Labs Inc., 2380 Via Espada, Pleasanton, CA 94566, USA; mögliche Verarbeitungsorte USA/EU/Indien, SCC als vorgesehenes Transferinstrument. Keine nicht geprüfte EU-only-Zusage, kein unbelegter Nachweis konkreter Kontoeinstellungen oder tatsächlicher Log-Aufbewahrungsfristen.
+- Konkreter E-Mail-Anbieter und Löschkonzept noch offen. Anwendung löscht Anfragen nicht automatisch. Checkliste weist auf manuelle organisatorische Umsetzung und fehlende automatische Betreiberbenachrichtigung hin.
+- AGB-Veröffentlichung allein bezieht sie nicht wirksam ein. Texte vor verbindlicher Kundenerklärung bereitstellen und passende Widerrufsbelehrung mit Telefonnummer auf dauerhaftem Datenträger übermitteln.
+- §356a BGB seit 19.06.2026: Pflicht bei Vertragsschluss über Onlineoberfläche prüfen. Derzeit echtes unverbindliches Anfrageformular; bei späterer Bestellung/Annahme-/Zahlungsänderung neu bewerten. Kein vorgetäuschter Widerrufsbutton ohne Eingangsbestätigung.
+- Offizielle Quellen aus §5 DDG, §§312g/356/356a BGB, Artikel246a EGBGB und Anlage1 recherchiert. Aktuelle amtliche §356-Struktur verwendet (Dienstleistungserlöschen inzwischen Absatz5). EU-OS-Plattform seit20.07.2025 eingestellt: kein veralteter Pflichtlink eingebaut.
+- Neue harmonisierte Gewährleistungsmitteilung nach EU2025/1960 / aktuellem Artikel246a EGBGB in Betreiber-Checkliste für konkrete Angebote/Vertragsschluss berücksichtigt; keine unbelegte Behauptung, ein AGB-Satz erfülle alle Kennzeichnungspflichten.
+
+### Verifiziert
+- 15/15 Backendtests: ohne Consent erfolgreich, alte true/false/fehlende Consentwerte akzeptiert und nicht gespeichert, Pflichtfelder weiter validiert, Mongo-Persistenz, Idempotenz, keine öffentliche Anfrageliste.
+- Frontend: vier direkte Routen inklusive Reload/Titel, Footer/Tabs/TOC/Mail/Zurück, Downloads/Volltext/Widerrufsformular, Druckansicht, 390-/360-Pixel-Layout ohne Overflow, Browserformular ohne Checkbox und Datenschutzlink, Hero weiterhin ohne Pinning.
+- Explizite Telemetrie-Snippets in Source/Build fehlen; in getesteten Abläufen keine Anfragen an PostHog/ap.emergent.sh/emergent-main.js beobachtet.
+- Testdaten bereinigt; Bericht `/app/test_reports/iteration_8.json`; Build `/app/test_reports/legal-build.log` erfolgreich.
+- Keine technischen Fehler im geprüften Umfang. Rechtsprüfung wurde NICHT durch Funktionstests ersetzt.

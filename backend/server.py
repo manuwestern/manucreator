@@ -44,7 +44,9 @@ class InquiryCreate(BaseModel):
     material: Literal['holz', 'kunststoff', 'glas', 'metall', 'schiefer', 'textil', 'offen']
     quantity: int = Field(ge=1, le=100000)
     message: str = Field(min_length=10, max_length=5000)
-    consent: Literal[True]
+    # Kept only for old clients; precontractual inquiry handling does not require
+    # an additional consent. Do not store it as a new consent record.
+    consent: bool | None = Field(default=None, exclude=True)
     website: str = Field(default='', max_length=0)
 
 
@@ -66,7 +68,7 @@ async def health():
 async def create_inquiry(inquiry: InquiryCreate):
     inquiry_id = str(inquiry.request_id)
     document = inquiry.model_dump(exclude={'request_id', 'website'})
-    document.update(id=inquiry_id, created_at=datetime.now(timezone.utc).isoformat(), status='new')
+    document.update(id=inquiry_id, created_at=datetime.now(timezone.utc).isoformat(), status='new', privacy_notice_version='2026-10-02')
     try:
         await db.inquiries.insert_one(document)
     except DuplicateKeyError:

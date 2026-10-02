@@ -1,14 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import '@/App.css';
 import '@/styles/product-images.css';
+import '@/styles/legal.css';
 import { Header, Footer } from '@/components/site/Layout';
 import { Hero } from '@/components/site/Hero';
 import { Services } from '@/components/site/Services';
 import { Process, ContactBanner } from '@/components/site/Sections';
 import { InquiryDialog } from '@/components/site/InquiryDialog';
 import { ContentDialog } from '@/components/site/ContentDialog';
+import LegalPage from '@/pages/LegalPage';
+import { legalDocuments } from '@/data/legal';
+import { legalNavigation } from '@/data/legal/company';
 
-export default function App() {
+function HomePage() {
   const [inquiry, setInquiry] = useState(null);
   const [content, setContent] = useState(null);
   const request = (material = 'offen') => { setContent(null); setInquiry(material); };
@@ -27,4 +32,21 @@ export default function App() {
       <InquiryDialog material={inquiry} onClose={() => setInquiry(null)} />
     </>
   );
+}
+
+function RouteScroll() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const target = window.location.hash.slice(1);
+    const id = requestAnimationFrame(() => {
+      if (target && document.getElementById(target)) document.getElementById(target).scrollIntoView();
+      else window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [pathname]);
+  return null;
+}
+
+export default function App() {
+  return <BrowserRouter><RouteScroll /><Routes><Route path="/" element={<HomePage />} />{legalNavigation.map(item => <Route key={item.key} path={item.path} element={<LegalPage document={legalDocuments[item.key]} />} />)}<Route path="*" element={<HomePage />} /></Routes></BrowserRouter>;
 }

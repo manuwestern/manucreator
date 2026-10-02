@@ -1,0 +1,86 @@
+MANUCREATOR – RECHTLICHE BETREIBER-CHECKLISTE
+Stand: 2. Oktober 2026
+
+Dies ist eine Orientierung und Arbeitsgrundlage, keine anwaltliche oder steuerliche Einzelfallberatung. Die Website-Texte sind Entwürfe. Eine Veröffentlichung von AGB ersetzt weder ihre wirksame Einbeziehung noch die tatsächliche Umsetzung der beschriebenen Abläufe.
+
+1. VOR VERBINDLICHEN VERBRAUCHERAUFTRÄGEN ERGÄNZEN
+
+- Geschäftliche Telefonnummer: Sie fehlt noch. Insbesondere die Fernabsatzinformationen nach Artikel 246a § 1 Absatz 1 Nummer 3 EGBGB und das gesetzliche Muster der Widerrufsbelehrung sehen eine Telefonnummer vor. Eine fehlende Telefonnummer wird nicht durch den vorhandenen Entwurfshinweis ersetzt.
+- Prüfen, ob eine Umsatzsteuer-Identifikationsnummer oder Wirtschafts-Identifikationsnummer bereits zugeteilt wurde. Falls vorhanden, gehört sie ins Impressum (§ 5 DDG), auch wenn die Kleinunternehmerregelung genutzt wird. Die persönliche Steuernummer gehört nicht ins öffentliche Impressum.
+- Adresse als tatsächliche, zustellfähige Geschäftsanschrift bestätigen; E-Mail-Postfach regelmäßig überwachen.
+- Entwurfsannahme prüfen: keine freiwillige Teilnahme an Verbraucherschlichtung und keine gesetzliche Teilnahmeverpflichtung. Eine bestehende Bindung, beispielsweise durch Mitgliedschaft, wäre zu berücksichtigen. Informationspflichten im konkreten Streitfall nach § 37 VSBG gesondert erfüllen.
+- Widerrufs-Rücksendekosten: Der Entwurf legt die unmittelbaren Rücksendekosten beim Kunden an. Dies muss zum tatsächlichen Geschäft passen und vorher mitgeteilt werden. Für nicht paketversandfähige Waren müssen erforderliche konkrete oder geschätzte Rücksendekosten vor Vertragsschluss ergänzt werden.
+- AGB, Haftung, Bearbeitungsrisiken und Widerrufsunterlagen durch eine im E-Commerce-/Vertragsrecht tätige Rechtsberatung prüfen lassen.
+
+2. AUFTRÄGE SAUBER ABSCHLIESSEN
+
+- Die Website sammelt nur unverbindliche Anfragen. Weder Speicherung noch Eingangsbestätigung sind Bestellung oder Auftragsbestätigung.
+- Vor einer verbindlichen Kundenbestellung müssen Produkt-/Leistungsmerkmale, Gesamtpreis, Versand-/Nebenkosten, Zahlungsweise, Liefer-/Leistungsfrist, Kontaktdaten und einschlägige Verbraucherinformationen feststehen.
+- Die AGB und die zum Auftrag passende Widerrufsbelehrung einschließlich Musterformular vor der verbindlichen Kundenerklärung zugänglich machen, sinnvollerweise als E-Mail-Anhang. Nicht erstmals nach Vertragsschluss beifügen.
+- Vertrag erst durch ausdrücklich als solche bezeichnete Auftragsbestätigung von ManuCreator annehmen. Vertragsunterlagen anschließend auf einem dauerhaften Datenträger, beispielsweise als E-Mail mit Anhang, bestätigen.
+- Die bereits vorhandene Formular-Referenz bestätigt nur den Eingang. Keine Produktions- oder Zahlungsfreigabe daraus ableiten.
+- Freigaben zu Schreibweise, Motiv, Position, Material, Farben und eventuellen Tests dokumentieren. Freigaben nehmen Kunden ihre gesetzlichen Mängelrechte nicht.
+- Seit 27. September 2026 geltende beziehungsweise umgesetzte Vorgaben zur harmonisierten Gewährleistungsmitteilung nach Durchführungsverordnung (EU) 2025/1960 und zum jeweils aktuellen Artikel 246a EGBGB bei Angeboten/Vertragsschluss berücksichtigen. Ein einfacher AGB-Satz ersetzt eine vorgeschriebene harmonisierte Mitteilung nicht. Hersteller-Garantien nur nennen, wenn sie tatsächlich bestehen.
+
+3. WIDERRUF NICHT PAUSCHAL AUSSCHLIESSEN
+
+- Individuell hergestellte oder eindeutig persönlich zugeschnittene Waren können unter § 312g Absatz 2 Nummer 1 BGB fallen. Die Voraussetzungen prüfen und den Kunden vor Vertragsschluss auftragsbezogen informieren. Eine beliebige Auswahl aus Standardoptionen genügt nicht automatisch.
+- Nicht personalisierte Standardware grundsätzlich mit 14-tägiger Verbraucher-Widerrufsfrist behandeln; Fristbeginn je nach Lieferung korrekt auswählen.
+- Gravur/Bearbeitung kundeneigener Gegenstände separat einordnen. Dies ist nicht automatisch eine vom Widerruf ausgeschlossene Lieferung personalisierter Ware.
+- Für einen gewünschten Arbeitsbeginn vor Fristablauf bei entsprechenden entgeltlichen Dienstleistungen/Werkleistungen gesondert und ausdrücklich einholen:
+  „Ich verlange ausdrücklich und stimme zu, dass ManuCreator vor Ablauf der Widerrufsfrist mit der vereinbarten Dienstleistung beginnt. Mir ist bekannt, dass mein Widerrufsrecht mit vollständiger Vertragserfüllung durch ManuCreator erlischt. Bei einem vorherigen Widerruf kann unter den gesetzlichen Voraussetzungen Wertersatz für bereits erbrachte Leistungen anfallen.“
+  Diese Erklärung nur mit konkreter Auftragszuordnung, ordnungsgemäßer Belehrung und in der gesetzlich erforderlichen Form verwenden; nicht als vorangekreuzte Klausel im allgemeinen Anfrageformular. Bei einem außerhalb von Geschäftsräumen geschlossenen Vertrag ist insbesondere die dauerhafte Übermittlung der Zustimmung zu beachten.
+- Kein vollständiger Verlust des Widerrufsrechts schon bei Arbeitsbeginn. Bei Leistungen sind vollständige Erbringung und die weiteren gesetzlichen Voraussetzungen erforderlich. Kein pauschaler Ausschluss von Mängelrechten bei gravierten Waren.
+- Die seit 19. Juni 2026 geltende elektronische Widerrufsfunktion (§ 356a BGB) prüfen, sobald Verträge über eine Online-Benutzeroberfläche geschlossen werden. Die gegenwärtige Website nimmt nur unverbindliche Anfragen entgegen und hat keine Online-Bestell-/Annahmefunktion. Bei geändertem Ablauf Pflicht neu prüfen, auch wenn die formale Annahme anschließend per E-Mail erfolgt. Nicht pauschal auf „E-Mail-Vertrag“ als Ausnahme verlassen.
+- Ein Download des Musterformulars oder ein E-Mail-Link wäre KEIN Ersatz für einen gegebenenfalls vorgeschriebenen Widerrufsbutton mit zweiter Bestätigung und unverzüglicher Eingangsbestätigung auf dauerhaftem Datenträger. Eine solche Funktion wird auf der reinen Anfrageseite nicht behauptet.
+- Die EU-OS-Plattform wurde am 20. Juli 2025 eingestellt. Keinen veralteten Pflichtlink darauf verwenden. Nationale Verbraucherstreitbeilegung bleibt davon getrennt.
+
+4. DATENSCHUTZ TATSÄCHLICH UMSETZEN
+
+- Vertragliche Hosting-Konfiguration prüfen: Emergent Labs Inc., zugehöriger Auftragsverarbeitungsvertrag, tatsächlich eingesetzte Unterauftragnehmer, Datenbank-/Serverregionen, Protokollfristen, Zugriffsberechtigungen und Sicherungen. Keine EU-exklusive Speicherung unterstellen. Öffentliches DPA nennt USA, EU und Indien und sieht unter anderem Standardvertragsklauseln vor. Die konkrete Konfiguration und einschlägigen Garantien anhand der Vertragsunterlagen bestätigen.
+- Den tatsächlich eingesetzten E-Mail-Anbieter, die Buchhaltung, Bank, Versandunternehmen und gegebenenfalls weitere Empfänger dokumentieren; erforderliche Auftragsverarbeitungsverträge abschließen.
+- Datenschutztext anhand dieser Angaben freigeben. Entwicklungsvorschau und endgültige Betriebsumgebung getrennt prüfen: Infrastruktur-/Entwicklungstools können zusätzliche Datenverarbeitung verursachen.
+- Die frühere explizite Analyse-/Session-Recording-Einbindung wurde aus der HTML-Seitenvorlage entfernt. Schrift, Bilder und Hero-Frames werden lokal ausgeliefert. Keine pauschale Cookie-Freiheitszusage: technisch notwendige Infrastruktur-Funktionen gesondert prüfen. Vor späterer Analyse-/Marketingeinbindung erst Einwilligungslösung und Datenschutzhinweise passend umsetzen.
+- Für die vertragsbezogene Anfragebearbeitung gilt grundsätzlich Artikel 6 Absatz 1 Buchstabe b DSGVO; eine erzwungene zusätzliche Einwilligung ist dafür nicht nötig. Das Formular informiert stattdessen vor dem Absenden.
+- Löschfristen und Verantwortlichkeiten festlegen: offene/abgeschlossene Anfragen, Verträge, Motive, E-Mails, Protokolle und Backups getrennt betrachten. Die Anwendung löscht Anfragen derzeit NICHT automatisch. Notwendige Aufbewahrung und tatsächliche Löschung umsetzen, statt ungeprüfte automatische Fristen zu versprechen.
+- Verfahren für Auskunft, Berichtigung, Löschung, Widerspruch und Datenschutzvorfälle festlegen. Daten nur erforderlichen Personen zugänglich machen, Zugänge absichern und Backups schützen.
+- Wichtig: Das Formular speichert Anfragen in der Datenbank, sendet sie aber NICHT automatisch an info@manucreator.de. Einen zuverlässigen Bearbeitungs-/Abrufprozess sicherstellen oder eine gesonderte Benachrichtigungslösung beauftragen. Im Datenschutztext wird kein automatischer Mailversand behauptet.
+
+5. ZAHLUNG UND STEUERN
+
+- Kleinunternehmerstatus nach § 19 UStG, geltende Umsatzgrenzen und individuelle Voraussetzungen mit steuerlicher Beratung prüfen. Keine Umsatzsteuer gesondert ausweisen, solange die jeweilige Leistung unter die Regelung fällt.
+- Rechnungen müssen die tatsächlich erforderlichen Pflichtangaben und einen geeigneten Hinweis auf die Kleinunternehmerregelung enthalten. Anforderungen an E-Rechnungen und die Fähigkeit, solche Rechnungen zu empfangen, gesondert prüfen.
+- Vorkasse erst nach Vertragsschluss anfordern; Zahlungsfristen und Produktionsbeginn vorab vereinbaren. Kontodaten nicht als öffentliche AGB-Pflichtangabe behandeln.
+- Für Waren-/Dienstleistungsverkäufe PayPal gewerblich und mit der passenden Zahlungsart verwenden, nicht „Freunde & Familie“. Derzeit ist KEIN PayPal-Checkout auf der Website eingebunden. Zahlung erst mit den Auftragsunterlagen vereinbaren.
+
+6. PRODUKTE, VERSAND UND MOTIVRECHTE
+
+- Gewerbeanmeldung, zuständige Kammer und gegebenenfalls handwerksrechtliche Einordnung der tatsächlich angebotenen Arbeiten prüfen.
+- Produkt- und Betriebshaftpflicht prüfen; insbesondere Bearbeitungsschäden an kundeneigenen, wertvollen Gegenständen mitversichern lassen. Risiken individuell erläutern, statt „alles auf eigene Gefahr“ zu behaupten.
+- GPSR/Produktsicherheitsrecht je nach Produkt und Rolle als Hersteller, Händler oder Veredler prüfen: Rückverfolgbarkeit, Hersteller-/Kontaktangaben, Risikobeurteilung, Warnhinweise und gegebenenfalls Angaben im Fernabsatz. Gravuren an sicherheitsrelevanten Bauteilen oder Oberflächen können Materialeigenschaften verändern.
+- Bei Schneidebrettern, Trinkgläsern und anderen Lebensmittelkontaktmaterialien Eignung, Beschichtungen, verwendete Stoffe und einschlägige Lebensmittelkontakt-Anforderungen prüfen. Nicht unbesehen „lebensmittelecht“ oder „spülmaschinenfest“ zusichern.
+- Bei Textilien Faserkennzeichnung und zutreffende Pflege-/Verarbeitungshinweise prüfen. Bei Kinderartikeln, Spielzeug, Elektronik oder Schutzausrüstung können zusätzliche Spezialpflichten gelten.
+- Bei Versand in Deutschland Verpackungsgesetz prüfen, insbesondere LUCID-Registrierung und Systembeteiligung für einschlägige Verpackungen. Liefergebiete und Versandkosten vor Beauftragung klären.
+- Kunden dürfen Logos, Bilder, Marken oder Personenabbildungen nur mit passenden Rechten nutzen lassen. Nachweise bei Zweifeln erfragen; keine pauschale Haftungsverlagerung ohne Verschulden.
+- Nutzungsrechte für die Websitebilder und das Hero-Video prüfen. Kundenarbeiten, Namen und Logos nicht ohne gesonderte Berechtigung als Referenz veröffentlichen. Aussagen zu Qualität, Haltbarkeit und Nachhaltigkeit müssen belegbar sein.
+- Barrierefreiheitsstärkungsgesetz: tatsächlichen Anwendungsbereich und etwaige Kleinstunternehmensausnahme anhand Beschäftigtenzahl/Umsatz und Angebot prüfen. Nicht ungeprüft eine vollständige Ausnahme oder vollständige Barrierefreiheit erklären.
+
+WICHTIGE QUELLEN (am 2. Oktober 2026 recherchiert)
+
+§ 5 DDG: https://www.gesetze-im-internet.de/ddg/__5.html
+AGB-Einbeziehung: https://www.gesetze-im-internet.de/bgb/__305.html
+Fernabsatzinformationen: https://www.gesetze-im-internet.de/bgbeg/art_246a__1.html
+Widerrufsausnahmen: https://www.gesetze-im-internet.de/bgb/__312g.html
+Widerrufsfristen/Erlöschen: https://www.gesetze-im-internet.de/bgb/__356.html
+Elektronische Widerrufsfunktion: https://www.gesetze-im-internet.de/bgb/__356a.html
+Wertersatz: https://www.gesetze-im-internet.de/bgb/__357a.html
+Widerrufsmuster: https://www.gesetze-im-internet.de/bgbeg/art_253anlage_1.html
+Kleinunternehmer: https://www.gesetze-im-internet.de/ustg_1980/__19.html
+Verbraucherschlichtung: https://www.gesetze-im-internet.de/vsbg/__36.html
+Ende OS-Plattform: https://consumer-redress.ec.europa.eu/site-relocation_en
+DSGVO: https://eur-lex.europa.eu/eli/reg/2016/679/oj?locale=de
+Hosting-DPA: https://app.emergent.sh/dpa
+Hosting-Unterauftragnehmer: https://app.emergent.sh/subprocessors
+Datenschutzaufsicht NRW: https://www.ldi.nrw.de/
+
+Diese Liste ersetzt keine produkt- oder betriebsspezifische rechtliche Prüfung. Neue Funktionen wie Online-Bestellung, Zahlungsintegration, Uploads, Newsletter oder Tracking können zusätzliche Pflichten auslösen.

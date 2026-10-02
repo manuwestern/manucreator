@@ -56,7 +56,7 @@ def created_ids():
 def cleanup_created_records(mongo_collection, created_ids):
     yield
     ids_to_delete = set(created_ids)
-    ids_to_delete.add("a12c9e7a-4c8a-4b16-9a10-5da4f3e170b8")
+    ids_to_delete.add("181e9a83-3db8-4345-8e91-cb04cd1d6c73")
     if ids_to_delete:
         mongo_collection.delete_many({"id": {"$in": list(ids_to_delete)}})
 
@@ -96,9 +96,34 @@ class TestInquiryApi:
         assert saved["material"] == payload["material"]
         assert saved["quantity"] == payload["quantity"]
         assert saved["message"] == payload["message"]
-        assert saved["consent"] is True
+        assert "consent" not in saved
         assert saved["status"] == "new"
+        assert saved["privacy_notice_version"] == "2026-10-02"
         assert "created_at" in saved
+
+    @pytest.mark.parametrize("consent_value", [True, False, None])
+    def test_legacy_consent_accepted_but_never_stored(self, api_client, mongo_collection, created_ids, consent_value):
+        request_id = str(uuid4())
+        payload = {
+            "request_id": request_id,
+            "name": "TEST Legacy Consent",
+            "email": "legacy.consent@example.de",
+            "material": "offen",
+            "quantity": 1,
+            "message": "TEST Alte Clients senden optional consent true/false.",
+            "website": "",
+        }
+        if consent_value is not None:
+            payload["consent"] = consent_value
+
+        response = api_client.post(f"{BASE_URL}/api/inquiries", json=payload, timeout=20)
+        assert response.status_code == 201
+        created_ids.append(request_id)
+
+        saved = mongo_collection.find_one({"id": request_id}, {"_id": 0})
+        assert saved is not None
+        assert "consent" not in saved
+        assert saved["privacy_notice_version"] == "2026-10-02"
 
     def test_duplicate_request_id_returns_same_receipt_without_duplicate(self, api_client, mongo_collection, created_ids):
         request_id = str(uuid4())
@@ -139,7 +164,6 @@ class TestInquiryApi:
             lambda p: p.update({"message": "         "}),
             lambda p: p.update({"material": "papier"}),
             lambda p: p.update({"quantity": 0}),
-            lambda p: p.update({"consent": False}),
             lambda p: p.update({"website": "spam"}),
         ],
     )

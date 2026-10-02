@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Menu, X, Send, ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { legalNavigation } from '@/data/legal/company';
 
 const links = [['Leistungen', '#leistungen'], ['Beispiele', 'examples'], ['Ablauf', '#ablauf'], ['Über mich', 'about'], ['Kontakt', '#kontakt']];
 export const Logo = ({ footer = false }) => <a href="#start" className="brand" aria-label="ManuCreator – zur Startseite" data-testid={`${footer ? 'footer' : 'header'}-logo`}><img src="/images/logo.png" alt="ManuCreator – Ideen. Laser. Unikate." width="291" height="78" /></a>;
@@ -39,7 +41,7 @@ export const Footer = ({ onContent }) => (
         <nav aria-label="Fußnavigation"><a href="#leistungen" data-testid="footer-services">Leistungen</a><button onClick={() => onContent({ type: 'examples' })} data-testid="footer-examples">Beispiele</button><button onClick={() => onContent({ type: 'about' })} data-testid="footer-about">Über mich</button><a href="#kontakt" data-testid="footer-contact">Kontakt</a></nav>
         <div className="footer-signoff" data-testid="footer-tagline"><span>Mit Ideen. Mit Präzision. Mit Herz.</span><span>Kreativität in Materialform.</span></div>
       </div>
-      <div className="footer-bottom"><p data-testid="copyright">© {new Date().getFullYear()} ManuCreator — Alle Rechte vorbehalten.</p><div><button data-testid="footer-imprint" onClick={() => onContent({ type: 'imprint' })}>Impressum</button><button data-testid="footer-privacy" onClick={() => onContent({ type: 'privacy' })}>Datenschutz</button><a href="#start" data-testid="back-to-top" aria-label="Zurück nach oben"><ArrowUpRight size={17} /></a></div></div>
+      <div className="footer-bottom"><p data-testid="copyright">© {new Date().getFullYear()} ManuCreator — Alle Rechte vorbehalten.</p><div>{legalNavigation.map(item => <Link key={item.key} to={item.path} data-testid={`footer-${item.key}`}>{item.label}</Link>)}<a href="#start" data-testid="back-to-top" aria-label="Zurück nach oben"><ArrowUpRight size={17} /></a></div></div>
     </div>
   </footer>
 );
