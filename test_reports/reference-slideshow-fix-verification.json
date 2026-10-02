@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-02",
+  "source_report": "/app/test_reports/iteration_9.json",
+  "issue": "Inconclusive native tab-switch visibility pause in headless automation",
+  "changes": [
+    "Synchronously clear autoplay timer on hidden state, window blur and pagehide",
+    "Gate timer callback on active-page ref, document.hidden and document.hasFocus",
+    "Restart a full interval on visibility/focus/pageshow return with activity-version dependency"
+  ],
+  "verification": {
+    "method": "External preview browser; controlled document.hidden override and visibilitychange events, plus synthetic blur/focus events, followed by actual DOM slide-counter assertions",
+    "hidden_pause_for_5500ms": "PASS",
+    "visibility_return_advances_after_5500ms": "PASS",
+    "blur_pause_for_5500ms": "PASS",
+    "focus_return_advances_after_5500ms": "PASS",
+    "single_image_category_controls_hidden": "PASS",
+    "production_build": "PASS"
+  },
+  "limitations": "This deterministic lifecycle regression is not a claim of physical-device or native tab-switch testing. Earlier responsive swipe check used a drag gesture because the remote browser did not expose a touch API.",
+  "remaining_confirmed_bugs": []
+}

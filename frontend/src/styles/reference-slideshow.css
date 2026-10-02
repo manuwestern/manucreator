@@ -1,0 +1,60 @@
+.content-dialog.content-service {
+  max-width: 1100px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+}
+.content-service .detail-copy { padding: 52px 35px 35px; min-width: 0; }
+.reference-gallery { background: #171b16; color: #e7ebdf; min-width: 0; padding: 24px 22px 22px; align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
+.reference-gallery:focus-visible { outline: 2px solid #b6c19e; outline-offset: -3px; }
+.reference-topline { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 0 0 18px; }
+.reference-topline .eyebrow { color: #b5bda8; font-size: 7px; letter-spacing: 2px; }
+.reference-topline>span:last-child { font-size: 9px; color: #8f9c81; white-space: nowrap; }
+.reference-stage { width: 100%; aspect-ratio: 3 / 2; background: #111510; min-width: 0; overflow: hidden; }
+.reference-stage>div { height: 100%; }
+.reference-track { margin-left: 0; height: 100%; touch-action: pan-y pinch-zoom; }
+.reference-slide { padding-left: 0; height: 100%; overflow: hidden; }
+.reference-image-wrap { width: 100%; height: 100%; position: relative; }
+.reference-image-wrap>img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; user-select: none; -webkit-user-drag: none; }
+.reference-image-wrap>img.reference-image-failed { visibility: hidden; }
+.reference-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 82px; padding: 17px 0 12px; }
+.reference-caption { min-width: 0; }
+.reference-caption p { font-size: 12px; font-weight: 500; line-height: 1.6; color: #e1e8d7; margin: 0 0 5px; overflow-wrap: anywhere; }
+.reference-caption>span { font-size: 9px; color: #9aab89; font-variant-numeric: tabular-nums; }
+.reference-controls { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+.reference-control { width: 35px; height: 35px; padding: 0; border-radius: 50%; color: #dde7d2; background: #242c20; border: 1px solid #3c4833; transition: color .2s, background-color .2s, border-color .2s; }
+.reference-control:hover { color: #111b0b; background: #e5dbc4; border-color: #e5dbc4; }
+.reference-control:focus-visible { outline: 2px solid #e5dbc4; outline-offset: 3px; }
+.reference-thumbnails { display: flex; align-items: center; gap: 10px; padding: 5px 0 2px; min-width: 0; overflow-x: auto; scrollbar-width: thin; scrollbar-color: #596b48 transparent; }
+.reference-thumbnail { width: 76px; height: 55px; flex-shrink: 0; padding: 3px; border: 1px solid #424e39; border-radius: 4px; background: #0f150d; opacity: .58; transition: opacity .2s, border-color .2s; }
+.reference-thumbnail:hover { opacity: .9; }
+.reference-thumbnail.is-selected { opacity: 1; border-color: #e5d4b3; }
+.reference-thumbnail img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 1px; }
+.reference-image-error { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 23px; color: #bcc7ad; text-align: center; }
+.reference-image-error p { font-size: 11px; line-height: 1.8; }
+.reference-image-error button { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; text-decoration: underline; text-underline-offset: 4px; }
+@media (min-width: 701px) and (max-width: 950px) {
+  .content-dialog.content-service { width: calc(100% - 32px); grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+  .content-service .detail-copy { padding: 42px 25px 30px; }
+  .reference-gallery { padding: 23px 16px 20px; }
+  .reference-toolbar { gap: 10px; }
+  .reference-caption p { font-size: 10px; }
+  .reference-control { width: 31px; height: 31px; }
+}
+@media (max-width: 700px) {
+  .content-dialog.content-service { grid-template-columns: minmax(0, 1fr); }
+  .content-service .detail-copy { padding: 25px; }
+  .reference-gallery { padding: 24px 17px 19px; }
+  .reference-topline { padding-bottom: 15px; padding-right: 28px; }
+  .reference-topline .eyebrow { font-size: 6px; letter-spacing: 1.5px; }
+  .reference-topline>span:last-child { font-size: 8px; }
+  .reference-toolbar { min-height: 74px; gap: 10px; padding-top: 13px; }
+  .reference-caption p { font-size: 11px; }
+  .reference-controls { gap: 4px; }
+  .reference-control { width: 34px; height: 34px; }
+  .reference-thumbnail { width: 66px; height: 49px; }
+}
+@media (max-width: 360px) {
+  .reference-gallery { padding-left: 13px; padding-right: 13px; }
+  .reference-control { width: 31px; height: 31px; }
+  .reference-caption p { font-size: 10px; }
+  .reference-topline .eyebrow { font-size: 5.5px; letter-spacing: 1.1px; }
+}

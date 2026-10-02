@@ -75,7 +75,7 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 ### P2 — Optionale sichtbare Erweiterungen
 - Wunschtext-Gravurvorschau auf einem ausgewählten Material.
 - Optional später eine geschützte Anfrageverwaltung, nur nach ausdrücklicher Beauftragung; vor Auth-Code zwingend Integrations-Playbook einholen.
-- Optionale echte Referenzgalerie mit gelieferten Projektbildern.
+- Weitere Referenzbilder insbesondere für Kunststoff, Schiefer und Textilien ergänzen, sobald der Nutzer zusätzliche Motive bereitstellt; die Kategorie-Slideshow ist bereits implementiert.
 
 ## Nächste Aufgaben
 1. Weitere Originalbilder für Holz/Kunststoff vom Nutzer entgegennehmen.
@@ -216,3 +216,47 @@ Klärung durch Nutzer: „1a, 2a, 3b, 4a,c,d,e,f Paypal“ = Einzelunternehmer o
 - Explizite Telemetrie-Snippets in Source/Build fehlen; in getesteten Abläufen keine Anfragen an PostHog/ap.emergent.sh/emergent-main.js beobachtet.
 - Testdaten bereinigt; Bericht `/app/test_reports/iteration_8.json`; Build `/app/test_reports/legal-build.log` erfolgreich.
 - Keine technischen Fehler im geprüften Umfang. Rechtsprüfung wurde NICHT durch Funktionstests ersetzt.
+
+## Kategorie-Referenzen und Slideshow — 2026-10-02
+Originalauftrag: „Kannst du die Bilder noch in die entsprechenden Kategorien einordnen? Also wenn jemand auf 'ne bestimmte Kategorie klickt, dass der dort dann, wenn sich dieser, äh, Popup-Dialog oder was das ist, öffnet, beziehungsweise die Detailseite zu dem entsprechenden, zu Kategorie, dass der da so 'ne Slideshow hat. Dass der dann da so 'ne Slideshow hat, wo dann noch andere, ja, Referenzen sichtbar werden“.
+
+### Nutzerentscheidungen
+- Das transparente Praxisschild besteht ausdrücklich aus Glas und gehört zu Glasgravuren, NICHT Kunststoff/Acryl.
+- Bei der Slideshow wurden beide Optionen ausgewählt: „Zusätzlich automatisch, mit einer Pause-Taste; Nur durch Klicken oder Wischen“. Umgesetzt als kombinierte Automatik plus jederzeitige manuelle Bedienung; manuelle Bedienung stoppt die Automatik bis zum erneuten Einschalten.
+
+### Bilderzuordnung
+- `IMG_6072.webp` → Metall: zylindrisches Bauteil mit QR-Code und Seriennummer, `/images/references/metall-bauteil.webp`.
+- `IMG_6071.webp` → Metall: Hundemarke „Luna“, `/images/references/metall-hundemarke.webp`.
+- `IMG_6070.webp` → Glas: Zahnarzt-Praxisschild „Dr. Klein“, `/images/references/glas-praxisschild.webp`.
+- `IMG_6069.webp` → Glas: Familienporträt in Kristallglas, `/images/references/glas-familienportrait.webp`.
+- Gelieferte Originale unverändert unter `/app/assets/originals/` gespeichert. Web-Versionen 1600 × 1070, ca. 109–259 KB; zusätzliche kleine Vorschaubilder lokal unter `/images/references/`.
+- Glas: 3 Motive (bisheriges Whiskyglas + Praxisschild + Familienporträt).
+- Metall: 3 Motive (bisheriges Schild + Bauteil + Hundemarke).
+- Holz: 2 Motive (bisheriges Lebensbaum-Brett + bereits gelieferter „Make it Real“-Holzblock).
+- Kunststoff, Schiefer, Textil: je 1 vorhandenes Motiv; keine erfundenen oder duplizierten Füllbilder.
+
+### Umsetzung
+- Bestehende Kategorie-Popups auf Slideshow umgestellt; Zugang sowohl über Leistungskacheln als auch Beispielübersicht.
+- Bilder bleiben vollständig sichtbar (`object-fit: contain`), mit stabiler 3:2-Bühne, individuellen Beschreibungen, Motivzählung und Vorschaubildern. Startseitenkacheln und Hero unverändert.
+- Bewährte vorhandene Shadcn-/Embla-Carousel-Komponente für Touch-/Drag-Gesten und umlaufendes Blättern genutzt; keine neue externe Integration oder Bibliothek.
+- Automatischer Wechsel alle 5 Sekunden; Play/Pause, Zurück/Weiter, direkte Thumbnail-Auswahl und Tastatur (Links/Rechts, Pos1/Ende).
+- Manuelles Blättern, Ziehen/Wischen und Tastaturfokus im Carousel stoppen die Automatik; Play erlaubt explizites Fortsetzen. Maus-Hover pausiert vorübergehend. Ein-Bild-Kategorien zeigen keine sinnlosen Navigations-/Autoplay-Steuerungen.
+- Reduzierte Bewegung startet ohne Autoplay. Explizites Einschalten erlaubt Bildwechsel ohne erzwungene Tween-Animation.
+- Bei Schließen, Kategorie-Wechsel oder Anfrageübergang werden Timer/Listener entfernt. Neuer Kategorieaufruf beginnt beim ersten Motiv.
+- Sichtbarkeitswechsel, Fenster-Fokusverlust und Pagehide pausieren die Automatik sofort. Rückkehr startet ein frisches Intervall; zusätzliche synchrone Prüfung im Timer verhindert Weiterlaufen im Hintergrund.
+- Bildladefehler: lesbare Fehlermeldung und erneutes Laden statt leerer/kaputter Bildfläche.
+- Bestehende Anfrage übernimmt weiterhin die ausgewählte Materialkategorie; keine Backend-, Zahlungs-, Rechts- oder Hero-Änderungen.
+
+### Dateien
+- Zentrale Referenzzuordnung: `frontend/src/data/serviceReferences.js`.
+- Anzeige: `components/site/ReferenceSlideshow.jsx`, `ReferenceImage.jsx`; Einbindung in `ContentDialog.jsx`.
+- Interaktion/Timer: `hooks/useReferenceSlideshow.js`; Gestaltung: `styles/reference-slideshow.css`.
+- Bestehender Carousel-Wrapper ergänzt um fehlendes Entfernen des `reInit`-Listeners beim Unmount.
+
+### Prüfung
+- Hauptagent: tatsächlicher automatischer Bildwechsel, Pause über mehr als 5 Sekunden, Praxisschild- und Metallmotive, korrekte Anfragevorauswahl im externen Browser erfolgreich.
+- Testing-Agent `/app/test_reports/iteration_9.json`: korrekte Zuordnung/Anzahl, Pfeile, Thumbnails, Tastatur, Fokus/Escape, Wiederöffnen, Einzelbildansicht, reduzierte Bewegung, Fehler/Retry und Anfrageübergang bestanden; 390 × 844, 320 × 568 und 768 × 1024 ohne horizontales Overflow.
+- Drag-Geste in mobiler Emulation geprüft; der Testbrowser bot keine echte Touch-API. Keine Behauptung eines Tests auf einem physischen Smartphone.
+- Ein Tabwechsel-Test war wegen unklarer Headless-Sichtbarkeit nicht eindeutig. Daraufhin zusätzlich synchrone Timer-Abschaltung bei `blur`/`pagehide`, Aktivitätsgeneration und direkte `document.hidden`/`document.hasFocus()`-Prüfung implementiert.
+- Gezielter Browser-Nachtest über kontrollierte Visibility-/Focus-Ereignisse: Hintergrundpause, Wiederaufnahme, zusätzliche Blur-Pause und erneute Focus-Wiederaufnahme jeweils nach 5,5 Sekunden erfolgreich. Ergänzungsbericht `/app/test_reports/reference-slideshow-fix-verification.json` beschreibt die Testgrenzen ausdrücklich.
+- Produktionsbuild erfolgreich: `/app/test_reports/reference-slideshow-build.log`.
