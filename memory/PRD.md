@@ -11,6 +11,7 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 - Deutschsprachige One-Page nahe der bereitgestellten visuellen Vorlage. Keine zusätzliche Rückfrage erforderlich.
 - Aktuell: geliefertes Video als Hero-Hintergrund nutzen; Scrollen abwärts steuert die Bilder vorwärts, aufwärts rückwärts. Kein zeitgesteuertes Autoplay.
 - Nach Fehlermeldung des Nutzers wird derselbe Effekt mit echten extrahierten Video-Einzelbildern statt browserabhängigem Video-Seeking dargestellt. Bewegungsreduktion bleibt standardmäßig respektiert, kann ausdrücklich im Hero übersteuert werden.
+- Neueste Klarstellung: Die Seite muss ab dem ersten Scrollschritt normal mitscrollen. Der Hero darf NICHT festgehalten werden und darf keine zusätzliche Scrollstrecke für das Video erzeugen. Frames bewegen sich nur begleitend zum normalen Scrollen.
 
 ## Nutzergruppen
 - Privatpersonen auf der Suche nach individuellen Geschenken und Einzelstücken.
@@ -161,3 +162,15 @@ Nutzer meldete: „Irgendwie funktioniert der Video scroll Effekt nicht“.
 - Wiederholbarer Engine-Test: `/app/.browser-testing/bin/python /app/tests/webkit_smoke.py`; isolierte Testumgebung via `.gitignore` ausgeschlossen.
 - Build erfolgreich: `/app/test_reports/hero-frames-build.log`.
 - Keine noch offenen Fehler im geprüften Umfang. Falls die Nutzerumgebung weiterhin betroffen ist, konkreten Browser/Gerät und Vorschauzustand erfragen, statt dieselbe Chromium-Prüfung zu wiederholen.
+
+## Normales Seitenscrollen mit begleitender Hero-Bewegung — 2026-10-02
+Nutzerpräzisierung: „Die Seite soll aber trotzdem schon scrollen also nicht erst wenn das Video durchgescrollt ist?!“.
+
+- Frühere Sticky-/Pin-Entscheidung ausdrücklich aufgehoben. Der Hero bleibt vollständig im normalen Dokumentfluss (`position: relative`, `top: 0`). Nur der bereits bestehende Navigationsheader bleibt wie zuvor sticky/fixed.
+- Äußere Hero-Höhe entspricht genau der sichtbaren Hero-Höhe; `--scrub-distance` und die zusätzliche Videostrecke entfernt, auch mobil. Leistungen folgen unmittelbar auf den Hero.
+- Scrollfortschritt für die Frames jetzt von `start start` bis `end start`: Frames laufen vorwärts, während der Hero nach oben aus dem Bildschirm scrollt; beim Zurückscrollen rückwärts. Kein Warten auf das Videoende.
+- Ein-/Ausschalten des Effekts verändert die Dokumenthöhe nicht mehr. Bestehende Frame-Ladelogik, Mobiloptimierung, Bewegungsreduktion und Wiederholen-Funktion unverändert.
+- Desktop-Messung: nach 200 px Scrollen Hero bei −200 px, Leistungen bei 600 px sichtbar, Videoframe 60. Nach 400 px Frame 120, Rückwärtsbewegung auf 150 px ergibt Frame 45.
+- Gezielter Testing-Agent-Nachtest: normale Bewegung, fehlende Zusatzstrecke, Frame-Vorwärts/Rückwärtslauf, stabiler Seitenumfang beim Umschalten und Leistungen-Anker bestanden. Desktop, Mobilviewport 390 × 844 und echte WebKit-Engine geprüft.
+- Bericht: `/app/test_reports/iteration_7.json`; wiederholbarer Test `/app/tests/webkit_quick_hero_scroll.py`; Messwerte `/app/test_reports/artifacts/iteration_7/webkit_quick_results.json`.
+- Keine offenen Fehler dieses Änderungsumfangs. Keine Backend-, Integrations- oder weiteren Designänderungen.

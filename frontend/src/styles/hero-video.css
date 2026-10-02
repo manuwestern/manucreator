@@ -1,15 +1,14 @@
-/* Native sticky positioning leaves scrolling, anchors and touch gestures intact. */
+/* The hero stays in normal document flow; frames follow its visible scroll exit. */
 .hero-scroll-track {
   --hero-height: max(620px, 100svh);
-  --scrub-distance: clamp(700px, 125svh, 1400px);
   position: relative;
-  height: calc(var(--hero-height) + var(--scrub-distance));
+  height: var(--hero-height);
   background: #121513;
 }
 
 .hero.hero--video {
-  position: sticky;
-  top: min(0px, calc(100svh - var(--hero-height)));
+  position: relative;
+  top: 0;
   height: var(--hero-height);
   min-height: 0;
   max-height: none;
@@ -109,7 +108,6 @@
 @media (max-width: 700px) {
   .hero-scroll-track {
     --hero-height: max(780px, 100svh);
-    --scrub-distance: 110svh;
   }
   .hero--video .hero-inner { padding-top: 122px; }
   .hero-video-stage { width: 100%; top: 475px; height: calc(100% - 570px); }

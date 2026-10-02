@@ -1,0 +1,117 @@
+{
+  "desktop": {
+    "base": {
+      "scrollY": 0,
+      "hero_position": "relative",
+      "hero_top_rect": 0,
+      "track_height": "1080px",
+      "hero_height": "1080px",
+      "services_top_rect": 1080,
+      "frame": 0,
+      "targetFrame": 0,
+      "doc_height": 2815
+    },
+    "scroll_200": {
+      "scrollY": 200,
+      "hero_position": "relative",
+      "hero_top_rect": -200,
+      "track_height": "1080px",
+      "hero_height": "1080px",
+      "services_top_rect": 880,
+      "frame": 44,
+      "targetFrame": 44,
+      "doc_height": 2815
+    },
+    "scroll_400": {
+      "scrollY": 400,
+      "hero_position": "relative",
+      "hero_top_rect": -400,
+      "track_height": "1080px",
+      "hero_height": "1080px",
+      "services_top_rect": 680,
+      "frame": 89,
+      "targetFrame": 89,
+      "doc_height": 2815
+    },
+    "reverse_150": {
+      "scrollY": 150,
+      "hero_position": "relative",
+      "hero_top_rect": -150,
+      "track_height": "1080px",
+      "hero_height": "1080px",
+      "services_top_rect": 930,
+      "frame": 33,
+      "targetFrame": 33,
+      "doc_height": 2815
+    },
+    "doc_height_before_toggle": 2815,
+    "doc_height_after_toggle": 2815,
+    "anchor": {
+      "hash": "#leistungen",
+      "services_top_rect": 95,
+      "scrollY": 985
+    }
+  },
+  "mobile": {
+    "base": {
+      "scrollY": 0,
+      "hero_position": "relative",
+      "hero_top_rect": 0,
+      "track_height": "844px",
+      "hero_height": "844px",
+      "services_top_rect": 844,
+      "frame": 0,
+      "targetFrame": 0,
+      "doc_height": 2919
+    },
+    "scroll_180": {
+      "scrollY": 180,
+      "hero_position": "relative",
+      "hero_top_rect": -180,
+      "track_height": "844px",
+      "hero_height": "844px",
+      "services_top_rect": 664,
+      "frame": 51,
+      "targetFrame": 51,
+      "doc_height": 2919
+    }
+  },
+  "checks": [
+    {
+      "name": "hero_position_relative",
+      "pass": true
+    },
+    {
+      "name": "track_equals_hero_height",
+      "pass": true
+    },
+    {
+      "name": "small_scroll_moves_hero",
+      "pass": true
+    },
+    {
+      "name": "small_scroll_advances_frame",
+      "pass": true
+    },
+    {
+      "name": "reverse_scroll_reverses_frame",
+      "pass": true
+    },
+    {
+      "name": "motion_toggle_keeps_doc_height",
+      "pass": true
+    },
+    {
+      "name": "leistungen_anchor_reachable",
+      "pass": true
+    },
+    {
+      "name": "mobile_scroll_moves_hero",
+      "pass": true
+    },
+    {
+      "name": "mobile_scroll_advances_frame",
+      "pass": true
+    }
+  ]
+}

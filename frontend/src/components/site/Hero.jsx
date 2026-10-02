@@ -16,7 +16,8 @@ export const Hero = ({ onRequest, onExamples }) => {
   const animated = (motionOverride ?? !reduced) && !failed;
   const toggleMotion = () => { setMotionOverride(failed || !animated); setFailed(false); };
   const motionLabel = failed ? 'Animation erneut laden' : animated ? 'Bewegung ausschalten' : 'Bewegung einschalten';
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
+  // Scrub during the hero's normal passage out of view; never pin the page.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   return (
     <section className={`hero-scroll-track${animated ? '' : ' hero-scroll-track--static'}`} id="start" ref={ref} data-testid="hero-scroll-track">
     <div className="hero hero--video" data-testid="hero-section">
