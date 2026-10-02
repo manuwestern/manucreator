@@ -1,0 +1,118 @@
+/* Native sticky positioning leaves scrolling, anchors and touch gestures intact. */
+.hero-scroll-track {
+  --hero-height: max(620px, 100svh);
+  --scrub-distance: clamp(700px, 125svh, 1400px);
+  position: relative;
+  height: calc(var(--hero-height) + var(--scrub-distance));
+  background: #121513;
+}
+
+.hero.hero--video {
+  position: sticky;
+  top: min(0px, calc(100svh - var(--hero-height)));
+  height: var(--hero-height);
+  min-height: 0;
+  max-height: none;
+  isolation: isolate;
+}
+
+.hero-video-stage {
+  position: absolute;
+  width: 70%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.hero-video-poster,
+.hero-scroll-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  mask-image: linear-gradient(90deg, transparent, #000 15%, #000 100%);
+}
+
+.hero-scroll-video {
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.hero-scroll-video.is-ready { opacity: 1; }
+
+.hero--video .hero-shade {
+  pointer-events: none;
+  background: linear-gradient(90deg, #121513 0%, #121513f2 26%, #121513ad 39%, #12151330 53%, #12151300 69%);
+}
+
+.hero--video .hero-inner { padding-top: 100px; }
+
+.hero-scroll-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #ead7ba99;
+  transform-origin: left;
+  pointer-events: none;
+}
+
+.hero-scroll-track--static { height: var(--hero-height); }
+.hero-scroll-track--static .hero--video { position: relative; top: 0; }
+
+@media (min-width: 1600px) {
+  .hero--video .hero-copy { max-width: 760px; }
+  .hero--video h1 { font-size: 60px; }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .hero-video-stage { width: 79%; top: 9%; height: 90%; }
+  .hero--video .hero-shade {
+    background: linear-gradient(90deg, #121513 0%, #121513e8 20%, #12151370 50%, transparent 79%);
+  }
+}
+
+@media (min-width: 701px) and (max-width: 950px) and (orientation: portrait) {
+  .hero--video .hero-inner { justify-content: flex-start; padding-top: 155px; }
+  .hero--video .hero-copy { max-width: 660px; }
+  .hero-video-stage { width: 100%; top: 47%; height: 44%; }
+  .hero--video .hero-shade { background: none; }
+  .hero-video-poster,
+  .hero-scroll-video {
+    mask-image: linear-gradient(180deg, transparent, #000 10%, #000 88%, transparent);
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-scroll-track {
+    --hero-height: max(780px, 100svh);
+    --scrub-distance: 110svh;
+  }
+  .hero--video .hero-inner { padding-top: 122px; }
+  .hero-video-stage { width: 100%; top: 475px; height: calc(100% - 570px); }
+  .hero-video-poster,
+  .hero-scroll-video {
+    mask-image: linear-gradient(180deg, transparent, #000 10%, #000 88%, transparent);
+    object-position: center;
+  }
+  .hero--video .hero-shade { background: none; }
+  .hero--video .hero-bottom { bottom: 24px; }
+}
+
+@media (max-width: 350px) {
+  .hero--video .hero-inner { padding-top: 105px; }
+  .hero--video h1 { font-size: 33px; }
+  .hero--video .hero-actions { align-items: flex-start; flex-direction: column; gap: 9px; }
+  .hero--video .hero-actions .pill { min-height: 43px; }
+  .hero-video-stage { top: 480px; height: calc(100% - 575px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-track { height: var(--hero-height); }
+  .hero.hero--video { position: relative; top: 0; }
+  .hero-scroll-progress { display: none; }
+}

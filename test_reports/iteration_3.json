@@ -1,0 +1,72 @@
+{
+  "summary": "Frontend-only hero scroll-video verification completed on public preview URL. Core scrub behavior, pause semantics, reverse scrubbing, sticky-to-services transition, CTA/dialog/nav interactions, reduced-motion behavior, and reload/resize synchronization passed. Two regressions found: blocked-asset fallback does not collapse to static track, and responsive hero composition overlaps media product at smaller breakpoints.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Hero responsive layout",
+        "issue": "At 768x1024, heading and CTA region visibly overlap the media product area; requirement asked for non-overlapping heading/actions with media product.",
+        "selector": "[data-testid='hero-heading'], .hero-actions, [data-testid='hero-video-stage']",
+        "priority": "HIGH"
+      },
+      {
+        "component": "Hero responsive layout",
+        "issue": "At 320x568, secondary CTA is partially over the media area and compressed, reducing clarity/usability in cramped viewport.",
+        "selector": "[data-testid='hero-examples-button'], [data-testid='hero-video-stage']",
+        "priority": "MEDIUM"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Video asset failure fallback (both /media/hero-scroll.mp4 and /media/hero-scroll.webm unavailable)",
+        "issue": "Hero does not switch to static fallback mode. Track remains 'hero-scroll-track' (not 'hero-scroll-track--static'), video element remains mounted in loading state, and pinned scroll runway does not collapse.",
+        "affected_selectors": [
+          "[data-testid='hero-scroll-track']",
+          "[data-testid='hero-video-stage']",
+          "[data-testid='hero-scroll-video']"
+        ]
+      }
+    ],
+    "design_issues": [
+      {
+        "screen": "Hero tablet/cramped breakpoints",
+        "issues": [
+          "Tablet 768x1024 screenshot shows copy and buttons visually colliding with product render zone.",
+          "Cramped 320x568 screenshot shows CTA stack intruding into media area, weakening hierarchy/readability."
+        ]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/root/.emergent/automation_output/20261002_150413/console_20261002_150413.log",
+    "/root/.emergent/automation_output/20261002_150445/console_20261002_150445.log",
+    "/root/.emergent/automation_output/20261002_150523/console_20261002_150523.log",
+    "/root/.emergent/automation_output/20261002_150542/console_20261002_150542.log",
+    "/root/.emergent/automation_output/20261002_150622/console_20261002_150622.log"
+  ],
+  "action_items": [
+    "Implement explicit failure timeout/error fallback in ScrollVideo/useScrollVideo (or source-level error handling) so dual asset failure toggles hero-scroll-track--static.",
+    "Adjust tablet and cramped hero layout rules to keep heading/actions clear of product media region while preserving CTA usability.",
+    "Re-run blocked-assets scenario after fix to confirm static class application and collapsed runway behavior."
+  ],
+  "critical_code_review_comments": [
+    "onFailure currently depends on media error path that is not reached in intercepted-failure state (readyState=0, networkState=3, no media error surfaced), leaving stage stuck in loading mode.",
+    "Reduced-motion path is correctly implemented: no video element rendered and no hero media request when reduce is active before load.",
+    "Scroll synchronization logic and quantized seeking are stable under rapid directional reversals in normal mode."
+  ],
+  "updated_files": [
+    "/app/test_reports/iteration_3.json"
+  ],
+  "success_rate": {
+    "backend": "N/A (frontend-only scope)",
+    "frontend": "82%"
+  },
+  "seed_data_creation": "None.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Validated on https://subtle-motion-8.preview.emergentagent.com only. Desktop scrub checks passed: 0/25/50/100% mapped to ~0/2.5/5/10s, paused at rest, reverse settle works, frame hashes differ, reload+resize sync passed, nav/CTA/dialog interactions functional, and services/back-to-top path works. Reduced-motion passed (no video/request). Remaining failure is dual-asset blocked fallback not collapsing to static mode; responsive overlap concern visible at 768x1024 and 320x568 screenshots.",
+  "rca of the issue": "RCA-1 (HIGH): When both video assets fail to load, hero fallback does not activate because error transition is not triggered in this failure mode; component stays in loading state with full sticky runway. Repro: intercept/abort /media/hero-scroll.mp4 and /media/hero-scroll.webm on reload -> track class remains hero-scroll-track, stage data-state=loading after >5s, video still mounted. Mitigation: add deterministic fail-safe timer/networkState guard and source-level failure aggregation to call onFailure and collapse track. RCA-2 (layout): Tablet/cramped breakpoints place copy/CTA block within media product region; adjust hero-video-stage sizing/top or copy max-width/spacing for those breakpoints."
+}

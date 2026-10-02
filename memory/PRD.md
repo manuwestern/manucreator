@@ -9,6 +9,7 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 - „Starte mit passenden vorläufigen Bildern; die Originale liefere ich später“
 - „Ein Kontaktformular, das Anfragen auf der Webseite speichert“
 - Deutschsprachige One-Page nahe der bereitgestellten visuellen Vorlage. Keine zusätzliche Rückfrage erforderlich.
+- Aktuell: geliefertes Video als Hero-Hintergrund nutzen; Scrollen abwärts steuert die Bilder vorwärts, aufwärts rückwärts. Kein zeitgesteuertes Autoplay.
 
 ## Nutzergruppen
 - Privatpersonen auf der Suche nach individuellen Geschenken und Einzelstücken.
@@ -64,14 +65,14 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 - Vollständigen Namen/Firmenbezeichnung, Anschrift und Kontaktdaten für Impressum erhalten; Datenschutz anhand tatsächlicher Betreiber-/Hostingangaben vervollständigen.
 ### P1 — Vom Nutzer angekündigt
 - Noch ausstehende Originalbilder für Holzgravuren und Kunststoffgravuren einbauen, sobald hochgeladen. Glas, Metall, Schiefer, Textildruck und Kontaktmotiv sind bereits ersetzt.
-- Drei/vier separate Hero-Bilder als unabhängige Tiefenebenen integrieren und Scroll-Perspektive gezielt pro Ebene abstimmen.
+- Ursprünglich angekündigte separate Hero-Ebenen sind durch den später gewünschten, gelieferten Scroll-Video-Hero ersetzt; keine weiteren Hero-Bilder für den aktuellen Effekt erforderlich.
 ### P2 — Optionale sichtbare Erweiterungen
 - Wunschtext-Gravurvorschau auf einem ausgewählten Material.
 - Optional später eine geschützte Anfrageverwaltung, nur nach ausdrücklicher Beauftragung; vor Auth-Code zwingend Integrations-Playbook einholen.
 - Optionale echte Referenzgalerie mit gelieferten Projektbildern.
 
 ## Nächste Aufgaben
-1. Weitere Originalbilder für Holz/Kunststoff und separate Hero-Ebenen vom Nutzer entgegennehmen.
+1. Weitere Originalbilder für Holz/Kunststoff vom Nutzer entgegennehmen.
 2. Rechtliche Anbieterangaben ergänzen.
 3. Optional interaktive Gravurvorschau anbieten.
 
@@ -102,3 +103,29 @@ Nutzerauftrag: „Kannst du diese Bilder schon einmal verwenden“, mit fünf an
 - Gezielter Frontend-Test bei 390 × 844, 360 × 800 und 768 × 1024: 100 % bestanden, kein horizontales Overflow, keine Bild-/Textüberlagerungen, Detail-CTAs und Materialvorauswahl weiterhin funktional.
 - Bericht: `/app/test_reports/iteration_2.json`; mobile Screenshots unter `/app/test_reports/artifacts/iteration_2/`.
 - Keine Backendänderungen, keine neuen Integrationen oder Konten, keine offenen Fehler aus dieser Bildaktualisierung.
+
+## Scroll-Video-Hero — 2026-10-02
+Nutzerauftrag: „Kannst du dieses Video für den Hero Hintergrund benutzen (animiertes Video des Bilds) und mit dem runterschicken bzw hochscrollen soll das Video quasi Frame für Frame abgespielt werden um diesen Motion Effekt zu haben“.
+
+### Umsetzung
+- Geliefertes Video ersetzt das bisherige statische Hero-Bild und dessen zusätzliche CSS-Perspektivbewegung.
+- Original erhalten unter `/app/assets/originals/hero-motion-original.mp4`; tatsächliche Metadaten: 736 × 400, 24 fps, 241 Frames, 10,041667 Sekunden (automatische Videoanalyse schätzte fälschlich 8 Sekunden).
+- Scrolloptimierte Exporte: `/media/hero-scroll.mp4` (H.264, ca. 6 MB, faststart) sowie `/media/hero-scroll.webm` (VP9, ca. 10,6 MB) als native Browser-Alternative. Beide ohne Audiospur, jeder Frame als Keyframe.
+- Passendes Standbild aus Originalframe 0: `/images/hero-video-poster.webp`.
+- `ScrollVideo.jsx` und `useScrollVideo.js` halten das Video dauerhaft pausiert und setzen `currentTime` anhand des auf 24 fps quantisierten Scrollfortschritts. RAF fasst Ereignisse zusammen; nach laufendem Seek wird immer die aktuellste Sollposition übernommen.
+- Kein Autoplay, kein Loop, keine sichtbaren Playercontrols. `muted`, `playsInline`, deaktiviertes Picture-in-Picture. HTML-Video dekodiert die Originalframes; keine simulierten Hintergrundanimationen.
+- Framer-Motion `useScroll` auf äußerem Hero-Abschnitt mit `start start`/`end end`; CSS-Sticky hält den Hero während der Sequenz sichtbar, danach setzt sich normales Seitenscrollen fort.
+- Responsive Layout in `src/styles/hero-video.css`: Desktop mit Hintergrundbild rechts; Tablet-Hochformat und Smartphone trennen Text/Buttons klar von der kompletten Produktansicht. Native Touch-/Ankerscrollnavigation bleibt erhalten.
+- `prefers-reduced-motion`: nur Standbild, kein Video-Download, kein verlängerter Sticky-Bereich.
+- Quellenfehler (letztes Source-Element), Medienfehler und 15-Sekunden-Ladezeitlimit führen zum Standbild und entfernen den verlängerten Scrollbereich; kein dauerhaft leerer Hero.
+- Vorhandene Kontakt-, Galerie-, Material- und Navigationsfunktionen unverändert.
+
+### Verifizierung und behobene Probleme
+- Desktop mit 0/25/50/100 % Scrollfortschritt → ca. 0/2,5/5/10 Sekunden getestet. Rückwärtsscrollen und schnelle Richtungswechsel funktionieren; ohne Scrollen bleibt das Bild stehen.
+- Tatsächlich wechselnde dekodierte Frames vom Testing-Agent über Canvas-Pixel-Hashes bestätigt (Canvas nur im Test, nicht in der App).
+- Vorschau-Testbrowser unterstützt H.264 nicht, deshalb WebM-Fallback zusätzlich eingebaut und erfolgreich geprüft; normale Browser können MP4 auswählen.
+- Ersttest fand Quellenfehler ohne Medienfehler-Event und Überlagerungen bei 768 × 1024 / 320 × 568. Explizites Fehlerhandling und passende Layoutregeln beheben diese.
+- Gezielter Nachtest 100 % erfolgreich: 768 × 1024, 320 × 568, 390 × 844, gesperrte beide Videoquellen, Rückwärtslauf und Standbild. Erster Test zusätzlich 360 × 800, Reload/Resize-Synchronisierung, Anker und Dialoge sowie Reduced Motion erfolgreich.
+- Berichte: `/app/test_reports/iteration_3.json`, `/app/test_reports/iteration_4.json`; Screenshots in `/app/test_reports/artifacts/iteration_4/`.
+- Produktionsbuild erfolgreich: `/app/test_reports/hero-video-build.log`.
+- Keine offenen Fehler im getesteten Umfang; keine Backend-/Umgebungsänderungen oder neuen Integrationen.
