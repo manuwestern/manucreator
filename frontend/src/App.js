@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '@/App.css';
+import '@/styles/product-images.css';
 import { Header, Footer } from '@/components/site/Layout';
 import { Hero } from '@/components/site/Hero';
 import { Services } from '@/components/site/Services';

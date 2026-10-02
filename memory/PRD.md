@@ -63,7 +63,7 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 ### P0 — Nutzerangaben erforderlich
 - Vollständigen Namen/Firmenbezeichnung, Anschrift und Kontaktdaten für Impressum erhalten; Datenschutz anhand tatsächlicher Betreiber-/Hostingangaben vervollständigen.
 ### P1 — Vom Nutzer angekündigt
-- Originale Produktbilder einbauen, sobald hochgeladen.
+- Noch ausstehende Originalbilder für Holzgravuren und Kunststoffgravuren einbauen, sobald hochgeladen. Glas, Metall, Schiefer, Textildruck und Kontaktmotiv sind bereits ersetzt.
 - Drei/vier separate Hero-Bilder als unabhängige Tiefenebenen integrieren und Scroll-Perspektive gezielt pro Ebene abstimmen.
 ### P2 — Optionale sichtbare Erweiterungen
 - Wunschtext-Gravurvorschau auf einem ausgewählten Material.
@@ -71,6 +71,34 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 - Optionale echte Referenzgalerie mit gelieferten Projektbildern.
 
 ## Nächste Aufgaben
-1. Originalbilder und Hero-Ebenen vom Nutzer entgegennehmen.
+1. Weitere Originalbilder für Holz/Kunststoff und separate Hero-Ebenen vom Nutzer entgegennehmen.
 2. Rechtliche Anbieterangaben ergänzen.
 3. Optional interaktive Gravurvorschau anbieten.
+
+## Bildaktualisierung — 2026-10-02
+Nutzerauftrag: „Kannst du diese Bilder schon einmal verwenden“, mit fünf angehängten Produktbildern.
+
+### Eingebaut
+- Whiskyglas mit Hirsch-/Good-Times-Gravur → Glasgravuren, Galerie und Materialdetail.
+- Built-Different-Metallschild mit Bergmotiv → Metallgravuren, Galerie und Materialdetail; Alt-Text an Schild statt bisherigen Anhänger angepasst.
+- Schieferherz „Schön, dass es dich gibt“ → Schiefergravuren, Galerie und Materialdetail.
+- Schwarzes ManuCreator-Shirt „Good Ideas Wear Better“ → Textildruck, Galerie und Materialdetail.
+- Holzblock „Make it Real“ → Kontaktbereich; mobil vollständiges Foto unter Text und Anfragebutton.
+- Hero sowie Holz- und Kunststoffmaterialbilder bewusst unverändert; dafür wurden noch keine passenden Originale geliefert.
+
+### Dateien und Bildschutz
+- Originale unverändert unter `/app/assets/originals/` gesichert.
+- Optimierte, neu benannte WebP-Versionen unter `/app/frontend/public/images/{glas,metall,schiefer,textil,contact}-original.webp`, jeweils 1448 × 1086 Pixel; ca. 230–327 KB statt bis zu 3,4 MB.
+- Glasquelle: `9FF0AF24-0CE0-41F3-A52F-69272BC01C6F.png`.
+- Metallquelle: `52DDA854-73D3-4269-90F4-528BD8D384D8.png`.
+- Schieferquelle: `5575EB9B-E2FA-4509-83F2-B002EB25258D.png`.
+- Textilquelle: `2B785094-465D-4524-B6BB-1A67EB25785C.png`.
+- Kontaktquelle: `7CF32BA0-337D-4DCB-9E9D-AEF8EF6ADD82.webp`.
+- Bilddaten zentral in `src/data/services.js`; gezielte responsive Bildregeln in `src/styles/product-images.css`.
+- Gelieferte Produktbilder in Detailansichten und Galerie mit `contain`, mobil natürliche 4:3-Darstellung der Materialbilder, damit Produktkanten und Schriftzüge nicht abgeschnitten werden.
+
+### Verifizierung
+- Desktop-Browserprüfung bei 1920 × 800: vier Originalmotive in Galerie geladen, Metallschild vollständig, Materialübergabe an Anfrageformular korrekt, Kontaktfoto korrekt.
+- Gezielter Frontend-Test bei 390 × 844, 360 × 800 und 768 × 1024: 100 % bestanden, kein horizontales Overflow, keine Bild-/Textüberlagerungen, Detail-CTAs und Materialvorauswahl weiterhin funktional.
+- Bericht: `/app/test_reports/iteration_2.json`; mobile Screenshots unter `/app/test_reports/artifacts/iteration_2/`.
+- Keine Backendänderungen, keine neuen Integrationen oder Konten, keine offenen Fehler aus dieser Bildaktualisierung.
