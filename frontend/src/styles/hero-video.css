@@ -26,7 +26,7 @@
 }
 
 .hero-video-poster,
-.hero-scroll-video {
+.hero-frame-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -36,12 +36,31 @@
   mask-image: linear-gradient(90deg, transparent, #000 15%, #000 100%);
 }
 
-.hero-scroll-video {
+.hero-frame-canvas {
   opacity: 0;
   transition: opacity .25s ease;
 }
 
-.hero-scroll-video.is-ready { opacity: 1; }
+.hero-frame-canvas.is-ready { opacity: 1; }
+
+.hero-bottom-actions { display: flex; align-items: center; gap: 24px; }
+.hero-motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 38px;
+  min-height: 38px;
+  padding: 0 11px;
+  border: 1px solid #e7e6da4d;
+  border-radius: 99px;
+  color: #ecece2;
+  background: #121513cc;
+  font-size: 9px;
+  transition: background-color .2s, border-color .2s;
+}
+.hero-motion-toggle:hover { background: #30392a; border-color: #ead7ba; }
+.hero-motion-toggle.is-static { background: #ead7ba; border-color: #ead7ba; color: #1b2417; }
 
 .hero--video .hero-shade {
   pointer-events: none;
@@ -82,7 +101,7 @@
   .hero-video-stage { width: 100%; top: 47%; height: 44%; }
   .hero--video .hero-shade { background: none; }
   .hero-video-poster,
-  .hero-scroll-video {
+  .hero-frame-canvas {
     mask-image: linear-gradient(180deg, transparent, #000 10%, #000 88%, transparent);
   }
 }
@@ -95,12 +114,19 @@
   .hero--video .hero-inner { padding-top: 122px; }
   .hero-video-stage { width: 100%; top: 475px; height: calc(100% - 570px); }
   .hero-video-poster,
-  .hero-scroll-video {
+  .hero-frame-canvas {
     mask-image: linear-gradient(180deg, transparent, #000 10%, #000 88%, transparent);
     object-position: center;
   }
   .hero--video .hero-shade { background: none; }
   .hero--video .hero-bottom { bottom: 24px; }
+  .hero--video .hero-bottom { align-items: flex-end; gap: 6px; }
+  .hero--video .trust-strip { column-gap: 12px; }
+  .hero--video .trust-strip > div { font-size: 8px; gap: 7px; }
+  .hero--video .trust-strip svg { width: 18px; }
+  .hero-bottom-actions { gap: 0; }
+  .hero-motion-toggle { width: 36px; height: 36px; min-width: 36px; padding: 0; }
+  .hero-motion-toggle span { display: none; }
 }
 
 @media (max-width: 350px) {
@@ -112,7 +138,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-scroll-track { height: var(--hero-height); }
-  .hero.hero--video { position: relative; top: 0; }
-  .hero-scroll-progress { display: none; }
+  .hero-frame-canvas { transition: none; }
 }

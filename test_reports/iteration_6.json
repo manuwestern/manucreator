@@ -1,0 +1,38 @@
+{
+  "summary": "Frontend-only focused retest completed on REAL Playwright WebKit using /app/.browser-testing/bin/python. Verified frame-sequence scroll behavior (0/50/100 + reverse + idle settle) on desktop and mobile, validated delayed-routing concurrency stress with rapid direction flips and motion off/on, and spot-checked failure-retry and reduced-motion opt-in flows.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/tests/webkit_smoke.py",
+    "/app/test_reports/artifacts/iteration_6/webkit_results.json",
+    "/root/.emergent/automation_output/20261002_153215/console_20261002_153215.log"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "WebKit evidence confirms scroll state is driving canvas frames: desktop frame/targetFrame moved 0 -> 216 -> 240 and reverse back to 0; mobile moved 0 -> 229 -> 240 and reverse back to 0.",
+    "Canvas hashes changed between checkpoints and matched again at reverse+idle, indicating no frozen frame and stable settle behavior in this run.",
+    "Delayed 1200ms media routing + rapid direction flips + quick motion off/on kept observed in-flight hero-sequence requests at peak_active=2 (<=3 requirement), with drained_before_close=true and no WebKit page crash in final run.",
+    "Failure path and recovery in WebKit works: blocked source switched stage to static (no canvas), then retry restored animated canvas and frame updates.",
+    "Reduced-motion explicit activation works in WebKit: initial static state without canvas, motion toggle opt-in restored animated sequence."
+  ],
+  "updated_files": [
+    "/app/tests/webkit_smoke.py",
+    "/app/test_reports/iteration_6.json"
+  ],
+  "success_rate": {
+    "backend": "N/A (frontend-only scope)",
+    "frontend": "100% for requested retest scope"
+  },
+  "seed_data_creation": "None.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Artifacts are under /app/test_reports/artifacts/iteration_6 with per-checkpoint screenshots and structured telemetry in webkit_results.json (scrollY, frame, targetFrame, stageState, canvasHash, concurrency lifecycle). Script uses REAL WebKit sync API and can be rerun directly with /app/.browser-testing/bin/python /app/tests/webkit_smoke.py.",
+  "rca of the issue": "Original false-negative ('webkit_frame=0 after wheel') was caused by insufficient readiness/settle logic in the old smoke script (single short wheel + fixed 900ms wait). After adding readiness checks, track-relative scrolling, settle waits, and state telemetry, WebKit no longer reproduces the reported stuck-scroll bug in this environment."
+}

@@ -51,6 +51,7 @@ __pycache__/
 *pyc*
 venv/
 .venv/
+.browser-testing/
 
 # Development tools
 chainlit.md
@@ -83,3 +84,4 @@ android-sdk/
 
 # overlay black-box crash/user-report dumps — session data, never history
 **/.emergent/recordings/
+.browser-testing/lib/python3.11/site-packages/playwright/driver/node

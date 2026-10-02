@@ -1,0 +1,442 @@
+{
+  "url": "https://subtle-motion-8.preview.emergentagent.com",
+  "timestamp": 1790955550.044005,
+  "engine": "webkit",
+  "desktop_directional": {
+    "ok": true,
+    "result": {
+      "device": "desktop_1920x800",
+      "viewport": {
+        "width": 1920,
+        "height": 800
+      },
+      "states": [
+        {
+          "hasCanvas": true,
+          "frame": "0",
+          "targetFrame": "0",
+          "stageState": "ready",
+          "scrollY": 0,
+          "scrollHeight": 3535,
+          "viewportHeight": 800,
+          "maxScroll": 2735,
+          "trackTop": 0,
+          "trackHeight": 1800,
+          "canvasHash": "308230123",
+          "canvasAvgLum": 161.1,
+          "label": "desktop_1920x800_start",
+          "screenshot": "/app/test_reports/artifacts/iteration_6/desktop_1920x800_start.jpeg"
+        },
+        {
+          "hasCanvas": true,
+          "frame": "216",
+          "targetFrame": "216",
+          "stageState": "ready",
+          "scrollY": 900,
+          "scrollHeight": 3535,
+          "viewportHeight": 800,
+          "maxScroll": 2735,
+          "trackTop": -900,
+          "trackHeight": 1800,
+          "canvasHash": "794852345",
+          "canvasAvgLum": 185.66,
+          "label": "desktop_1920x800_middle",
+          "screenshot": "/app/test_reports/artifacts/iteration_6/desktop_1920x800_middle.jpeg"
+        },
+        {
+          "hasCanvas": true,
+          "frame": "240",
+          "targetFrame": "240",
+          "stageState": "ready",
+          "scrollY": 1800,
+          "scrollHeight": 3535,
+          "viewportHeight": 800,
+          "maxScroll": 2735,
+          "trackTop": -1800,
+          "trackHeight": 1800,
+          "canvasHash": "73849658",
+          "canvasAvgLum": 191.17,
+          "label": "desktop_1920x800_end",
+          "screenshot": "/app/test_reports/artifacts/iteration_6/desktop_1920x800_end.jpeg"
+        },
+        {
+          "hasCanvas": true,
+          "frame": "0",
+          "targetFrame": "0",
+          "stageState": "ready",
+          "scrollY": 0,
+          "scrollHeight": 3535,
+          "viewportHeight": 800,
+          "maxScroll": 2735,
+          "trackTop": 0,
+          "trackHeight": 1800,
+          "canvasHash": "308230123",
+          "canvasAvgLum": 161.1,
+          "label": "desktop_1920x800_reverse_start",
+          "screenshot": "/app/test_reports/artifacts/iteration_6/desktop_1920x800_reverse_start.jpeg"
+        },
+        {
+          "hasCanvas": true,
+          "frame": "0",
+          "targetFrame": "0",
+          "stageState": "ready",
+          "scrollY": 0,
+          "scrollHeight": 3535,
+          "viewportHeight": 800,
+          "maxScroll": 2735,
+          "trackTop": 0,
+          "trackHeight": 1800,
+          "canvasHash": "308230123",
+          "canvasAvgLum": 161.1,
+          "label": "desktop_1920x800_idle_settle",
+          "screenshot": "/app/test_reports/artifacts/iteration_6/desktop_1920x800_idle_settle.jpeg"
+        }
+      ]
+    }
+  },
+  "mobile_directional": {
+    "ok": true,
+    "result": {
+      "device": "mobile_390x844",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "states": [
+        {
+          "hasCanvas": true,
+          "frame": "0",
+          "targetFrame": "0",
+          "stageState": "ready",
+          "scrollY": 0,
+          "scrollHeight": 3847,
+          "viewportHeight": 844,
+          "maxScroll": 3003,
+          "trackTop": 0,
+          "trackHeight": 1772,
+          "canvasHash": "982873612",
+          "canvasAvgLum": 161.07,
+          "label": "mobile_390x844_start",
+          "screenshot": "/app/test_reports/artifacts/iteration_6/mobile_390x844_start.jpeg"
+        },
+        {
+          "hasCanvas": true,
+          "frame": "229",
+          "targetFrame": "229",
+          "stageState": "ready",
+          "scrollY": 886,
+          "scrollHeight": 3847,
+          "viewportHeight": 844,
+          "maxScroll": 3003,
+          "trackTop": -886,
+          "trackHeight": 1772,
+          "canvasHash": "530154439",
+          "canvasAvgLum": 193.98,
+          "label": "mobile_390x844_middle",
+          "screenshot": "/app/test_reports/artifacts/iteration_6/mobile_390x844_middle.jpeg"
+        },
+        {
+          "hasCanvas": true,
+          "frame": "240",
+          "targetFrame": "240",
+          "stageState": "ready",
+          "scrollY": 1772,
+          "scrollHeight": 3847,
+          "viewportHeight": 844,
+          "maxScroll": 3003,
+          "trackTop": -1772,
+          "trackHeight": 1772,
+          "canvasHash": "816441984",
+          "canvasAvgLum": 191.57,
+          "label": "mobile_390x844_end",
+          "screenshot": "/app/test_reports/artifacts/iteration_6/mobile_390x844_end.jpeg"
+        },
+        {
+          "hasCanvas": true,
+          "frame": "0",
+          "targetFrame": "0",
+          "stageState": "ready",
+          "scrollY": 0,
+          "scrollHeight": 3847,
+          "viewportHeight": 844,
+          "maxScroll": 3003,
+          "trackTop": 0,
+          "trackHeight": 1772,
+          "canvasHash": "982873612",
+          "canvasAvgLum": 161.07,
+          "label": "mobile_390x844_reverse_start",
+          "screenshot": "/app/test_reports/artifacts/iteration_6/mobile_390x844_reverse_start.jpeg"
+        },
+        {
+          "hasCanvas": true,
+          "frame": "0",
+          "targetFrame": "0",
+          "stageState": "ready",
+          "scrollY": 0,
+          "scrollHeight": 3847,
+          "viewportHeight": 844,
+          "maxScroll": 3003,
+          "trackTop": 0,
+          "trackHeight": 1772,
+          "canvasHash": "982873612",
+          "canvasAvgLum": 161.07,
+          "label": "mobile_390x844_idle_settle",
+          "screenshot": "/app/test_reports/artifacts/iteration_6/mobile_390x844_idle_settle.jpeg"
+        }
+      ]
+    }
+  },
+  "concurrency_stress": {
+    "ok": true,
+    "result": {
+      "requests_seen": 49,
+      "peak_active": 2,
+      "active_end": 0,
+      "drained_before_close": true,
+      "page_crashed": false,
+      "lifecycle_tail": [
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-15.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-17.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-16.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-18.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-17.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-19.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-18.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-20.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-19.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-21.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-20.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-22.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-21.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-23.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-22.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-24.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-23.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-25.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-24.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-26.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-25.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-27.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-26.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-28.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-27.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-29.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-28.webp"
+        },
+        {
+          "event": "request",
+          "active": 2,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-30.webp"
+        },
+        {
+          "event": "finished",
+          "active": 1,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-29.webp"
+        },
+        {
+          "event": "finished",
+          "active": 0,
+          "url": "https://subtle-motion-8.preview.emergentagent.com/media/hero-sequence/desktop-30.webp"
+        }
+      ],
+      "final_state": {
+        "hasCanvas": true,
+        "frame": "48",
+        "targetFrame": "48",
+        "stageState": "ready",
+        "scrollY": 200,
+        "scrollHeight": 3535,
+        "viewportHeight": 800,
+        "maxScroll": 2735,
+        "trackTop": -200,
+        "trackHeight": 1800,
+        "canvasHash": "126389601",
+        "canvasAvgLum": 79.8,
+        "label": "concurrency_final",
+        "screenshot": "/app/test_reports/artifacts/iteration_6/concurrency_final.jpeg"
+      },
+      "pass_cap_le_3": true
+    }
+  },
+  "failure_retry": {
+    "ok": true,
+    "result": {
+      "failed_state": {
+        "hasCanvas": false,
+        "frame": null,
+        "targetFrame": null,
+        "stageState": "static",
+        "scrollY": 0,
+        "scrollHeight": 2535,
+        "viewportHeight": 800,
+        "maxScroll": 1735,
+        "trackTop": 0,
+        "trackHeight": 800,
+        "canvasHash": null,
+        "canvasAvgLum": null,
+        "label": "failure_state",
+        "screenshot": "/app/test_reports/artifacts/iteration_6/failure_state.jpeg"
+      },
+      "recovered_state": {
+        "hasCanvas": true,
+        "frame": "0",
+        "targetFrame": "0",
+        "stageState": "ready",
+        "scrollY": 0,
+        "scrollHeight": 3535,
+        "viewportHeight": 800,
+        "maxScroll": 2735,
+        "trackTop": 0,
+        "trackHeight": 1800,
+        "canvasHash": "308230123",
+        "canvasAvgLum": 161.1,
+        "label": "retry_recovered",
+        "screenshot": "/app/test_reports/artifacts/iteration_6/retry_recovered.jpeg"
+      }
+    }
+  },
+  "reduced_motion_opt_in": {
+    "ok": true,
+    "result": {
+      "static_state": {
+        "hasCanvas": false,
+        "frame": null,
+        "targetFrame": null,
+        "stageState": "static",
+        "scrollY": 0,
+        "scrollHeight": 2535,
+        "viewportHeight": 800,
+        "maxScroll": 1735,
+        "trackTop": 0,
+        "trackHeight": 800,
+        "canvasHash": null,
+        "canvasAvgLum": null,
+        "label": "reduced_static",
+        "screenshot": "/app/test_reports/artifacts/iteration_6/reduced_static.jpeg"
+      },
+      "opted_in_state": {
+        "hasCanvas": true,
+        "frame": "240",
+        "targetFrame": "240",
+        "stageState": "ready",
+        "scrollY": 0,
+        "scrollHeight": 3535,
+        "viewportHeight": 800,
+        "maxScroll": 2735,
+        "trackTop": 0,
+        "trackHeight": 1800,
+        "canvasHash": "73849658",
+        "canvasAvgLum": 191.17,
+        "label": "reduced_opted_in",
+        "screenshot": "/app/test_reports/artifacts/iteration_6/reduced_opted_in.jpeg"
+      }
+    }
+  }
+}

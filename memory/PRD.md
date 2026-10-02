@@ -10,6 +10,7 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 - „Ein Kontaktformular, das Anfragen auf der Webseite speichert“
 - Deutschsprachige One-Page nahe der bereitgestellten visuellen Vorlage. Keine zusätzliche Rückfrage erforderlich.
 - Aktuell: geliefertes Video als Hero-Hintergrund nutzen; Scrollen abwärts steuert die Bilder vorwärts, aufwärts rückwärts. Kein zeitgesteuertes Autoplay.
+- Nach Fehlermeldung des Nutzers wird derselbe Effekt mit echten extrahierten Video-Einzelbildern statt browserabhängigem Video-Seeking dargestellt. Bewegungsreduktion bleibt standardmäßig respektiert, kann ausdrücklich im Hero übersteuert werden.
 
 ## Nutzergruppen
 - Privatpersonen auf der Suche nach individuellen Geschenken und Einzelstücken.
@@ -129,3 +130,34 @@ Nutzerauftrag: „Kannst du dieses Video für den Hero Hintergrund benutzen (ani
 - Berichte: `/app/test_reports/iteration_3.json`, `/app/test_reports/iteration_4.json`; Screenshots in `/app/test_reports/artifacts/iteration_4/`.
 - Produktionsbuild erfolgreich: `/app/test_reports/hero-video-build.log`.
 - Keine offenen Fehler im getesteten Umfang; keine Backend-/Umgebungsänderungen oder neuen Integrationen.
+
+## Fehlerbehebung Scroll-Effekt — 2026-10-02
+Nutzer meldete: „Irgendwie funktioniert der Video scroll Effekt nicht“.
+
+### Untersuchung
+- Bisheriges Video-Seeking ließ sich im Chromium-Test bewegen, der genaue Auslöser auf dem nicht angegebenen Nutzergerät konnte nicht unmittelbar reproduziert werden.
+- Nachweisbarer stiller Standbild-Fall: aktivierte Systemeinstellung `prefers-reduced-motion`, bislang ohne manuelle Einschaltmöglichkeit. Außerdem hing die alte Lösung von Videoformat-Unterstützung, pausierter Videodekodierung und einem 15-Sekunden-Ladetimeout ab.
+- Deshalb keine Behauptung eines bestätigten spezifischen Browserfehlers auf dem Nutzergerät; stattdessen Abhängigkeit vom nativen Videoplayer vollständig entfernt.
+
+### Aktuelle Implementierung (ersetzt vorheriges Video-Seeking)
+- Alle 241 Originalframes bei 24 fps aus dem gelieferten Video extrahiert, Motiv und Bewegung unverändert.
+- 31 WebP-Bildtafeln mit jeweils bis zu 8 Einzelbildern (4 × 2). Desktop-Frames 736 × 400, mobile Frames 552 × 300; unter `/media/hero-sequence/{desktop,mobile}-00.webp` bis `-30.webp`.
+- `HeroFrameSequence.jsx` zeichnet den exakt zur Scrollposition passenden Frame in ein Canvas. HTML-Video, Medienfreigaben, Codecs, Audio und Autoplay werden nicht mehr benötigt. Kein Mock-Effekt.
+- `useHeroFrames.js` folgt dem vorhandenen Framer-Motion-Scrollfortschritt und zeichnet bei RAF; verspätet geladene Bilder zeichnen automatisch den neuesten Ziel-Frame ohne weiteres Scrollereignis.
+- `heroFrames.js`: priorisiert aktuelle Bildtafel, hält komprimierte Bilddaten im Speicher, maximal drei dekodierte Tafeln; Objekt-URLs werden freigegeben, Requests beim Abschalten abgebrochen.
+- `frameDownloads.js`: gemeinsame Download-Warteschlange über mehrere Loader-Lebenszyklen, strikt höchstens zwei aktive Downloads; korrigiert beim ersten Stresstest gemeldete erhöhte Parallelität.
+- Ein-/Ausschaltknopf im Hero: „Bewegung einschalten/ausschalten“, mobil Play-/Pause-Symbol mit zugänglicher Beschriftung. Bei Bildladefehlern Standbild und „Animation erneut laden“, Wiederherstellung ohne Seitenreload möglich.
+- Reduzierte Bewegung: initial keine Canvas-/Frame-Anfragen und keine Sticky-Zusatzstrecke. Explizites Einschalten aktiviert den Effekt trotzdem; dafür störende pauschale Reduced-Motion-CSS-Regeln entfernt.
+- Vorherige `ScrollVideo.jsx` und `useScrollVideo.js` entfernt. Originalvideo und ältere Exporte bleiben archiviert, werden aber nicht mehr vom Hero angefragt.
+
+### Prüfung
+- Chromium: echte Mausradbewegung, exakte Zuordnung 0/25/50/100 % → Frame 0/60/120/240, Rückwärtslauf, Pixel-Hash-Vergleich, kein schwarzes Bild, kein zeitabhängiges Abspielen.
+- Systemeinstellung reduzierte Bewegung einschließlich explizitem Opt-in und wiederholtem Aus-/Einschalten bestanden.
+- Gesperrte Bildquellen: Standbild, Wiederholen-Schaltfläche und Wiederherstellung nach Freigabe bestanden.
+- Reale Playwright-WebKit-Engine zusätzlich in isolierter Testumgebung installiert (keine Änderung der Anwendungsabhängigkeiten). Desktop 1920 × 800 und Mobilviewport 390 × 844: wechselnde Canvas-Pixel und Frame-Zielwerte, vorwärts/rückwärts, Stillstand bestätigt. Dies ist ein Safari-Engine-Test, kein Test auf einem physischen iPhone.
+- Verzögerte Bildanfragen (1200 ms) + schnelle Richtungswechsel + Aus/Ein: maximal zwei aktive Downloads, sauberer Abschluss.
+- Responsiv zusätzlich 320 × 568 und 768 × 1024 geprüft; Buttons und Anfrageabläufe erreichbar, kein horizontales Overflow.
+- Berichte: `/app/test_reports/iteration_5.json` (initialer Parallelitätsbefund), `/app/test_reports/iteration_6.json` (behoben, Nachtest bestanden), strukturierte WebKit-Messwerte und Screenshots unter `/app/test_reports/artifacts/iteration_6/`.
+- Wiederholbarer Engine-Test: `/app/.browser-testing/bin/python /app/tests/webkit_smoke.py`; isolierte Testumgebung via `.gitignore` ausgeschlossen.
+- Build erfolgreich: `/app/test_reports/hero-frames-build.log`.
+- Keine noch offenen Fehler im geprüften Umfang. Falls die Nutzerumgebung weiterhin betroffen ist, konkreten Browser/Gerät und Vorschauzustand erfragen, statt dieselbe Chromium-Prüfung zu wiederholen.
