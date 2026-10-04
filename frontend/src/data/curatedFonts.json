@@ -1,0 +1,1873 @@
+{
+  "version": "manucreator-curated-1",
+  "families": [
+    {
+      "id": "open-sans",
+      "family": "Open Sans",
+      "category": "Klar & modern",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/open-sans-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 300,
+          "style": "italic",
+          "key": "curated:open-sans:300:italic",
+          "ttf": "open-sans-300-italic.ttf",
+          "url": "/fonts/curated/open-sans-300-italic.woff2",
+          "sha256": "e84b361ee7968c575457e0e28cbb590f67757d2bef897686c4b084c9baad14a5",
+          "woff2_sha256": "fde3b3e3ca400145d286d673be700f4695be6d94c628834cce6533b1c8c3dbf1"
+        },
+        {
+          "weight": 300,
+          "style": "normal",
+          "key": "curated:open-sans:300:normal",
+          "ttf": "open-sans-300-normal.ttf",
+          "url": "/fonts/curated/open-sans-300-normal.woff2",
+          "sha256": "e56a241b5aaae65265fb63fbb2259468d718662e9624ad1b999faf59dbbbdaf3",
+          "woff2_sha256": "a8d8608b570868c09b5c4f1b372bd6b3932c5662fccd00ee0a3438fb1f24f902"
+        },
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:open-sans:400:italic",
+          "ttf": "open-sans-400-italic.ttf",
+          "url": "/fonts/curated/open-sans-400-italic.woff2",
+          "sha256": "d0cd191cd043d3c28e793eab785fcf07ea5e8b7495f5c9f00116babd094ad2db",
+          "woff2_sha256": "87f7f6b029e7f2c9a73a36160bb0d991b6e943fd216c2b2c763caf8f466c85b6"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:open-sans:400:normal",
+          "ttf": "open-sans-400-normal.ttf",
+          "url": "/fonts/curated/open-sans-400-normal.woff2",
+          "sha256": "423c7b20ebde300c0af6c5bd5d4e88e64f1748fadf9f4893e6fd3b766a1ea3c2",
+          "woff2_sha256": "2a95503bcca213a5b726f358aff4d8bfb5a6d7eb5bd9b7cc8d6c8a9d01c3387d"
+        },
+        {
+          "weight": 500,
+          "style": "italic",
+          "key": "curated:open-sans:500:italic",
+          "ttf": "open-sans-500-italic.ttf",
+          "url": "/fonts/curated/open-sans-500-italic.woff2",
+          "sha256": "1e0fd7e9713c677693096a55ede712d4608d493e85b6a1c436409ec81118bf93",
+          "woff2_sha256": "a9c9b03f75e1eabd4eafdb1aaf0e69949442b02fe9bacbd8bc760ebafbec0557"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:open-sans:500:normal",
+          "ttf": "open-sans-500-normal.ttf",
+          "url": "/fonts/curated/open-sans-500-normal.woff2",
+          "sha256": "ceee0f0426e2c88f3e406dec8cce32b48de91559b4ce6488083ad9b18876054a",
+          "woff2_sha256": "015eed251b1f1b206f28573495e6f04c4cce4ceb3e4cbd8797f818bd6966b1b2"
+        },
+        {
+          "weight": 600,
+          "style": "italic",
+          "key": "curated:open-sans:600:italic",
+          "ttf": "open-sans-600-italic.ttf",
+          "url": "/fonts/curated/open-sans-600-italic.woff2",
+          "sha256": "8160262c825c4f35d6e7c5f8b5635e69da14ee103378463d8cca6356092af26a",
+          "woff2_sha256": "33e7507166db71a05b15c3d328286ee43359543af9daa847be2a6ae2115ef132"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:open-sans:600:normal",
+          "ttf": "open-sans-600-normal.ttf",
+          "url": "/fonts/curated/open-sans-600-normal.woff2",
+          "sha256": "8b94e1f639d4167df8f0b75cab2ee2743a114b73e296ee5b0ac98b27687fe27c",
+          "woff2_sha256": "3cf5558a91e9643e847ac8e52270cc9b22b22280020f559b6e3ea17af8a3c0c9"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:open-sans:700:italic",
+          "ttf": "open-sans-700-italic.ttf",
+          "url": "/fonts/curated/open-sans-700-italic.woff2",
+          "sha256": "bc006966ef54e5d00f1fc15bcce4dad6f1d7254ff2e5934dba4574cc4ff7eef1",
+          "woff2_sha256": "5814eca6628ec5701a7c69c30bc07bc7b3a3fb8a7c893f1cd0cd0ddf054d18dc"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:open-sans:700:normal",
+          "ttf": "open-sans-700-normal.ttf",
+          "url": "/fonts/curated/open-sans-700-normal.woff2",
+          "sha256": "b8917a055631aeb3e70df204a28e7b1d1acdd6fde5f7d97355b0e2cb309d68f0",
+          "woff2_sha256": "f7a85a7cce18e1e0069df6b3f6f928479dcf8f7c2ca23c44e3b8ebe77446fa30"
+        },
+        {
+          "weight": 800,
+          "style": "italic",
+          "key": "curated:open-sans:800:italic",
+          "ttf": "open-sans-800-italic.ttf",
+          "url": "/fonts/curated/open-sans-800-italic.woff2",
+          "sha256": "3aba6bd81ee2918404c847a2c2e1b587cdfee2e0af9c5a4753295d66953d9f68",
+          "woff2_sha256": "f85911d833b2306b381a4e6011b591457d7ab74cb8c8ad42e9eee8299f7b8f3d"
+        },
+        {
+          "weight": 800,
+          "style": "normal",
+          "key": "curated:open-sans:800:normal",
+          "ttf": "open-sans-800-normal.ttf",
+          "url": "/fonts/curated/open-sans-800-normal.woff2",
+          "sha256": "58b8dac7e5d19aa946ad10ba1f3369053cb9f701a52fb73fe2889793f8b1a048",
+          "woff2_sha256": "e6e4c456f428c822aad25bca2e8d3427dd0f31f0b79b7e7e59111b41b94606df"
+        }
+      ],
+      "default": "curated:open-sans:400:normal"
+    },
+    {
+      "id": "montserrat",
+      "family": "Montserrat",
+      "category": "Klar & modern",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/montserrat-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 100,
+          "style": "italic",
+          "key": "curated:montserrat:100:italic",
+          "ttf": "montserrat-100-italic.ttf",
+          "url": "/fonts/curated/montserrat-100-italic.woff2",
+          "sha256": "70ef8282de33366f69718df3ac59d464e497044e32705ff4cadbe9e56e4afc0a",
+          "woff2_sha256": "0a875d55823765b15d3756ed96ffbef8e0cc8aab06052903497fa65b6ff20023"
+        },
+        {
+          "weight": 100,
+          "style": "normal",
+          "key": "curated:montserrat:100:normal",
+          "ttf": "montserrat-100-normal.ttf",
+          "url": "/fonts/curated/montserrat-100-normal.woff2",
+          "sha256": "4d20443f7252c0a56bd61bd18960549d82b474219373a273fa999039d62bae0e",
+          "woff2_sha256": "d27b3b09214311cd6b02d211c39b513b9b4415e28a43537dc2927acce295d27c"
+        },
+        {
+          "weight": 200,
+          "style": "italic",
+          "key": "curated:montserrat:200:italic",
+          "ttf": "montserrat-200-italic.ttf",
+          "url": "/fonts/curated/montserrat-200-italic.woff2",
+          "sha256": "353c2e2dff01d9990f310f311c87d06f05c875b073589b57559e35a675019c52",
+          "woff2_sha256": "2badb0de03fed6faea85cfa5ece137f807aa97a1117fa61b7014f3f47b4e9cba"
+        },
+        {
+          "weight": 200,
+          "style": "normal",
+          "key": "curated:montserrat:200:normal",
+          "ttf": "montserrat-200-normal.ttf",
+          "url": "/fonts/curated/montserrat-200-normal.woff2",
+          "sha256": "2044506b354b276e2af817d87f467e70a3e49138f094a3f3f2e2c53ad1abe546",
+          "woff2_sha256": "5df70b6baff99f83e5570008b59a8600d5c1a214d328514f5ab5ed0673a1b2e5"
+        },
+        {
+          "weight": 300,
+          "style": "italic",
+          "key": "curated:montserrat:300:italic",
+          "ttf": "montserrat-300-italic.ttf",
+          "url": "/fonts/curated/montserrat-300-italic.woff2",
+          "sha256": "deaae1d3dadd3bfa5e8d9862410829b0f380b46b519493bdd69ae0264dd10640",
+          "woff2_sha256": "2626d1cd19e361139d898837cdbdadb9081405751fb0dc8749c3c0b5cce6b7e9"
+        },
+        {
+          "weight": 300,
+          "style": "normal",
+          "key": "curated:montserrat:300:normal",
+          "ttf": "montserrat-300-normal.ttf",
+          "url": "/fonts/curated/montserrat-300-normal.woff2",
+          "sha256": "1b25c070c38f3b9e0c96aff32a68e5c75834c6f00a4beb81ef898281a3485483",
+          "woff2_sha256": "857bff104d86d2fa3574aecef3928f3b8c8bdfbb1555cc8b3b1879a8cd0c4960"
+        },
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:montserrat:400:italic",
+          "ttf": "montserrat-400-italic.ttf",
+          "url": "/fonts/curated/montserrat-400-italic.woff2",
+          "sha256": "7b881230f115cce2766a7945aba719753eda4d6f2d3ae0a4c152435445d305e0",
+          "woff2_sha256": "07c451cf0e40e6241120ac2d3279d1eb80741cbcf72d33fb948c2a67d0949594"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:montserrat:400:normal",
+          "ttf": "montserrat-400-normal.ttf",
+          "url": "/fonts/curated/montserrat-400-normal.woff2",
+          "sha256": "b9129bd4ebc6a4365d2745838cc58cddf7bc63b4cc4068fc5bfcf4d045be6f0d",
+          "woff2_sha256": "9ef326351d989f3372d83604f9dd996bb8f5b38986f46153670464bc91c65a0d"
+        },
+        {
+          "weight": 500,
+          "style": "italic",
+          "key": "curated:montserrat:500:italic",
+          "ttf": "montserrat-500-italic.ttf",
+          "url": "/fonts/curated/montserrat-500-italic.woff2",
+          "sha256": "c9058fe53795d7ede595b19582d885194ca64715a57ab80ae1f05b85772a2751",
+          "woff2_sha256": "183c8c679d3676d6c0f53487a1e0e9ba7d7f85e1917047423ad40158b8ad0ea8"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:montserrat:500:normal",
+          "ttf": "montserrat-500-normal.ttf",
+          "url": "/fonts/curated/montserrat-500-normal.woff2",
+          "sha256": "d7853c6cdff9db794528e074118323a3954249d1c8c37e3bba7ddfd99945bdf1",
+          "woff2_sha256": "0b5571c7e93920e8762cec38a298484edd9eca4c093dd9f64299fd01c2ada31e"
+        },
+        {
+          "weight": 600,
+          "style": "italic",
+          "key": "curated:montserrat:600:italic",
+          "ttf": "montserrat-600-italic.ttf",
+          "url": "/fonts/curated/montserrat-600-italic.woff2",
+          "sha256": "21d92de59713fe45ec9737d3cf02ae59609d3cc95ee8c9e7e4438a56eb48a0ca",
+          "woff2_sha256": "dbb2a53f3906e612d048d40f0c1c42460b5c01a119dab3611840b9dec093e73a"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:montserrat:600:normal",
+          "ttf": "montserrat-600-normal.ttf",
+          "url": "/fonts/curated/montserrat-600-normal.woff2",
+          "sha256": "abc0a1ccc48a63beef1bd0db864da43072a047913f842d0ff1b866717d587461",
+          "woff2_sha256": "856d85e153f2537329288994c21a6f9ba3822e053f8be0f71ca276f138f8a983"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:montserrat:700:italic",
+          "ttf": "montserrat-700-italic.ttf",
+          "url": "/fonts/curated/montserrat-700-italic.woff2",
+          "sha256": "0cff912272a2e05741e3cef69d15c9e9174a78f01e81d50162992e4ae4222331",
+          "woff2_sha256": "8ba94978aef001327e68a24f4bb8382f2ed079cb947ab164d18741ff33d24043"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:montserrat:700:normal",
+          "ttf": "montserrat-700-normal.ttf",
+          "url": "/fonts/curated/montserrat-700-normal.woff2",
+          "sha256": "a2dbdad96c71c69ddf85a0f52a953cf606c917622333f15e43bc6c9bd886be15",
+          "woff2_sha256": "be1d90fa366833d6ec387300675c9437d338540c8b696b02a5740cfd2913c2ed"
+        },
+        {
+          "weight": 800,
+          "style": "italic",
+          "key": "curated:montserrat:800:italic",
+          "ttf": "montserrat-800-italic.ttf",
+          "url": "/fonts/curated/montserrat-800-italic.woff2",
+          "sha256": "755c5fc2f4f7fb6fc4fc1a05d6cd5255b2bfd8ff809bcaa803769b057e4801bc",
+          "woff2_sha256": "54db1fd60f8cd3afcfff8ad89c5230a634471781f9e0274d35367eaa292cbbfe"
+        },
+        {
+          "weight": 800,
+          "style": "normal",
+          "key": "curated:montserrat:800:normal",
+          "ttf": "montserrat-800-normal.ttf",
+          "url": "/fonts/curated/montserrat-800-normal.woff2",
+          "sha256": "69d04dc96585e481d77583246e4cdd6e358e7db13e64572e189f06c6a58bcbda",
+          "woff2_sha256": "782974574c2548fa88b3cce29defe4503e3ae64048e8728abf886243188a7e6e"
+        },
+        {
+          "weight": 900,
+          "style": "italic",
+          "key": "curated:montserrat:900:italic",
+          "ttf": "montserrat-900-italic.ttf",
+          "url": "/fonts/curated/montserrat-900-italic.woff2",
+          "sha256": "35e75147472ec81f1b7b2138d4e7c9a996c777796cf5619b436153bd51ae1704",
+          "woff2_sha256": "7bcfb30f5af1e6b3bd95032910e06f5eec4c1cd79275bd14ec2d0bf3e6774232"
+        },
+        {
+          "weight": 900,
+          "style": "normal",
+          "key": "curated:montserrat:900:normal",
+          "ttf": "montserrat-900-normal.ttf",
+          "url": "/fonts/curated/montserrat-900-normal.woff2",
+          "sha256": "d33c31bb91320480f73148a1fcf8ac82e898f004c8341b2c87dae9e658f7ee19",
+          "woff2_sha256": "c70c522e324f15699efdc37651c70e558fa538e4322a4c506598af86d49d9916"
+        }
+      ],
+      "default": "curated:montserrat:400:normal"
+    },
+    {
+      "id": "nunito",
+      "family": "Nunito",
+      "category": "Klar & modern",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/nunito-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 200,
+          "style": "italic",
+          "key": "curated:nunito:200:italic",
+          "ttf": "nunito-200-italic.ttf",
+          "url": "/fonts/curated/nunito-200-italic.woff2",
+          "sha256": "327751817bd2ef951d77a8409238bee547b942cb6a56bbf51a47640088bd8e43",
+          "woff2_sha256": "bfcee994720908c2d2c557d7999c259f677ab4a28e3440146770419f52cf7a24"
+        },
+        {
+          "weight": 200,
+          "style": "normal",
+          "key": "curated:nunito:200:normal",
+          "ttf": "nunito-200-normal.ttf",
+          "url": "/fonts/curated/nunito-200-normal.woff2",
+          "sha256": "57f02bc243dc8e29792eb311a6fb6eef6de5717dc3b848dc5787c2fc1e82f3bc",
+          "woff2_sha256": "b5b9a7a4e662d0f3a243db804c009bee9d5a4d76df2ee3655d4bbd685db7b14d"
+        },
+        {
+          "weight": 300,
+          "style": "italic",
+          "key": "curated:nunito:300:italic",
+          "ttf": "nunito-300-italic.ttf",
+          "url": "/fonts/curated/nunito-300-italic.woff2",
+          "sha256": "1d5d84fa104110bc4a893937b10f4f33e6b26e79ee2bac9c63d7078b4901aea9",
+          "woff2_sha256": "6e8d67ce21224eb29595f1783d249aad8525a075c531868598f736fd1cbe5f6f"
+        },
+        {
+          "weight": 300,
+          "style": "normal",
+          "key": "curated:nunito:300:normal",
+          "ttf": "nunito-300-normal.ttf",
+          "url": "/fonts/curated/nunito-300-normal.woff2",
+          "sha256": "8c662777cb53c82b1f3e359a04c91b918827b0c3318f503edb6cf95507378089",
+          "woff2_sha256": "bdc078a6d46a5c1e7060eb1ab8d2a8b9228118f3115f27a12c2e99d6b40a0dc1"
+        },
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:nunito:400:italic",
+          "ttf": "nunito-400-italic.ttf",
+          "url": "/fonts/curated/nunito-400-italic.woff2",
+          "sha256": "8ad8270d35c8c1ea11497c197f8dc4f3ca6574c8aa6e94ea573d30b14779b065",
+          "woff2_sha256": "d6dd7e4ac998c88e71faf7b71ffba6d08dd1cd7502d8cbe3189adcca36b67f0c"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:nunito:400:normal",
+          "ttf": "nunito-400-normal.ttf",
+          "url": "/fonts/curated/nunito-400-normal.woff2",
+          "sha256": "02eecb63c3c0c78d04f94e8c384b16a373e8f0cc218fa772173ba2dae0ee4d04",
+          "woff2_sha256": "4c7332b2b20617cb4923d6db395de89eb0cc0621e0d755eb4899c4a98a3cc6c7"
+        },
+        {
+          "weight": 500,
+          "style": "italic",
+          "key": "curated:nunito:500:italic",
+          "ttf": "nunito-500-italic.ttf",
+          "url": "/fonts/curated/nunito-500-italic.woff2",
+          "sha256": "7fab86882408848b8938679dbbe2b7301197ec558908ea8ffe96aaf4dfecba88",
+          "woff2_sha256": "71260d3c8a0db4b984693774bd37d90cf7c5baedd6a36281e7bb47a31f3aa0fe"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:nunito:500:normal",
+          "ttf": "nunito-500-normal.ttf",
+          "url": "/fonts/curated/nunito-500-normal.woff2",
+          "sha256": "7b2dccc115cb27baffc0a8f33657aeff51aa6df7453c9c4e3faf34d0948e2457",
+          "woff2_sha256": "2a6fa8eaa9cdd67e6cea1d6b613bbe8c698bfe6ab7ee74b12232afbf6d9b7fba"
+        },
+        {
+          "weight": 600,
+          "style": "italic",
+          "key": "curated:nunito:600:italic",
+          "ttf": "nunito-600-italic.ttf",
+          "url": "/fonts/curated/nunito-600-italic.woff2",
+          "sha256": "d44e439fa62088abbcecd2668c06c1e92a8166acde1d9685e94c542005d09b6f",
+          "woff2_sha256": "79d34b2052098e84da3ccb8bdc90379c89ac8abb14f38587cf6aa4b7cbbba9ed"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:nunito:600:normal",
+          "ttf": "nunito-600-normal.ttf",
+          "url": "/fonts/curated/nunito-600-normal.woff2",
+          "sha256": "c6764cee99bcbc6da14317547ca164635724d46d1be1ab4dc65fff73fced453d",
+          "woff2_sha256": "d4755d5a9d2f7c77d13dde0adbc756bd06884e504cb1bfaa1587b191336b8107"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:nunito:700:italic",
+          "ttf": "nunito-700-italic.ttf",
+          "url": "/fonts/curated/nunito-700-italic.woff2",
+          "sha256": "b99667a6fa599264559951c734feb3f6c0263d7e1726f634746775ac57fcc001",
+          "woff2_sha256": "e0c1d53b04ddcb7d0e3e7fb3da8b8a57d1af65f411a81a1c23876df359ff142c"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:nunito:700:normal",
+          "ttf": "nunito-700-normal.ttf",
+          "url": "/fonts/curated/nunito-700-normal.woff2",
+          "sha256": "95230aa8ec6e3206612e47984b1f5415fef08aa23bb07fcbd23bbdca3e6a0f79",
+          "woff2_sha256": "f3312741eed22882c3de235b4ee6f15318db5925a00fe04f7c5c496e013a4173"
+        },
+        {
+          "weight": 800,
+          "style": "italic",
+          "key": "curated:nunito:800:italic",
+          "ttf": "nunito-800-italic.ttf",
+          "url": "/fonts/curated/nunito-800-italic.woff2",
+          "sha256": "20c20f4cfe6e6308c4307e28da0d43d7ee6bd959d2ee074f4caba6d0acc4e715",
+          "woff2_sha256": "76799dcd45cae14a51e4c4800b642b9888d36977f0e81c7cb01d96d943bfd3e1"
+        },
+        {
+          "weight": 800,
+          "style": "normal",
+          "key": "curated:nunito:800:normal",
+          "ttf": "nunito-800-normal.ttf",
+          "url": "/fonts/curated/nunito-800-normal.woff2",
+          "sha256": "15ab01ebc01e594d9ae72c347e8f062b1364c545fc9b05dcdc41faaf909489f5",
+          "woff2_sha256": "2affaaa42de9cb27b6d639caf4849d1160c2b78ca3a7e16f618b0a5b72cd1ad5"
+        },
+        {
+          "weight": 900,
+          "style": "italic",
+          "key": "curated:nunito:900:italic",
+          "ttf": "nunito-900-italic.ttf",
+          "url": "/fonts/curated/nunito-900-italic.woff2",
+          "sha256": "18c9835dd043d7707d8ecd4beda695566014fc2ef8c0f00557ca9a4b15dc4dab",
+          "woff2_sha256": "e9701e66ec17bba74e5424cb22a2966ddc0274ab8ae1f1e6ba90d9e5dba5615a"
+        },
+        {
+          "weight": 900,
+          "style": "normal",
+          "key": "curated:nunito:900:normal",
+          "ttf": "nunito-900-normal.ttf",
+          "url": "/fonts/curated/nunito-900-normal.woff2",
+          "sha256": "7cf7034e7cb87ed20e7e7618f8f359e1ef48b42c15f26c6884e60acf77115d59",
+          "woff2_sha256": "104e39d88140a4177b1ab3cd79ee4089f1af182212875234be98ebd09775824d"
+        }
+      ],
+      "default": "curated:nunito:400:normal"
+    },
+    {
+      "id": "raleway",
+      "family": "Raleway",
+      "category": "Klar & modern",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/raleway-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 100,
+          "style": "italic",
+          "key": "curated:raleway:100:italic",
+          "ttf": "raleway-100-italic.ttf",
+          "url": "/fonts/curated/raleway-100-italic.woff2",
+          "sha256": "e0c41f254cb9fd72b9f68e54056c9cfb230fa4f2d7f6cb2ce5d3ce56ff9dbb16",
+          "woff2_sha256": "ee7c8060c50775a87465f273838cef105cef4006cd64cd24243e006eb8503996"
+        },
+        {
+          "weight": 100,
+          "style": "normal",
+          "key": "curated:raleway:100:normal",
+          "ttf": "raleway-100-normal.ttf",
+          "url": "/fonts/curated/raleway-100-normal.woff2",
+          "sha256": "41a18b55b5b624103124f7c2d04434c8a54fe1e0ec7c288c2ec06327507935d5",
+          "woff2_sha256": "ef44c7d7a252c1befbc0454deb0c77039ccf06d0b8af9ced6e4bf0d0bbcaa1e4"
+        },
+        {
+          "weight": 200,
+          "style": "italic",
+          "key": "curated:raleway:200:italic",
+          "ttf": "raleway-200-italic.ttf",
+          "url": "/fonts/curated/raleway-200-italic.woff2",
+          "sha256": "d4635b946fbe81e063f3deef10b83c16e04d13696d4f0b739d1b19d0f1c91e67",
+          "woff2_sha256": "aae968fd9a85945ff6c5dd7632eb3c47053aaf1ef83e716a3a66fe68dc97a223"
+        },
+        {
+          "weight": 200,
+          "style": "normal",
+          "key": "curated:raleway:200:normal",
+          "ttf": "raleway-200-normal.ttf",
+          "url": "/fonts/curated/raleway-200-normal.woff2",
+          "sha256": "dd78245ec8cd95e0fa684146683f60c967170eabb330f729c491b929cf188297",
+          "woff2_sha256": "f68d82b8adc189be0fbf347b5e5d7c7ce169f3d1b459cd6cbf8bbbc425410f64"
+        },
+        {
+          "weight": 300,
+          "style": "italic",
+          "key": "curated:raleway:300:italic",
+          "ttf": "raleway-300-italic.ttf",
+          "url": "/fonts/curated/raleway-300-italic.woff2",
+          "sha256": "19e254653b365dac33eb2dea704f0541ad875e026a9a3b6506889a94c3dc1e16",
+          "woff2_sha256": "6d43372bb0eae2560ecfa489ee6f207e463a63bba4f8f656f7b89b40f1678d46"
+        },
+        {
+          "weight": 300,
+          "style": "normal",
+          "key": "curated:raleway:300:normal",
+          "ttf": "raleway-300-normal.ttf",
+          "url": "/fonts/curated/raleway-300-normal.woff2",
+          "sha256": "e9a617b60de215f50ac4452d0f3ac08764ea372afb11b597fd3a01202527bb28",
+          "woff2_sha256": "ef746f0149dc876631c315e517a9cbf62f246189c23ed0caa84ecd1d4734c6a2"
+        },
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:raleway:400:italic",
+          "ttf": "raleway-400-italic.ttf",
+          "url": "/fonts/curated/raleway-400-italic.woff2",
+          "sha256": "550eb7113fa4e9db69af40211d2b8a092e1e4786f9e3093fab6c4bbfd7308d51",
+          "woff2_sha256": "01e4858e00fe336c1e3f278e9c6d26c024dee29bd10ca1a2c7eeb7e72671f4c8"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:raleway:400:normal",
+          "ttf": "raleway-400-normal.ttf",
+          "url": "/fonts/curated/raleway-400-normal.woff2",
+          "sha256": "a631e813fc5fe4331f1dc95f40d6fa7e43c96f944e10e5edd33c346c0c7145fd",
+          "woff2_sha256": "993347edf192a8e74d0c4b539a9e156aa14dee6e8c82ed2cc4630face525a4f7"
+        },
+        {
+          "weight": 500,
+          "style": "italic",
+          "key": "curated:raleway:500:italic",
+          "ttf": "raleway-500-italic.ttf",
+          "url": "/fonts/curated/raleway-500-italic.woff2",
+          "sha256": "bf773408ecb3bb107813eb04a3d636fa1584b558bfb254f8935892cbc16aeb13",
+          "woff2_sha256": "b46d032c69cf3a10a50f28ac5fcf168b75a247e48a2f3586da429cd5d416d5c0"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:raleway:500:normal",
+          "ttf": "raleway-500-normal.ttf",
+          "url": "/fonts/curated/raleway-500-normal.woff2",
+          "sha256": "4767174100141e3a1dac92c84c15336554d20b82f6d75d115dd8e83670269586",
+          "woff2_sha256": "ba117673008f8c1eff39cbc06c81ae07a02cd3146a532030d191ceabab33dde2"
+        },
+        {
+          "weight": 600,
+          "style": "italic",
+          "key": "curated:raleway:600:italic",
+          "ttf": "raleway-600-italic.ttf",
+          "url": "/fonts/curated/raleway-600-italic.woff2",
+          "sha256": "9315f58cbfebf110d848f28eebc274da085bd7928c768923a7eb4a4077163f38",
+          "woff2_sha256": "b9806414e66b235c67873eedd23640a03b3e36399ed2d46a0a5c363e71b8f6f4"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:raleway:600:normal",
+          "ttf": "raleway-600-normal.ttf",
+          "url": "/fonts/curated/raleway-600-normal.woff2",
+          "sha256": "09e934170a5df80aa7cf5e1492e1e15b686926a156f032ff6f2c89115078fdf4",
+          "woff2_sha256": "03a1c9f3b8d3d64a53e8bc2ec69a8e8692c2974ca2ce2ca23a5ba7706c3fadd9"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:raleway:700:italic",
+          "ttf": "raleway-700-italic.ttf",
+          "url": "/fonts/curated/raleway-700-italic.woff2",
+          "sha256": "878edbc4dfcadda6b82b00a1ad9a1e65b5c9ed5f1bb12d717a26b5a5574408e9",
+          "woff2_sha256": "1fb95c203e3a525bf69f9df1aaa19e40a107ddc50b824f210261273e09165003"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:raleway:700:normal",
+          "ttf": "raleway-700-normal.ttf",
+          "url": "/fonts/curated/raleway-700-normal.woff2",
+          "sha256": "4ed8fe0100693f7a59924e50b5032cdf49a92015595ab6629f4d4d4e1f9899da",
+          "woff2_sha256": "6b869c60b797ccc6cb0be75f7933d79ef246af0158392edb9097799076160111"
+        },
+        {
+          "weight": 800,
+          "style": "italic",
+          "key": "curated:raleway:800:italic",
+          "ttf": "raleway-800-italic.ttf",
+          "url": "/fonts/curated/raleway-800-italic.woff2",
+          "sha256": "5e4d45b62d339aedad1d84cf8f70c1f669e9b874878d9534124dfceab2b6809d",
+          "woff2_sha256": "95290d562e5ff43d024f141bdd18abbec154d0eb95a7b4c302e2b1309b0ca466"
+        },
+        {
+          "weight": 800,
+          "style": "normal",
+          "key": "curated:raleway:800:normal",
+          "ttf": "raleway-800-normal.ttf",
+          "url": "/fonts/curated/raleway-800-normal.woff2",
+          "sha256": "dcf90ee441a8060305dc879b7337fc5da8b065fabdac3ebd62f9161cd0a669f7",
+          "woff2_sha256": "7d248acc64208cbe688560c0a3de40c537e2507810f96431e2a48f5f4495c998"
+        },
+        {
+          "weight": 900,
+          "style": "italic",
+          "key": "curated:raleway:900:italic",
+          "ttf": "raleway-900-italic.ttf",
+          "url": "/fonts/curated/raleway-900-italic.woff2",
+          "sha256": "9a2f95431575f8d82e5be116ac367adf3f692a01a483c2c883f153db720d931a",
+          "woff2_sha256": "dd3b4a23d9625122f5bc1c4eb038f05895bcab1b85bcdd6db7e215d4686918e4"
+        },
+        {
+          "weight": 900,
+          "style": "normal",
+          "key": "curated:raleway:900:normal",
+          "ttf": "raleway-900-normal.ttf",
+          "url": "/fonts/curated/raleway-900-normal.woff2",
+          "sha256": "4dd913b7aea9f91cc9a7ca902b1e22af459ed44faabdebb408147913eeb747dd",
+          "woff2_sha256": "220f400b72296941958d75566a9133e17b3e51e171ba98dc79f7771aab1579c4"
+        }
+      ],
+      "default": "curated:raleway:400:normal"
+    },
+    {
+      "id": "merriweather",
+      "family": "Merriweather",
+      "category": "Klassisch",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/merriweather-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 300,
+          "style": "italic",
+          "key": "curated:merriweather:300:italic",
+          "ttf": "merriweather-300-italic.ttf",
+          "url": "/fonts/curated/merriweather-300-italic.woff2",
+          "sha256": "3bb73af3ab982efb12b2b074778996421c4bb932d2dc4a2d5ca1731ceca520a4",
+          "woff2_sha256": "05f91b5b4a903b19789c433bbd27971587b2a89e038ff2eb5331340376e220f0"
+        },
+        {
+          "weight": 300,
+          "style": "normal",
+          "key": "curated:merriweather:300:normal",
+          "ttf": "merriweather-300-normal.ttf",
+          "url": "/fonts/curated/merriweather-300-normal.woff2",
+          "sha256": "6cd08e0b554529bdada778695a8b11564e33eef96287cadf1cbb956273bd3f2e",
+          "woff2_sha256": "7093d4c7823825481f2ce4d248402a58a451a567fa3f57ca9c07c4cfdd85c04e"
+        },
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:merriweather:400:italic",
+          "ttf": "merriweather-400-italic.ttf",
+          "url": "/fonts/curated/merriweather-400-italic.woff2",
+          "sha256": "90e5b1fae99ad58694bb52e096fd61f3a0d8a4f8b046c79ff340717d5fd3444a",
+          "woff2_sha256": "bdfb11304a4f79c33294a339afa50512cda78fec2529b96538666db0ed282f42"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:merriweather:400:normal",
+          "ttf": "merriweather-400-normal.ttf",
+          "url": "/fonts/curated/merriweather-400-normal.woff2",
+          "sha256": "f3f67a9e11ae7cccd00e3f5475b628c9dd82904d73ee57c41ad85532e1faf84c",
+          "woff2_sha256": "504020a0f3a6002f93fbc1f3e312e515e61447652c050d262e7a991e2227986a"
+        },
+        {
+          "weight": 500,
+          "style": "italic",
+          "key": "curated:merriweather:500:italic",
+          "ttf": "merriweather-500-italic.ttf",
+          "url": "/fonts/curated/merriweather-500-italic.woff2",
+          "sha256": "a5e4a04973752f2eb6d909918ceffa67efa1b01d192d08199701e85ec523be15",
+          "woff2_sha256": "93e46503fbb701ec758c48bd602bd0d6183bb846e668c263d7e33dd41215637e"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:merriweather:500:normal",
+          "ttf": "merriweather-500-normal.ttf",
+          "url": "/fonts/curated/merriweather-500-normal.woff2",
+          "sha256": "0a8257183d777fe6de50841f786c34e09adfd3ea6e96fba96ecfd94b48a08feb",
+          "woff2_sha256": "9225c4a540ff554483fcce14ed253062f6c357381e1e382f0c40b0f2dd79f201"
+        },
+        {
+          "weight": 600,
+          "style": "italic",
+          "key": "curated:merriweather:600:italic",
+          "ttf": "merriweather-600-italic.ttf",
+          "url": "/fonts/curated/merriweather-600-italic.woff2",
+          "sha256": "2dba14b1338d1f88e03e346df9c8e7a53485e1cbfb69742b87d2068f72f698ee",
+          "woff2_sha256": "acc6f854f12873937bc7fc2daf314441e978884683e70a771f75cab40563ad16"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:merriweather:600:normal",
+          "ttf": "merriweather-600-normal.ttf",
+          "url": "/fonts/curated/merriweather-600-normal.woff2",
+          "sha256": "7077304c03e114a547a4eb7400d9adb6a11196392a00001e0c3ee0455a11783d",
+          "woff2_sha256": "86b9f5ff15ac53fd32a4120ddd31fd8c50c9ed7f8c3cd20df21065efd5b30fb4"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:merriweather:700:italic",
+          "ttf": "merriweather-700-italic.ttf",
+          "url": "/fonts/curated/merriweather-700-italic.woff2",
+          "sha256": "8187d06486425caa4439cb16086a780b6866575cddf897212e8acbaa17bb3f96",
+          "woff2_sha256": "1c016b265f8b1617b0202f0b3083c783eef6a6a76615a3cecbd46c198b38549f"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:merriweather:700:normal",
+          "ttf": "merriweather-700-normal.ttf",
+          "url": "/fonts/curated/merriweather-700-normal.woff2",
+          "sha256": "cc9f2fd833f9a4357cc7e1c74b686c4d3b1e178445b3baf22899317baa0a8540",
+          "woff2_sha256": "b84d8edcd473f8ce188ead93f60a68ec6760bed4d79952b0af91acf6ba60bce6"
+        },
+        {
+          "weight": 800,
+          "style": "italic",
+          "key": "curated:merriweather:800:italic",
+          "ttf": "merriweather-800-italic.ttf",
+          "url": "/fonts/curated/merriweather-800-italic.woff2",
+          "sha256": "5a7092e49d8d4b2efa35060c13e91be27e2c45caf873fd1ce8a051098b71e237",
+          "woff2_sha256": "1e35bc3224753ba6cdb21dc726190e2a4f8c8e20a799947f44cc9e243549058f"
+        },
+        {
+          "weight": 800,
+          "style": "normal",
+          "key": "curated:merriweather:800:normal",
+          "ttf": "merriweather-800-normal.ttf",
+          "url": "/fonts/curated/merriweather-800-normal.woff2",
+          "sha256": "88cbef31014f4cbea621555e559d485ba8d02234fed539ffb058417eec4b9cd6",
+          "woff2_sha256": "691b4dc239e254a0c69570baf135745aeaf5298bd7d6c8ac365f8755494854a7"
+        },
+        {
+          "weight": 900,
+          "style": "italic",
+          "key": "curated:merriweather:900:italic",
+          "ttf": "merriweather-900-italic.ttf",
+          "url": "/fonts/curated/merriweather-900-italic.woff2",
+          "sha256": "1940e6e8ef5006eb4ca7dfa943c02187bf18ce2db2a490fa09d6d3201257c6ea",
+          "woff2_sha256": "3f91d8035ba41b6414ecd24463f5693c1254c4b7982cc43f08baac33c9f84cd8"
+        },
+        {
+          "weight": 900,
+          "style": "normal",
+          "key": "curated:merriweather:900:normal",
+          "ttf": "merriweather-900-normal.ttf",
+          "url": "/fonts/curated/merriweather-900-normal.woff2",
+          "sha256": "702ab7e03a93f214da4e49b856ceeb583147c64e1cb9f6052b7583710c400663",
+          "woff2_sha256": "9891a2a333f1f991e7218a5ed08de10183b838318ec3df58976281668004be71"
+        }
+      ],
+      "default": "curated:merriweather:400:normal"
+    },
+    {
+      "id": "lora",
+      "family": "Lora",
+      "category": "Klassisch",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/lora-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:lora:400:italic",
+          "ttf": "lora-400-italic.ttf",
+          "url": "/fonts/curated/lora-400-italic.woff2",
+          "sha256": "48d1ad1eeea15c3e5a5ba59a9ef51bb4db8a09d67cdabd666d6e3a2a55223942",
+          "woff2_sha256": "194c5052a5a518772b2bb59fd082e1b3fdc86e0c9c3f82dc6a412365a14fd9cb"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:lora:400:normal",
+          "ttf": "lora-400-normal.ttf",
+          "url": "/fonts/curated/lora-400-normal.woff2",
+          "sha256": "6d1875d5461e80664873029feae94976672a8d89c84d72c0185a859543e0cd90",
+          "woff2_sha256": "b81d294043da8f2b1285eca5a25dbf5fd250cfe2c600ee0e4294405a760d0a0a"
+        },
+        {
+          "weight": 500,
+          "style": "italic",
+          "key": "curated:lora:500:italic",
+          "ttf": "lora-500-italic.ttf",
+          "url": "/fonts/curated/lora-500-italic.woff2",
+          "sha256": "eb7c8933feba7c589508b9569b726333b675c0da54d94f57c44ac8ea3aaee859",
+          "woff2_sha256": "6e1a19dd9e7dfa6b562bc6f9c27e79933b89d41e4579a7fd74cc2f4df4fca0ae"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:lora:500:normal",
+          "ttf": "lora-500-normal.ttf",
+          "url": "/fonts/curated/lora-500-normal.woff2",
+          "sha256": "5582b6b912af6f49075c8f806e9f125d40675f5d86d8c6ed5202d342e7bec1c9",
+          "woff2_sha256": "7244482e6a1fdc51053f22cfd58b21b4acb696797cb564c57442761f86f0b086"
+        },
+        {
+          "weight": 600,
+          "style": "italic",
+          "key": "curated:lora:600:italic",
+          "ttf": "lora-600-italic.ttf",
+          "url": "/fonts/curated/lora-600-italic.woff2",
+          "sha256": "419a74c101c5eee6bc251e18c0c15d5e36345bacd5de74a3e6f090b8cbc32ffb",
+          "woff2_sha256": "20a26483ecabdaf328855941e04ffeadd61339f38ad2ff3ed6d70ca3790c8858"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:lora:600:normal",
+          "ttf": "lora-600-normal.ttf",
+          "url": "/fonts/curated/lora-600-normal.woff2",
+          "sha256": "5fe8fae3e8ad619b48f33845f55faa72326ee86d6989aebbf9f9f5758ac8f552",
+          "woff2_sha256": "83ae2fae1ce3f720229204a6ad436878a78ea3987328f85dba04ecdb6970faa2"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:lora:700:italic",
+          "ttf": "lora-700-italic.ttf",
+          "url": "/fonts/curated/lora-700-italic.woff2",
+          "sha256": "0e678c2e2057dddb9e5aa99f80f477cd27163b1c17a10eef34c45573fbe1fbf9",
+          "woff2_sha256": "881450120ce65bb8b31f2696d1d9bab03caa5aa610c5dc6d01081c4cf44b5dd1"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:lora:700:normal",
+          "ttf": "lora-700-normal.ttf",
+          "url": "/fonts/curated/lora-700-normal.woff2",
+          "sha256": "d6738821dafea61053495631dd144e31d552f07200f91d7e3accffe43c8e944d",
+          "woff2_sha256": "7aca0c04625c779441513a7498bc1918b6cd896d0372f66b88703e8dc8064dc7"
+        }
+      ],
+      "default": "curated:lora:400:normal"
+    },
+    {
+      "id": "playfair-display",
+      "family": "Playfair Display",
+      "category": "Klassisch",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/playfair-display-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:playfair-display:400:italic",
+          "ttf": "playfair-display-400-italic.ttf",
+          "url": "/fonts/curated/playfair-display-400-italic.woff2",
+          "sha256": "3cb173803282ea9e04046623ce1857ef8c3e855c3f77fb4893701bbf2ea55ca3",
+          "woff2_sha256": "0b0f3250a13d39fcb232bbfc9c13c1a8ddc7233304c56c67ab73f2dc989e3fac"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:playfair-display:400:normal",
+          "ttf": "playfair-display-400-normal.ttf",
+          "url": "/fonts/curated/playfair-display-400-normal.woff2",
+          "sha256": "275ca0ce6b2ff4a22ea4ceb0c196950d4d2d9a03c73934c07e18ae3c67a92d28",
+          "woff2_sha256": "731af068de8ac8b3ee933515d1b67bb52f3441c5babd119cda3a754921b8bdb3"
+        },
+        {
+          "weight": 500,
+          "style": "italic",
+          "key": "curated:playfair-display:500:italic",
+          "ttf": "playfair-display-500-italic.ttf",
+          "url": "/fonts/curated/playfair-display-500-italic.woff2",
+          "sha256": "93ef887425aa8afaaf805480ca9205e6e62800b6b079bfd0e0a6e73dcbe19423",
+          "woff2_sha256": "8d81c4527c08f633ceafed0976cf55d6a98bb5a252011faec62736cffd1537fc"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:playfair-display:500:normal",
+          "ttf": "playfair-display-500-normal.ttf",
+          "url": "/fonts/curated/playfair-display-500-normal.woff2",
+          "sha256": "0e13da2b0897cf1448615b0fdc9d255d1586537287463a847e4a63f9a9b8e02e",
+          "woff2_sha256": "a83eb8fcb3863243c5024ed1ac91546c6a19f3871fef09924f2187b3d02e9cbc"
+        },
+        {
+          "weight": 600,
+          "style": "italic",
+          "key": "curated:playfair-display:600:italic",
+          "ttf": "playfair-display-600-italic.ttf",
+          "url": "/fonts/curated/playfair-display-600-italic.woff2",
+          "sha256": "d4e8eda3e34463863f1da34e32347455d80ce3a0ab45826e6f7f5e23c826da9b",
+          "woff2_sha256": "39e8a18d261297096b007fa8e58fd0f4e5e001f5c136224ec26a960423065bb3"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:playfair-display:600:normal",
+          "ttf": "playfair-display-600-normal.ttf",
+          "url": "/fonts/curated/playfair-display-600-normal.woff2",
+          "sha256": "3ccb7089b240aa17288eefd4708a2df1a1e7f0a1adb646faae38b607a48df6a4",
+          "woff2_sha256": "f3f470d816e148bc6f9506c394962205ad37c7595537528b74b9fafc87a5ef8e"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:playfair-display:700:italic",
+          "ttf": "playfair-display-700-italic.ttf",
+          "url": "/fonts/curated/playfair-display-700-italic.woff2",
+          "sha256": "86c0fb31a505e7c55c8f6ece447a1b6d7ff3e2427dd044e84f78bad79df7a9ec",
+          "woff2_sha256": "5d8a9c2b47e42977c57640818c38f0829a59da5ae1429cddc638631e8dac34b7"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:playfair-display:700:normal",
+          "ttf": "playfair-display-700-normal.ttf",
+          "url": "/fonts/curated/playfair-display-700-normal.woff2",
+          "sha256": "034445cebebbc22d02f00dcba6b7d85dc51ca5377a4a792447c655aa9187b867",
+          "woff2_sha256": "0bc1d98c47600e6d014127c0353f09aae7093dd612e790ff4cda435f37a861d2"
+        },
+        {
+          "weight": 800,
+          "style": "italic",
+          "key": "curated:playfair-display:800:italic",
+          "ttf": "playfair-display-800-italic.ttf",
+          "url": "/fonts/curated/playfair-display-800-italic.woff2",
+          "sha256": "542127569072d9fa4f63f25541aeb4d83205e6c4f33ea643e68532aa96243d83",
+          "woff2_sha256": "59e6b88196facfef095194f74209e29ce7b519fe2baf5b7e431e3fd0e8d4baa3"
+        },
+        {
+          "weight": 800,
+          "style": "normal",
+          "key": "curated:playfair-display:800:normal",
+          "ttf": "playfair-display-800-normal.ttf",
+          "url": "/fonts/curated/playfair-display-800-normal.woff2",
+          "sha256": "08a669838f981054430950f1b5702d6e29ed8c1688c5a304343497af7e9f0473",
+          "woff2_sha256": "4a572afae7f3aec1f958cdf94982cba943f1d3ce0bd9e1503fa7fbbca7c4d1f9"
+        },
+        {
+          "weight": 900,
+          "style": "italic",
+          "key": "curated:playfair-display:900:italic",
+          "ttf": "playfair-display-900-italic.ttf",
+          "url": "/fonts/curated/playfair-display-900-italic.woff2",
+          "sha256": "9a6c236e2876ed08a08b296514e8d133d81f5d6aa194c1c90207a4a88666acd3",
+          "woff2_sha256": "5402adc7df54ba2131f5cf900fff9fa9ce9a7f7a601cc86ade634bef99b20fb1"
+        },
+        {
+          "weight": 900,
+          "style": "normal",
+          "key": "curated:playfair-display:900:normal",
+          "ttf": "playfair-display-900-normal.ttf",
+          "url": "/fonts/curated/playfair-display-900-normal.woff2",
+          "sha256": "7af43c0391e0794104ccb5d448f17cc79b2f23f32e526e1be13a9df9366f5de6",
+          "woff2_sha256": "717e4dfe98f480840e2d3758a35787d799920419a9ae7c4cd30d714afd14ae4a"
+        }
+      ],
+      "default": "curated:playfair-display:400:normal"
+    },
+    {
+      "id": "cormorant-garamond",
+      "family": "Cormorant Garamond",
+      "category": "Klassisch",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/cormorant-garamond-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 300,
+          "style": "italic",
+          "key": "curated:cormorant-garamond:300:italic",
+          "ttf": "cormorant-garamond-300-italic.ttf",
+          "url": "/fonts/curated/cormorant-garamond-300-italic.woff2",
+          "sha256": "0d7af029b38e91f103504841dbe2aee097ab603d6c6cfaeb6b34e96ec9d72323",
+          "woff2_sha256": "c9c6f9d5c706269686c07b0cc53cdca3e0047830c12c2906381d52258f090e88"
+        },
+        {
+          "weight": 300,
+          "style": "normal",
+          "key": "curated:cormorant-garamond:300:normal",
+          "ttf": "cormorant-garamond-300-normal.ttf",
+          "url": "/fonts/curated/cormorant-garamond-300-normal.woff2",
+          "sha256": "435d1a4e1bef2dc9a502b55d35ed381fe778e45e993ff3eabebfe8b7db9a87bd",
+          "woff2_sha256": "9581984306d6c537f2b5a24e0c6ced476b4d6b186c04be5f0c848bee88a1bc28"
+        },
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:cormorant-garamond:400:italic",
+          "ttf": "cormorant-garamond-400-italic.ttf",
+          "url": "/fonts/curated/cormorant-garamond-400-italic.woff2",
+          "sha256": "fb090f7eb8a7c54ad837a50a11e176dab6dbae980d5ff537c56db5697fe92610",
+          "woff2_sha256": "de917dda6622aa24ffce27222dca8ba1d36565cb80c511f6ba9a23b5b76f6624"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:cormorant-garamond:400:normal",
+          "ttf": "cormorant-garamond-400-normal.ttf",
+          "url": "/fonts/curated/cormorant-garamond-400-normal.woff2",
+          "sha256": "3b8bf0810fce22b22fa114018e8cdd853e5735f37ea44d6bb8393b262bedf8a2",
+          "woff2_sha256": "6815a07dc250004e81e78b94e9d1ab00745cbea2cf372a772d994f02e33912b4"
+        },
+        {
+          "weight": 500,
+          "style": "italic",
+          "key": "curated:cormorant-garamond:500:italic",
+          "ttf": "cormorant-garamond-500-italic.ttf",
+          "url": "/fonts/curated/cormorant-garamond-500-italic.woff2",
+          "sha256": "9b94623c6449e8e11264f34d25e522d90ecf353e9099dab6144208dc443c0552",
+          "woff2_sha256": "bc77f2b791e8c14fab5ee6123ab5272f41107d35f2e40fcd291a71330108d526"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:cormorant-garamond:500:normal",
+          "ttf": "cormorant-garamond-500-normal.ttf",
+          "url": "/fonts/curated/cormorant-garamond-500-normal.woff2",
+          "sha256": "f7f13101bf7cb2b07ab3644799ff89bbdff1d2fc69b32161d684f1a09513d839",
+          "woff2_sha256": "a54cea46485c913610e5f7ea9eb14e03923d4e3847e1d2b934d5d8ee4c577ed2"
+        },
+        {
+          "weight": 600,
+          "style": "italic",
+          "key": "curated:cormorant-garamond:600:italic",
+          "ttf": "cormorant-garamond-600-italic.ttf",
+          "url": "/fonts/curated/cormorant-garamond-600-italic.woff2",
+          "sha256": "d02791d931703dcd7e85711edf6e75ac012f090ccd8b62990c3483fe71b1558f",
+          "woff2_sha256": "3b57fd4d46043c15e10cc62e8b3fb9e66566c1a1c7810e3fd4b1cc2b56d06fb5"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:cormorant-garamond:600:normal",
+          "ttf": "cormorant-garamond-600-normal.ttf",
+          "url": "/fonts/curated/cormorant-garamond-600-normal.woff2",
+          "sha256": "9933bff2e41ef5e9687f0ee6ef3d861ba207f7577a14979b32aced1b52e4f5fd",
+          "woff2_sha256": "c6057f4c410a41681cb802556d93e87b5179a34850c01acd32b88e3dcc6c59fa"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:cormorant-garamond:700:italic",
+          "ttf": "cormorant-garamond-700-italic.ttf",
+          "url": "/fonts/curated/cormorant-garamond-700-italic.woff2",
+          "sha256": "db405383beec05451e2c11036eee54130dccfc25881416d7b0a2feffb77a2651",
+          "woff2_sha256": "58e3499ed989e46ab08d16bea4ef3027837415bf650cb43ea86d94c9931d22d3"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:cormorant-garamond:700:normal",
+          "ttf": "cormorant-garamond-700-normal.ttf",
+          "url": "/fonts/curated/cormorant-garamond-700-normal.woff2",
+          "sha256": "98aa8143bd41aeff0ce0ef3d1e12843b5709a2484b6303598e0d9cebe49c98d6",
+          "woff2_sha256": "0e3e2812a8629d5428da6806bf8e95c47f4a684ba7539554ffad66e5d2537519"
+        }
+      ],
+      "default": "curated:cormorant-garamond:400:normal"
+    },
+    {
+      "id": "noto-serif",
+      "family": "Noto Serif",
+      "category": "Klassisch",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/noto-serif-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 100,
+          "style": "italic",
+          "key": "curated:noto-serif:100:italic",
+          "ttf": "noto-serif-100-italic.ttf",
+          "url": "/fonts/curated/noto-serif-100-italic.woff2",
+          "sha256": "2f3e206a14e2e1b82dc316be1c5b52a5911c55a5a58514bc2874f5365998031c",
+          "woff2_sha256": "99356c0c94b8eecb0ce8addcd8a31d6d519562ca5ee474dfbf51af7a4083f624"
+        },
+        {
+          "weight": 100,
+          "style": "normal",
+          "key": "curated:noto-serif:100:normal",
+          "ttf": "noto-serif-100-normal.ttf",
+          "url": "/fonts/curated/noto-serif-100-normal.woff2",
+          "sha256": "0f805d54cabf50230e7406f33a6680436560fc40aa9b614eb8a1277a4edd46e7",
+          "woff2_sha256": "adb29279178642baf0499354f783efb776b5e27601c8442e08d46e6183a24079"
+        },
+        {
+          "weight": 200,
+          "style": "italic",
+          "key": "curated:noto-serif:200:italic",
+          "ttf": "noto-serif-200-italic.ttf",
+          "url": "/fonts/curated/noto-serif-200-italic.woff2",
+          "sha256": "37ce608b261e196929b758e5f0e5b118a0f95027d70eeb1cb3eaa739b321821d",
+          "woff2_sha256": "0dc5f9437bde058e604d74bb33c4edd9fa6abc4eda3ff58b3e878182dfa8345a"
+        },
+        {
+          "weight": 200,
+          "style": "normal",
+          "key": "curated:noto-serif:200:normal",
+          "ttf": "noto-serif-200-normal.ttf",
+          "url": "/fonts/curated/noto-serif-200-normal.woff2",
+          "sha256": "5c49adcd20470012fa72273212dc3db7b8edaef1722e25fb5860762c6ae3b296",
+          "woff2_sha256": "31bb2fcb349e3645420f3fc9c3b6ad2d1f8bae7d6ab2a84cf948cbde3f53d961"
+        },
+        {
+          "weight": 300,
+          "style": "italic",
+          "key": "curated:noto-serif:300:italic",
+          "ttf": "noto-serif-300-italic.ttf",
+          "url": "/fonts/curated/noto-serif-300-italic.woff2",
+          "sha256": "5511df5403ddda9db16ba8c94e8f197c5c832493cc3d3abc3887290586f274fd",
+          "woff2_sha256": "89e7507af00a958a04f299a9b65e8a3ca7c9f7b8b333eb165e547a031e9be32d"
+        },
+        {
+          "weight": 300,
+          "style": "normal",
+          "key": "curated:noto-serif:300:normal",
+          "ttf": "noto-serif-300-normal.ttf",
+          "url": "/fonts/curated/noto-serif-300-normal.woff2",
+          "sha256": "708912c3d4a5efeefcaf5162d8469d977a4edceddef9533d4c68dda75e046819",
+          "woff2_sha256": "25cd81d332fe2f0dd93bd7abf3463b7ec123b00d58979c8ea699603f6de6cd2e"
+        },
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:noto-serif:400:italic",
+          "ttf": "noto-serif-400-italic.ttf",
+          "url": "/fonts/curated/noto-serif-400-italic.woff2",
+          "sha256": "d7906f53d8428e7bffc20b71947262b2e55e2b7df8ca273b72e7fbe945ef284d",
+          "woff2_sha256": "2f5ed181057120798035323125e3a850a785e9206f8f8463618efab7e86732f9"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:noto-serif:400:normal",
+          "ttf": "noto-serif-400-normal.ttf",
+          "url": "/fonts/curated/noto-serif-400-normal.woff2",
+          "sha256": "86e07b8ac73c80fb517cb3e6f05afca627ba0574f2b81363b7d7f0b8e9284b4a",
+          "woff2_sha256": "849cf44e3109f5ed6ea60db1e45af8db5e86be7b61ff345a5171abd67996dd59"
+        },
+        {
+          "weight": 500,
+          "style": "italic",
+          "key": "curated:noto-serif:500:italic",
+          "ttf": "noto-serif-500-italic.ttf",
+          "url": "/fonts/curated/noto-serif-500-italic.woff2",
+          "sha256": "b3368a208cc64d58453c9748a934cab011ec1883a15dca515ef17f1309fcf5d0",
+          "woff2_sha256": "f0153f872258c2a7b8f9f98179f65d8a5794982d45e240cc52d6c1a868cf6fde"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:noto-serif:500:normal",
+          "ttf": "noto-serif-500-normal.ttf",
+          "url": "/fonts/curated/noto-serif-500-normal.woff2",
+          "sha256": "232c796967d892094f8a92080225805563007d2a5a6d5eba4af24828c7945a32",
+          "woff2_sha256": "bc434f39ab428334319b420c02dfa3270545f6e2a157a9c1537473c982f482b6"
+        },
+        {
+          "weight": 600,
+          "style": "italic",
+          "key": "curated:noto-serif:600:italic",
+          "ttf": "noto-serif-600-italic.ttf",
+          "url": "/fonts/curated/noto-serif-600-italic.woff2",
+          "sha256": "437dfd2473c78a318c7346d81917641df84688da179a9436feed531a0b806363",
+          "woff2_sha256": "9be532cc571299cb5a124767cd6de4a246c8d453cf815f9cbbf6ff5d063d5114"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:noto-serif:600:normal",
+          "ttf": "noto-serif-600-normal.ttf",
+          "url": "/fonts/curated/noto-serif-600-normal.woff2",
+          "sha256": "6f8b973485a088eba38d6a0e894366184f1d6cbbc9d925371aa2d462afacee69",
+          "woff2_sha256": "2fb82b36730cd65c6e80a38c55934a34f0d06108a187be8363e9db30130941fc"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:noto-serif:700:italic",
+          "ttf": "noto-serif-700-italic.ttf",
+          "url": "/fonts/curated/noto-serif-700-italic.woff2",
+          "sha256": "af77449097b46bc62596007c3071b3e1dc63f6164618fb48faaf9b6bff4daebd",
+          "woff2_sha256": "176f6b1e398d7a4ee9867239b6d3a165b432d88f4e940ee9f38b44e94d4e0089"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:noto-serif:700:normal",
+          "ttf": "noto-serif-700-normal.ttf",
+          "url": "/fonts/curated/noto-serif-700-normal.woff2",
+          "sha256": "f07224dbebfe2d1ec0ab7c9cadc8b0a79a58a6f9fa15bd9e9937b8f35b67017f",
+          "woff2_sha256": "f3bc79bfa4060ea9f324b64cf7a67ab1d982b0cfba7c534676c496d216eb4ec0"
+        },
+        {
+          "weight": 800,
+          "style": "italic",
+          "key": "curated:noto-serif:800:italic",
+          "ttf": "noto-serif-800-italic.ttf",
+          "url": "/fonts/curated/noto-serif-800-italic.woff2",
+          "sha256": "fc72c56a44c4571473adf3767563ac0c277d9060fbdea0f83d8db5c89c3de1c7",
+          "woff2_sha256": "1d012edbb1210b34ed1dcb9b1ace49aaca59f9a0cc5c0fc20af0fcf982b036c6"
+        },
+        {
+          "weight": 800,
+          "style": "normal",
+          "key": "curated:noto-serif:800:normal",
+          "ttf": "noto-serif-800-normal.ttf",
+          "url": "/fonts/curated/noto-serif-800-normal.woff2",
+          "sha256": "493a05e8a144437eb45115a7d04a3f381b66761d34a0f48fc0369071878b59ed",
+          "woff2_sha256": "4e81abb04f9f01838998b1e3f1c93793393fbd9adc57e7303f7249e37c1af734"
+        },
+        {
+          "weight": 900,
+          "style": "italic",
+          "key": "curated:noto-serif:900:italic",
+          "ttf": "noto-serif-900-italic.ttf",
+          "url": "/fonts/curated/noto-serif-900-italic.woff2",
+          "sha256": "5e132b349d4f9f447f0fa2a1c853f06aeadc45009ced931f3e64188d86cca2e0",
+          "woff2_sha256": "49b2b518855c8b10158c564286161836b68d37b485e3ce8497c215070b01badf"
+        },
+        {
+          "weight": 900,
+          "style": "normal",
+          "key": "curated:noto-serif:900:normal",
+          "ttf": "noto-serif-900-normal.ttf",
+          "url": "/fonts/curated/noto-serif-900-normal.woff2",
+          "sha256": "baeca510a8ed83b1bb6c39c4df13f215372c437067fc95ad882675a03dbd17ff",
+          "woff2_sha256": "f242a981c7f89ca88e61b9ce1d8082d9c46083de158c2134c86d54a488a286dd"
+        }
+      ],
+      "default": "curated:noto-serif:400:normal"
+    },
+    {
+      "id": "oswald",
+      "family": "Oswald",
+      "category": "Markant & dekorativ",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/oswald-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 200,
+          "style": "normal",
+          "key": "curated:oswald:200:normal",
+          "ttf": "oswald-200-normal.ttf",
+          "url": "/fonts/curated/oswald-200-normal.woff2",
+          "sha256": "eaf24169b314ce56f59f9ebc445863cac6d316c985a4ec01594a696d6b299c9c",
+          "woff2_sha256": "61961a2ca61c667c0380235db99f10243392e75eaec13049721166328ccf9f00"
+        },
+        {
+          "weight": 300,
+          "style": "normal",
+          "key": "curated:oswald:300:normal",
+          "ttf": "oswald-300-normal.ttf",
+          "url": "/fonts/curated/oswald-300-normal.woff2",
+          "sha256": "3131335915941baf5ddb95eaa8d29f33870f99ce9320ddb016758e6626d2daa0",
+          "woff2_sha256": "8f357cc804170248fbf4c4eac3af44b552c1eaea23c404b4f5a181e914a1bbbc"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:oswald:400:normal",
+          "ttf": "oswald-400-normal.ttf",
+          "url": "/fonts/curated/oswald-400-normal.woff2",
+          "sha256": "13295f4f408b6eb1ccc850a5db013b79f722b31833e7ecd8d0ea0e06347e2482",
+          "woff2_sha256": "560473e6ede0bf2530938b5ff1042d42f1da6ac481f2c6fa2d68f24fbd70a30a"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:oswald:500:normal",
+          "ttf": "oswald-500-normal.ttf",
+          "url": "/fonts/curated/oswald-500-normal.woff2",
+          "sha256": "4cd6890482683a86763fc9be981fdc05dffffd7f18183f1ec922727c363fe9e3",
+          "woff2_sha256": "6f6eaf97d1a3653dcb78c2a51002b7aa785167c79579e711562450b7358314a3"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:oswald:600:normal",
+          "ttf": "oswald-600-normal.ttf",
+          "url": "/fonts/curated/oswald-600-normal.woff2",
+          "sha256": "d4d19be3bb6ed4dee031b9f859fda63fe6c63ee0605cf8589ee5772928b4a5d2",
+          "woff2_sha256": "e2f237068b97bfbbf490b6a06c563fffabc9c19cd92a7486cf0a8d6b03abcab1"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:oswald:700:normal",
+          "ttf": "oswald-700-normal.ttf",
+          "url": "/fonts/curated/oswald-700-normal.woff2",
+          "sha256": "3aa900cb1c1a2cb27d13a262f9091fd500b779712e2629f1927da69482ef57a3",
+          "woff2_sha256": "96b01b59c3a1ca9fd82a77c2d6a326ec42f9bb749e67b89966ab299e05638f34"
+        }
+      ],
+      "default": "curated:oswald:400:normal"
+    },
+    {
+      "id": "bebas-neue",
+      "family": "Bebas Neue",
+      "category": "Markant & dekorativ",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/bebas-neue-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:bebas-neue:400:normal",
+          "ttf": "bebas-neue-400-normal.ttf",
+          "url": "/fonts/curated/bebas-neue-400-normal.woff2",
+          "sha256": "267084d8c5a6c5744a4bff2d6643c4eb6c90e90383849282f182498fb0f5744c",
+          "woff2_sha256": "bf4efa55be79bbc05af3aa5215dcac5bbe27f6677804ff59316b193769da2f07"
+        }
+      ],
+      "default": "curated:bebas-neue:400:normal"
+    },
+    {
+      "id": "anton",
+      "family": "Anton",
+      "category": "Markant & dekorativ",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/anton-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:anton:400:normal",
+          "ttf": "anton-400-normal.ttf",
+          "url": "/fonts/curated/anton-400-normal.woff2",
+          "sha256": "72b62953362833498cd9dd777576b559348059bdb14234657b1f55f1f8431171",
+          "woff2_sha256": "0bb4c1a1d9623b6228e57004085e74a4e6b293ecd9c502562c6ffa3fb96ad77b"
+        }
+      ],
+      "default": "curated:anton:400:normal"
+    },
+    {
+      "id": "cinzel",
+      "family": "Cinzel",
+      "category": "Markant & dekorativ",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/cinzel-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:cinzel:400:normal",
+          "ttf": "cinzel-400-normal.ttf",
+          "url": "/fonts/curated/cinzel-400-normal.woff2",
+          "sha256": "ce498f898e5132850eb9dee93e29f592e82106bf51158c643275a86d96876d01",
+          "woff2_sha256": "092b35c887ff3eed55035de734c20caaecc23fdcb26c5ba42fd5401046baac19"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:cinzel:500:normal",
+          "ttf": "cinzel-500-normal.ttf",
+          "url": "/fonts/curated/cinzel-500-normal.woff2",
+          "sha256": "e9b3e787575a1708bd5e62dbc086c5be77a6d9f7df6f9ee1b96d176cc83f203a",
+          "woff2_sha256": "fded9203f3b5c6b6b2502f963c4acdcc79fa98efddd91131f0b947d758c23a43"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:cinzel:600:normal",
+          "ttf": "cinzel-600-normal.ttf",
+          "url": "/fonts/curated/cinzel-600-normal.woff2",
+          "sha256": "4c3f02f7ba8fe7e9770b07391e64917807ffb8cee0adc5cf61c1f81c771060f7",
+          "woff2_sha256": "9d8ea72388297276f1c1a65f4476ae1f79a96a27c922f8c291ef5f042987b875"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:cinzel:700:normal",
+          "ttf": "cinzel-700-normal.ttf",
+          "url": "/fonts/curated/cinzel-700-normal.woff2",
+          "sha256": "341b651c7160e27c716c6252d96886b5152e06dcc31a6a7358712c43bc23a016",
+          "woff2_sha256": "3eeeb1c9a6fa0cfc472270f314d14532b82e46703e71487c20683718fb2745ab"
+        },
+        {
+          "weight": 800,
+          "style": "normal",
+          "key": "curated:cinzel:800:normal",
+          "ttf": "cinzel-800-normal.ttf",
+          "url": "/fonts/curated/cinzel-800-normal.woff2",
+          "sha256": "9f6a72d2c318ae7c868589c718a2044169479011ede44571db96f8cef0a091b7",
+          "woff2_sha256": "bc5da718b5bff049efdb945bb4580ff53d1b4c43857f48b70e116f99ec52c1da"
+        },
+        {
+          "weight": 900,
+          "style": "normal",
+          "key": "curated:cinzel:900:normal",
+          "ttf": "cinzel-900-normal.ttf",
+          "url": "/fonts/curated/cinzel-900-normal.woff2",
+          "sha256": "6cf2c9079a42069d66cb84081792a526ecff70f687e0a4522fa4feb82271e0b1",
+          "woff2_sha256": "ddd167e76f7388bf2a2adcb96258e72c9803ec696800800a0fac437ea8fa791a"
+        }
+      ],
+      "default": "curated:cinzel:400:normal"
+    },
+    {
+      "id": "great-vibes",
+      "family": "Great Vibes",
+      "category": "Geschwungen & festlich",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/great-vibes-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:great-vibes:400:normal",
+          "ttf": "great-vibes-400-normal.ttf",
+          "url": "/fonts/curated/great-vibes-400-normal.woff2",
+          "sha256": "0c271ad94de7508d169790d081a0c24372d5a78c835ebbea347ffd7a14c4a54d",
+          "woff2_sha256": "9fdc416f01966c0eec9e13b3d3198895f3e0c8c90d01b0a24d44e8a55a2e9eaa"
+        }
+      ],
+      "default": "curated:great-vibes:400:normal"
+    },
+    {
+      "id": "dancing-script",
+      "family": "Dancing Script",
+      "category": "Geschwungen & festlich",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/dancing-script-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:dancing-script:400:normal",
+          "ttf": "dancing-script-400-normal.ttf",
+          "url": "/fonts/curated/dancing-script-400-normal.woff2",
+          "sha256": "fd548492e52db278a4e55e1e8d5817fbcf2c5535e566fa237ca42350e167ebb2",
+          "woff2_sha256": "d5023ed67a50736e4660e709ca4afe493fa1a00d7da1a310b0298cf367d64bee"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:dancing-script:500:normal",
+          "ttf": "dancing-script-500-normal.ttf",
+          "url": "/fonts/curated/dancing-script-500-normal.woff2",
+          "sha256": "e0411c6934702ed175996aa156d7180f184a199c96adaaaffb09e7eec10310ca",
+          "woff2_sha256": "c0e656224e23d7116f12127f7257f12341f9f0a348574ac3f006e1585cf86b1b"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:dancing-script:600:normal",
+          "ttf": "dancing-script-600-normal.ttf",
+          "url": "/fonts/curated/dancing-script-600-normal.woff2",
+          "sha256": "c29393d70bca2c2abb7d2fded486a4325e8ed297fbfbad9a7252d77a2017fdeb",
+          "woff2_sha256": "608d874482b7ba4f2de3e85c029421f9a7bfcab6c0ebb0cffd8833ca0ebb693e"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:dancing-script:700:normal",
+          "ttf": "dancing-script-700-normal.ttf",
+          "url": "/fonts/curated/dancing-script-700-normal.woff2",
+          "sha256": "07b0705fa9ca93e9c08b5be8d890f60c7bc07b4e26e30f4e9f225a711c184290",
+          "woff2_sha256": "161ea66ccdd471767fd79f27db7c81de3745abb311254de43245cd0fad3bf890"
+        }
+      ],
+      "default": "curated:dancing-script:400:normal"
+    },
+    {
+      "id": "allura",
+      "family": "Allura",
+      "category": "Geschwungen & festlich",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/allura-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:allura:400:normal",
+          "ttf": "allura-400-normal.ttf",
+          "url": "/fonts/curated/allura-400-normal.woff2",
+          "sha256": "afd9fe514cf5a39e0aa30109fc72c27b70d97d615512170d0aefb7a32ea57291",
+          "woff2_sha256": "7af3b6ac0127224092f50e69275f19c603e9bbbe55f9d8ad205b72550e0b4137"
+        }
+      ],
+      "default": "curated:allura:400:normal"
+    },
+    {
+      "id": "pacifico",
+      "family": "Pacifico",
+      "category": "Geschwungen & festlich",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/pacifico-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:pacifico:400:normal",
+          "ttf": "pacifico-400-normal.ttf",
+          "url": "/fonts/curated/pacifico-400-normal.woff2",
+          "sha256": "3ae054fb3fb2e94bc835020a02b745ba2bd6ab9ccbeb6b8d405cdaa256a59dcd",
+          "woff2_sha256": "2435f999a53f1f5b39f14e9b3752edb00108e2f9d46bb661a276fa50c9d79b13"
+        }
+      ],
+      "default": "curated:pacifico:400:normal"
+    },
+    {
+      "id": "lobster",
+      "family": "Lobster",
+      "category": "Geschwungen & festlich",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/lobster-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:lobster:400:normal",
+          "ttf": "lobster-400-normal.ttf",
+          "url": "/fonts/curated/lobster-400-normal.woff2",
+          "sha256": "240cbf064064a66f3550c442e24c74e1224104193ff6abd39f6ec8fb16b82760",
+          "woff2_sha256": "ff575055412d3e673bae40f3be1c51968212aa084a2121d1ee33d328416b653a"
+        }
+      ],
+      "default": "curated:lobster:400:normal"
+    },
+    {
+      "id": "caveat",
+      "family": "Caveat",
+      "category": "Handschriftlich",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/caveat-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:caveat:400:normal",
+          "ttf": "caveat-400-normal.ttf",
+          "url": "/fonts/curated/caveat-400-normal.woff2",
+          "sha256": "5c9e17a60efe4f4feb9210820447e9db669cf82ca5b5b2a48702bef661864537",
+          "woff2_sha256": "cd372109d7d49c8d9a16c61ce66a87395db678e135b421e6d92c26dc9247d84e"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:caveat:500:normal",
+          "ttf": "caveat-500-normal.ttf",
+          "url": "/fonts/curated/caveat-500-normal.woff2",
+          "sha256": "5193e3b372ba3a0063fcaa56767510e9a0197998ca7094734dafe51dc76984d2",
+          "woff2_sha256": "194c855a44e9c159bcfd749d2d675bb86f35f71a95299be9a0cdab914a1e96f9"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:caveat:600:normal",
+          "ttf": "caveat-600-normal.ttf",
+          "url": "/fonts/curated/caveat-600-normal.woff2",
+          "sha256": "1bfbacd31017851aac18b1b47c53423df9a57b2a1fd1d960b54373bd2301405a",
+          "woff2_sha256": "2107334dd46ee6ec241539fde4da0c733884f4d0561e2196b66502a7c34fb19b"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:caveat:700:normal",
+          "ttf": "caveat-700-normal.ttf",
+          "url": "/fonts/curated/caveat-700-normal.woff2",
+          "sha256": "4b89b50e4ccc51ad6c4a0b26f9f2b09fea30837f14eadf63b8215603a5747d30",
+          "woff2_sha256": "17a3d6532f58ee396f3e719f7747e3c42c4da21f348fc3805c254a4cfd682b56"
+        }
+      ],
+      "default": "curated:caveat:400:normal"
+    },
+    {
+      "id": "kalam",
+      "family": "Kalam",
+      "category": "Handschriftlich",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/kalam-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 300,
+          "style": "normal",
+          "key": "curated:kalam:300:normal",
+          "ttf": "kalam-300-normal.ttf",
+          "url": "/fonts/curated/kalam-300-normal.woff2",
+          "sha256": "b49901174161743fff04d434a3b9c4b49a11b18756c98a37ce5018b6a0e8c0c0",
+          "woff2_sha256": "150de254b9778a9219488938e5b3000c6718b9f0c27d3d820df43ff6b7d46871"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:kalam:400:normal",
+          "ttf": "kalam-400-normal.ttf",
+          "url": "/fonts/curated/kalam-400-normal.woff2",
+          "sha256": "8841768a59e95463eff80dac6b52b3ef7d4029ce9c0845dda984cccb7809f61e",
+          "woff2_sha256": "d07ca15a2a77856354a5d1b363f8b262ad155076c175c50cbb2ee70395738137"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:kalam:700:normal",
+          "ttf": "kalam-700-normal.ttf",
+          "url": "/fonts/curated/kalam-700-normal.woff2",
+          "sha256": "f30b3ea33f42b1ac9247cd4516f0db1a5015da1ade2495ce296f129b29276101",
+          "woff2_sha256": "0475a8a38edc52b5491ca18a3ec9476c71f2cfee44ab745d79ad1f9dc0bd2671"
+        }
+      ],
+      "default": "curated:kalam:400:normal"
+    },
+    {
+      "id": "permanent-marker",
+      "family": "Permanent Marker",
+      "category": "Handschriftlich",
+      "version": "5.3.0",
+      "license": "Apache-2.0",
+      "license_url": "/fonts/curated/permanent-marker-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:permanent-marker:400:normal",
+          "ttf": "permanent-marker-400-normal.ttf",
+          "url": "/fonts/curated/permanent-marker-400-normal.woff2",
+          "sha256": "6c2f45bff721e92b5db713dd5e8b965a436688924a414672b9071317690dd6cc",
+          "woff2_sha256": "8326c4544663969af525d867600af3c0c1a06eb0559d2eddeea2a7d68e5c3de8"
+        }
+      ],
+      "default": "curated:permanent-marker:400:normal"
+    },
+    {
+      "id": "amatic-sc",
+      "family": "Amatic SC",
+      "category": "Handschriftlich",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/amatic-sc-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:amatic-sc:400:normal",
+          "ttf": "amatic-sc-400-normal.ttf",
+          "url": "/fonts/curated/amatic-sc-400-normal.woff2",
+          "sha256": "c100e1c8abd17e89acc225ab1c516011da30febbeed09e3e18913551508ae5c1",
+          "woff2_sha256": "c60e14f506dbcbcd4d9ae66f5a2b4993c3c2555b1e67d57471c415d37e4b79e5"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:amatic-sc:700:normal",
+          "ttf": "amatic-sc-700-normal.ttf",
+          "url": "/fonts/curated/amatic-sc-700-normal.woff2",
+          "sha256": "aa9bee0c04f3b6e8b3738a57b7ef5376c2a1f2f31403459bd7a92eff83b25915",
+          "woff2_sha256": "a1bb8b74089b34b9f8987889e757487626b8dbfcf874bb48a293ce26ac97e086"
+        }
+      ],
+      "default": "curated:amatic-sc:400:normal"
+    },
+    {
+      "id": "roboto-mono",
+      "family": "Roboto Mono",
+      "category": "Technisch & Schreibmaschine",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/roboto-mono-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 100,
+          "style": "italic",
+          "key": "curated:roboto-mono:100:italic",
+          "ttf": "roboto-mono-100-italic.ttf",
+          "url": "/fonts/curated/roboto-mono-100-italic.woff2",
+          "sha256": "ff7cfb1b90156f763860d8f272b25b32e87ad82fac70a969682f8ee3ad3051c0",
+          "woff2_sha256": "97d5576c6029c287e57535903fc19d60b2bc847d2575f62cd66efc28d5732a57"
+        },
+        {
+          "weight": 100,
+          "style": "normal",
+          "key": "curated:roboto-mono:100:normal",
+          "ttf": "roboto-mono-100-normal.ttf",
+          "url": "/fonts/curated/roboto-mono-100-normal.woff2",
+          "sha256": "6705ff5b0017e62d7d7c4ca4fbbefd700d445414a2e92e3cfa477b6e7cd91d73",
+          "woff2_sha256": "8c272140497c5b1771d0f173073ae0288a306f0674b65b35f4a39b411d341288"
+        },
+        {
+          "weight": 200,
+          "style": "italic",
+          "key": "curated:roboto-mono:200:italic",
+          "ttf": "roboto-mono-200-italic.ttf",
+          "url": "/fonts/curated/roboto-mono-200-italic.woff2",
+          "sha256": "1b7d5bb3afa32697f05eb2aa66bd06db058b16174aa2c55c5b095e47e4da825a",
+          "woff2_sha256": "d53f4bf66a491887963162d4510ae52f3a977f868ff771fa8b26f6c3afa5f326"
+        },
+        {
+          "weight": 200,
+          "style": "normal",
+          "key": "curated:roboto-mono:200:normal",
+          "ttf": "roboto-mono-200-normal.ttf",
+          "url": "/fonts/curated/roboto-mono-200-normal.woff2",
+          "sha256": "a01f2a8c273af5795ef300ddb5b5aebc2f9f930ce06a8fb94e67924c6c960c83",
+          "woff2_sha256": "fb6c9e017df86913927bbad05d529970aa464e236b532c1765d21fa65604ccb8"
+        },
+        {
+          "weight": 300,
+          "style": "italic",
+          "key": "curated:roboto-mono:300:italic",
+          "ttf": "roboto-mono-300-italic.ttf",
+          "url": "/fonts/curated/roboto-mono-300-italic.woff2",
+          "sha256": "96b650b30370c8680d992d7635ea69190d61995b4d079f19228983c17f576534",
+          "woff2_sha256": "c2b7131f267059836f4ee0231d9ed50dc46f09aadf8d1ff5eb4d51d5e2c86a0b"
+        },
+        {
+          "weight": 300,
+          "style": "normal",
+          "key": "curated:roboto-mono:300:normal",
+          "ttf": "roboto-mono-300-normal.ttf",
+          "url": "/fonts/curated/roboto-mono-300-normal.woff2",
+          "sha256": "ade363f8c0298f74274f027b2b6191c07c80b1371910949300ef3f61f0325ecb",
+          "woff2_sha256": "ce9a6da0cf4febe295f7cb5496c79ad391183229cfe2e6d2322379073dcfbe9f"
+        },
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:roboto-mono:400:italic",
+          "ttf": "roboto-mono-400-italic.ttf",
+          "url": "/fonts/curated/roboto-mono-400-italic.woff2",
+          "sha256": "f618c8bbd3426ca5bf04ec25e20810cc184133c794e0d3ef185047f1f80f7b2e",
+          "woff2_sha256": "2d1cad290e90df87a3af9f66f5a0da705e1418b00244f08cee77c25f072dbbbd"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:roboto-mono:400:normal",
+          "ttf": "roboto-mono-400-normal.ttf",
+          "url": "/fonts/curated/roboto-mono-400-normal.woff2",
+          "sha256": "73079ef155624b4e2e6abd8e3399db8d2da8f39ca557d78ba92843b11de242cf",
+          "woff2_sha256": "42cb764a5a37ea60c24939aaaa969cf2e348ba9df7723f7a1b958fccfea35928"
+        },
+        {
+          "weight": 500,
+          "style": "italic",
+          "key": "curated:roboto-mono:500:italic",
+          "ttf": "roboto-mono-500-italic.ttf",
+          "url": "/fonts/curated/roboto-mono-500-italic.woff2",
+          "sha256": "1f9720e88d42c903fde71c607b25d3d1e0243e1380d266fa0e61ff2785f4d318",
+          "woff2_sha256": "953da2d1dbae6e42d831410470a9b95f82b22c331019ca4f565e75f8de1a11ec"
+        },
+        {
+          "weight": 500,
+          "style": "normal",
+          "key": "curated:roboto-mono:500:normal",
+          "ttf": "roboto-mono-500-normal.ttf",
+          "url": "/fonts/curated/roboto-mono-500-normal.woff2",
+          "sha256": "54e136d220df2180a3dd501fca782f64462042b6eb40203757a3209bb70db531",
+          "woff2_sha256": "a064e8472b31ef000a50a36f11a5726fcb56efe7b40be5f463299f41af5877b9"
+        },
+        {
+          "weight": 600,
+          "style": "italic",
+          "key": "curated:roboto-mono:600:italic",
+          "ttf": "roboto-mono-600-italic.ttf",
+          "url": "/fonts/curated/roboto-mono-600-italic.woff2",
+          "sha256": "5c2ebb90411bca8b66e89f3fa78a3781c10ffcac5b288a4083de814dff7ea20a",
+          "woff2_sha256": "cc2ecef8b16644b91f13a3b3f65c39899d05df1fc7b2460ea8c39370958af1d9"
+        },
+        {
+          "weight": 600,
+          "style": "normal",
+          "key": "curated:roboto-mono:600:normal",
+          "ttf": "roboto-mono-600-normal.ttf",
+          "url": "/fonts/curated/roboto-mono-600-normal.woff2",
+          "sha256": "f793e9fa1a4b35145b7025077f46f09430480c107ff55a0c9394f1b559c5608b",
+          "woff2_sha256": "ecfe8c449751d8cec9349de8af13270a7a4d8e8158eefd82ddbc11dc55cf4332"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:roboto-mono:700:italic",
+          "ttf": "roboto-mono-700-italic.ttf",
+          "url": "/fonts/curated/roboto-mono-700-italic.woff2",
+          "sha256": "19f3febeec264503cbd46c6c8dfe22fcc9bdaededaee5a036a154a71432faf30",
+          "woff2_sha256": "e6eea4180ce580eb2c67a0fb3dffe2361b51dd99d3ca351cbccb0ec3f2ac1086"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:roboto-mono:700:normal",
+          "ttf": "roboto-mono-700-normal.ttf",
+          "url": "/fonts/curated/roboto-mono-700-normal.woff2",
+          "sha256": "5e616722a993d5a10c3dfddd56c04ec98eecce755e6084abf9d424843b179b63",
+          "woff2_sha256": "f957206ea4a227d768d010f033e0419dc251e5ac29d23b46aa29c47ef72fc17d"
+        }
+      ],
+      "default": "curated:roboto-mono:400:normal"
+    },
+    {
+      "id": "space-mono",
+      "family": "Space Mono",
+      "category": "Technisch & Schreibmaschine",
+      "version": "5.3.0",
+      "license": "OFL-1.1",
+      "license_url": "/fonts/curated/space-mono-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "italic",
+          "key": "curated:space-mono:400:italic",
+          "ttf": "space-mono-400-italic.ttf",
+          "url": "/fonts/curated/space-mono-400-italic.woff2",
+          "sha256": "f05bd2b6f12125fca402a3ac5034a3c615a292e8f62acb765b7186510e622a54",
+          "woff2_sha256": "a8caa17f19ed68005195aa9a75b16171b3fea3c6d1265fd55d10ad0629dd5357"
+        },
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:space-mono:400:normal",
+          "ttf": "space-mono-400-normal.ttf",
+          "url": "/fonts/curated/space-mono-400-normal.woff2",
+          "sha256": "ea710aad695a1891ed3a860dcaad18e0be9eaa16ec2ec4ed7dcdcff406b6e1e8",
+          "woff2_sha256": "0c1e76d7580ff19727914d39b94bd9f8ab3b563d075c0d722dcfa134c1f987bd"
+        },
+        {
+          "weight": 700,
+          "style": "italic",
+          "key": "curated:space-mono:700:italic",
+          "ttf": "space-mono-700-italic.ttf",
+          "url": "/fonts/curated/space-mono-700-italic.woff2",
+          "sha256": "3ed3f908cd75f7b3af438edc7d6e49e505c9cde086536f1bc3ca1c480484b20e",
+          "woff2_sha256": "b19941c071a66019d2a5c68593c0f1464cd194cc0f689de083018d87331396fa"
+        },
+        {
+          "weight": 700,
+          "style": "normal",
+          "key": "curated:space-mono:700:normal",
+          "ttf": "space-mono-700-normal.ttf",
+          "url": "/fonts/curated/space-mono-700-normal.woff2",
+          "sha256": "d17ebd88829c77c26aa041c9aaf07e1c085d3db1549a4f86f55626dad8d71097",
+          "woff2_sha256": "f30f147b8013eacce9d27875e131222644552eaf092a2ed946161d3c068086b2"
+        }
+      ],
+      "default": "curated:space-mono:400:normal"
+    },
+    {
+      "id": "special-elite",
+      "family": "Special Elite",
+      "category": "Technisch & Schreibmaschine",
+      "version": "5.3.0",
+      "license": "Apache-2.0",
+      "license_url": "/fonts/curated/special-elite-LICENSE.txt",
+      "variants": [
+        {
+          "weight": 400,
+          "style": "normal",
+          "key": "curated:special-elite:400:normal",
+          "ttf": "special-elite-400-normal.ttf",
+          "url": "/fonts/curated/special-elite-400-normal.woff2",
+          "sha256": "3fcc3c613634a919c1fc5ed3004e58f03be3c4820d95bbead873b38843d2e997",
+          "woff2_sha256": "20279679a1fed2f5ef25e96be1b64e092eb965554cdf630d72edba347fa23353"
+        }
+      ],
+      "default": "curated:special-elite:400:normal"
+    }
+  ]
+}

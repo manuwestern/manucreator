@@ -93,3 +93,9 @@ app.include_router(products_router)
 app.include_router(product_images_router)
 from studio.background import router as background_router
 app.include_router(background_router)
+from studio.fonts import router as font_router
+from studio.text_engine import router as text_router
+app.include_router(font_router)
+app.include_router(text_router)
+from studio.templates import router as templates_router
+app.include_router(templates_router)

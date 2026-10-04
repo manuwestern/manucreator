@@ -1,5 +1,7 @@
 # Local foreground extraction
 
+**Historischer Bestand, nicht mehr aktiv:** Die lokale Freistellung wurde auf ausdrücklichen Nutzerwunsch durch die optionale OpenAI-Bildbearbeitung ersetzt. Ohne eigenen OpenAI-API-Schlüssel bleibt Freistellen deaktiviert. Dieses frühere Modell wird nicht als Ersatz aufgerufen. Die folgenden Angaben dokumentieren ausschließlich den früheren Implementierungsstand.
+
 - Wrapper: rembg 2.0.85 (MIT), ONNX Runtime CPU 1.30.0 (MIT).
 - Explicit model: U²-Net small `u2netp`; never use the rembg default model.
 - Source: https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx

@@ -4,10 +4,10 @@ from pydantic import EmailStr, Field, model_validator
 from .common import StrictModel
 
 class Box(StrictModel):
-    x: float = Field(ge=0, le=800, allow_inf_nan=False)
-    y: float = Field(ge=0, le=800, allow_inf_nan=False)
-    w: float = Field(ge=5, le=800, allow_inf_nan=False)
-    h: float = Field(ge=5, le=800, allow_inf_nan=False)
+    x: float = Field(ge=-800, le=800, allow_inf_nan=False)
+    y: float = Field(ge=-800, le=800, allow_inf_nan=False)
+    w: float = Field(ge=.1, le=800, allow_inf_nan=False)
+    h: float = Field(ge=.1, le=800, allow_inf_nan=False)
 
 class Layout(StrictModel):
     text: Box
@@ -32,13 +32,21 @@ class Element(Box):
     id: str = Field(min_length=1, max_length=60, pattern=r'^[a-zA-Z0-9_-]+$')
     kind: Literal['text','image']
     text: str = Field(default='',max_length=60)
-    font: Font = 'sans'
+    font: str = Field(default='sans',max_length=80,pattern=r'^(modern|classic|bold|sans|sans-bold|sans-italic|serif|serif-italic|mono|narrow|fs:[a-f0-9]{32}|curated:[a-z0-9-]+:[1-9][0-9]{2}:normal|curated:[a-z0-9-]+:[1-9][0-9]{2}:italic)$')
+    font_size: float = Field(default=0,ge=0,le=200,allow_inf_nan=False)
+    rotation: float = Field(default=0,ge=-360,le=360,allow_inf_nan=False)
+    curvature: float = Field(default=0,ge=-150,le=150,allow_inf_nan=False)
     asset_id: UUID | None = None
     original_asset_id: UUID | None = None
     image_type: Literal['photo','logo'] = 'photo'
+    image_ratio: float = Field(default=0,ge=0,le=10000,allow_inf_nan=False)
     crop: Crop = Field(default_factory=Crop)
     locked: bool = False
     hidden: bool = False
+    placeholder: bool = False
+    template_field: str | None = Field(default=None,max_length=40)
+    field_label: str | None = Field(default=None,max_length=60)
+    template_slot: Box | None = None
 
 class Design(StrictModel):
     product_id: str = Field(min_length=2, max_length=80, pattern=r'^[a-zA-Z0-9_-]+$')
@@ -54,6 +62,10 @@ class Design(StrictModel):
     focal_y: float = Field(default=0, ge=-30, le=30)
     layout: Layout | None = None
     elements: list[Element] | None = Field(default=None, max_length=12)
+    editor_mode: Literal['free','simple'] = 'free'
+    template_id: str | None = Field(default=None,max_length=40)
+    template_version: int | None = Field(default=None,ge=1)
+    font_catalog_version: str = Field(default='manucreator-curated-1',max_length=50)
 
 class CartAdd(StrictModel):
     draft_id: str = Field(min_length=32, max_length=80)

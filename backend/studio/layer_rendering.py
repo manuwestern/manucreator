@@ -1,7 +1,7 @@
 import io
 from PIL import Image, ImageOps, ImageDraw, ImageChops
 from fastapi import HTTPException
-from .geometry import constrain
+from .transform_geometry import inside
 
 def validate_elements(design, product):
     elements = design.elements
@@ -10,38 +10,52 @@ def validate_elements(design, product):
     if not any(not e.hidden and (e.text.strip() if e.kind=='text' else e.asset_id) for e in elements):
         raise HTTPException(422,'Bitte mindestens eine sichtbare Text- oder Bildebene ergänzen.')
     for e in elements:
-        box=e.model_dump(include={'x','y','w','h'}); bounded=constrain(box,product['area'])
-        if any(abs(box[k]-bounded[k])>.1 for k in box):
+        box=e.model_dump(include={'x','y','w','h','rotation'})
+        if not inside(box,product['area']):
             raise HTTPException(422,'Eine Ebene liegt außerhalb der freigegebenen Gravurfläche.')
         if e.kind=='text':
             if len(e.text)>product['max_text']:
                 raise HTTPException(422,f"Pro Textebene sind höchstens {product['max_text']} Zeichen möglich.")
-            if any(not (32<=ord(c)<=591 or c in '–—„“’') for c in e.text):
-                raise HTTPException(422,'Bitte lateinische Buchstaben und Satzzeichen ohne Emojis oder Zeilenumbrüche verwenden.')
-        elif not e.asset_id or e.image_type not in product['templates']:
-            raise HTTPException(422,'Für diese Bildebene fehlt ein zulässiges Foto oder Logo.')
+            if any(not c.isprintable() for c in e.text):
+                raise HTTPException(422,'Bitte eine einzelne Textzeile ohne Steuerzeichen verwenden.')
+        elif e.placeholder or not e.asset_id or e.image_type not in product['templates']:
+            raise HTTPException(422,'Bitte Bildplatzhalter durch ein eigenes zulässiges Foto oder Logo ersetzen.')
+        if design.editor_mode=='simple' and e.template_slot:
+            slot=e.template_slot
+            if e.x<slot.x-.1 or e.y<slot.y-.1 or e.x+e.w>slot.x+slot.w+.1 or e.y+e.h>slot.y+slot.h+.1:
+                raise HTTPException(422,'Ein Inhalt passt nicht in das feste Vorlagenfeld. Bitte kürzen oder bewusst frei bearbeiten.')
 
-def render_layers(design, product, blank, assets):
+def render_layers(design, product, blank, assets, font_paths=None):
     from .rendering import fitted_font
     base=Image.open(io.BytesIO(blank)).convert('RGBA').resize((800,800))
     overlay=Image.new('RGBA',base.size); draw=ImageDraw.Draw(overlay)
     for e in design.elements:
         if e.hidden:
             continue
+        stamp=Image.new('RGBA',(max(1,round(e.w)),max(1,round(e.h))))
         if e.kind=='text' and e.text:
-            font=fitted_font(e.text,e.font,max(6,int(e.h*.76)),max(1,e.w-4),minimum=6)
-            # Draw on a separate layer so lower content is composited, not erased.
-            layer=Image.new('RGBA',base.size)
-            ImageDraw.Draw(layer).text((e.x+e.w/2,e.y+e.h/2),e.text,font=font,fill=product['ink'],anchor='mm')
-            overlay.alpha_composite(layer)
+            if e.font_size>0:
+                from .text_engine import text_sprite
+                data,_=text_sprite(str(font_paths[e.font]),e.text,e.font_size,e.curvature)
+                text=Image.open(io.BytesIO(data)).convert('RGBA')
+                s=min(1,e.w/text.width,e.h/text.height)
+                if s<1:text=text.resize((max(1,round(text.width*s)),max(1,round(text.height*s))),Image.Resampling.LANCZOS)
+                ink=Image.new('RGBA',text.size,product['ink']);ink.putalpha(text.getchannel('A'))
+                stamp.alpha_composite(ink,((stamp.width-ink.width)//2,(stamp.height-ink.height)//2))
+            else:
+                font=fitted_font(e.text,e.font,max(6,int(e.h*.76)),max(1,e.w-4),minimum=6)
+                ImageDraw.Draw(stamp).text((stamp.width/2,stamp.height/2),e.text,font=font,fill=product['ink'],anchor='mm')
         elif e.kind=='image':
             image=Image.open(io.BytesIO(assets[str(e.asset_id)])).convert('RGBA')
             c=e.crop; image=image.crop((c.x*image.width,c.y*image.height,(c.x+c.w)*image.width,(c.y+c.h)*image.height))
-            image=image.resize((max(1,round(e.w)),max(1,round(e.h))),Image.Resampling.LANCZOS)
+            image=ImageOps.contain(image,(max(1,round(e.w)),max(1,round(e.h))),Image.Resampling.LANCZOS)
             gray=ImageOps.invert(image.convert('RGB').convert('L')).point(lambda v: round(v*.78))
             alpha=ImageChops.multiply(gray,image.getchannel('A'))
-            stamp=Image.new('RGBA',image.size,product['ink']);stamp.putalpha(alpha)
-            overlay.alpha_composite(stamp,(round(e.x),round(e.y)))
+            ink=Image.new('RGBA',image.size,product['ink']);ink.putalpha(alpha)
+            stamp.alpha_composite(ink,((stamp.width-ink.width)//2,(stamp.height-ink.height)//2))
+        if abs(e.rotation)>.001:
+            stamp=stamp.rotate(-e.rotation,resample=Image.Resampling.BICUBIC,expand=True)
+        overlay.alpha_composite(stamp,(round(e.x+e.w/2-stamp.width/2),round(e.y+e.h/2-stamp.height/2)))
     a=product['area'];mask=Image.new('L',base.size,0);draw=ImageDraw.Draw(mask)
     (draw.ellipse if a.get('shape')=='circle' else draw.rectangle)((a['x'],a['y'],a['x']+a['w'],a['y']+a['h']),fill=255)
     overlay.putalpha(ImageChops.multiply(overlay.getchannel('A'),mask));base.alpha_composite(overlay)

@@ -1,0 +1,3 @@
+import { Dialog,DialogContent,DialogTitle,DialogDescription } from '@/components/ui/dialog';
+import { DesignCanvas } from './DesignCanvas';
+export const ProductPreview=({product,design,onClose})=><Dialog open onOpenChange={v=>{if(!v)onClose();}}><DialogContent className="product-preview-dialog" data-testid="product-preview-dialog"><DialogTitle>{product.name} · Produktvorschau</DialogTitle><DialogDescription>Dein aktueller Entwurf auf dem Rohling · keine Fertigungsfreigabe</DialogDescription><div className="product-preview-stage"><DesignCanvas product={product} design={design} readOnly disabled guides={false}/></div></DialogContent></Dialog>;

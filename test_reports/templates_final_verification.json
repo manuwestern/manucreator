@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-04",
+  "scope": "Zoom, live engraving boundaries, 25 bundled fonts, six templates with simple/free modes",
+  "reports": ["/app/test_reports/iteration_15.json", "/app/test_reports/iteration_16.json"],
+  "backend": {"active_passed": 48, "historical_real_gemini_skipped": 1, "targeted_followup_passed": 5},
+  "frontend_verified": ["zoom50-400/fit/pan/Ctrl-wheel", "browser-emulated CDP pinch without element mutation", "held live transformations on rect/circle at250%+pan", "RGBA-identical800x800 export at100%vs250%+pan", "read-only product preview", "25fontfamilies177realvariants, German glyphs and local licenses", "six templates, replace-confirmation, simple-fields, actual photo/crop, placeholders blocked", "free-edit, undo/redo, preserved invalid legacy contents, checkout gating", "single queued save-to-cart result"],
+  "last_minor_issue_fixed": "Loading state uses studio-canvas-status; is-error reserved for actual failures",
+  "build": {"passed": true, "warnings": 0, "log": "/app/test_reports/templates-build.log"},
+  "cleanup": "Only the two archived temporary circle products listed in iteration16 were removed; four active sample blanks remain. User designs/orders unchanged.",
+  "mocked_application_apis": [],
+  "unconfigured": "Optional GPT image-edit cutout requires own OPENAI_API_KEY; disabled, no fallback, no live provider success claim",
+  "limitations": ["Pinch validated through browser emulation, not physical touch hardware", "Test-only checkout, no payment/manufacturing", "Scenes and production support not implemented because out of scope"]
+}

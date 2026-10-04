@@ -71,3 +71,16 @@ async def check_available(draft):
     snapshot = draft.get('product_snapshot')
     if snapshot and snapshot['version'] != current['version']:
         raise HTTPException(409, 'Der Rohling wurde geändert. Bitte den Entwurf im Studio erneut prüfen und speichern.')
+    from .models import Design
+    from .layer_rendering import validate_elements
+    from .rendering import validate_design
+    from .fonts import font_path
+    try:
+        design=Design.model_validate(draft['design'])
+        if design.elements is not None:
+            validate_elements(design,current)
+            for element in design.elements:
+                if element.kind=='text':await font_path(element.font)
+        else:validate_design(design,current)
+    except (ValueError,HTTPException) as exc:
+        raise HTTPException(409,'Dieser Entwurf muss vor dem Abschluss korrigiert werden. Bitte im Studio öffnen und Gravurgrenzen, Inhalte und Schriften prüfen.') from exc

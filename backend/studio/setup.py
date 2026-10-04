@@ -9,6 +9,10 @@ async def initialize(database):
     await seed_admin()
     await initialize_products()
     await database.studio_processed.create_index([('guest',1),('fingerprint',1)],unique=True)
+    await database.studio_font_assets.create_index('id',unique=True)
+    await database.studio_font_assets.create_index([('font_id',1),('weight',1),('style',1)],unique=True)
+    await database.studio_font_catalog.create_index('key',unique=True)
+    await database.studio_bg_requests.create_index([('guest',1),('request_id',1)],unique=True)
     for collection in ['studio_guests', 'studio_files', 'studio_drafts', 'studio_cart', 'studio_orders', 'studio_chats']:
         await database[collection].create_index('id', unique=True)
     await database.studio_guests.create_index('expires_at', expireAfterSeconds=0)

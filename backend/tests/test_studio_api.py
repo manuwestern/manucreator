@@ -404,10 +404,18 @@ def test_valid_upload_persists_blob_and_metadata_without_base64(api_client, mong
     assert "data" not in record and "base64" not in record and "content" not in record
 
 
-# Module coverage: local u2netp background removal, alpha output quality, cache reuse, and isolation
-def test_remove_background_local_model_reuses_result_and_keeps_original(api_client, mongo_db):
+# Module coverage: GPT cutout no-key contract (capabilities, consent gate, 503 without fallback, ownership)
+def test_gpt_cutout_contract_without_openai_key(api_client, mongo_db):
     guest_a = create_guest(api_client)
     guest_b = seed_peer_guest(mongo_db)
+
+    capabilities = api_client.get(f"{BASE_URL}/api/studio/uploads/background-capabilities", timeout=20)
+    assert capabilities.status_code == 200
+    cap = capabilities.json()
+    assert cap["configured"] is False
+    assert cap["provider"] == "OpenAI"
+    assert cap["requires_consent"] is True
+    assert "OpenAI-API-Zugang nicht eingerichtet" in cap["reason"]
 
     uploaded = api_client.post(
         f"{BASE_URL}/api/studio/uploads",
@@ -419,53 +427,197 @@ def test_remove_background_local_model_reuses_result_and_keeps_original(api_clie
     assert uploaded.status_code == 201
     original_id = uploaded.json()["id"]
 
-    original_blob = api_client.get(
-        f"{BASE_URL}/api/studio/files/{original_id}", headers=guest_a["headers"], timeout=30
-    )
-    assert original_blob.status_code == 200
-    original_bytes = original_blob.content
-
-    processed = api_client.post(
+    request_id = str(uuid4())
+    no_consent = api_client.post(
         f"{BASE_URL}/api/studio/uploads/{original_id}/remove-background",
         headers=guest_a["headers"],
-        timeout=180,
+        json={"request_id": request_id, "consent": False},
+        timeout=30,
     )
-    assert processed.status_code == 200
-    result = processed.json()
-    assert result["original_id"] == original_id
-    assert result["reused"] is False
-    assert isinstance(result["id"], str) and result["id"]
+    assert no_consent.status_code == 422
 
-    processed_blob = api_client.get(
-        f"{BASE_URL}/api/studio/files/{result['id']}", headers=guest_a["headers"], timeout=45
-    )
-    assert processed_blob.status_code == 200
-    image = Image.open(io.BytesIO(processed_blob.content)).convert("RGBA")
-    alpha_min, alpha_max = image.getchannel("A").getextrema()
-    assert alpha_min < 255
-    assert alpha_max > 0
-    assert alpha_min != alpha_max
-
-    repeated = api_client.post(
+    blocked = api_client.post(
         f"{BASE_URL}/api/studio/uploads/{original_id}/remove-background",
         headers=guest_a["headers"],
+        json={"request_id": request_id, "consent": True},
+        timeout=30,
+    )
+    assert blocked.status_code == 503
+
+    bg_request = mongo_db["studio_bg_requests"].find_one(
+        {"guest": guest_a["guest"], "request_id": request_id},
+        {"_id": 0},
+    )
+    assert bg_request is None
+
+    foreign = api_client.post(
+        f"{BASE_URL}/api/studio/uploads/{original_id}/remove-background",
+        headers=guest_b["headers"],
+        json={"request_id": str(uuid4()), "consent": True},
+        timeout=30,
+    )
+    assert foreign.status_code == 404
+
+
+# Module coverage: curated font manifest contract and retired install endpoint
+def test_font_catalog_and_install_flow(api_client):
+    catalog = api_client.get(f"{BASE_URL}/api/studio/fonts", timeout=30)
+    assert catalog.status_code == 200
+    body = catalog.json()
+    assert body["version"] == "manucreator-curated-1"
+    assert len(body["families"]) == 25
+    assert sum(len(f["variants"]) for f in body["families"]) == 177
+
+    retired = api_client.post(
+        f"{BASE_URL}/api/studio/fonts/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/install",
+        timeout=30,
+    )
+    assert retired.status_code == 404
+
+    for family in body["families"]:
+        license_response = api_client.get(f"{BASE_URL}{family['license_url']}", timeout=30)
+        assert license_response.status_code == 200
+        assert len(license_response.text.strip()) > 20
+
+
+# Module coverage: text-preview endpoint consistency, umlauts, curvature, and no-fallback invalid font handling
+def test_text_preview_endpoint_behavior(api_client):
+    guest = create_guest(api_client)
+
+    straight = api_client.post(
+        f"{BASE_URL}/api/studio/text-preview",
+        headers=guest["headers"],
+        json={"text": "München ÄÖÜ", "font": "sans", "font_size": 36, "curvature": 0},
         timeout=45,
     )
-    assert repeated.status_code == 200
-    repeated_json = repeated.json()
-    assert repeated_json["id"] == result["id"]
-    assert repeated_json["reused"] is True
+    assert straight.status_code == 200
+    straight_body = straight.json()
+    assert straight_body["width"] > 0 and straight_body["height"] > 0
+    assert straight_body["image"].startswith("data:image/png;base64,")
 
-    original_after = api_client.get(
-        f"{BASE_URL}/api/studio/files/{original_id}", headers=guest_a["headers"], timeout=30
+    curved_up = api_client.post(
+        f"{BASE_URL}/api/studio/text-preview",
+        headers=guest["headers"],
+        json={"text": "München ÄÖÜ", "font": "sans", "font_size": 36, "curvature": 90},
+        timeout=45,
     )
-    assert original_after.status_code == 200
-    assert original_after.content == original_bytes
+    curved_down = api_client.post(
+        f"{BASE_URL}/api/studio/text-preview",
+        headers=guest["headers"],
+        json={"text": "München ÄÖÜ", "font": "sans", "font_size": 36, "curvature": -90},
+        timeout=45,
+    )
+    assert curved_up.status_code == 200
+    assert curved_down.status_code == 200
 
-    cross_guest = api_client.get(
-        f"{BASE_URL}/api/studio/files/{result['id']}", headers=guest_b["headers"], timeout=30
+    invalid_font = api_client.post(
+        f"{BASE_URL}/api/studio/text-preview",
+        headers=guest["headers"],
+        json={"text": "Test", "font": "fs:ffffffffffffffffffffffffffffffff", "font_size": 30, "curvature": 0},
+        timeout=30,
     )
-    assert cross_guest.status_code == 404
+    assert invalid_font.status_code == 422
+    assert "keine Ersatzschrift" in invalid_font.text
+
+    invalid_glyph = api_client.post(
+        f"{BASE_URL}/api/studio/text-preview",
+        headers=guest["headers"],
+        json={"text": "A\u0001", "font": "sans", "font_size": 30, "curvature": 0},
+        timeout=30,
+    )
+    assert invalid_glyph.status_code == 422
+
+
+# Module coverage: image proportion persistence (portrait/landscape) and explicit stretch rejection
+def test_image_ratio_validation_with_landscape_and_portrait(api_client):
+    guest = create_guest(api_client)
+
+    landscape = api_client.post(
+        f"{BASE_URL}/api/studio/uploads",
+        headers=guest["headers"],
+        files={"file": ("landscape.png", create_png_bytes(1200, 800), "image/png")},
+        data={"rights_confirmed": "true"},
+        timeout=35,
+    )
+    portrait = api_client.post(
+        f"{BASE_URL}/api/studio/uploads",
+        headers=guest["headers"],
+        files={"file": ("portrait.png", create_png_bytes(800, 1200), "image/png")},
+        data={"rights_confirmed": "true"},
+        timeout=35,
+    )
+    assert landscape.status_code == 201
+    assert portrait.status_code == 201
+
+    landscape_id = landscape.json()["id"]
+    portrait_id = portrait.json()["id"]
+
+    payload = _base_layer_payload("holzscheibe")
+    payload["elements"] = [
+        {
+            "id": "img-landscape",
+            "kind": "image",
+            "text": "",
+            "font": "sans",
+            "x": 280,
+            "y": 285,
+            "w": 180,
+            "h": 120,
+            "rotation": 0,
+            "asset_id": landscape_id,
+            "original_asset_id": None,
+            "image_type": "photo",
+            "image_ratio": 1.5,
+            "crop": {"x": 0, "y": 0, "w": 1, "h": 1},
+            "locked": False,
+            "hidden": False,
+        },
+        {
+            "id": "img-portrait",
+            "kind": "image",
+            "text": "",
+            "font": "sans",
+            "x": 410,
+            "y": 300,
+            "w": 120,
+            "h": 180,
+            "rotation": 0,
+            "asset_id": portrait_id,
+            "original_asset_id": None,
+            "image_type": "photo",
+            "image_ratio": 2 / 3,
+            "crop": {"x": 0, "y": 0, "w": 1, "h": 1},
+            "locked": False,
+            "hidden": False,
+        },
+    ]
+
+    valid = api_client.post(f"{BASE_URL}/api/studio/drafts", headers=guest["headers"], json=payload, timeout=45)
+    assert valid.status_code == 200
+    saved = valid.json()["design"]["elements"]
+    assert saved[0]["image_ratio"] == pytest.approx(1.5, rel=1e-3)
+    assert saved[1]["image_ratio"] == pytest.approx(2 / 3, rel=1e-3)
+
+    stretched = _base_layer_payload("holzscheibe")
+    stretched["elements"] = [{**payload["elements"][0], "h": 180, "rotation": 0}]
+    stretched_resp = api_client.post(
+        f"{BASE_URL}/api/studio/drafts",
+        headers=guest["headers"],
+        json=stretched,
+        timeout=45,
+    )
+    assert stretched_resp.status_code == 422
+    assert "proportional" in stretched_resp.text
+
+    legacy_ratio_zero = _base_layer_payload("holzscheibe")
+    legacy_ratio_zero["elements"] = [{**payload["elements"][0], "h": 180, "image_ratio": 0, "rotation": 0}]
+    legacy_resp = api_client.post(
+        f"{BASE_URL}/api/studio/drafts",
+        headers=guest["headers"],
+        json=legacy_ratio_zero,
+        timeout=45,
+    )
+    assert legacy_resp.status_code == 200
 
 
 # Module coverage: cross-guest resource authorization and isolation boundaries

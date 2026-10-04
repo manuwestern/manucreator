@@ -14,6 +14,8 @@ from .storage import save_file, read_file
 from .rendering import clean_upload, validate_design, render_design
 from .layer_rendering import validate_elements, render_layers
 from .responses import DraftResponse
+from .fonts import font_path
+from .text_engine import validate_chars
 
 router=APIRouter(prefix='/api/studio',tags=['Gestaltungsstudio'])
 
@@ -85,7 +87,17 @@ async def save_draft(design:Design,guest=Depends(guest_id)):
     blank=await blank_bytes(product)
     if design.elements is not None:
         assets={identity:(await read_file(identity,guest))[0] for identity in {str(e.asset_id) for e in images}}
-        rendered=await asyncio.to_thread(render_layers,design,product,blank,assets)
+        font_paths={e.font:await font_path(e.font) for e in design.elements if e.kind=='text'}
+        for e in design.elements:
+            if e.kind=='text':validate_chars(font_paths[e.font],e.text)
+            if e.kind=='image' and e.image_ratio>0:
+                from PIL import Image
+                import io
+                image=Image.open(io.BytesIO(assets[str(e.asset_id)]))
+                ratio=image.width*e.crop.w/(image.height*e.crop.h)
+                if abs(e.w/e.h/ratio-1)>.012:
+                    raise HTTPException(422,'Das Bild muss proportional bleiben. Bitte den Zuschnitt oder die Größe im Editor erneut prüfen.')
+        rendered=await asyncio.to_thread(render_layers,design,product,blank,assets,font_paths)
     else:
         content=(await read_file(str(design.asset_id),guest))[0] if design.asset_id else None
         rendered=await asyncio.to_thread(render_design,design,content,product,blank)

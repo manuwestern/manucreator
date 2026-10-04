@@ -1,0 +1,56 @@
+{
+  "summary": "Completed backend+frontend regression for curated fonts, zoom/camera export invariants, template simple/free workflows, and legacy invalid-draft blocking.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "Studio canvas loading state",
+        "issues": [
+          "Loading state uses class name containing 'error' (studio-canvas-error), which can create false positives in automated error scans."
+        ]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_studio_phase1_regression.py",
+    "/app/backend/tests/test_studio_api.py",
+    "/app/test_reports/pytest/pytest_results.xml",
+    "/app/test_reports/pytest/pytest_results_phase1.xml",
+    "/root/.emergent/automation_output/20261004_181509/console_20261004_181509.log",
+    "/root/.emergent/automation_output/20261004_181540/console_20261004_181540.log",
+    "/root/.emergent/automation_output/20261004_181610/console_20261004_181610.log",
+    "/root/.emergent/automation_output/20261004_181622/console_20261004_181622.log",
+    "/root/.emergent/automation_output/20261004_181704/console_20261004_181704.log",
+    "/root/.emergent/automation_output/20261004_181717/console_20261004_181717.log",
+    "/root/.emergent/automation_output/20261004_181730/console_20261004_181730.log",
+    "/root/.emergent/automation_output/20261004_181752/console_20261004_181752.log"
+  ],
+  "action_items": [
+    "Optional: rename non-error loading CSS class ('studio-canvas-error') to avoid false-positive QA/error-monitoring signals.",
+    "Optional manual follow-up: real touch-device pinch gesture validation (multi-touch) for final release sign-off."
+  ],
+  "critical_code_review_comments": [
+    "Outdated legacy font install/paging tests were still present; updated tests now enforce curated-manifest contract (25 families / 177 variants) and retired install endpoint 404.",
+    "Export flow correctly preserves user camera state via try/finally while generating canonical 800x800 output.",
+    "Live transform telemetry via data-live-element is emitted during transform and clamps invalid oversized/rotated image/text transforms to last valid geometry."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_studio_phase1_regression.py",
+    "/app/backend/tests/test_studio_api.py",
+    "/app/test_reports/iteration_15.json"
+  ],
+  "success_rate": {
+    "backend": "100% pass on active suite (48 passed, 1 skipped)",
+    "frontend": "~96% for requested critical flows (zoom, templates, fonts, export, save/cart, responsive, legacy-invalid blocking, live-transform telemetry)"
+  },
+  "seed_data_creation": "Created transient guest sessions, transient uploads, and one temporary DB-inserted legacy-invalid draft (cleaned up in test).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "No functional blockers found. High-value checks completed: curated font dropdown count=25, no Google/CDN font requests on switch, download remains 800x800 independent of zoom/pan, template placeholder gating works, undo/redo mode transitions work, localStorage legacy invalid design preserved+blocked. Multi-touch pinch specifically was not hardware-validated in this run.",
+  "rca of the issue": "RCA (test-side): prior regressions were caused by obsolete assumptions about old font catalog/install APIs. Current implementation uses fixed curated manifest via GET /api/studio/fonts and intentionally removed runtime install route (404). Tests were updated to align with approved contract."
+}
