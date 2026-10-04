@@ -8,8 +8,8 @@ export const company = {
   email: 'info@manucreator.de',
 };
 
-export const legalVersion = '2026-10-02';
-export const legalDate = '2. Oktober 2026';
+export const legalVersion = '2026-10-04';
+export const legalDate = '4. Oktober 2026';
 export const address = 'Manuel Bayer · ManuCreator, Büttgerwald 16, 47877 Willich, Deutschland';
 export const legalNavigation = [
   { key: 'imprint', path: '/impressum', label: 'Impressum' },

@@ -1,5 +1,40 @@
 # ManuCreator — One-Page-Webseite
 
+## Aktueller Stand — 2026-10-04 (maßgeblich; ältere Studio-Pläne unten sind Historie)
+- ABGESCHLOSSEN UND GETESTET: Admin-Rohlingverwaltung und freier Ebeneneditor. Hero/Website-Slideshows unverändert.
+- NEUESTE NUTZERENTSCHEIDUNG: „Alles entfernen, einschließlich Beratung.“ Statt KI-Vorschau/Assistent: Bild hochladen, zuschneiden, Hintergrund entfernen, mehr reguläre Fonts, zusätzliche Textelemente und Ebenen gegen versehentliche Bildauswahl. Für Freistellung: „Nutze KI wo notwendig“.
+- Generative KI-Bildvorschau, freie Text-KI UND geführter Dialog entfernt. Alte `/api/studio/quota`, `/assistant/*` und `POST /drafts/{id}/preview` liefern 404. Keine Gemini/Claude-Aufrufe. Historische Daten werden nicht gelöscht; Legacy-ai_status-Felder bleiben nur zur Datenkompatibilität.
+- Editor `/gestalten`: maximal 12 unabhängige Text-/Bildebenen; auswählen, ziehen, skalieren, numerisch positionieren, zentrieren, sperren/entsperren, aus-/einblenden, sortieren, duplizieren, löschen, 30-Schritte Undo/Redo. Gesperrte Bilder fangen keine Zeigerereignisse ab. Rechteck-/Kreisgrenzen identisch in Browser und Backend validiert.
+- Zehn lokal geladene Schriftvarianten: Nimbus Sans/Roman/Bold und Liberation Sans/Bold/Italic/Serif/SerifItalic/Mono/Narrow. Font-Dateien für Browser und Pillow identisch; Liberation-Lizenz im öffentlichen licenses-Verzeichnis.
+- Eigene JPG/PNG/WebP, Rechtebestätigung, max8MB; Bildzuschnitt frei/1:1/4:3, Ziehgriffe und Prozentfelder; Original und Zuschnitt getrennt, Zuschnitt zurücksetzbar. PNG-Download der Direktvorschau.
+- Explizite Hintergrundentfernung: rembg2.0.85 + ONNX Runtime CPU + gebündeltes Apache-2.0-u2netp-Modell (4.57MB). SERVERSEITIG lokal, NICHT browserlokal. Keine Übertragung an externe KI-Anbieter und keine generativen APIs. Original bleibt erhalten; Ergebnis privat, wiederverwendbar und rückgängig machbar. Eine parallele Verarbeitung pro Prozess, 2 CPU-Threads, Tageslimit12 pro Gast. Qualität/Kanten motivabhängig.
+- Admin `/verwaltung`: JWT/Secure-HttpOnly-Cookies, Passwort-Hash, Refresh-Rotation/Logout, persistente Login-Limits; Zugang in memory/test_credentials.md. Produktfoto normalisiert800×800, Produktdaten, Maße, Beispielpreise, erlaubte Vorlagen, Rechteck-/Kreisfläche per Zeichnen/Transformieren/Zahlen, archivieren/reaktivieren. Idempotente Muster-Seeds; echte CRUD-Daten in MongoDB.
+- Rohlingversionen/Entwurfs-Snapshots verhindern unbemerkte Änderungen. Veraltete Rohlinge im gespeicherten Entwurf werden beim Öffnen erkannt und an gültige Grenzen angepasst; vor Checkout neu speichern. Archivierte Rohlinge nicht bestellbar.
+- Test-Warenkorb/Testabschluss bleiben OHNE echte Zahlung oder Fertigung. Kein automatischer E-Mail-Versand. APIs sind nicht gemockt; Kontakt, Fotos, Entwürfe und Testbestellungen werden real gespeichert.
+
+### Architektur der Erweiterung
+- Backend: `studio/admin_auth.py`, `products.py`, `geometry.py`, `layer_rendering.py`, `background.py`, `guest_limiter.py`; bestehende `router.py`, `models.py`, `cart.py`, `storage.py`, `session.py`, `setup.py`. `ai.py`/`assistant.py` gelöscht.
+- MongoDB: `studio_products`, `studio_admins`, `studio_admin_sessions`, `studio_login_attempts`, `studio_guest_counters`, `studio_processed`; bestehende Gäste/Dateien/Entwürfe/Warenkorb/Orders/Inquiries. Produkte enthalten area{x,y,w,h,shape}, version, image_file_id, active, is_sample. Design.elements[]{id,kind,text,font,x,y,w,h,asset_id,original_asset_id,crop,locked,hidden,image_type} ist kanonisch; Altentwürfe werden migriert.
+- Bildablage: bestehender privater Emergent Object Storage, öffentliche Produktfotos ausschließlich kind=product_blank. Kundenbilder nie über öffentliche Produktfoto-URL zugänglich. Objektpfade statt Bild-Base64 in MongoDB.
+- Frontend: react-konva19.0.10/konva10, react-image-crop11; `DesignCanvas`, `CanvasElement`, `LayerList`, `LayerProperties`, `LayerUpload`, `CropDialog`, `ElementTools`, `BlankForm`, `BlankAreaEditor`, `AdminProductsPage`; `studioLayers.js`, `studioGeometry.js`, `adminApi.js`, `studio-layers.css`. Unbenutzte generative Beratungskomponenten und alte CSS-Zeichenvorschau entfernt.
+- Konfiguration: bestehende Env-Schlüssel unverändert erhalten. Neue ADMIN_EMAIL/ADMIN_PASSWORD, REMBG_HOME, STUDIO_BG_MODEL=u2netp, STUDIO_BG_DAILY_LIMIT, STUDIO_GUEST_NETWORK_HOURLY_LIMIT=500, STUDIO_GUEST_GLOBAL_HOURLY_LIMIT=2000. Modelldatei gebündelt unter backend/studio/ml/models/u2netp; kein Laufzeitdownload bei Kundenanfragen.
+- CORS_ORIGINS enthält exakte externe Preview-Origin und deren intern umgeschriebene Alias-Origin. Fremde Origin weiter403, kein Wildcard. Andere Domain-Konfiguration benötigt passende env-Werte. Vorschau ausschließlich frontend/.env entnehmen, nicht aus älteren Abschnitten unten.
+- Gastgrenzen: atomare MongoDB-Stunden-Zähler pro beobachtetem Peer UND global; geteilter Ingress nicht als einzelner Kunde behandelt; keine Übernahme frei manipulierbarer X-Forwarded-For-Werte. Refresh zählt nicht als Gastneuanlage.
+
+### Verifiziert — 2026-10-04
+- Testbericht `/app/test_reports/iteration_13.json`: 32 aktive Backendtests bestanden, 1 veralteter realer Gemini-Test bewusst übersprungen. Tests prüfen entfernte APIs explizit auf404. Kein generativer Aufruf im neuen Testumfang.
+- Echte u2netp-Freistellung: Transparenzvarianz, privater Abruf, Cache-Wiederverwendung und unverändertes Original bestanden. Strikte Ebenen-Validierung, Fonts, Grenzen, Eigentümerschutz, Speicherung, Warenkorb/Checkout ebenfalls bestanden.
+- Frontend: Mehrfachtexte, Upload, Zuschnitt, Freistellen/Original wiederherstellen, Sperren/Entsperren, Duplizieren, Sichtbarkeit, Speichern und kompletter Testabschluss bestanden. Responsive320/768/1024/1440 ohne horizontales Überlaufen.
+- Nach Testbericht behoben: Adminliste übernimmt den bestätigten Rohling direkt aus der Mutation, alte Listenanfragen können sie nicht überschreiben. Gastlimit vorher40/sharedPeer auf konfigurierbare atomare Peer-/Globallimits umgestellt.
+- Vollständiger Backend-Nachtest nach Korrekturen: erneut32 bestanden/1 historischerTest übersprungen. Produktionsbuild erfolgreich, keine Compilewarnungen, `/app/test_reports/layers-build.log`.
+- Gezielter Browser-Nachtest: frischer Gast ohne429-Blockade; Rohlingfoto hochgeladen, neu angelegt, archiviert, reaktiviert, Status sofort korrekt, nach Reload persistent, erneut archiviert. Letzter temporärer Testrohling anschließend exakt per ID entfernt, vier aktive Musterrohlinge übrig.
+- Eigener Abschlussbericht `/app/test_reports/layers_final_verification.json`; keine bekannten offenen Blocker im beauftragten Studio-Umfang.
+
+### Nächste Aufgaben / Prioritäten
+- P0 im beauftragten Funktionsumfang: keine bekannten offenen Fehler. Nutzer soll mit echten Fotos und überlagernden Texten ausprobieren.
+- P1 Inhalt/Betrieb: echte Rohlingfotos und genaue Gravurgrenzen einpflegen; rechtliche Betreiber-/Hosting-/Löschinformationen finalisieren (siehe rechtlicher Backlog). Bestehender Anfrageprozess braucht reale Bearbeitung, kein automatischer E-Mail-Versand.
+- P2 optional: manueller Kantenpinsel zur Korrektur schwieriger Freistellungen; Verwaltungsansicht für Kontaktanfragen/Testbestellungen; echte Zahlungen nur nach separater Beauftragung. KI-Beratung/-Bildgenerierung NICHT wieder einplanen.
+
 ## Originale Aufgabenstellung
 „Kannst du basierend auf diesem Mockup eine schöne One-Page-Webseite machen mit schönen dezenten Animationen. Die weiteren Bilder, die du auf dem Bild siehst, die werde ich dir noch mitgeben. Und im Hero soll so ein Effekt sein, dazu gebe ich dir aber auch noch mal drei, vier separate Bilder, ähm, wo wenn man so scrollt, sich so ein bisschen so dieser Parallax-Effekt beziehungsweise so perspektivischer Effekt reinkommt.“
 
@@ -33,7 +68,7 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 - FastAPI mit `POST /api/inquiries` und `GET /api/health`.
 - MongoDB aus bestehenden `MONGO_URL`-/`DB_NAME`-Werten, Collection `inquiries`.
 - API-URL ausschließlich aus `REACT_APP_BACKEND_URL`. Keine Änderungen geschützter Umgebungswerte.
-- Kein Login, Adminbereich, Dateiupload oder E-Mail-Versand angefragt oder implementiert. Anfragen werden tatsächlich gespeichert, keine gemockte API.
+- Ursprüngliche One-Page ohne Login; inzwischen geschützte Rohlingverwaltung und privater Studioupload vorhanden (siehe aktuellen Stand oben). Weiterhin kein automatischer E-Mail-Versand. Anfragen werden tatsächlich gespeichert, keine gemockte API.
 - Keine öffentliche Liste oder Abrufmöglichkeit für personenbezogene Anfragedaten.
 - Pydantic validiert UUID, Name, E-Mail, Material, Stückzahl, Nachricht und Honeypot. Einmalige Request-ID verhindert doppelte Speicherung bei Retry. Seit Rechtsanpassung ist keine gesonderte Einwilligung für die vorvertragliche Anfrage erforderlich; alte `consent`-Felder werden optional akzeptiert, aber nicht als neue Einwilligung gespeichert.
 - `created_at` ist der Eingang als UTC-ISO-Zeitstempel, Status initial `new`; neue Anfragen enthalten `privacy_notice_version`. Dies ist kein Einwilligungsnachweis. Alte Bestandsdaten wurden nicht nachträglich verändert.
@@ -73,14 +108,14 @@ Der Nutzer stellte ein vollständiges ManuCreator-Mockup bereit und bat: „Star
 - Noch ausstehende Originalbilder für Holzgravuren und Kunststoffgravuren einbauen, sobald hochgeladen. Glas, Metall, Schiefer, Textildruck und Kontaktmotiv sind bereits ersetzt.
 - Ursprünglich angekündigte separate Hero-Ebenen sind durch den später gewünschten, gelieferten Scroll-Video-Hero ersetzt; keine weiteren Hero-Bilder für den aktuellen Effekt erforderlich.
 ### P2 — Optionale sichtbare Erweiterungen
-- Wunschtext-Gravurvorschau auf einem ausgewählten Material.
+- Wunschtext-Gravurvorschau ist inzwischen als vollständiger Ebeneneditor umgesetzt; optional später manueller Kantenpinsel für Freistellungen.
 - Optional später eine geschützte Anfrageverwaltung, nur nach ausdrücklicher Beauftragung; vor Auth-Code zwingend Integrations-Playbook einholen.
 - Weitere Referenzbilder insbesondere für Kunststoff, Schiefer und Textilien ergänzen, sobald der Nutzer zusätzliche Motive bereitstellt; die Kategorie-Slideshow ist bereits implementiert.
 
 ## Nächste Aufgaben
 1. Weitere Originalbilder für Holz/Kunststoff vom Nutzer entgegennehmen.
 2. Fehlende Telefonnummer und Betriebsdetails ergänzen; Rechtstext-Entwürfe nach fachlicher Prüfung freigeben.
-3. Optional interaktive Gravurvorschau anbieten.
+3. Aktuellen Ebeneneditor mit echten Rohlingen ausprobieren und bei Bedarf Freistell-Kantenkorrektur ergänzen.
 
 ## Bildaktualisierung — 2026-10-02
 Nutzerauftrag: „Kannst du diese Bilder schon einmal verwenden“, mit fünf angehängten Produktbildern.
@@ -260,3 +295,66 @@ Originalauftrag: „Kannst du die Bilder noch in die entsprechenden Kategorien e
 - Ein Tabwechsel-Test war wegen unklarer Headless-Sichtbarkeit nicht eindeutig. Daraufhin zusätzlich synchrone Timer-Abschaltung bei `blur`/`pagehide`, Aktivitätsgeneration und direkte `document.hidden`/`document.hasFocus()`-Prüfung implementiert.
 - Gezielter Browser-Nachtest über kontrollierte Visibility-/Focus-Ereignisse: Hintergrundpause, Wiederaufnahme, zusätzliche Blur-Pause und erneute Focus-Wiederaufnahme jeweils nach 5,5 Sekunden erfolgreich. Ergänzungsbericht `/app/test_reports/reference-slideshow-fix-verification.json` beschreibt die Testgrenzen ausdrücklich.
 - Produktionsbuild erfolgreich: `/app/test_reports/reference-slideshow-build.log`.
+
+## Gestaltungsstudio mit KI und Test-Warenkorb — 2026-10-04
+Originalauftrag: „Ich benötige für meine Seite eine Art Tool zum personalisieren ähnlich wie auf dem Mockup, wo rein basierend auf den produktrohlingen mittels ki eine Vorschau generiert werden kann um ein personalisiertes Produkt fertigen zu lassen.“
+
+### Explizite Entscheidungen
+- Vorerst Musterrohlinge Holzscheibe, Schneidebrett, Glasschild, Metallanhänger; echte ungravierte Produktfotos und Namen folgen vom Nutzer.
+- Foto/Logo-Upload, Text/Namen/Datum, Schriftstil und begrenzte Größen-/Positionseinstellungen; Herstellbarkeit und geringe KI-Kosten wichtig.
+- Anbieterwahl delegiert; Gemini Nano Banana über das freigegebene Plattform-KI-Guthaben gewählt.
+- Bestätigter Ablauf: feste Vorlagen, kostenlose direkte Vorschau, KI nur auf ausdrücklichen Klick, Wiederverwendung und Generierungslimits.
+- Abschluss ausdrücklich TESTBESTELLUNGEN mit klaren Musterprodukten/Beispielpreisen und OHNE echte Zahlungen. Keine Änderung zu Live-Zahlungen ohne neue ausdrückliche Beauftragung.
+
+### Implementierte erste Ausbaustufe
+- `/gestalten`: Produktwahl links, kostenlose Live-Canvas-Vorschau mittig, vorgegebene Gestaltung rechts, mobil untereinander.
+- Vier neutrale Musterfotos generiert; Mustermaße, Gravurflächen und Preise ausdrücklich nicht für tatsächliche Fertigung freigegeben. Bilder unter `frontend/public/images/studio`, identische serverseitige Vorlagen unter `backend/studio/assets`.
+- Vorlagen „Nur Text“, „Foto & Text“, „Logo & Text“; Foto nur für Holzrohlinge, Logo/Text auch für Glas/Metall.
+- Drei lokal gehostete Nimbus-Schriften, begrenzte Textlängen/Größen, vorgegebene Position oben/Mitte/unten, Bildfokus/Zoom. Canvas und Pillow verwenden dieselben Fonts und Flächenregeln. Server validiert und beschneidet Darstellungen auf die freigegebene Musterfläche.
+- ACHTUNG: Flächen stehen aktuell fest in `backend/studio/catalog.py`; noch KEIN Betreibereditor für Rohlinge und noch KEIN freies Drag-and-Drop einzelner Elemente.
+- Foto-/Logo-Upload mit Rechtebestätigung, JPG/PNG/WebP, max. 8 MB und 20 Megapixel; EXIF entfernen, ungültige/zu große Bilder ablehnen. SVG nicht zulässig.
+- ECHTER Emergent Object Storage für Uploads, gespeicherte Renderings und KI-Ergebnisse; MongoDB speichert nur Metadaten/Referenzen. Private Dateiabrufe ausschließlich nach Gastbesitzprüfung, keine Tokens in Bild-URLs.
+- Anonymer JWT-Gastzugang ohne Login-UI: Access 15 Minuten, Refresh 7 Tage mit Rotation, serverseitigem Secret und Mongo-Gültigkeit; lokale Browserpersistenz für Zugang und letzten Entwurf. Keine Admin-/Passwortkonten erstellt.
+- Bilder/Drafts/Warenkorb/Bestellungen sind dem Gast zugeordnet. Gastablauf löscht die Bilder nicht automatisch; entsprechend transparenter Datenschutzentwurf, Löschkonzept weiterhin erforderlich.
+- Speichern erzeugt serverseitige exakte Direktvorschau und unveränderliche Gestaltungsparameter. SHA256-Fingerprint pro Gast dedupliziert identische normalisierte Designs einschließlich Bildinhalt; keine KI-Aufrufe beim Bearbeiten/Speichern/Warenkorb.
+- ECHTE optionale Gemini-Bildgenerierung: `gemini-3.1-flash-image-preview` über `emergentintegrations`, Referenzen Rohling + deterministischer Entwurf. Expliziter Bestätigungsdialog über Datenweitergabe, serverseitig `confirmed=true` erforderlich. KI-Ausgabe ist unverbindliche Anschauung, niemals Produktionsdatei oder Fertigungsfreigabe.
+- Jobs werden asynchron bearbeitet und abgefragt; Fehler lassen den exakten Entwurf bestehen. Fertige identische Vorschauen werden ohne neuen Provider-Aufruf wiederverwendet; geänderte Entwürfe markieren die alte Ansicht als veraltet.
+- Quoten in `.env`: 2 KI-Aufrufe/Gast/Tag, 4 je serverseitiger Peer-Netzwerkgruppe/Tag, global 8/Tag, 30 Sekunden Abstand. Globale/Netz-/Gastzähler atomar, Cache-Hits verbrauchen nichts, maximal zwei Versuche für fehlgeschlagenen identischen Entwurf, nach Erfolg keine erneute Generierung desselben Fingerprints. Hinter Shared-Ingress kann das konservative Peer-Limit mehrere Besucher gruppieren; keine Behauptung einer verifizierten Endnutzer-IP.
+- `/warenkorb`: eigene Entwürfe, private Vorschaubilder, Stückzahl/Entfernen/Wiederöffnen, ausschließlich serverseitige Beispielpreise.
+- `/testabschluss`: Beispieldaten-Button, Testbestätigung, null Euro zahlbar, keine Zahlungsdaten/Abwicklung, keine automatische Bestell-E-Mail.
+- `/testbestellung/:id`: gespeicherter TEST-Beleg mit unveränderlichem Entwurfssnapshot, Download und Rückkehr. Idempotenz per request_id, keine Fertigung ausgelöst.
+- Eigene API-Module unter `backend/studio/`; response_models für Mongo-basierte Draft-/Cart-/Order-Antworten, `_id` ausgeschlossen. Keine Änderung geschützter Backend-/Frontend-URL-/Mongo-Werte.
+- Hauptnavigation „Selbst gestalten“ auf Desktop/Mobil. Vorhandene Seite, Slideshow, nicht gepinnter Scroll-Hero und rechtliche Seiten bleiben bestehen.
+- Datenschutzentwurf ergänzt um Gastzugang/Local Storage, Uploads/Objektspeicher, ausdrücklich angeforderte Gemini-Verarbeitung, Testbestellungen und tatsächlich fehlende automatische Datenlöschung. Rechtsstand/Notice-Version 2026-10-04.
+
+### Dateien / Integration / Betrieb
+- Verifizierte Playbooks für Gemini-Bildbearbeitung, Emergent Object Storage und JWT-Gastzugang vor Implementierung eingeholt. Keine zusätzlichen Nutzer-Accounts oder Zahlungsintegration.
+- `studioApi.js` verwaltet Gastzugang/Refresh und autorisierte API-/Blob-Abrufe; Auth-Testhinweise unter `/app/auth_testing.md`, Credential-Hinweise in `/app/memory/test_credentials.md`.
+- `studio-base.css` enthält Basisdarstellung, `studio.css` responsive Regeln. Konfigurator-Datenmodelle/Constraints in `catalog.py`, `models.py`, `rendering.py`; nächste Ausbaustufe muss diese serverseitigen Grenzen ausdrücklich erweitern, nicht nur das UI.
+- Modell/Storage-Proxy/JWT-Secret/Quoten nur in Backend-Umgebung. In Produktion muss deren Vorhandensein separat sichergestellt werden; in dieser Arbeit kein Deployment angefordert oder durchgeführt.
+
+### Verifiziert
+- Testing-Agent `/app/test_reports/iteration_10.json`: 26/26 Backendtests plus Desktop-/Tablet-/Mobilabläufe, Gastisolation, Uploadvalidierung/EXIF, echtes Object Storage, Draft-Deduplizierung, Cart/Testcheckout und Idempotenz.
+- Genau EINE echte KI-Generierung im Test ausgeführt und erfolgreich beendet; Ergebnis privat abrufbar. Zweiter Abruf desselben Entwurfs bestätigt Cache-Hit ohne Quotenverbrauch. Echte Verbrauchszähler wurden nicht zurückgesetzt.
+- Initialer Gesamtbuild erfolgreich (`/app/test_reports/studio-build.log`); keine blockierenden Testfehler. Optional bemängelter Proxy-Fallback entfernt, jetzt strikte Umgebungsvariable.
+- Nachtest nach Persistenzverbesserung: gespeicherter Entwurf bleibt nach Reload inklusive serverseitigem Speicherstatus erhalten; 1920×800-Layout intakt, kein horizontaler Overflow, keine KI-Anfrage ausgelöst.
+- Keine weitere KI-Generierung für reine UI-Nachtests beauftragen, sofern vorhandenes Ergebnis wiederverwendbar ist.
+
+## Neuester Nutzerwunsch: mehr Gestaltungsfreiheit bei festen Fertigungsgrenzen — 2026-10-04
+Nutzer fragt, wo später die Gravurfläche eingestellt wird, wie Text auf Mobil/Desktop frei verschoben werden kann und ob ein schrittweiser Chat mit Beispielen, Schrift-/Bildstilen und Hintergrundentfernung (ähnlich dem erwähnten XTool-Workflow) sinnvoll wäre, ohne hohe KI-Kosten.
+
+### Gegebene Empfehlung, NOCH NICHT implementiert
+- Betreiberverwaltung für echte Rohlinge, Maße, freigegebene Rechteck-/Kreis-/Konturflächen und gesperrte Bereiche; diese technischen Grenzen sollen nicht von Kunden veränderbar sein.
+- Kunden können Text und Bild innerhalb dieser Grenzen per Maus/Finger verschieben, skalieren und ausrichten; Einrasten/Hilfslinien, Mindestschriftgrößen, Undo/Reset und Auflösungswarnungen; ohne Bildgenerierung bei normalen Änderungen.
+- Geführter Gestaltungsassistent im Chat-Stil mit tatsächlichen Auswahlchips und visuellen Beispielen, nicht als vorgetäuschter LLM-Chat. Standardfragen benötigen keine Sprachmodell-Aufrufe.
+- Optionaler Freitext-KI-Chat erst bei ausdrücklicher Wahl: übersetzt Wünsche in begrenzte, validierte Editoraktionen, darf keine Produkt-/Fertigungsgrenzen aufheben.
+- Hintergrundentfernung/Bildaufbereitung ausdrücklich auf Klick und wiederverwendbar. Technik/Lizenz/Ressourcen/Datenschutz dafür noch zu klären, keine bereits vorhandene Funktion behaupten.
+- KI-Produktansicht bleibt separat und kostenbegrenzt; Fertigungsgrundlage bleibt exakter Entwurf plus Originalmotiv. Herstellbarkeit muss weiterhin materialspezifisch geprüft werden.
+- Vor Implementierung Umfang/Assistentenvariante bestätigen. Auth-/Betreiberverwaltung vor neuem Auth-Code erneut mit passendem Integrations-Playbook klären; kein ungeschützter Adminbereich.
+
+### Priorisierter weiterer Backlog
+- P0: Reale Rohlingmaße/Gravurflächen/Materialregeln und Fotos vom Nutzer; keine Freigabe der Muster zur Fertigung behaupten.
+- P1: Nach Bestätigung Betreiber-Flächeneditor und begrenzter Drag-/Resize-Editor für Endkunden.
+- P1: Geführter Gestaltungsassistent mit Beispielauswahl; optionale zusätzliche Text-KI nur nach Entscheidung.
+- P2: Gesonderte Hintergrundentfernung und druck-/laserfähiger Export nach festgelegten Maschinenanforderungen.
+- Testmodus mit null Euro Zahlbetrag bleibt erhalten; echte Zahlungen sind kein automatischer nächster Schritt.

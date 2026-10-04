@@ -98,7 +98,7 @@ class TestInquiryApi:
         assert saved["message"] == payload["message"]
         assert "consent" not in saved
         assert saved["status"] == "new"
-        assert saved["privacy_notice_version"] == "2026-10-02"
+        assert saved["privacy_notice_version"] == "2026-10-04"
         assert "created_at" in saved
 
     @pytest.mark.parametrize("consent_value", [True, False, None])
@@ -123,7 +123,7 @@ class TestInquiryApi:
         saved = mongo_collection.find_one({"id": request_id}, {"_id": 0})
         assert saved is not None
         assert "consent" not in saved
-        assert saved["privacy_notice_version"] == "2026-10-02"
+        assert saved["privacy_notice_version"] == "2026-10-04"
 
     def test_duplicate_request_id_returns_same_receipt_without_duplicate(self, api_client, mongo_collection, created_ids):
         request_id = str(uuid4())

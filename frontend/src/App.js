@@ -12,6 +12,12 @@ import { ContentDialog } from '@/components/site/ContentDialog';
 import LegalPage from '@/pages/LegalPage';
 import { legalDocuments } from '@/data/legal';
 import { legalNavigation } from '@/data/legal/company';
+import { StudioLayout } from '@/components/studio/StudioLayout';
+import StudioPage from '@/pages/StudioPage';
+import StudioCartPage from '@/pages/StudioCartPage';
+import StudioCheckoutPage from '@/pages/StudioCheckoutPage';
+import StudioOrderPage from '@/pages/StudioOrderPage';
+import AdminProductsPage from '@/pages/AdminProductsPage';
 
 function HomePage() {
   const [inquiry, setInquiry] = useState(null);
@@ -48,5 +54,5 @@ function RouteScroll() {
 }
 
 export default function App() {
-  return <BrowserRouter><RouteScroll /><Routes><Route path="/" element={<HomePage />} />{legalNavigation.map(item => <Route key={item.key} path={item.path} element={<LegalPage document={legalDocuments[item.key]} />} />)}<Route path="*" element={<HomePage />} /></Routes></BrowserRouter>;
+  return <BrowserRouter><RouteScroll /><Routes><Route path="/" element={<HomePage />} /><Route path="/verwaltung" element={<AdminProductsPage />} />{legalNavigation.map(item => <Route key={item.key} path={item.path} element={<LegalPage document={legalDocuments[item.key]} />} />)}<Route element={<StudioLayout />}><Route path="/gestalten" element={<StudioPage />} /><Route path="/warenkorb" element={<StudioCartPage />} /><Route path="/testabschluss" element={<StudioCheckoutPage />} /><Route path="/testbestellung/:id" element={<StudioOrderPage />} /></Route><Route path="*" element={<HomePage />} /></Routes></BrowserRouter>;
 }

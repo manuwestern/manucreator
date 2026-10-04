@@ -22,6 +22,8 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await db.inquiries.create_index('id', unique=True)
+    from studio.setup import initialize
+    await initialize(db)
     yield
     client.close()
 
@@ -30,9 +32,9 @@ app = FastAPI(title='ManuCreator', lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=os.environ['CORS_ORIGINS'].split(','),
-    allow_credentials=False,
-    allow_methods=['GET', 'POST'],
-    allow_headers=['Content-Type'],
+    allow_credentials=True,
+    allow_methods=['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allow_headers=['Content-Type', 'Authorization'],
 )
 
 
@@ -68,7 +70,7 @@ async def health():
 async def create_inquiry(inquiry: InquiryCreate):
     inquiry_id = str(inquiry.request_id)
     document = inquiry.model_dump(exclude={'request_id', 'website'})
-    document.update(id=inquiry_id, created_at=datetime.now(timezone.utc).isoformat(), status='new', privacy_notice_version='2026-10-02')
+    document.update(id=inquiry_id, created_at=datetime.now(timezone.utc).isoformat(), status='new', privacy_notice_version='2026-10-04')
     try:
         await db.inquiries.insert_one(document)
     except DuplicateKeyError:
@@ -79,3 +81,15 @@ async def create_inquiry(inquiry: InquiryCreate):
         raise HTTPException(503, 'Deine Anfrage konnte nicht gespeichert werden. Bitte versuche es noch einmal.')
     # Never expose the MongoDB document or customer data through a public read endpoint.
     return InquiryReceipt(id=inquiry_id, message='Deine Anfrage wurde erfolgreich gespeichert.')
+
+from studio.router import router as studio_router
+from studio.cart import router as studio_cart_router
+app.include_router(studio_router)
+app.include_router(studio_cart_router)
+from studio.admin_auth import router as admin_auth_router
+from studio.products import router as products_router, public_router as product_images_router
+app.include_router(admin_auth_router)
+app.include_router(products_router)
+app.include_router(product_images_router)
+from studio.background import router as background_router
+app.include_router(background_router)

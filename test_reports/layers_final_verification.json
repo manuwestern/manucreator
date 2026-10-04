@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-04",
+  "scope": "Non-generative layered engraving editor, local background removal, admin blanks",
+  "source_report": "/app/test_reports/iteration_13.json",
+  "backend_retest": {"passed": 32, "skipped": 1, "skip_reason": "Historical real Gemini generation test; feature removed", "failed": 0},
+  "build": {"passed": true, "log": "/app/test_reports/layers-build.log"},
+  "resolved_issues": [
+    {"issue": "Admin reactivation stale status", "fix": "Canonical mutation response merged synchronously; revision guard rejects obsolete list responses", "verification": "Real browser: create photo blank -> archive -> reactivate -> correct status immediately -> reload still active -> archive. Passed."},
+    {"issue": "Shared-preview guest creation rate limit", "fix": "Atomic MongoDB hour buckets; configured peer500/global2000; refresh untouched", "verification": "Fresh real browser loaded Studio without rate-limit error. Backend guest rotation/authorization regression passed."}
+  ],
+  "frontend_core": "Testing agent verified multiple layers, image upload/crop, actual local background removal, original restore, locks, duplicate, visibility, save/cart/checkout/order",
+  "responsive_widths_verified": [320,768,1024,1440],
+  "admin_retest_log": "/root/.emergent/automation_output/20261004_142741/console_20261004_142741.log",
+  "guest_retest_log": "/root/.emergent/automation_output/20261004_142703/console_20261004_142703.log",
+  "test_cleanup": "Exact final temporary product removed after successful verification; four active original sample blanks remain",
+  "mocked_apis": [],
+  "known_blockers": [],
+  "limitations": ["Background removal is model-dependent; fine edges can need correction", "Checkout is test-only without payment or manufacturing", "Legal/operator retention and provider details still need owner review"]
+}

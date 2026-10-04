@@ -1,0 +1,1 @@
+"""Constrained sample-product personalization and test checkout."""

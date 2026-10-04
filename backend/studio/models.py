@@ -1,0 +1,73 @@
+from typing import Literal
+from uuid import UUID
+from pydantic import EmailStr, Field, model_validator
+from .common import StrictModel
+
+class Box(StrictModel):
+    x: float = Field(ge=0, le=800, allow_inf_nan=False)
+    y: float = Field(ge=0, le=800, allow_inf_nan=False)
+    w: float = Field(ge=5, le=800, allow_inf_nan=False)
+    h: float = Field(ge=5, le=800, allow_inf_nan=False)
+
+class Layout(StrictModel):
+    text: Box
+    subtitle: Box
+    image: Box
+
+class Crop(StrictModel):
+    x: float = Field(default=0, ge=0, le=1, allow_inf_nan=False)
+    y: float = Field(default=0, ge=0, le=1, allow_inf_nan=False)
+    w: float = Field(default=1, gt=0.001, le=1, allow_inf_nan=False)
+    h: float = Field(default=1, gt=0.001, le=1, allow_inf_nan=False)
+
+    @model_validator(mode='after')
+    def inside_image(self):
+        if self.x + self.w > 1.00001 or self.y + self.h > 1.00001:
+            raise ValueError('Der Zuschnitt muss im Bild liegen.')
+        return self
+
+Font = Literal['modern','classic','bold','sans','sans-bold','sans-italic','serif','serif-italic','mono','narrow']
+
+class Element(Box):
+    id: str = Field(min_length=1, max_length=60, pattern=r'^[a-zA-Z0-9_-]+$')
+    kind: Literal['text','image']
+    text: str = Field(default='',max_length=60)
+    font: Font = 'sans'
+    asset_id: UUID | None = None
+    original_asset_id: UUID | None = None
+    image_type: Literal['photo','logo'] = 'photo'
+    crop: Crop = Field(default_factory=Crop)
+    locked: bool = False
+    hidden: bool = False
+
+class Design(StrictModel):
+    product_id: str = Field(min_length=2, max_length=80, pattern=r'^[a-zA-Z0-9_-]+$')
+    template: Literal['text', 'photo', 'logo'] = 'text'
+    text: str = Field(default='', max_length=60)
+    subtitle: str = Field(default='', max_length=36)
+    font: Literal['modern', 'classic', 'bold'] = 'classic'
+    size: Literal['small', 'medium', 'large'] = 'medium'
+    position: Literal['top', 'center', 'bottom'] = 'center'
+    asset_id: UUID | None = None
+    zoom: float = Field(default=1, ge=1, le=1.6)
+    focal_x: float = Field(default=0, ge=-30, le=30)
+    focal_y: float = Field(default=0, ge=-30, le=30)
+    layout: Layout | None = None
+    elements: list[Element] | None = Field(default=None, max_length=12)
+
+class CartAdd(StrictModel):
+    draft_id: str = Field(min_length=32, max_length=80)
+    quantity: int = Field(default=1, ge=1, le=20)
+
+class Quantity(StrictModel):
+    quantity: int = Field(ge=1, le=20)
+
+class AIRequest(StrictModel):
+    confirmed: Literal[True]
+
+class TestOrder(StrictModel):
+    request_id: UUID
+    name: str = Field(min_length=2, max_length=100)
+    email: EmailStr = Field(max_length=254)
+    note: str = Field(default='', max_length=500)
+    acknowledge_test: Literal[True]

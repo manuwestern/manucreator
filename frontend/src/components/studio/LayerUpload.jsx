@@ -1,0 +1,12 @@
+import { useRef, useState } from 'react';
+import { ImagePlus, LoaderCircle } from 'lucide-react';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
+import { studioApi } from '@/lib/studioApi';
+
+export const LayerUpload = ({ disabled, onUpload, onBusy, onError }) => {
+  const [open, setOpen] = useState(false), [rights, setRights] = useState(false), [busy, setBusy] = useState(false), input = useRef();
+  const upload = async file => { if (!file || !rights || busy) return; if (file.size > 8 * 1024 * 1024) { onError('Das Bild darf höchstens 8 MB groß sein.'); return; } setBusy(true); onBusy(true); onError(''); try { const body = new FormData(); body.append('file', file); body.append('rights_confirmed', 'true'); const result = await studioApi('/uploads', { method: 'POST', body }); onUpload(result); setOpen(false); if (result.warning) onError(result.warning); } catch (e) { onError(e.message); } finally { setBusy(false); onBusy(false); if (input.current) input.current.value = ''; } };
+  return <><button className="editor-add-button" onClick={() => setOpen(true)} disabled={disabled} data-testid="add-image-layer"><ImagePlus size={16} />Bild hinzufügen</button><Dialog open={open} onOpenChange={v => { if (!busy) setOpen(v); }}><DialogContent data-testid="image-upload-dialog" className="image-upload-dialog"><DialogTitle>Dein Foto oder Logo</DialogTitle><DialogDescription>JPG, PNG oder WebP · maximal 8 MB</DialogDescription><div className="upload-rights"><Checkbox id="upload-image-rights" checked={rights} onCheckedChange={v => setRights(v === true)} data-testid="studio-image-rights" disabled={busy} /><label htmlFor="upload-image-rights">Ich darf dieses Bild und abgebildete Personen für meinen Entwurf verwenden.</label></div><input ref={input} type="file" accept="image/jpeg,image/png,image/webp" className="sr-only" data-testid="studio-file-input" disabled={!rights || busy} onChange={e => upload(e.target.files?.[0])} /><Button disabled={!rights || busy} onClick={() => input.current.click()} data-testid="studio-upload-button">{busy ? <LoaderCircle className="loading-spin" size={17} /> : <ImagePlus size={17} />}{busy ? 'Wird hochgeladen …' : 'Bild auswählen'}</Button><Button variant="outline" onClick={() => setOpen(false)} disabled={busy} data-testid="upload-cancel">Abbrechen</Button></DialogContent></Dialog></>;
+};

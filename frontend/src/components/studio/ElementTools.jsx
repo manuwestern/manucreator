@@ -1,0 +1,9 @@
+import { AlignCenter, ArrowDown, ArrowLeft, ArrowRight, ArrowUp, LockKeyhole } from 'lucide-react';
+import { constrain } from '@/lib/studioGeometry';
+
+export const ElementTools = ({ element, product, update, disabled }) => {
+  if (!element) return null;
+  const b = element;
+  const change = values => { if (b.kind === 'image' && values.w !== undefined && values.h === undefined) values.h = b.h * values.w / b.w; if (b.kind === 'image' && values.h !== undefined && values.w === undefined) values.w = b.w * values.h / b.h; update(constrain({ ...b, ...values }, product.area)); };
+  return <section className="element-tools" aria-label="Position und Größe">{b.locked && <p className="layer-locked-note" data-testid="element-locked"><LockKeyhole size={13} />Ebene gesperrt</p>}<fieldset disabled={disabled || b.locked}><div className="element-move">{[[ArrowLeft,-5,0,'left','Nach links'],[ArrowUp,0,-5,'up','Nach oben'],[ArrowDown,0,5,'down','Nach unten'],[ArrowRight,5,0,'right','Nach rechts']].map(([Icon,dx,dy,id,label]) => <button key={id} title={label} aria-label={label} onClick={() => change({ x: b.x + dx, y: b.y + dy })} data-testid={`element-move-${id}`}><Icon size={16} /></button>)}<button title="Horizontal zentrieren" aria-label="Horizontal zentrieren" onClick={() => change({ x: product.area.x + (product.area.w - b.w) / 2 })} data-testid="element-center"><AlignCenter size={16} /></button></div><div className="element-numbers">{[['x','X'],['y','Y'],['w','Breite'],['h','Höhe']].map(([key,label]) => <label key={key}>{label}<input aria-label={`${label} des Elements`} type="number" step="1" min={key === 'w' || key === 'h' ? 10 : 0} max="800" value={Math.round(b[key] * 10) / 10} onChange={e => change({ [key]: Number(e.target.value) })} data-testid={`element-${key}`} /></label>)}</div></fieldset></section>;
+};
