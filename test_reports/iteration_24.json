@@ -1,0 +1,43 @@
+{
+  "summary": "Completed requested P0 backend reruns and a new full customer-centric studio flow on preview URL with real admin canvas gestures, clipping/mask pixel checks, save-reopen-cart-test-order, version-change resave behavior, and preview recovery injections.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_studio_iteration23_masks_p0.py",
+    "/app/backend/tests/test_studio_iteration20_shapes_auth.py",
+    "/app/test_reports/pytest/pytest_results_iteration24_backend.xml",
+    "/app/tests/studio_iteration24_customer_flow.py",
+    "/app/test_reports/iteration24_customer_flow_checks.json"
+  ],
+  "action_items": [
+    "Review preview-retry transient matching for real 503 variants such as 'unconditional drop overload'; current bounded retry works for 'Service unavailable' and requires manual canvas retry for persistent failures.",
+    "Optional hardening: make per-element retry telemetry explicit in UI to explain why persistent scenario logged 6 intercepted attempts (multiple preview calls) while still bounded and recoverable."
+  ],
+  "critical_code_review_comments": [
+    "PASS: Free movement across engraving boundaries works with visual clipping (no hard boundary rejection).",
+    "PASS: Export remains deterministic (800x800) and identical across zoom/pan states, implying guides/transformer suppression in export path is effective.",
+    "PASS: Save/reopen/order preserved geometry and product_snapshot.exclusions in the validated central customer flow.",
+    "RISK: Retry transient-detection is message-driven; certain 503 details may bypass automatic retry and rely on manual canvas-retry path."
+  ],
+  "updated_files": [
+    "/app/tests/studio_iteration24_customer_flow.py",
+    "/app/test_reports/iteration24_customer_flow_checks.json",
+    "/app/test_reports/iteration_24.json"
+  ],
+  "success_rate": {
+    "backend": "100% (8/8)",
+    "frontend": "96% (all targeted P0 checks passed in final run; recovery tests passed with TEST-ONLY failure injection)"
+  },
+  "seed_data_creation": "Created TEST_ isolated product/photo/draft/order during run (latest product_id 249313ad-16ba-4ed9-98ba-6c0cd57a85ed, draft_id 405531ab-cfe5-41f4-a518-145a95a3dbbe).",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use /app/tests/studio_iteration24_customer_flow.py for reproducible customer/admin mask workflow coverage. Final run report: /app/test_reports/iteration24_customer_flow_checks.json. Backend reruns passed via /app/test_reports/pytest/pytest_results_iteration24_backend.xml. Failure injection is TEST-ONLY request interception; app business APIs remain real.",
+  "rca of the issue": "No deterministic mask regression found in requested P0 flow. Prior observed instability aligns with upstream/intermittent 503 behavior. Recovery behavior validated: bounded retries and manual canvas-retry restore rendering while preserving element state; 422 path did not exhibit unbounded retry loops."
+}

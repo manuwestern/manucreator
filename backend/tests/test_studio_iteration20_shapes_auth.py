@@ -288,8 +288,9 @@ def test_circle_shape_inside_circular_area_uses_disk_envelope(admin_session, cre
     outside = dict(inside_design["elements"][0])
     outside["x"] = inside_x + 2.2
     outside_design["elements"] = [outside]
-    rejected = requests.post(f"{BASE_URL}/api/studio/drafts", headers=guest_headers, json=outside_design, timeout=35)
-    assert rejected.status_code == 422
+    clipped = requests.post(f"{BASE_URL}/api/studio/drafts", headers=guest_headers, json=outside_design, timeout=35)
+    assert clipped.status_code == 200, clipped.text
+    assert clipped.json()['design']['elements'][0]['x'] == outside['x']
 
 
 # Module coverage: admin auth cookies/cors/bcrypt and brute-force lockout threshold

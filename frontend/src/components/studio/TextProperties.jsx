@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { ensureFont } from '@/lib/curatedFonts';
 import { existingFace } from '@/lib/fontCatalog';
 import { getTextPreview,effectValues } from '@/lib/textPreview';
-import { isInside } from '@/lib/transformGeometry';
+import { isValidElement } from '@/lib/transformGeometry';
 import { FontSelector } from './FontSelector';
 import { TextEffects } from './TextEffects';
 
@@ -22,7 +22,7 @@ export const TextProperties=({element,product,update,disabled,onPending})=>{
       if(next.text.length>product.max_text)throw new Error(`Bitte auf höchstens ${product.max_text} Zeichen kürzen. Dein Entwurf bleibt unverändert.`);
       await ensureFont(next.font);const rendered=await getTextPreview(next);if(seq!==ticket.current||!mounted.current)return;
       const old=latest.current,candidate={...old,text:next.text,font:next.font,font_size:next.font_size,curvature:next.curvature||0,...effectValues(next),w:rendered.width,h:rendered.height,x:old.x+(old.w-rendered.width)/2,y:old.y+(old.h-rendered.height)/2};
-      if(!isInside(candidate,product.area,0))throw new Error('Text samt Kontur und Schatten passt so nicht vollständig in die Gravurfläche. Bitte Größe, Position, Bogen oder Effekt anpassen. Dein Entwurf bleibt unverändert.');
+      if(!isValidElement(candidate))throw new Error('Die technische Elementgröße beträgt höchstens 800 px. Bitte Schriftgröße oder Effekt verringern.');
       // Only text/geometry are authored here. Do not overwrite concurrently edited admin field permissions.
       const keys=['text','font','font_size','curvature','text_mode','outline_width','shadow_enabled','shadow_distance','shadow_angle','x','y','w','h'];
       update(Object.fromEntries(keys.map(key=>[key,candidate[key]])));

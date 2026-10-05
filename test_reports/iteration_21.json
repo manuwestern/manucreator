@@ -1,0 +1,52 @@
+{
+  "summary": "Executed targeted backend + UI verification for admin-origin/CORS hardening. Preview admin login and navigation work. Source-side parser/CSRF protections largely pass. Production bug remains pending user secret update and still reproduces as 403.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "https://manucreator.de/api/admin/auth/refresh",
+        "issue": "Production still returns 403 'Nicht erlaubter Ursprung der Anfrage.' with Origin=https://manucreator.de. Response also shows Access-Control-Allow-Origin: * with credentials=true, confirming production secret/runtime config is still wildcard-based and not yet corrected.",
+        "priority": "CRITICAL"
+      }
+    ],
+    "minor": [
+      {
+        "endpoint": "https://subtle-motion-8.preview.emergentagent.com/api/admin/auth/login (OPTIONS/POST)",
+        "issue": "When Origin is https://subtle-motion-8.preview.emergentagent.com, Access-Control-Allow-Origin is returned as https://subtle-motion-8.cluster-12.preview.emergentcf.cloud instead of echoing the exact request origin. Other configured origins echo correctly."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_admin_origin_policy_iteration21.py",
+    "/app/test_reports/pytest/pytest_results_iteration21_admin_origin.xml",
+    "/root/.emergent/automation_output/20261005_111708/console_20261005_111708.log"
+  ],
+  "action_items": [
+    "Production panel secret CORS_ORIGINS must be set to explicit live origins (no wildcard) and redeployed; then re-run live login verification.",
+    "Investigate preview edge behavior where Origin=preview.emergentagent.com receives ACAO for cluster domain; enforce exact ACAO echo for that configured origin path.",
+    "After production secret update, rerun one full live admin flow: login -> /me -> refresh rotation -> logout from https://manucreator.de/verwaltung."
+  ],
+  "critical_code_review_comments": [
+    "PASS: studio/origins.py correctly canonicalizes explicit origins and rejects wildcard/null/scheme-relative/credentials/path-query-fragment/wildcard-netloc/malformed-port entries.",
+    "PASS: studio/admin_auth.same_origin now relies on shared explicit_origins policy and blocks missing/null/malicious/scheme-port mismatch origins and spoofed forwarded headers.",
+    "PASS: backend/server.py CORS middleware uses explicit_origins() with credentials enabled and no wildcard in source env.",
+    "RISK: CORS middleware is initialized at import with allow_origins=explicit_origins(); runtime env changes require process restart (expected), but deployment secret mismatch still causes live failures until redeploy."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_admin_origin_policy_iteration21.py",
+    "/app/test_reports/iteration_21.json"
+  ],
+  "success_rate": {
+    "backend": "78% (7/9 tests passed)",
+    "frontend": "100% for requested preview admin smoke flow"
+  },
+  "seed_data_creation": "No persistent seed data created. Used existing admin credentials from /app/memory/test_credentials.md and isolated lockout test email.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Preview verification done against REACT_APP_BACKEND_URL from frontend/.env. New test file covers parser canonicalization/rejections, missing env fail-fast, wildcard fail-closed, shared parser usage, allowed/disallowed origins, spoofed header rejection, preflight checks, lockout behavior. Remaining blockers are production secret mismatch and preview-origin ACAO mismatch for emergentagent alias.",
+  "rca of the issue": "User-reported production login failure reproduces exactly: wildcard-origin production secret causes same_origin rejection before auth. Reproduction: POST https://manucreator.de/api/admin/auth/refresh with Origin=https://manucreator.de returns 403 detail 'Nicht erlaubter Ursprung der Anfrage.' and ACAO '*'. Mitigation: set explicit production CORS_ORIGINS in deployment Secrets, redeploy, then retest live login once. Separate minor RCA: on preview gateway alias, ACAO normalizes to cluster-domain origin for one configured alias, causing strict exact-origin assertion failure in automated tests."
+}

@@ -3,7 +3,7 @@ import { Crop,ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { getTextPreview } from '@/lib/textPreview';
-import { isInside,imageFrame } from '@/lib/transformGeometry';
+import { isValidElement,imageFrame } from '@/lib/transformGeometry';
 import { fullCrop } from '@/lib/studioLayers';
 import { useStudioImage } from '@/hooks/useStudioImage';
 import { LayerUpload } from './LayerUpload';
@@ -20,7 +20,7 @@ const SimpleText=({element:e,product,onChange,onState,disabled})=>{
     if(!value){if(version===seq.current){onChange({...e,text:''});onState(e.id,{pending:false,error:false});}return;}
     const rendered=await getTextPreview({...e,text:value});if(version!==seq.current)return;
     const slot=e.template_slot,next={...e,text:value,w:rendered.width,h:rendered.height,x:slot.x+(slot.w-rendered.width)/2,y:slot.y+(slot.h-rendered.height)/2};
-    if(value&&(rendered.width>slot.w+.05||rendered.height>slot.h+.05||!isInside(next,product.area,0)))throw new Error('Der Text ist für dieses Vorlagenfeld zu lang. Bitte kürzen oder bewusst frei bearbeiten.');
+    if(value&&(rendered.width>slot.w+.05||rendered.height>slot.h+.05||!isValidElement(next)))throw new Error('Der Text ist für dieses Vorlagenfeld zu lang. Bitte kürzen oder bewusst frei bearbeiten.');
     onChange(next);onState(e.id,{pending:false,error:false});
   }catch(err){if(version===seq.current){setError(err.message);onState(e.id,{pending:false,error:true});}}},160);};
   return <div className="simple-text-field"><label htmlFor={`simple-${e.id}`}>{e.field_label||'Text'}{e.field_required?' *':''}<Input id={`simple-${e.id}`} value={text} aria-required={!!e.field_required} onChange={event=>edit(event.target.value)} disabled={disabled} data-testid={`template-field-${e.template_field}`}/></label>{error&&<p role="alert" className="property-error" data-testid={`template-field-error-${e.template_field}`}>{error}</p>}</div>;

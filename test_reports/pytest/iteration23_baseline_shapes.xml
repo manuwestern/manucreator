@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="5" time="6.720" timestamp="2026-10-05T16:25:46.377436+00:00" hostname="agent-env-cba085b3-080a-4f23-8210-d0ec8710cce9"><testcase classname="tests.test_studio_iteration20_shapes_auth" name="test_shape_preview_renders_all_six_types_with_expected_centers" time="1.815" /><testcase classname="tests.test_studio_iteration20_shapes_auth" name="test_shape_preview_rejects_invalid_constraints_with_422" time="0.828" /><testcase classname="tests.test_studio_iteration20_shapes_auth" name="test_circle_preview_alpha_stays_within_outer_radius" time="0.154" /><testcase classname="tests.test_studio_iteration20_shapes_auth" name="test_shape_only_draft_save_allowed_but_layer_limit_enforced" time="0.926" /><testcase classname="tests.test_studio_iteration20_shapes_auth" name="test_circle_shape_inside_circular_area_uses_disk_envelope" time="1.902"><failure message="assert 200 == 422&#10; +  where 200 = &lt;Response [200]&gt;.status_code">admin_session = &lt;requests.sessions.Session object at 0xfa82e7cb04d0&gt;
+created_ids = {'products': {'fe607799-dcd2-4104-bb1a-f28aebb8aef4'}, 'templates': set(), 'template_revisions': set(), 'decorations': set(), ...}
+guest_headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlZjY3ZTJlZmRlNTMwYzZlNmJjNTE2ZGM5NzM0MzZiM2U...kwOWNjYzA0MjY2ZmY1M2YxMDciLCJleHAiOjE3OTEyMTg0NTEsImlhdCI6MTc5MTIxNzU1MX0.Q6LZ4xZ0LPQOL6bpYoSUO3BEprjsSmSdfJzjtyvn1Io'}
+
+    def test_circle_shape_inside_circular_area_uses_disk_envelope(admin_session, created_ids, guest_headers):
+        product = _create_product(admin_session, created_ids, show_basic_templates=True)
+        product = _update_product(
+            admin_session,
+            product,
+            area={"x": 200, "y": 200, "w": 400, "h": 400, "shape": "circle"},
+            area_mm="Ø 80 mm",
+        )
+    
+        radius = product["area"]["w"] / 2
+        shape_diameter = 180
+        shape_radius = shape_diameter / 2
+        center_x = product["area"]["x"] + radius + (radius - shape_radius - 0.5)
+        center_y = product["area"]["y"] + radius
+        inside_x = center_x - shape_radius
+        inside_y = center_y - shape_radius
+    
+        inside_design = {
+            "product_id": product["id"],
+            "template": "text",
+            "text": "",
+            "subtitle": "",
+            "font": "classic",
+            "size": "medium",
+            "position": "center",
+            "asset_id": None,
+            "zoom": 1,
+            "focal_x": 0,
+            "focal_y": 0,
+            "elements": [
+                _shape_element(
+                    "circle-near-edge",
+                    "circle",
+                    x=inside_x,
+                    y=inside_y,
+                    w=shape_diameter,
+                    h=shape_diameter,
+                    stroke_width=4,
+                    shape_mode="outline",
+                )
+            ],
+            "editor_mode": "free",
+            "template_id": None,
+            "template_version": None,
+            "template_revision_id": None,
+            "allow_free_edit": True,
+            "font_catalog_version": "manucreator-curated-1",
+        }
+    
+        accepted = requests.post(f"{BASE_URL}/api/studio/drafts", headers=guest_headers, json=inside_design, timeout=35)
+        assert accepted.status_code == 200, accepted.text
+    
+        outside_design = dict(inside_design)
+        outside = dict(inside_design["elements"][0])
+        outside["x"] = inside_x + 2.2
+        outside_design["elements"] = [outside]
+        rejected = requests.post(f"{BASE_URL}/api/studio/drafts", headers=guest_headers, json=outside_design, timeout=35)
+&gt;       assert rejected.status_code == 422
+E       assert 200 == 422
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+backend/tests/test_studio_iteration20_shapes_auth.py:292: AssertionError</failure></testcase></testsuite></testsuites>

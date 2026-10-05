@@ -1,6 +1,6 @@
 import { useEffect,useState } from 'react';
 import { LockKeyhole,LockKeyholeOpen,Square,ScanLine } from 'lucide-react';
-import { isInside } from '@/lib/transformGeometry';
+import { isValidElement } from '@/lib/transformGeometry';
 import { shapeNames,validShape } from '@/lib/studioShapes';
 
 const NumberField=({label,testId,value,min=4,max=800,step=1,onChange})=>{
@@ -23,7 +23,7 @@ export const ShapeProperties=({element:e,product,update,disabled})=>{
     if(values.stroke_width!==undefined&&e.shape_type==='line')next.h=values.stroke_width;
     next.x=e.x+(e.w-next.w)/2;next.y=e.y+(e.h-next.h)/2;
     if(!validShape(next)){setError('Diese Größe oder Strichstärke passt nicht zur Form. Der bisherige Stand bleibt erhalten.');return;}
-    if(!isInside(next,product.area,0)){setError('Die vollständige Form einschließlich Strichstärke muss innerhalb der Gravurfläche bleiben. Der bisherige Stand bleibt erhalten.');return;}
+    if(!isValidElement(next)){setError('Bitte gültige Maße verwenden. Die technische Elementgröße beträgt höchstens 800 px.');return;}
     setError('');update(next);
   };
   return <fieldset className="shape-properties" disabled={disabled||e.locked} data-testid="shape-properties"><p className="shape-kind" data-testid="shape-kind">{shapeNames[e.shape_type]}</p>

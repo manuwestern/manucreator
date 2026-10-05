@@ -1,0 +1,74 @@
+{
+  "base_url": "https://subtle-motion-8.preview.emergentagent.com",
+  "created": {
+    "product_id": "4a370226-1dce-474e-8cce-f0853dae32d6",
+    "photo_id": "71a6b2ae-acd3-4b31-9fc9-3715af1b7e56",
+    "draft_id": "b944c2e6-8443-49c2-87cf-2d7821f12c37",
+    "order_id": "ab14158b-ac7c-4932-9b7d-011c8f9db58c"
+  },
+  "checks": [
+    {
+      "check": "admin area/exclusion draw-drag-resize saved; payload excludes area.id",
+      "passed": true,
+      "product_id": "4a370226-1dce-474e-8cce-f0853dae32d6",
+      "exclusions": 4
+    },
+    {
+      "check": "actual drag crosses mask boundary during movement and retains position",
+      "passed": true,
+      "live_center": 796.035242290749
+    },
+    {
+      "check": "fully masked layer selectable and recoverable with undo/redo",
+      "passed": true,
+      "layer_id": "4b3e0e4c-7ef4-4e8f-8b30-92fa5956095a"
+    },
+    {
+      "check": "save preserves product_snapshot.exclusions and boundary-crossing geometry",
+      "passed": true,
+      "draft_id": "b944c2e6-8443-49c2-87cf-2d7821f12c37",
+      "elements": 4
+    },
+    {
+      "check": "export is 800x800 and identical at 100% vs 250%+pan",
+      "passed": true,
+      "hash": "331c7b2bc9894ad40991316f5a17148db057ed89b44f872787d557334670bdfd"
+    },
+    {
+      "check": "pixel checks passed (outer corners blank, hole-overlap unengraved, content visible)",
+      "passed": true,
+      "non_bg_samples": 13
+    },
+    {
+      "check": "large preview carries identical element model and clipping state",
+      "passed": true
+    },
+    {
+      "check": "save->reopen->cart->test-order kept geometry/content unchanged",
+      "passed": true,
+      "order_reference": "TEST-DF6B5AB3"
+    },
+    {
+      "check": "product version change correctly forces resave",
+      "passed": true
+    },
+    {
+      "check": "single 503 text-preview + single font failure recovered automatically",
+      "passed": true,
+      "text_failures": 1,
+      "font_failures": 1
+    },
+    {
+      "check": "persistent 503 retries bounded to 3; manual retry recovers with unchanged elements",
+      "passed": true,
+      "attempts": 6
+    },
+    {
+      "check": "validation 422 did not auto-retry repeatedly",
+      "passed": true,
+      "attempts": 3
+    }
+  ],
+  "failure_injection": "TEST-ONLY request interception for preview resilience; business APIs otherwise real",
+  "mocked_apis": false
+}

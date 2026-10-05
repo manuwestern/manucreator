@@ -27,7 +27,7 @@ export async function studioApi(path, { method = 'GET', body, blob = false, raw 
   const multipart = body instanceof FormData;
   const response = await fetch(`${BASE}${path}`, { method, headers: { Authorization: `Bearer ${token}`, ...(!multipart && body !== undefined ? { 'Content-Type': 'application/json' } : {}) }, body: body === undefined ? undefined : multipart ? body : JSON.stringify(body) });
   if (response.status === 401 && retry) { await session(true); return studioApi(path, { method, body, blob, raw }, false); }
-  if (!response.ok) { const data = await response.json().catch(() => ({})); throw new Error(detail(data)); }
+  if (!response.ok) { const data = await response.json().catch(() => ({})); const error = new Error(detail(data)); error.status = response.status; throw error; }
   return raw ? response : blob ? response.blob() : response.json();
 }
 

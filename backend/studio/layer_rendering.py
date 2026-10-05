@@ -1,7 +1,7 @@
 import io
 from PIL import Image, ImageOps, ImageDraw, ImageChops
 from fastapi import HTTPException
-from .transform_geometry import inside
+from .engraving_mask import engraving_mask
 from .ornaments import BY_ID as ORNAMENTS, ROUND, ornament_sprite
 from .engraving_effects import effect_args
 from .shapes import validate_shape,shape_sprite
@@ -13,9 +13,6 @@ def validate_elements(design, product, allow_placeholders=False):
     if not any(not e.hidden and (e.text.strip() if e.kind=='text' else e.shape_type if e.kind=='shape' else e.ornament if e.kind=='decoration' else e.asset_id or allow_placeholders and e.placeholder) for e in elements):
         raise HTTPException(422,'Bitte mindestens eine sichtbare Text- oder Bildebene ergänzen.')
     for e in elements:
-        box=e.model_dump(include={'x','y','w','h','rotation','kind','ornament','shape_type'})
-        if not inside(box,product['area']):
-            raise HTTPException(422,'Eine Ebene liegt außerhalb der freigegebenen Gravurfläche.')
         if e.kind=='shape':
             validate_shape(e.model_dump())
             if e.template_field:raise HTTPException(422,'Formen sind feste Gestaltungselemente, keine Kunden-Eingabefelder.')
@@ -41,7 +38,7 @@ def validate_elements(design, product, allow_placeholders=False):
 def render_layers(design, product, blank, assets, font_paths=None):
     from .rendering import fitted_font
     base=Image.open(io.BytesIO(blank)).convert('RGBA').resize((800,800))
-    overlay=Image.new('RGBA',base.size); draw=ImageDraw.Draw(overlay)
+    overlay=Image.new('RGBA',base.size)
     for e in design.elements:
         if e.hidden:
             continue
@@ -77,7 +74,6 @@ def render_layers(design, product, blank, assets, font_paths=None):
         if abs(e.rotation)>.001:
             stamp=stamp.rotate(-e.rotation,resample=Image.Resampling.BICUBIC,expand=True)
         overlay.alpha_composite(stamp,(round(e.x+e.w/2-stamp.width/2),round(e.y+e.h/2-stamp.height/2)))
-    a=product['area'];mask=Image.new('L',base.size,0);draw=ImageDraw.Draw(mask)
-    (draw.ellipse if a.get('shape')=='circle' else draw.rectangle)((a['x'],a['y'],a['x']+a['w'],a['y']+a['h']),fill=255)
+    mask=engraving_mask(product,base.size)
     overlay.putalpha(ImageChops.multiply(overlay.getchannel('A'),mask));base.alpha_composite(overlay)
     out=io.BytesIO();base.convert('RGB').save(out,'PNG');return out.getvalue()

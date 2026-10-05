@@ -14,6 +14,7 @@ from pymongo.errors import DuplicateKeyError, PyMongoError
 from starlette.middleware.cors import CORSMiddleware
 
 load_dotenv(Path(__file__).parent / '.env')
+from studio.origins import explicit_origins
 client = AsyncIOMotorClient(os.environ['MONGO_URL'], serverSelectionTimeoutMS=5000)
 db = client[os.environ['DB_NAME']]
 logger = logging.getLogger(__name__)
@@ -23,15 +24,19 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     await db.inquiries.create_index('id', unique=True)
     from studio.setup import initialize
-    await initialize(db)
-    yield
-    client.close()
+    from studio.storage import close_storage
+    try:
+        await initialize(db)
+        yield
+    finally:
+        await close_storage()
+        client.close()
 
 
 app = FastAPI(title='ManuCreator', lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.environ['CORS_ORIGINS'].split(','),
+    allow_origins=explicit_origins(),
     allow_credentials=True,
     allow_methods=['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allow_headers=['Content-Type', 'Authorization'],

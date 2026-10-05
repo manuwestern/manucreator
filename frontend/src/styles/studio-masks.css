@@ -1,0 +1,12 @@
+.mask-regions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;max-height:140px;overflow:auto}
+.mask-regions button,.mask-add-toolbar button{display:flex;align-items:center;gap:6px;min-height:38px;padding:8px 10px;border:1px solid #d1dfc5;border-radius:4px;font-size:11px;transition:background-color .18s,border-color .18s}
+.mask-regions button[aria-pressed=true]{background:#e8eee1;border-color:#658052;color:#365623}
+.mask-regions button:not(:first-child)[aria-pressed=true]{background:#fae8e4;border-color:#b45b50;color:#93473d}
+.mask-regions button:hover,.mask-add-toolbar button:hover{background:#eff3e9}
+.mask-add-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:12px 0;margin-bottom:14px;border-top:1px solid #dde5d4;border-bottom:1px solid #dde5d4}
+.mask-add-toolbar>span{margin-right:auto;font-size:12px;color:#667e55}
+.mask-add-toolbar button:disabled{opacity:.45;cursor:not-allowed}
+.mask-active-label{margin:16px 0 0;font-size:12px;color:#667e55}
+.blank-area-editor>.element-numbers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:none;gap:8px;margin-top:12px}
+.blank-area-editor>.element-numbers label,.blank-area-editor>.element-numbers input{min-width:0;width:100%}
+@media(max-width:420px){.blank-area-editor>.element-numbers{grid-template-columns:repeat(2,minmax(0,1fr))}.mask-add-toolbar>span{flex-basis:100%}}

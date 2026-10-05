@@ -1,0 +1,63 @@
+{
+  "summary": "Executed backend + UI testing for P0 engraving mask/exclusions. New iteration23 backend regression suite passed (7/7). Admin mask workflow works end-to-end: isolated product creation, exclusion add/edit/delete, area shape switch, save/reload persistence, and no area.id leak in save payload. One intermittent frontend integration issue observed in preview UI (sporadic 503 leading to temporary 'A network error occurred.').",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "/app/backend/tests/test_studio_iteration20_shapes_auth.py::test_circle_shape_inside_circular_area_uses_disk_envelope",
+        "issue": "Existing legacy test expects 422 for out-of-engraving placement. Current approved P0 behavior allows out-of-bound placement with non-destructive clipping, so this expectation is obsolete and now fails against live behavior."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Studio canvas/text preview",
+        "issue": "Intermittent temporary 'A network error occurred.' appeared during editor session while console recorded 503s for /api/studio/text-preview and some static assets in the same run.",
+        "selector": "[data-testid=\"workspace-canvas\"]",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Customer studio editing after admin product setup",
+        "issue": "Intermittent upstream/network instability (503) surfaced in browser automation run; backend direct endpoint replay returned 200 (5/5) afterward, suggesting non-deterministic gateway/edge issue rather than deterministic backend validation failure.",
+        "affected_selectors": [
+          "[data-testid=\"studio-title\"]",
+          "[data-testid=\"workspace-canvas\"]"
+        ]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_studio_iteration23_masks_p0.py",
+    "/app/test_reports/pytest/pytest_results_iteration23_masks.xml",
+    "/root/.emergent/automation_output/20261005_162833/console_20261005_162833.log",
+    "/root/.emergent/automation_output/20261005_162949/console_20261005_162949.log"
+  ],
+  "action_items": [
+    "Update/replace obsolete assertions in iteration20 tests that still enforce hard boundary rejection (422) for dragged elements outside engraving area.",
+    "Investigate intermittent preview 503 path (ingress/edge/static asset serving and occasional /api/studio/text-preview visibility in browser run). Add retry/observability around preview fetches to avoid transient canvas error state.",
+    "Retest full customer path (save/reopen/cart/test-order) under longer soak once 503 intermittency is addressed."
+  ],
+  "critical_code_review_comments": [
+    "PASS: Exclusion constraints are strictly validated in ProductInput (finite coords, min size 2px, circle side equality, in-photo bounds, unique IDs, max 24).",
+    "PASS: Engraving mask implementation uses non-destructive clipping with union-like hole behavior and applies in render_layers and legacy render_free path.",
+    "PASS: Admin area editor save payload did not send area.id='area' in tested flow.",
+    "RISK: Browser-observed intermittent 503s can temporarily degrade canvas preview UX even when backend endpoint is generally healthy."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_studio_iteration23_masks_p0.py",
+    "/app/test_reports/iteration_23.json"
+  ],
+  "success_rate": {
+    "backend": "100% (7/7 in new iteration23 suite)",
+    "frontend": "85% (core admin mask + persistence + responsive checks passed; intermittent network/preview issue observed)"
+  },
+  "seed_data_creation": "Created isolated TEST_ products/templates/drafts via automated tests; cleanup fixture included in test file for iteration23-created records.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run /app/backend/tests/test_studio_iteration23_masks_p0.py as baseline for P0 mask behavior. For UI, product id 6a4acb8c-567a-402f-9f38-45bb2091c706 was used to validate area tab persistence and responsive layout. Console log references contain intermittent 503 evidence; backend logs around same period show many successful 200 responses, so focus next run on gateway-level reproducibility and long-run frontend stability.",
+  "rca of the issue": "Primary observed failure is intermittent frontend preview instability, not deterministic business logic break. Reproduction (intermittent): during studio editing after admin product save, browser console logs include sporadic 503 responses for /api/studio/text-preview and static assets, then canvas shows temporary 'A network error occurred.'. In the same environment, direct repeated API calls to /api/studio/text-preview succeeded (200, 5/5), and backend access logs show normal 200s for most matching requests. Likely mitigation path: inspect ingress/edge/network intermittency and add client-side retry or graceful recovery for preview fetch failures."
+}

@@ -15,6 +15,22 @@ class Layout(StrictModel):
     subtitle: Box
     image: Box
 
+class Exclusion(StrictModel):
+    id: str = Field(min_length=1, max_length=60, pattern=r'^[a-zA-Z0-9_-]+$')
+    shape: Literal['rect', 'circle'] = 'rect'
+    x: float = Field(ge=0, le=798, allow_inf_nan=False)
+    y: float = Field(ge=0, le=798, allow_inf_nan=False)
+    w: float = Field(ge=2, le=800, allow_inf_nan=False)
+    h: float = Field(ge=2, le=800, allow_inf_nan=False)
+
+    @model_validator(mode='after')
+    def valid_exclusion(self):
+        if self.x + self.w > 800.01 or self.y + self.h > 800.01:
+            raise ValueError('Die Aussparung muss vollständig im Produktfoto liegen.')
+        if self.shape == 'circle' and abs(self.w-self.h) > .1:
+            raise ValueError('Eine runde Aussparung benötigt gleiche Seiten.')
+        return self
+
 class Crop(StrictModel):
     x: float = Field(default=0, ge=0, le=1, allow_inf_nan=False)
     y: float = Field(default=0, ge=0, le=1, allow_inf_nan=False)

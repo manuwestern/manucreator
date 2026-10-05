@@ -3,7 +3,8 @@ import warnings
 from PIL import Image, ImageOps, ImageDraw, ImageFont, ImageChops, UnidentifiedImageError
 from fastapi import HTTPException
 from .catalog import ASSET_DIR, FONT_FILES
-from .geometry import constrain, default_layout
+from .geometry import default_layout
+from .engraving_mask import engraving_mask
 
 Image.MAX_IMAGE_PIXELS = 20000000
 
@@ -40,11 +41,6 @@ def validate_design(design, product):
     for character in design.text + design.subtitle:
         if not (32 <= ord(character) <= 591 or character in '–—„“’'):
             raise HTTPException(422, 'Bitte lateinische Buchstaben, Ziffern und Satzzeichen verwenden – keine Emojis oder Zeilenumbrüche.')
-    if design.layout:
-        for box in design.layout.model_dump().values():
-            bounded = constrain(box, product['area'])
-            if any(abs(box[k]-bounded[k]) > .1 for k in box):
-                raise HTTPException(422, 'Ein Gestaltungselement liegt außerhalb der freigegebenen Gravurfläche.')
     return product
 
 def fitted_font(text, family, size, max_width, minimum=14):
@@ -85,8 +81,7 @@ def render_design(design, asset_bytes, product, blank):
     draw.text((center_x, text_y), design.text, font=font, fill=product['ink'], anchor='mm')
     if design.subtitle:
         draw.text((center_x, text_y + 34), design.subtitle, font=sub_font, fill=product['ink'], anchor='mm')
-    mask = Image.new('L', base.size, 0)
-    ImageDraw.Draw(mask).rectangle((x, y, x + w, y + h), fill=255)
+    mask = engraving_mask(product, base.size)
     overlay.putalpha(ImageChops.multiply(overlay.getchannel('A'), mask))
     base.alpha_composite(overlay)
     output = io.BytesIO(); base.convert('RGB').save(output, 'PNG')
@@ -113,9 +108,7 @@ def render_free(design, product, base, asset_bytes):
         stamp = Image.new('RGBA', image.size, product['ink'])
         stamp.putalpha(ImageOps.invert(image).point(lambda v: round(v*.78)))
         overlay.alpha_composite(stamp,(round(b['x']),round(b['y'])))
-    a = product['area']; mask = Image.new('L',base.size,0); painter = ImageDraw.Draw(mask)
-    method = painter.ellipse if a.get('shape') == 'circle' else painter.rectangle
-    method((a['x'],a['y'],a['x']+a['w'],a['y']+a['h']),fill=255)
+    mask = engraving_mask(product, base.size)
     overlay.putalpha(ImageChops.multiply(overlay.getchannel('A'),mask))
     base.alpha_composite(overlay)
     output=io.BytesIO();base.convert('RGB').save(output,'PNG');return output.getvalue()

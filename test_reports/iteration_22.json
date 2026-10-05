@@ -1,0 +1,46 @@
+{
+  "summary": "Re-ran targeted admin origin policy suite (10 tests) and quick preview admin UI regression. Source-side CORS/CSRF behavior passes fully. Production 403 remains reproducible and is a deployment-secret configuration blocker, not a source-code regression.",
+  "backend_issues": {
+    "critical": [
+      {
+        "endpoint": "https://manucreator.de/api/admin/auth/login",
+        "issue": "Still returns 403 with detail 'Nicht erlaubter Ursprung der Anfrage.' for Origin=https://manucreator.de, and response headers still include Access-Control-Allow-Origin: * with credentials=true. Confirms live secret/runtime config not updated yet.",
+        "priority": "CRITICAL"
+      }
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_admin_origin_policy_iteration21.py",
+    "/app/test_reports/pytest/pytest_results_iteration22_admin_origin.xml",
+    "/root/.emergent/automation_output/20261005_112322/console_20261005_112322.log"
+  ],
+  "action_items": [
+    "User/operator must update EXISTING production secret CORS_ORIGINS to explicit values: https://manucreator.de,https://www.manucreator.de,https://subtle-motion-8.emergent.host.",
+    "Redeploy after secret update, then re-run one live admin flow on https://manucreator.de/verwaltung: login -> /me -> refresh rotation -> logout.",
+    "Keep source policy strict: no wildcard ACAO with credentials for admin auth paths."
+  ],
+  "critical_code_review_comments": [
+    "PASS: New direct ASGI test enforces exact ACAO echo for every configured explicit origin and rejects foreign preflight (400 without ACAO).",
+    "PASS: External helper behavior is gateway-aware only for the preview alias matching BASE_URL job; this is not a wildcard/security relaxation.",
+    "PASS: admin_auth same_origin still strict-matches explicit origins and rejects missing/null/foreign/spoofed-forwarded origin attempts.",
+    "RISK: Production remains misconfigured until deployment secret is corrected; source changes alone cannot fix live login."
+  ],
+  "updated_files": [
+    "/app/test_reports/iteration_22.json"
+  ],
+  "success_rate": {
+    "backend": "100% (10/10 targeted tests passed)",
+    "frontend": "100% for requested preview admin login/navigation quick regression"
+  },
+  "seed_data_creation": "No persistent seed data created. Used existing admin credentials from /app/memory/test_credentials.md and isolated non-admin email for live 403 verification.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration22 verified requested scope only: targeted admin origin/CORS/CSRF suite and preview UI quick regression. All source-side assertions pass; remaining blocker is live secret still wildcard. After user updates existing production secret and redeploys, perform one focused live verification flow only.",
+  "rca of the issue": "Reproduction: POST https://manucreator.de/api/admin/auth/login with Origin=https://manucreator.de returns 403 and ACAO='*'. Root cause remains deployment/runtime secret mismatch (CORS_ORIGINS wildcard) in production, not app-source policy regression. Mitigation: update EXISTING secret to explicit live+preview origins and redeploy before retesting live auth."
+}

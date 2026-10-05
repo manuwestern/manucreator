@@ -1,5 +1,6 @@
 import { useCallback,useEffect,useRef,useState } from 'react';
-import { Stage,Layer,Group,Image as KImage,Rect,Ellipse,Transformer } from 'react-konva';
+import { Stage,Layer,Group,Image as KImage,Transformer } from 'react-konva';
+import { EngravingMask,MaskGuide } from './EngravingMask';
 import { useCanvasAssets } from '@/hooks/useCanvasAssets';
 import { useCanvasSize } from '@/hooks/useCanvasSize';
 import { useCanvasCamera } from '@/hooks/useCanvasCamera';
@@ -9,11 +10,13 @@ import { visualKey } from '@/lib/textPreview';
 
 export const DesignCanvas=({product,design,guides,canvasRef,updateElement,selected,onSelect,disabled,onReady,onNaturalSize,readOnly=false,adminMode=false})=>{
   const [wrap,size]=useCanvasSize(true),stage=useRef(),root=useRef(),transformer=useRef(),nodes=useRef({});
-  const {blank,error,loaded}=useCanvasAssets(product.image),camera=useCanvasCamera(stage,size,readOnly),a=product.area;
+  const {blank,error:blankError,loaded,retry}=useCanvasAssets(product.image),camera=useCanvasCamera(stage,size,readOnly),a=product.area;
+  const [previewAttempt,setPreviewAttempt]=useState(0);
   const [imageStates,setImageStates]=useState({});
   const [boundaryMessage,setBoundaryMessage]=useState('');
   useEffect(()=>setBoundaryMessage(''),[selected,product.id]);
-  const imageState=useCallback((id,asset,ready)=>setImageStates(old=>old[id]?.asset===asset&&old[id]?.ready===ready?old:{...old,[id]:{asset,ready}}),[]);
+  const imageState=useCallback((id,asset,ready,error='')=>setImageStates(old=>old[id]?.asset===asset&&old[id]?.ready===ready&&old[id]?.error===error?old:{...old,[id]:{asset,ready,error}}),[]);
+  const error=blankError||design.elements.some(e=>!e.hidden&&imageStates[e.id]?.asset===visualKey(e)&&imageStates[e.id]?.error)&&'Ein Motiv konnte nicht geladen werden.';
   const allReady=loaded&&design.elements.every(e=>e.hidden||e.placeholder||(imageStates[e.id]?.asset===visualKey(e)&&imageStates[e.id]?.ready));
   const selection=design.elements.find(e=>e.id===selected);
   const lineSelected=selection?.kind==='shape'&&selection.shape_type==='line',freeRectangle=selection?.kind==='shape'&&selection.shape_type==='rectangle'&&!selection.shape_proportional;
@@ -33,11 +36,11 @@ export const DesignCanvas=({product,design,guides,canvasRef,updateElement,select
   const start=e=>{camera.handlers.onMouseDown(e);if(!camera.hand&&!readOnly&&e.target===e.target.getStage())onSelect?.(null);};
   return <div className={`studio-canvas-wrap konva-wrap ${camera.hand?'camera-hand':''}`} ref={wrap} data-testid={readOnly?'product-preview-canvas':'design-canvas'} data-loaded={loaded} data-elements={JSON.stringify(design.elements)} data-selected={selected||''} data-camera={JSON.stringify(camera.view)} aria-label={`Gestaltungsfläche: ${product.name}`}>
     <Stage style={{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)'}} width={size} height={size} ref={stage} {...camera.handlers} onMouseDown={start}><Layer><Group ref={root} x={size/2+camera.view.x} y={size/2+camera.view.y} offsetX={400} offsetY={400} scaleX={size/800*camera.view.zoom} scaleY={size/800*camera.view.zoom}><KImage image={blank} width={800} height={800} listening={false}/>
-      {design.elements.map(element=><CanvasElement key={element.id} element={element} product={product} adminMode={adminMode} disabled={disabled||readOnly||camera.hand} onLoadState={imageState} onNaturalSize={onNaturalSize} onSelect={onSelect} onChange={changes=>updateElement?.(element.id,changes)} nodeRef={node=>{nodes.current[element.id]=node;}} toModel={camera.toModel} toScreen={camera.toScreen} onBoundary={setBoundaryMessage}/>)}
-      {guides&&!readOnly&&(a.shape==='circle'?<Ellipse name="editor-decoration" x={a.x+a.w/2} y={a.y+a.h/2} radiusX={a.w/2} radiusY={a.h/2} stroke="#718b5b" strokeWidth={1.2/(size/800*camera.view.zoom)} dash={[7,5]} listening={false}/>:<Rect name="editor-decoration" x={a.x} y={a.y} width={a.w} height={a.h} stroke="#718b5b" strokeWidth={1.2/(size/800*camera.view.zoom)} dash={[7,5]} listening={false}/>)}
+      <EngravingMask product={product}>{design.elements.map(element=><CanvasElement key={element.id} element={element} product={product} adminMode={adminMode} previewAttempt={previewAttempt} disabled={disabled||readOnly||camera.hand} onLoadState={imageState} onNaturalSize={onNaturalSize} onSelect={onSelect} onChange={changes=>updateElement?.(element.id,changes)} nodeRef={node=>{nodes.current[element.id]=node;}} toModel={camera.toModel} toScreen={camera.toScreen} onBoundary={setBoundaryMessage}/>)}</EngravingMask>
+      {guides&&!readOnly&&<><MaskGuide zone={a} scale={size/800*camera.view.zoom}/>{(product.exclusions||[]).map(zone=><MaskGuide key={zone.id} zone={zone} exclusion scale={size/800*camera.view.zoom}/>)}</>}
       {!readOnly&&<Transformer name="editor-decoration" ref={transformer} rotateEnabled rotationSnaps={[0,45,90,135,180,225,270,315]} rotateAnchorOffset={24} flipEnabled={false} keepRatio={!lineSelected&&!freeRectangle} enabledAnchors={lineSelected?['middle-left','middle-right']:freeRectangle?['top-left','top-center','top-right','middle-left','middle-right','bottom-left','bottom-center','bottom-right']:['top-left','top-right','bottom-left','bottom-right']} anchorSize={11} anchorCornerRadius={3} borderStroke="#496d35" anchorStroke="#496d35" anchorFill="#fff"/>}
     </Group></Layer></Stage><CameraControls camera={camera} prefix={readOnly?'preview':'canvas'} readOnly={readOnly}/>
     {!readOnly&&boundaryMessage&&<p className="canvas-boundary-warning" role="alert" data-testid="canvas-boundary-warning">{boundaryMessage}</p>}
-    {(!loaded||error)&&<div className={`studio-canvas-status${error?' is-error':''}`} data-testid={readOnly?'product-preview-status':'canvas-status'} role={error?'alert':'status'}>{error||'Rohling wird geladen …'}</div>}
+    {(!loaded||error)&&<div className={`studio-canvas-status${error?' is-error':''}`} data-testid={readOnly?'product-preview-status':'canvas-status'} role={error?'alert':'status'}>{error||'Rohling wird geladen …'}{error&&<button type="button" className="canvas-retry" onClick={()=>{retry();setPreviewAttempt(value=>value+1);}} data-testid={readOnly?'preview-retry':'canvas-retry'}>Erneut laden</button>}</div>}
   </div>;
 };

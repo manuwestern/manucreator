@@ -1,5 +1,6 @@
 .konva-wrap{max-height:none!important;aspect-ratio:1;max-width:640px;margin:auto;touch-action:none}
 .konva-wrap canvas,.blank-board canvas{width:100%!important;height:100%!important;object-fit:unset}
+.canvas-retry{display:block;margin:12px auto 0;padding:8px 14px;border:1px solid currentColor;border-radius:4px;font-size:12px;pointer-events:auto;transition:background-color .18s}.canvas-retry:hover{background:#e8eee1}
 .konva-wrap .konvajs-content,.blank-board .konvajs-content{max-width:100%}
 .studio-panel-tabs,.assistant-modes{display:flex;gap:6px;margin-bottom:20px;border-bottom:1px solid #dce3d3;padding-bottom:10px}
 .studio-panel-tabs>button,.assistant-modes>button{flex:1;padding:9px 7px;font-size:12px;color:#626f59;display:flex;align-items:center;justify-content:center;gap:6px;transition:background-color .2s,color .2s;border-radius:4px}

@@ -10,6 +10,7 @@ from .admin_auth import current_admin
 from .common import StrictModel, db, now
 from .catalog import PRODUCTS, ASSET_DIR
 from .storage import save_file, read_file
+from .models import Exclusion
 
 class Area(StrictModel):
     x: float = Field(ge=0, le=780, allow_inf_nan=False)
@@ -34,6 +35,7 @@ class ProductInput(StrictModel):
     area_mm: str = Field(min_length=2, max_length=80)
     max_text: int = Field(ge=1, le=60)
     area: Area
+    exclusions: list[Exclusion] = Field(default_factory=list, max_length=24)
     ink: str = Field(pattern=r'^#[0-9a-fA-F]{6}$')
     templates: list[Literal['text', 'photo', 'logo']] = Field(min_length=1, max_length=3)
     image_file_id: str | None = None
@@ -42,6 +44,12 @@ class ProductInput(StrictModel):
     version: int = Field(default=1, ge=1)
     show_basic_templates: bool = True
     decoration_ids: list[str] = Field(default_factory=list,max_length=100)
+
+    @model_validator(mode='after')
+    def unique_exclusions(self):
+        if len({zone.id for zone in self.exclusions}) != len(self.exclusions):
+            raise ValueError('Jede Aussparung benötigt eine eindeutige Kennung.')
+        return self
 
 class ProductResponse(ProductInput):
     model_config = ConfigDict(extra='ignore')
@@ -67,6 +75,7 @@ async def get_product(identity, active=True):
     product = await db().studio_products.find_one(query, {'_id': 0})
     if not product:
         raise HTTPException(404, 'Dieser Rohling ist nicht mehr verfügbar. Bitte wähle einen anderen.')
+    product.setdefault('exclusions', [])
     return product
 
 async def blank_bytes(product):

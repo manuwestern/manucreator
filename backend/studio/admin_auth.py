@@ -11,6 +11,7 @@ from pydantic import BaseModel, EmailStr, Field
 from pymongo import ReturnDocument
 from .common import StrictModel, db, now
 from .session import network_key
+from .origins import explicit_origins
 
 router = APIRouter(prefix='/api/admin/auth', tags=['Verwaltung'])
 
@@ -38,8 +39,9 @@ async def seed_admin():
 
 async def same_origin(request: Request):
     if request.method not in {'GET', 'HEAD', 'OPTIONS'}:
-        if request.headers.get('origin') not in os.environ['CORS_ORIGINS'].split(','):
-            logging.getLogger(__name__).warning('Admin origin rejected: received=%r configured=%r', request.headers.get('origin'), os.environ['CORS_ORIGINS'])
+        allowed=explicit_origins()
+        if request.headers.get('origin') not in allowed:
+            logging.getLogger(__name__).warning('Admin origin rejected: received=%r explicit_origins=%r', request.headers.get('origin'), allowed)
             raise HTTPException(403, 'Nicht erlaubter Ursprung der Anfrage.')
 
 def claims(request, kind):

@@ -5,11 +5,16 @@ export const rotatedCorners = e => {
   return [[-e.w/2,-e.h/2],[e.w/2,-e.h/2],[e.w/2,e.h/2],[-e.w/2,e.h/2]].map(([u,v])=>({x:cx+u*c-v*s,y:cy+u*s+v*c}));
 };
 export const scaleDetails=(e,scale)=>({...e,...(e.font_size>0?{font_size:e.font_size*scale,...(e.text_mode==='outline'?{outline_width:(e.outline_width??1)*scale}:{}),...(e.shadow_enabled?{shadow_distance:(e.shadow_distance??3)*scale}:{})}:{}),...(e.kind==='decoration'&&!e.decoration_id?{stroke_width:(e.stroke_width??1.5)*scale}:{})});
-export const isInside = (e,a,epsilon=.05) => {
+export const isValidElement = e => {
   if(!validShape(e))return false;
-  if(!Number.isFinite(e.w)||!Number.isFinite(e.h)||e.w<.1||e.h<.1||e.font_size>200||e.font_size>0&&e.font_size<4)return false;
+  if(!['x','y','w','h'].every(k=>Number.isFinite(e[k]))||Math.abs(e.x)>800||Math.abs(e.y)>800||e.w>800||e.h>800||e.w<.1||e.h<.1||e.font_size>200||e.font_size>0&&e.font_size<4)return false;
   if(e.kind==='text'&&((e.outline_width??1)>12||(e.outline_width??1)<.1||(e.shadow_distance??3)>40))return false;
   if(e.kind==='decoration'&&!e.decoration_id&&(Math.min(e.w,e.h)<4||(e.stroke_width??1.5)>12||(e.stroke_width??1.5)<.1||(e.stroke_width??1.5)+2>=Math.min(e.w,e.h)))return false;
+  return !circularEnvelope(e)||Math.abs(e.w-e.h)<=.1;
+};
+// Kept only for explicit fitting and initial placement, not engraving validation.
+export const isInside = (e,a,epsilon=.05) => {
+  if(!isValidElement(e))return false;
   if(circularEnvelope(e)){
     if(Math.abs(e.w-e.h)>.1)return false;
     const cx=e.x+e.w/2,cy=e.y+e.h/2,r=e.w/2;
@@ -55,7 +60,7 @@ export const fitElement = (e,a,allowScale=true) => {
   }
   return out;
 };
-export const imageFrame = (e,ratio,a) => {
+export const imageFrame = (e,ratio) => {
   const cx=e.x+e.w/2,cy=e.y+e.h/2,w=Math.min(e.w,e.h*ratio),h=w/ratio;
-  return fitElement({...e,w,h,x:cx-w/2,y:cy-h/2},a);
+  return {...e,w,h,x:cx-w/2,y:cy-h/2};
 };
