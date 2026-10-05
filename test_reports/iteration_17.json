@@ -1,0 +1,66 @@
+{
+  "summary": "Completed backend + frontend verification for Phase1 material templates/decorations/text-effects expansion. Backend compatibility/count/geometry checks passed (including synthetic circle product and all compatible template apply/preview). Frontend core template/simple/free/decor interactions passed; one UI defect found in shadow checkbox sizing.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "TextEffects shadow toggle",
+        "issue": "Shadow checkbox renders abnormally large (~190x41px) instead of expected 16x16, reducing readability/alignment.",
+        "selector": "[data-testid='text-shadow-enabled']",
+        "priority": "MEDIUM"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Add to cart navigation from /gestalten",
+        "issue": "Observed delayed transition in browser automation; cart add succeeded (header count became 1 and cart page reached), but navigation may exceed short waits.",
+        "affected_selectors": [
+          "[data-testid='studio-add-cart']"
+        ]
+      }
+    ],
+    "design_issues": [
+      {
+        "screen": "Gestalten > right properties panel",
+        "issues": [
+          "Oversized shadow checkbox breaks visual rhythm and control density in effects section."
+        ]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_studio_material_templates_iteration17.py",
+    "/app/backend/tests/test_studio_phase1_regression.py",
+    "/app/test_reports/pytest/pytest_results_iteration17_backend.xml",
+    "/app/test_reports/pytest/pytest_results_iteration17_admin.xml",
+    "/app/test_reports/pytest/pytest_results_iteration17_checkout.xml",
+    "/root/.emergent/automation_output/20261005_024823/console_20261005_024823.log",
+    "/root/.emergent/automation_output/20261005_024843/console_20261005_024843.log"
+  ],
+  "action_items": [
+    "Fix checkbox sizing scope for text effects (exclude checkbox from generic text input rules in layer property CSS).",
+    "Optionally profile/save-cart handoff latency in StudioPage run('cart') flow; functionally passed but can exceed short UI waits.",
+    "Retest remaining not-yet-covered visual parity items (100% vs 250% pan export pixel identity and reopen-from-real-order snapshot path) after UI fix."
+  ],
+  "critical_code_review_comments": [
+    "Regression expectation drift was present in test_studio_phase1_regression.py (old 6-template assumption). Updated expectations now align with intentional 40-template catalog expansion.",
+    "Checkbox size RCA: broad selector '.layer-properties input:not([type=number]), .layer-properties select' applies dimensions to checkbox inputs, overriding '.effect-switch input{width:16px;height:16px}'."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_studio_phase1_regression.py",
+    "/app/backend/tests/test_studio_material_templates_iteration17.py",
+    "/app/test_reports/iteration_17.json"
+  ],
+  "success_rate": {
+    "backend": "100% (12/12 executed tests passed across regression/material/admin-checkout targets)",
+    "frontend": "~85% (core template/simple/free/decor/effects/responsive smoke passed; one UI bug, partial checkout UI continuity not fully completed in single persisted session run)"
+  },
+  "seed_data_creation": "Created temporary synthetic circle product TEST_circle_<uuid> directly in studio_products for compatibility/geometry testing; cleaned up in test finally block.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Validated exact backend catalog invariants: 40 unique templates with split 16/14/10; public filtered counts confirmed for seeded products holzscheibe=26, metallanhaenger=23, glasschild=9; all compatible apply+preview passed and synthetic circle compatibility/inside-geometry checks passed. Frontend template search/filter/empty, replace cancel+confirm, simple->free with undo/redo mode preservation, decoration lock/hide/duplicate/delete, and responsive overflow checks passed. Remaining deeper parity checks (pixel-identical export 100 vs 250 pan and full save->reopen->cart->testabschluss in one sustained browser session with artifact comparisons) still open.",
+  "rca of the issue": "UI checkbox defect root cause is CSS selector scope in frontend styles: generic input sizing rule in layer properties includes checkbox inputs, inflating '[data-testid=\"text-shadow-enabled\"]' to text-input dimensions. Repro: open /gestalten, select text layer, view Gravureffekte; computed checkbox size ~190x41 instead of 16x16. Mitigation: narrow generic input selector to exclude type=checkbox (and likely type=range/color) or add stronger specific rule for .effect-switch input[type=checkbox]."
+}

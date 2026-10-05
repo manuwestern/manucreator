@@ -1,0 +1,10 @@
+import { useEffect,useState } from 'react';
+import { Shapes } from 'lucide-react';
+import { Dialog,DialogContent,DialogTitle,DialogDescription } from '@/components/ui/dialog';
+import { studioApi,productImage } from '@/lib/studioApi';
+
+export const DecorationPicker=({disabled,onAdd})=>{
+  const [open,setOpen]=useState(false),[items,setItems]=useState([]),[category,setCategory]=useState('Alle'),[error,setError]=useState('');
+  useEffect(()=>{if(!open||items.length)return;let alive=true;studioApi('/decorations').then(data=>{if(alive)setItems(data.items);}).catch(e=>{if(alive)setError(e.message);});return()=>{alive=false;};},[open,items.length]);
+  return <><button className="editor-add-button decoration-trigger" disabled={disabled} title="Rahmen und Ornamente hinzufügen" onClick={()=>setOpen(true)} data-testid="decoration-picker-open"><Shapes size={16}/><span>Dekoration</span></button><Dialog open={open} onOpenChange={setOpen}><DialogContent className="decoration-dialog" data-testid="decoration-dialog"><DialogTitle>Rahmen & Ornamente</DialogTitle><DialogDescription>Einfarbige Motive für dein Unikat</DialogDescription><label className="decoration-category">Auswahl<select value={category} onChange={e=>setCategory(e.target.value)} data-testid="decoration-category">{['Alle',...new Set(items.map(i=>i.category))].map(c=><option key={c}>{c}</option>)}</select></label><div className="decoration-options">{items.filter(i=>category==='Alle'||i.category===category).map(item=><button key={item.id} data-testid={`add-decoration-${item.id}`} onClick={()=>{onAdd(item);setOpen(false);}}><img loading="lazy" src={productImage(`/api/studio/decorations/${item.id}/thumbnail`)} alt={item.name} data-testid={`decoration-thumbnail-${item.id}`}/><span>{item.name}</span></button>)}</div>{!items.length&&!error&&<p role="status" data-testid="decorations-loading">Dekorationen laden …</p>}{error&&<p role="alert" data-testid="decoration-load-error">{error}</p>}</DialogContent></Dialog></>;
+};

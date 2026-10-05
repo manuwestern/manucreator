@@ -100,10 +100,13 @@ def test_curated_font_preview_german_chars_and_license_urls(api_client):
 def test_templates_list_preview_and_apply_protection(api_client):
     listed = api_client.get(f"{BASE_URL}/api/studio/templates?product_id=holzscheibe", timeout=30)
     assert listed.status_code == 200
-    items = listed.json()["items"]
-    assert len(items) == 6
-    ids = {item["id"] for item in items}
-    assert ids == {"monogram", "wedding", "birthday", "photo", "company", "dedication"}
+    payload = listed.json()
+    items = payload["items"]
+    assert payload["catalog_count"] == 40
+    assert payload["collections"] == {"holz": 16, "metall": 14, "universell": 10}
+    assert len(items) == 26
+    ids = [item["id"] for item in items]
+    assert len(ids) == len(set(ids))
 
     for item in items:
         preview = api_client.get(f"{BASE_URL}{item['preview']}", timeout=35)
@@ -122,7 +125,9 @@ def test_templates_list_preview_and_apply_protection(api_client):
 # Module coverage: apply template returns simple mode with expected placeholders/text slots
 def test_apply_template_returns_simple_design_shape(api_client):
     guest = _create_guest(api_client)
-    ids = ["monogram", "wedding", "birthday", "photo", "company", "dedication"]
+    listed = api_client.get(f"{BASE_URL}/api/studio/templates?product_id=holzscheibe", timeout=30)
+    assert listed.status_code == 200
+    ids = [item["id"] for item in listed.json()["items"]]
     for identity in ids:
         response = api_client.post(
             f"{BASE_URL}/api/studio/templates/{identity}/apply",

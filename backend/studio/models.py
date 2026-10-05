@@ -2,6 +2,7 @@ from typing import Literal
 from uuid import UUID
 from pydantic import EmailStr, Field, model_validator
 from .common import StrictModel
+from .engraving_effects import TextEffects
 
 class Box(StrictModel):
     x: float = Field(ge=-800, le=800, allow_inf_nan=False)
@@ -28,9 +29,11 @@ class Crop(StrictModel):
 
 Font = Literal['modern','classic','bold','sans','sans-bold','sans-italic','serif','serif-italic','mono','narrow']
 
-class Element(Box):
+class Element(Box, TextEffects):
     id: str = Field(min_length=1, max_length=60, pattern=r'^[a-zA-Z0-9_-]+$')
-    kind: Literal['text','image']
+    kind: Literal['text','image','decoration']
+    ornament: str | None = Field(default=None,max_length=40)
+    stroke_width: float = Field(default=1.5,ge=.1,le=12,allow_inf_nan=False)
     text: str = Field(default='',max_length=60)
     font: str = Field(default='sans',max_length=80,pattern=r'^(modern|classic|bold|sans|sans-bold|sans-italic|serif|serif-italic|mono|narrow|fs:[a-f0-9]{32}|curated:[a-z0-9-]+:[1-9][0-9]{2}:normal|curated:[a-z0-9-]+:[1-9][0-9]{2}:italic)$')
     font_size: float = Field(default=0,ge=0,le=200,allow_inf_nan=False)

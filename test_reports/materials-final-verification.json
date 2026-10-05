@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "check": "out-of-bounds shadow retains previous text,curve,rotation and geometry",
+      "passed": true
+    },
+    {
+      "check": "pre-commit rectangle transform restores last valid scale at250percent plus pan",
+      "passed": true,
+      "scale": 1.15
+    },
+    {
+      "check": "mouse drag rotated curved outline with shadow constrained at250percent",
+      "passed": true
+    },
+    {
+      "check": "399px outer circle fits400px area; increasing stroke rejected unchanged",
+      "passed": true
+    },
+    {
+      "check": "circle contour independent of137degree rotation; invalid live scale restores last valid",
+      "passed": true,
+      "scale": 1
+    },
+    {
+      "check": "twelve-layer limit includes decorations",
+      "passed": true
+    },
+    {
+      "check": "responsive bounded canvas,template and ornament dialogs",
+      "passed": true,
+      "width": 320
+    },
+    {
+      "check": "responsive bounded canvas,template and ornament dialogs",
+      "passed": true,
+      "width": 768
+    },
+    {
+      "check": "responsive bounded canvas,template and ornament dialogs",
+      "passed": true,
+      "width": 1024
+    },
+    {
+      "check": "responsive bounded canvas,template and ornament dialogs",
+      "passed": true,
+      "width": 1440
+    }
+  ]
+}

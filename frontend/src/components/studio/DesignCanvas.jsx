@@ -5,13 +5,14 @@ import { useCanvasSize } from '@/hooks/useCanvasSize';
 import { useCanvasCamera } from '@/hooks/useCanvasCamera';
 import { CanvasElement } from './CanvasElement';
 import { CameraControls } from './CameraControls';
+import { visualKey } from '@/lib/textPreview';
 
 export const DesignCanvas=({product,design,guides,canvasRef,updateElement,selected,onSelect,disabled,onReady,onNaturalSize,readOnly=false})=>{
   const [wrap,size]=useCanvasSize(true),stage=useRef(),root=useRef(),transformer=useRef(),nodes=useRef({});
   const {blank,error,loaded}=useCanvasAssets(product.image),camera=useCanvasCamera(stage,size,readOnly),a=product.area;
   const [imageStates,setImageStates]=useState({});
   const imageState=useCallback((id,asset,ready)=>setImageStates(old=>old[id]?.asset===asset&&old[id]?.ready===ready?old:{...old,[id]:{asset,ready}}),[]);
-  const allReady=loaded&&design.elements.every(e=>{const key=e.kind==='image'?e.asset_id:JSON.stringify([e.text,e.font,e.font_size,e.curvature]);return e.hidden||e.placeholder||(imageStates[e.id]?.asset===key&&imageStates[e.id]?.ready);});
+  const allReady=loaded&&design.elements.every(e=>e.hidden||e.placeholder||(imageStates[e.id]?.asset===visualKey(e)&&imageStates[e.id]?.ready));
   const selection=design.elements.find(e=>e.id===selected);
   useEffect(()=>{const node=nodes.current[selected];transformer.current?.nodes(node&&selection&&!selection.locked&&!selection.hidden&&!disabled&&!readOnly&&!camera.hand?[node]:[]);transformer.current?.getLayer()?.batchDraw();},[selected,selection,design,size,disabled,loaded,readOnly,camera.hand,camera.view]);
   useEffect(()=>{onReady?.(allReady&&!error);},[allReady,error,onReady]);

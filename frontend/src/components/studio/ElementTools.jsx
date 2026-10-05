@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AlignCenter,ArrowDown,ArrowLeft,ArrowRight,ArrowUp,RotateCcw } from 'lucide-react';
-import { fitElement,isInside,imageFrame } from '@/lib/transformGeometry';
+import { fitElement,isInside,imageFrame,scaleDetails } from '@/lib/transformGeometry';
 
 export const ElementTools=({element:b,product,update,disabled})=>{
   const [error,setError]=useState('');
@@ -8,8 +8,8 @@ export const ElementTools=({element:b,product,update,disabled})=>{
   const wrongRatio=b.kind==='image'&&b.image_ratio>0&&Math.abs(b.w/b.h/(b.image_ratio*b.crop.w/b.crop.h)-1)>.012;
   const change=values=>{
     const e={...b,...values};
-    if(values.w!==undefined){const scale=values.w/b.w;e.h=b.h*scale;if(e.font_size)e.font_size*=scale;}
-    if(values.h!==undefined){const scale=values.h/b.h;e.w=b.w*scale;if(e.font_size)e.font_size*=scale;}
+    if(values.w!==undefined){const scale=values.w/b.w;e.h=b.h*scale;Object.assign(e,scaleDetails(e,scale));}
+    if(values.h!==undefined){const scale=values.h/b.h;e.w=b.w*scale;Object.assign(e,scaleDetails(e,scale));}
     if(values.w!==undefined||values.h!==undefined){e.x=b.x+(b.w-e.w)/2;e.y=b.y+(b.h-e.h)/2;}
     if(!isInside(e,product.area,0)||e.font_size>200){setError('Dieser Wert überschreitet die Gravurfläche oder die maximale Schriftgröße. Die bisherige Einstellung bleibt erhalten.');return;}
     setError('');update(e);

@@ -4,9 +4,10 @@ import { Input } from '@/components/ui/input';
 import { familyFor } from '@/lib/studioLayers';
 import { ensureFont } from '@/lib/curatedFonts';
 import { existingFace } from '@/lib/fontCatalog';
-import { getTextPreview } from '@/lib/textPreview';
+import { getTextPreview,effectValues } from '@/lib/textPreview';
 import { isInside } from '@/lib/transformGeometry';
 import { FontSelector } from './FontSelector';
+import { TextEffects } from './TextEffects';
 
 export const TextProperties=({element,product,update,disabled,onPending})=>{
   const [values,setValues]=useState(element),[face,setFace]=useState(null),[error,setError]=useState(''),[pending,setPending]=useState(false),[readyFont,setReadyFont]=useState(null);
@@ -21,10 +22,19 @@ export const TextProperties=({element,product,update,disabled,onPending})=>{
     timer.current=setTimeout(async()=>{try{
       if(next.text.length>product.max_text)throw new Error(`Bitte auf höchstens ${product.max_text} Zeichen kürzen. Dein Entwurf bleibt unverändert.`);
       await ensureFont(next.font);const rendered=await getTextPreview(next);if(seq!==ticket.current||!mounted.current)return;setReadyFont(next.font);
-      const old=latest.current,candidate={...old,text:next.text,font:next.font,font_size:next.font_size,curvature:next.curvature||0,w:rendered.width,h:rendered.height,x:old.x+(old.w-rendered.width)/2,y:old.y+(old.h-rendered.height)/2};
-      if(!isInside(candidate,product.area,0))throw new Error('Dieser Text passt so nicht vollständig in die Gravurfläche. Bitte Größe, Position oder Bogen anpassen. Dein Entwurf bleibt unverändert.');
+      const old=latest.current,candidate={...old,text:next.text,font:next.font,font_size:next.font_size,curvature:next.curvature||0,...effectValues(next),w:rendered.width,h:rendered.height,x:old.x+(old.w-rendered.width)/2,y:old.y+(old.h-rendered.height)/2};
+      if(!isInside(candidate,product.area,0))throw new Error('Text samt Kontur und Schatten passt so nicht vollständig in die Gravurfläche. Bitte Größe, Position, Bogen oder Effekt anpassen. Dein Entwurf bleibt unverändert.');
       update(candidate);
     }catch(e){if(seq===ticket.current&&mounted.current)setError(e.message);}finally{if(seq===ticket.current&&mounted.current){setPending(false);onPending(false);}}},180);
   };
-  return <><fieldset disabled={disabled||element.locked} className="text-properties-controls"><label htmlFor="layer-text">Text<span data-testid="layer-text-count">{values.text.length}/{product.max_text}</span><Input id="layer-text" value={values.text} onChange={e=>edit({text:e.target.value})} data-testid="layer-text"/></label><FontSelector font={values.font} onChange={font=>edit({font})} legacyFace={face}/><div className="font-example" style={{fontFamily:readyFont===values.font?familyFor(values.font):undefined}} data-testid="font-example">{readyFont===values.font?(values.text||'Aa · Dein Unikat'):'Schrift wird geladen …'}</div><label htmlFor="text-font-size">Schriftgröße (px)<input id="text-font-size" type="number" min="4" max="200" step="1" value={Math.round(values.font_size||Math.max(4,element.h*.76))} onChange={e=>edit({font_size:Math.max(4,Math.min(200,Number(e.target.value)))})} data-testid="text-font-size"/></label><div className="curve-heading"><label htmlFor="text-curvature">Bogen <span data-testid="text-curvature-value">{values.curvature||0}°</span></label><button title="Gerader Text" aria-label="Bogen zurücksetzen" onClick={()=>edit({curvature:0})} data-testid="text-reset-curvature"><RotateCcw size={14}/></button></div><input id="text-curvature" type="range" min="-150" max="150" step="5" value={values.curvature||0} onChange={e=>edit({curvature:Number(e.target.value)})} data-testid="text-curvature"/><div className="curve-labels"><span>Nach unten</span><span>Gerade</span><span>Nach oben</span></div></fieldset>{pending&&<p className="property-status" data-testid="text-rendering"><LoaderCircle className="loading-spin" size={13}/>Text wird gesetzt …</p>}{error&&<p role="alert" className="property-error" data-testid="text-property-error">{error}</p>}</>;
+  return <><fieldset disabled={disabled||element.locked} className="text-properties-controls">
+    <label htmlFor="layer-text">Text<span data-testid="layer-text-count">{values.text.length}/{product.max_text}</span><Input id="layer-text" value={values.text} onChange={e=>edit({text:e.target.value})} data-testid="layer-text"/></label>
+    <FontSelector font={values.font} onChange={font=>edit({font})} legacyFace={face}/>
+    <div className="font-example" style={{fontFamily:readyFont===values.font?familyFor(values.font):undefined}} data-testid="font-example">{readyFont===values.font?(values.text||'Aa · Dein Unikat'):'Schrift wird geladen …'}</div>
+    <label htmlFor="text-font-size">Schriftgröße (px)<input id="text-font-size" type="number" min="4" max="200" step="1" value={Math.round(values.font_size||Math.max(4,element.h*.76))} onChange={e=>edit({font_size:Math.max(4,Math.min(200,Number(e.target.value)))})} data-testid="text-font-size"/></label>
+    <div className="curve-heading"><label htmlFor="text-curvature">Bogen <span data-testid="text-curvature-value">{values.curvature||0}°</span></label><button title="Gerader Text" aria-label="Bogen zurücksetzen" onClick={()=>edit({curvature:0})} data-testid="text-reset-curvature"><RotateCcw size={14}/></button></div>
+    <input id="text-curvature" type="range" min="-150" max="150" step="5" value={values.curvature||0} onChange={e=>edit({curvature:Number(e.target.value)})} data-testid="text-curvature"/>
+    <div className="curve-labels"><span>Nach unten</span><span>Gerade</span><span>Nach oben</span></div>
+    <TextEffects values={values} edit={edit}/>
+  </fieldset>{pending&&<p className="property-status" data-testid="text-rendering"><LoaderCircle className="loading-spin" size={13}/>Text wird gesetzt …</p>}{error&&<p role="alert" className="property-error" data-testid="text-property-error">{error}</p>}</>;
 };

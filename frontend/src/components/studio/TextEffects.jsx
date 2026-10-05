@@ -1,0 +1,11 @@
+import { Type,ScanLine } from 'lucide-react';
+
+export const TextEffects=({values,edit})=><section className="engraving-effects" data-testid="text-effects">
+  <h3>Gravureffekte</h3>
+  <div className="effect-mode" role="group" aria-label="Textdarstellung">
+    {[[Type,'filled','Gefüllt'],[ScanLine,'outline','Kontur']].map(([Icon,mode,label])=><button key={mode} type="button" aria-pressed={(values.text_mode||'filled')===mode} onClick={()=>edit({text_mode:mode})} data-testid={`text-mode-${mode}`}><Icon size={16}/>{label}</button>)}
+  </div>
+  {values.text_mode==='outline'&&<label htmlFor="text-outline-width">Konturstärke <output data-testid="text-outline-width-value">{Number(values.outline_width??1).toFixed(1)} px</output><input id="text-outline-width" type="range" min="0.3" max="8" step="0.1" value={Math.round((values.outline_width??1)*10)/10} onChange={e=>edit({outline_width:Number(e.target.value)})} data-testid="text-outline-width"/></label>}
+  <label className="effect-switch" htmlFor="text-shadow-enabled"><input id="text-shadow-enabled" type="checkbox" checked={!!values.shadow_enabled} onChange={e=>edit({shadow_enabled:e.target.checked})} data-testid="text-shadow-enabled"/>Versetzter Gravurschatten</label>
+  {values.shadow_enabled&&<><label htmlFor="text-shadow-distance">Abstand <output data-testid="text-shadow-distance-value">{Number(values.shadow_distance??3).toFixed(1)} px</output><input id="text-shadow-distance" type="range" min="0" max="30" step="0.5" value={Math.round((values.shadow_distance??3)*2)/2} onChange={e=>edit({shadow_distance:Number(e.target.value)})} data-testid="text-shadow-distance"/></label><label htmlFor="text-shadow-angle">Richtung <output data-testid="text-shadow-angle-value">{Math.round(values.shadow_angle??45)}°</output><input id="text-shadow-angle" type="range" min="-180" max="180" step="5" value={Math.round((values.shadow_angle??45)/5)*5} onChange={e=>edit({shadow_angle:Number(e.target.value)})} data-testid="text-shadow-angle"/></label></>}
+</section>;

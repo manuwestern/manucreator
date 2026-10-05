@@ -10,10 +10,11 @@ from fontTools.ttLib import TTFont
 from .common import StrictModel
 from .fonts import font_path
 from .session import guest_id
+from .engraving_effects import TextEffects,apply_effects,effect_args
 
 router=APIRouter(prefix='/api/studio',tags=['Textdarstellung'])
 
-class TextSpec(StrictModel):
+class TextSpec(TextEffects):
     text:str=Field(max_length=60)
     font:str=Field(max_length=80)
     font_size:float=Field(ge=4,le=200,allow_inf_nan=False)
@@ -28,7 +29,7 @@ def validate_chars(path,text):
         raise HTTPException(422,'Die ausgewählte Schrift enthält nicht alle eingegebenen Zeichen. Bitte Text oder Schrift anpassen.')
 
 @lru_cache(maxsize=200)
-def text_sprite(path,text,size,curve):
+def text_sprite(path,text,size,curve,text_mode='filled',outline_width=1,shadow_enabled=False,shadow_distance=3,shadow_angle=45):
     # Fourfold rasterization gives identical anti-aliased glyph placement in canvas and saved PNG.
     density=4;size=max(4,float(size));font=ImageFont.truetype(path,max(4,round(size*density)))
     text=text or ' ';validate_chars(path,text)
@@ -55,7 +56,8 @@ def text_sprite(path,text,size,curve):
         xmax=math.ceil(max(x+g.width for g,x,y in parts))+4;ymax=math.ceil(max(y+g.height for g,x,y in parts))+4
         image=Image.new('RGBA',(max(1,xmax-xmin),max(1,ymax-ymin)))
         for glyph,x,y in parts:image.alpha_composite(glyph,(round(x-xmin),round(y-ymin)))
-    # Trim only transparent padding. The full visible glyph silhouette is retained.
+    image=apply_effects(image,density,text_mode,outline_width,shadow_enabled,shadow_distance,shadow_angle)
+    # Trim only transparent padding, including the complete outline and displaced shadow.
     bounds=image.getbbox()
     if bounds:image=image.crop((max(0,bounds[0]-4),max(0,bounds[1]-4),min(image.width,bounds[2]+4),min(image.height,bounds[3]+4)))
     target=(max(5,math.ceil(image.width/density)),max(5,math.ceil(image.height/density)))
@@ -65,5 +67,5 @@ def text_sprite(path,text,size,curve):
 @router.post('/text-preview')
 async def preview(spec:TextSpec,guest=Depends(guest_id)):
     path=await font_path(spec.font)
-    image,(w,h)=await asyncio.to_thread(text_sprite,str(path),spec.text,spec.font_size,spec.curvature)
+    image,(w,h)=await asyncio.to_thread(text_sprite,str(path),spec.text,spec.font_size,spec.curvature,*effect_args(spec))
     return {'width':w,'height':h,'image':'data:image/png;base64,'+base64.b64encode(image).decode()}

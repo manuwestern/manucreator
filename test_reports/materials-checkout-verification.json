@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-10-05",
+  "source": "/root/.emergent/automation_output/20261005_025344/console_20261005_025344.log",
+  "checks": {
+    "shadow_checkbox_16_by_16": true,
+    "combined_outline_shadow_curve50_rotation15": true,
+    "export_dimensions": [800, 800],
+    "export_at100_and250plus_pan_pixel_identical": true,
+    "export_rgba_sha256": "b1e31857cb9c178a1a29f24d291aeb4349abc529a0b25045fd85f244fc223ddb",
+    "large_preview_same_elements": true,
+    "saved_draft_same_elements": true,
+    "reopen_saved_draft_same_elements": true,
+    "save_seconds": 0.62,
+    "cart_navigation_seconds": 0.09,
+    "continuous_ui_test_checkout": true,
+    "order_snapshot_same_elements": true,
+    "test_reference": "TEST-273057E2",
+    "payable_cents": 0,
+    "production_approved": false,
+    "mocked_apis": false,
+    "paid_provider_calls": 0
+  },
+  "scope_note": "Browser automation, not physical touch hardware. Final circle anti-aliasing clearance refined afterward and separately verified by raw pixel regression; persistence schema unchanged."
+}
