@@ -1,0 +1,50 @@
+{
+  "summary": "Completed backend + frontend retest for Phase1 shape tools, protected-template enforcement, and iteration19 admin customer-editable toggle regression. Targeted backend pytest passed (7/7). Customer and admin UI flows passed for core requested checks.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "ElementTools boundary message",
+        "issue": "When moving a selected shape outside bounds via numeric position, error text references max font size (text-specific wording), which is misleading for shapes.",
+        "selector": "[data-testid='element-boundary-error']",
+        "priority": "LOW"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_studio_iteration20_shapes_auth.py",
+    "/app/backend/tests/test_studio_iteration20_fixed_required_mix.py",
+    "/app/backend/tests/conftest.py",
+    "/app/test_reports/pytest/pytest_results_iteration20_backend.xml"
+  ],
+  "action_items": [
+    "Optional UX copy fix: make boundary-error text shape-aware instead of mentioning max font size.",
+    "Run one additional full e2e for save/reopen/download(800px)/cart/checkout pixel-equivalence at 100% vs 250%+pan, which was not fully re-executed in this iteration."
+  ],
+  "critical_code_review_comments": [
+    "PASS: Backend shape validation enforces six-shape enum, line h==stroke behavior, proportional constraints, and outline minimum interior checks.",
+    "PASS: Circular envelope logic is applied for circle shape bounds (disk-based, not square-corner based) in both backend and frontend geometry checks.",
+    "PASS: Protected template server enforcement still rejects forged mutations of fixed text while allowing customer-field edits.",
+    "PASS: Iteration19 HIGH bug appears resolved — customer-editable checkbox can be toggled while text preview pending and remains stable after render."
+  ],
+  "updated_files": [
+    "/app/backend/tests/conftest.py",
+    "/app/backend/tests/test_studio_iteration20_shapes_auth.py",
+    "/app/backend/tests/test_studio_iteration20_fixed_required_mix.py",
+    "/app/test_reports/iteration_20.json"
+  ],
+  "success_rate": {
+    "backend": "100% (7/7 targeted tests passed)",
+    "frontend": "~88% (core requested shape/admin regression checks passed; some full-flow regressions not re-run end-to-end)"
+  },
+  "seed_data_creation": "Created UI admin template fixture TEST_UI_I20_TOGGLE (published). Backend tests also created temporary test product/template fixtures via pytest helpers and cleanup tracker.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Validated: shape picker(6), add/resize/mode/layer cap, line length-stroke independence, circle roundness, rectangle lock behavior, boundary rejection messaging, responsive breakpoints 320/390/768/1024/1440 + short landscape, admin back-nav ?tab=templates, protected template one customer-field behavior in preview, and pending-toggle regression. Not fully revalidated this run: customer full checkout snapshot chain + 100 vs 250 pan pixel identity + archived historical replay checks.",
+  "rca of the issue": "Iteration19 remaining bug RCA recheck: prior failure came from checkbox being non-deterministically blocked during text-preview pending. Current implementation disables TemplateFieldSettings only on busy (not text-pending) and text updates patch only text/effect/geometry keys. Reproduction in this run showed pending=true and checkbox successfully persisted unchecked after render, indicating fix is effective."
+}

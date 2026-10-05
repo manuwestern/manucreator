@@ -16,7 +16,7 @@ class DecorationSpec(StrictModel):
 
 @router.get('/decorations')
 async def decorations():
-    return {'items': list(BY_ID.values())}
+    return {'items': []}
 
 @router.get('/decorations/{identity}/thumbnail')
 async def thumbnail(identity: str):

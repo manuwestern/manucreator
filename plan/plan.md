@@ -1,145 +1,145 @@
-# ManuCreator – Materialvorlagen, Rahmen und Gravureffekte
+# ManuCreator – Einfache Formenwerkzeuge für Gravurmotive
 
-Das Gestaltungsstudio erhält insgesamt 40 abwechslungsreiche Vorlagen mit Schwerpunkten für Holz und Metall sowie einer universellen Auswahl.
-Rahmen, Ornamente, Textkonturen und ein klar versetzter Gravurschatten erweitern die Gestaltung, während einfache Personalisierung und verbindliche Gravurgrenzen erhalten bleiben.
+Das Gestaltungsstudio erhält sechs einfache Grundformen: Linie, Kreis, Rechteck, Herz, Dreieck und Stern.
+Die Formen werden per Klick eingefügt und anschließend angepasst; die freigegebenen Gravurflächen und geschützten Artikelvorlagen bleiben verbindlich.
 
 ## Für wen
 
-- Kundinnen und Kunden, die ein persönliches Geschenk mit wenig Aufwand gestalten möchten.
-- Personen, die Fotos, Namen und Widmungen mit dekorativen oder bewusst reduzierten Layouts verbinden möchten.
-- Unternehmen und Vereine, die klare Beschriftungen und wiedererkennbare Gestaltungen auf Metall benötigen.
-- Den Betreiber von ManuCreator, dessen freigegebene Rohlinge und Gravurflächen weiterhin maßgeblich bleiben.
+- Den Betreiber, der eigene Artikelvorlagen mit Linien, Rahmen und einfachen Symbolen ergänzen möchte.
+- Kundinnen und Kunden, die im freien Studio ein persönliches Motiv gestalten möchten.
+- Wiederkehrende Geschenk-, Firmen- und Vereinsgestaltungen, die mit wenigen klaren Elementen auskommen.
 
 ## Kernfunktionen und Erlebnis
 
-### 1. Insgesamt 40 eigenständige Vorlagen
+### 1. Sechs Grundformen per Klick
 
-Die Auswahl umfasst **16 Holzvorlagen, 14 Metallvorlagen und 10 universelle Vorlagen**. Die bisherigen sechs Themen bleiben in der universellen Auswahl erhalten und zählen zu den 40 Vorlagen; es kommen nicht 40 zusätzliche Vorlagen hinzu.
+Die Auswahl umfasst ausschließlich:
 
-Die Vorlagen unterscheiden sich sichtbar in Aufbau, Schriftkombinationen, Ornamenten, Rahmen und Gewichtung der Inhalte. Ein bloßer Austausch von Überschrift oder Datum gilt nicht als neue Gestaltung.
+- **Linie:** gerade, durchgezogen und ohne Pfeilspitzen.
+- **Kreis:** stets rund, nicht zur Ellipse verzerrbar.
+- **Rechteck.**
+- **Herz.**
+- **Dreieck:** zunächst eine gleichseitige Grundform.
+- **Stern:** zunächst ein klassischer fünfzackiger Stern.
 
-| Kollektion | Vorlagenthemen |
-| --- | --- |
-| **Holz – 16 Vorlagen** | Familienkranz, rustikales Namensschild, Hochzeitskranz, Jubiläums-Baumscheibe, Geburtsandenken, Taufgeschenk, Blumenmonogramm, Wald- und Bergmotiv, Küchenbrett, Grillmeister, Gartenliebe, Haustier-Erinnerung, Haussegen, Danke-Geschenk für Lehrkräfte, Freundschaft, Weihnachtsanhänger |
-| **Metall – 14 Vorlagen** | Technisches Monogramm, industrielles Namensschild, Koordinatenplakette, Initialen-Schlüsselanhänger, Haustiermarke, Vereinsabzeichen, Firmenbadge, Werkzeugkennzeichnung, Sportauszeichnung, Fahrzeugplakette, Reiseanhänger, modernes Hochzeitsschild, klare Widmung, Nummern- und Datumsschild |
-| **Universell – 10 Vorlagen** | Name oder Monogramm, Hochzeit, Geburtstag oder Jubiläum, Fotogeschenk, Firma oder Verein, schlichte Widmung, Doppelrahmen, Lorbeer-Auszeichnung, Herzgruß, Kreis-Botschaft |
+Ein Klick auf eine Form fügt sie in passender Ausgangsgröße innerhalb der Gravurfläche ein und wählt sie zur Bearbeitung aus. Danach sind Verschieben, Größenänderung und Rotation möglich. Ein Aufziehen neuer Formen mit Maus oder Finger ist nicht Teil dieses Ausbaus.
 
-- Holzvorlagen erhalten natürliche, persönliche und dekorative Kompositionen: Zweige, Kränze, weichere Schriftkombinationen und ausgewogene Freiflächen.
-- Metallvorlagen erhalten klare, kompakte und geometrische Kompositionen. Kleine Anhänger und schmale Flächen bekommen reduzierte Varianten statt überladener Details.
-- Universelle Vorlagen bleiben materialübergreifend verwendbar, soweit Form, Platz und erlaubte Inhalte des Rohlings passen.
-- Koordinaten, Telefonnummern und Kennzeichnungen sind frei eingegebene Beschriftungen. Es werden keine Karten, Register oder anderen Dienste angebunden.
+### 2. Passende Einstellungen je Form
 
-### 2. Übersichtliche, zum Rohling passende Auswahl
+- Bei Linien sind **Länge, Strichstärke und Rotation** unabhängig voneinander einstellbar. Eine längere Linie wird dadurch nicht automatisch dicker.
+- Geschlossene Formen lassen sich zwischen **„Gefüllt“** und **„Kontur“** umschalten. Bei Konturformen ist die Strichstärke einstellbar; der Innenraum bleibt frei.
+- Ein Kreis erhält einen Durchmesser. Breite und Höhe bleiben miteinander verbunden.
+- Bei Rechtecken lassen sich Breite und Höhe getrennt einstellen. Für unverzerrtes Vergrößern oder Verkleinern steht zusätzlich eine Proportionssperre zur Verfügung.
+- Herz, Dreieck und Stern werden proportional skaliert und können gedreht werden. Einzelne Spitzen oder Pfadpunkte werden nicht bearbeitet.
+- Position, Größe und Rotation lassen sich direkt am Objekt sowie über die passenden Zahlenfelder ändern.
+- Die Darstellung bleibt einfarbig im bestehenden Gravurfarbton des Artikels. Bunte Füllungen, Verläufe, weiche Schatten und räumliche Effekte für Formen sind nicht vorgesehen.
 
-- Der vorhandene kompakte Vorlageneinstieg bleibt erhalten; es entsteht keine zusätzliche dauerhafte Seitenspalte.
-- Die Auswahl folgt zunächst dem Material: Holz zeigt Holz- und universelle Vorlagen, Metall zeigt Metall- und universelle Vorlagen. Andere Materialien erhalten vorerst die universelle Auswahl.
-- Filter nach Anlass beziehungsweise Verwendungszweck und eine Suche nach Vorlagennamen helfen beim Finden.
-- Jede Vorlage zeigt eine erkennbare Vorschau auf dem aktuellen Rohling, nicht nur ein abstraktes Symbol.
-- Ungeeignete Vorlagen werden nicht angeboten. Maßgeblich sind die freigegebene Form und Fläche sowie erlaubte Text-, Foto- und Logoinhalte. Deshalb sind nicht auf jedem Rohling alle 40 Vorlagen auswählbar.
-- Eine vorhandene Gestaltung wird nur nach Bestätigung ersetzt. Rückgängig stellt den bisherigen Entwurf wieder her.
+### 3. In Verwaltung und freiem Kundenstudio
 
-### 3. Rahmen und Ornamente als Gestaltungselemente
+Die Formenwerkzeuge stehen an zwei Stellen zur Verfügung:
 
-Neben ihrer Verwendung in Vorlagen sind vorbereitete Dekorationen im freien Editor hinzufügbar:
+- Im **artikelbezogenen Vorlageneditor der Verwaltung**.
+- Im **freien Kundenstudio**, einschließlich ausdrücklich zur freien Bearbeitung freigegebener Artikelvorlagen.
 
-- Einfache und doppelte Rechteck- und Kreisrahmen.
-- Linien und geometrische Trenner.
-- Blätterzweige und Kränze einschließlich einer klaren Lorbeerform.
-- Namensbänder und kompakte Schmuckelemente wie Herzen, Sterne und Bergkonturen.
+Im einfachen Personalisierungsmodus werden keine zusätzlichen Formenwerkzeuge eingeblendet. Dort bleiben ausschließlich die vom Betreiber freigegebenen Inhaltsfelder bearbeitbar.
 
-Die Elemente sind für eine einfarbige Gravurdarstellung ausgelegt, nicht als bunte Sticker oder fotorealistische Verzierungen.
+Schließt eine Artikelvorlage „Frei bearbeiten“ aus, können Kunden weder neue Formen hinzufügen noch feste Formen verändern oder entfernen. Freie Entwürfe ohne ausgewählte Vorlage bleiben weiterhin möglich.
 
-- Dekorationen lassen sich über die Ebenenliste auswählen, proportional skalieren, verschieben, drehen, ausblenden, sperren, duplizieren und löschen.
-- Geeignete Rahmen und Linien erhalten eine einfache Einstellung der Strichstärke.
-- Mehrteilige Ornamente wie ein Blätterkranz bleiben ein zusammengehöriges Gestaltungselement. Einzelne Blätter oder Pfadpunkte werden nicht separat bearbeitet.
-- Vorlagen-Dekorationen sind zunächst gesperrt und sinnvoll hinter beziehungsweise um die Inhalte angeordnet. Sie dürfen die Auswahl darüberliegender Texte nicht abfangen. Im freien Modus können sie bewusst über die Ebenenliste entsperrt werden.
-- Jede Dekoration zählt als eine Ebene. Die vorhandene Grenze von zwölf Ebenen bleibt einschließlich Rahmen und Ornamenten bestehen.
+### 4. Formen als normale Gestaltungsebenen
 
-### 4. Textkonturen und klarer versetzter Gravurschatten
+- Jede Form zählt als **eine Ebene**. Die Grenze von insgesamt zwölf Ebenen bleibt bestehen, einschließlich Texten, Bildern und eigenen Dekorationen.
+- Formen lassen sich über die Ebenenliste auswählen, verschieben, drehen, duplizieren, ausblenden, sperren, nach vorne oder hinten setzen und löschen.
+- Die Ebenen erhalten erkennbare Bezeichnungen wie „Linie“, „Kreis“ oder „Herz“.
+- Rückgängig und Wiederholen berücksichtigen Hinzufügen, Entfernen und Änderungen an den Formen.
+- In Artikelvorlagen eingefügte Formen sind feste Gestaltungselemente. Im einfachen Kundenmodus bleiben sie geschützt; eine ausdrücklich erlaubte freie Bearbeitung richtet sich weiterhin nach der Vorlageneinstellung und dem Sperrstatus der Ebene.
+- Die neuen Grundformen sind von hochgeladenen Dekorationen getrennt. Sie bringen die frühere Sammlung von 18 Ornamenten nicht zurück.
 
-Der Eigenschaftenbereich einer Textebene erhält einen kompakten Abschnitt für Gravureffekte:
+### 5. Verbindliche Gravurgrenzen
 
-- **Normaler Text:** die bisherige gefüllte Darstellung.
-- **Konturtext:** eine Schriftumrandung mit einstellbarer Strichstärke und freiem Innenraum.
-- **Versetzter Gravurschatten:** eine scharf begrenzte, verschobene Form hinter dem Text. Abstand und Richtung sind einstellbar; der Effekt lässt sich ausschalten.
-- Konturtext und versetzter Schatten können kombiniert werden, sofern das Ergebnis innerhalb der freigegebenen Fläche bleibt.
-- Die Effekte funktionieren auch mit gebogenen und gedrehten Textelementen. Text und Effekt bleiben eine gemeinsame Textebene.
+- Die vollständige sichtbare Form muss in der rechteckigen oder kreisförmigen Gravurfläche liegen, einschließlich sämtlicher Kontur- und Linienbreiten.
+- Die Prüfung gilt beim Verschieben, Skalieren, Drehen, Umschalten der Darstellung und Ändern der Strichstärke oder Länge.
+- Unzulässige Änderungen werden gestoppt beziehungsweise lassen den letzten gültigen Stand bestehen. Dazu erscheint eine verständliche Rückmeldung.
+- Kreisformen und Kreisrahmen werden anhand ihrer äußeren sichtbaren Kontur beurteilt, nicht anhand der Ecken eines umgebenden Quadrats.
+- Formen werden nicht automatisch beschnitten oder verzerrt, um eine ungültige Einstellung passend zu machen.
+- Arbeitsfläche, große Produktvorschau, gespeicherter Entwurf, vollständiger Download und Testabschluss übernehmen dieselbe Gestaltung.
 
-**Nicht vorgesehen sind weiche Schatten, Unschärfe, farbige Leuchteffekte oder simulierte räumliche Beleuchtung.** Der versetzte Schatten ist Bestandteil des Gravurmotivs, keine Zusage eines realen Schattens oder einer bestimmten Gravurtiefe. Die tatsächliche Wirkung hängt weiterhin von Material und Fertigung ab.
+### 6. Materialien und Gravurflächen bearbeiten
 
-### 5. Einfache Personalisierung bleibt einfach
+Die Bearbeitung erfolgt weiterhin in der bestehenden geschützten **Verwaltung unter `/verwaltung`**:
 
-- Vorlagen starten im einfachen Modus mit benannten Textfeldern und gegebenenfalls dem Ersetzen eines eigenen Fotos oder Logos samt ausdrücklich gewähltem Zuschnitt.
-- Schriftkombinationen, Rahmen, Ornamente und Effekte sind passend vorkonfiguriert. Das Layout kann nicht versehentlich auseinandergezogen werden.
-- „Frei bearbeiten“ übernimmt den Entwurf unverändert und gibt die vollständigen Eigenschaften einschließlich Dekorationen und Texteffekten frei. Freie Entwürfe werden nicht automatisch zurück in ein eingeschränktes Layout versetzt.
-- Zu lange Texte erhalten einen Hinweis. Inhalte werden nicht abgeschnitten, ungefragt gekürzt oder durch eine Ersatzschrift passend gemacht.
-- Foto- und Logovorlagen verwenden die tatsächlich hochgeladenen Motive. Nicht ersetzte Platzhalter sind keine fertigen Bestellmotive.
+1. Den gewünschten Artikel auswählen und **„Bearbeiten“** öffnen.
+2. Unter **„Artikeldaten“** beispielsweise Material, Materialgruppe, Artikelname und Produktmaße ändern.
+3. Unter **„Gravurfläche“** Rechteck oder Kreis wählen, Position und Größe auf dem Rohlingfoto einstellen und die tatsächlichen Gravurmaße hinterlegen.
+4. Unter **„Vorlagen“** die zugehörigen eigenen Vorlagen und Kundenfreigaben verwalten.
 
-### 6. Verbindliche Gravurgrenzen einschließlich aller Effekte
+Materialien werden in diesem Ausbau weiterhin am jeweiligen Artikel gepflegt. Eine separate globale Materialverwaltung wird nicht eingeführt. Pro Artikel bleibt es bei einer aktiven Gravurfläche.
 
-- Die vollständige sichtbare Gestaltung muss in der rechteckigen oder kreisförmigen Gravurfläche liegen: einschließlich Rahmenstrichen, Ornamenten, Textkonturen und versetztem Schatten.
-- Die Grenzen gelten bereits während des Verschiebens, Skalierens und Drehens sowie beim Ändern einer Strichstärke oder eines Schattenabstands.
-- Eine unzulässige Bewegung stoppt beziehungsweise bleibt beim letzten gültigen Stand. Nicht passende Einstellungen erhalten eine Rückmeldung.
-- Kreisrahmen werden nach ihrer sichtbaren äußeren Kontur samt Strichstärke beurteilt. Die Prüfung nur ihrer Mittellinie reicht nicht aus.
-- Bilder und Ornamente werden nicht verzerrt oder automatisch beschnitten, um sie passend zu machen.
-- Arbeitsfläche, große Produktvorschau, vollständiger Download, gespeicherte Entwürfe und Testabschluss übernehmen dieselbe Gestaltung.
+Position und Größe auf dem Foto sind Gestaltungswerte in Pixeln. Die realen Gravurmaße in Millimetern werden separat hinterlegt; aus dem Foto werden keine Fertigungsmaße geschätzt.
 
-### 7. Bestehende Funktionen bleiben erhalten
+### 7. Bestehender Stand bleibt erhalten
 
-- Die 25 bereitgestellten Schriftfamilien mit echten verfügbaren Schriftschnitten bleiben die Standardauswahl. Es werden keine zusätzlichen Schriften oder Kataloge eingeführt.
-- Zoom von 50–400 %, Handwerkzeug, Einpassen, Zwei-Finger-Zoom und große Produktvorschau bleiben erhalten. Ansichtsänderungen verändern weder Gravurmaße noch den vollständigen Export.
-- Rohlingverwaltung, Upload, Zuschnitt, proportionale Bilder, Rotation, Textbogen, Ebenenfunktionen und Rückgängig/Wiederholen bleiben bestehen.
-- Vorhandene Entwürfe erhalten nicht automatisch neue Rahmen oder Effekte. Bestehende Schriften und Inhalte bleiben erhalten; neue Vorlagen gelten erst nach bewusster Auswahl.
-- Website und Hero-Effekt werden nicht neu gestaltet.
-- Die optionale GPT-Freistellung bleibt unverändert: ausdrücklich auszulösen, mit Übertragungshinweis und Ergebnisvergleich, ohne eigenen geeigneten OpenAI-API-Zugang weiterhin als nicht eingerichtet gekennzeichnet. Es gibt keinen Ersatzanbieter.
-- Vorlagen, Ornamente und Texteffekte benötigen keine zusätzlichen KI-Aufrufe. Beratung, allgemeine KI-Bildgenerierung und Tischszenen bleiben außerhalb dieses Ausbaus.
-- Der Abschluss bleibt ein Testabschluss ohne echte Zahlung oder automatische Fertigung.
+- Die Kundenauswahl bleibt bei den sechs schlichten Grundvorlagen und den zum Artikel veröffentlichten eigenen Vorlagen. Die früheren 40 Materialvorlagen werden nicht erneut angeboten.
+- Eigene transparente PNG- und unterstützte statische SVG-Dekorationen, Bibliothek, Veröffentlichung, Archivierung und artikelbezogene Freigaben bleiben bestehen. Hochgeladene Motive erhalten dadurch keine nachträglich bearbeitbaren Pfadpunkte oder Linien.
+- Feste Vorlagentexte und freigegebene Kundenfelder bleiben klar getrennt. Formänderungen dürfen diese Freigaben nicht zurücksetzen.
+- Stärke, Stil und Schriftgröße bleiben gemeinsam in einer Zeile. Die Schriftgröße bleibt per Dropdown und eigener Zahleneingabe bedienbar; die entfernte zusätzliche Textvorschau wird nicht wieder eingeführt.
+- Vorlagenbilder bleiben vollständig sichtbar und die Vorlagenauswahl scrollbar, ohne überlappende Karten.
+- Die vorhandenen 25 Schriftfamilien, Textbogen, Textkontur und scharfer Versatzschatten, Kundenbild-Upload, ausdrücklicher Zuschnitt, Zoom von 50–400 %, Handwerkzeug und große Produktvorschau bleiben erhalten.
+- Bereits gespeicherte Gestaltungen werden durch die neuen Werkzeuge nicht automatisch verändert. Ältere darin enthaltene Ornamente bleiben darstellbar.
+- Website, Hero-Effekt und übrige Seiten werden nicht neu gestaltet.
+- Die optionale GPT-Freistellung bleibt ohne geeigneten eigenen OpenAI-Zugang nicht eingerichtet. Es kommen keine KI-Funktionen oder neuen Anbieter hinzu.
+- Der Abschluss bleibt ein Testabschluss ohne echte Zahlung, automatische Fertigung oder Produktionsfreigabe.
 
 ## Nutzerablauf
 
-1. Einen Rohling wählen oder einen vorhandenen Entwurf öffnen.
-2. Die zum Material passende Vorlagenauswahl öffnen und nach Anlass oder Verwendungszweck eingrenzen.
-3. Eine Vorschau auswählen; bei vorhandener Gestaltung das Ersetzen ausdrücklich bestätigen.
-4. Im einfachen Modus Namen, Datum, Widmung oder ein eigenes Motiv einsetzen.
-5. Bei Bedarf bewusst zu „Frei bearbeiten“ wechseln und Rahmen, Ornamente, Kontur oder Gravurschatten anpassen.
-6. Details mit Zoom und großer Produktvorschau kontrollieren. Alle sichtbaren Elemente bleiben innerhalb der Gravurfläche.
-7. Den vollständigen Entwurf speichern, herunterladen oder den bestehenden Testabschluss durchlaufen.
+### Betreiber
 
-## Erscheinungsbild und Bediengefühl
+1. In der Verwaltung einen Artikel öffnen und bei Bedarf Materialdaten oder Gravurfläche anpassen.
+2. Eine eigene Artikelvorlage öffnen oder anlegen.
+3. Über „Formen“ eine Grundform per Klick hinzufügen.
+4. Position, Größe, Drehung sowie Füllung oder Kontur einstellen und die Ebene passend anordnen.
+5. Die Kundenvorschau kontrollieren und die Vorlage bewusst veröffentlichen. Bestehende Kundenentwürfe behalten ihre bisherige Gestaltung.
 
-- Die vorhandene ManuCreator-Gestaltung und die sichtbare Arbeitsfläche haben Vorrang. Neue Funktionen werden in Vorlagenwahl, Ebenenliste und Objekteigenschaften eingeordnet.
-- Die Holzkollektion wirkt natürlich und persönlich, die Metallkollektion klar und präzise. Die Unterschiede entstehen durch die Komposition, nicht bloß durch einen anderen Hintergrundfarbton.
-- Vorschauen zeigen die tatsächlich verwendete Gestaltung auf dem Rohling. Einzelne Dekorationen bleiben erkennbar und werden nicht zu überladenen Mustern verdichtet.
-- Effekt-Einstellungen erscheinen nur bei einer passenden Auswahl. Im einfachen Modus bleiben sie zugunsten der wenigen Inhaltsfelder verborgen.
-- Mobil bleibt die Produktansicht sichtbar; Vorlagenauswahl und Eigenschaften bewegen sich in begrenzten Bereichen statt die Seite zu einer langen Formularliste zu machen.
-- Sperrstatus, fehlende Bildmotive und unzulässige Einstellungen bleiben eindeutig erkennbar.
+### Kunden
+
+1. Einen Artikel frei gestalten oder bei einer dafür freigegebenen Vorlage bewusst „Frei bearbeiten“ wählen.
+2. Eine Grundform hinzufügen und innerhalb der Gravurfläche anpassen.
+3. Die Gesamtgestaltung mit Texten, eigenen Motiven und Formen in der Produktvorschau kontrollieren.
+4. Den Entwurf speichern, vollständig herunterladen oder den bestehenden Testabschluss durchlaufen.
+
+## UI/UX-Gefühl
+
+- Ein kompakter Einstieg **„Formen“** mit erkennbaren Symbolen für die sechs Grundformen; keine zusätzliche dauerhafte Werkzeugspalte.
+- Einstellungen erscheinen im vorhandenen Eigenschaftenbereich nur für die ausgewählte Form. Eine Linie zeigt beispielsweise Länge und Strichstärke, ein Kreis seinen Durchmesser.
+- Gefüllt und Kontur werden als klare, kompakte Auswahl dargestellt. Sperrstatus und ungültige Einstellungen bleiben erkennbar.
+- Der Rohling und das Gesamtmotiv haben Vorrang. Die Eigenschaften bleiben mobil separat scrollbar, ohne die Produktansicht durch eine lange Formularliste zu verdrängen.
+- Das bestehende Erscheinungsbild von ManuCreator wird beibehalten.
 
 ## Umsetzungsphasen
 
-### Phase 1 – aktueller Ausbau / MVP
+### Phase 1 – MVP, jetzt vorgesehen
 
-Jetzt vorgesehen sind insgesamt 40 eigenständige Vorlagen mit der Aufteilung 16 Holz / 14 Metall / 10 universell, die passende gefilterte Vorlagenauswahl, vorbereitete editierbare Rahmen und Ornamente sowie Textkonturen und ein klar versetzter Gravurschatten.
+Die sechs ausgewählten Grundformen werden per Klick in der Vorlagenverwaltung und im freien Kundenstudio verfügbar. Dazu gehören die beschriebenen Formeigenschaften, Ebenenfunktionen, geschützte Vorlagen, verbindliche Gravurgrenzen sowie die unveränderte Übernahme in Vorschau, Speicherung, Download und Testabschluss.
 
-Dazu gehören der einfache Personalisierungsmodus, der bewusste Übergang zur freien Bearbeitung, die vollständige Einhaltung der Gravurgrenzen einschließlich aller Effekte und die Übernahme in Vorschau, Speicherung, Download und Testabschluss. Bestehende Entwürfe und Funktionen bleiben kompatibel.
+Die vorhandene artikelbezogene Bearbeitung von Materialien und Gravurflächen bleibt der zentrale Verwaltungsweg. Die zuletzt angepasste Bilddarstellung und kompakte Schriftbedienung bleiben erhalten.
 
-### Phase 2 – spätere Erweiterung, nicht Teil der aktuellen Umsetzung
+### Phase 2 – Weitere Formen, nicht Teil der aktuellen Umsetzung
 
-Weitere Materialkollektionen etwa für Glas oder Schiefer, zusätzliche saisonale Reihen und Vorlagenfavoriten können nach gesonderter Freigabe folgen. Ein Vorlagenbaukasten für den Betreiber gehört nicht zum aktuellen Ausbau.
+Zusätzliche Formen und Varianten können später gesondert festgelegt werden, beispielsweise Pfeile, abgerundete Rechtecke, weitere Polygone oder andere Sterne. Sie werden jetzt nicht vorweggenommen.
 
-### Phase 3 – spätere Produktionsunterstützung, nicht Teil der aktuellen Umsetzung
+### Phase 3 – Erweiterte Gestaltung und Produktionsunterstützung, nicht Teil der aktuellen Umsetzung
 
-Fertigungsspezifische Detailprüfungen, geeignete Produktionsdateien und vertiefte Auftragsbearbeitung können separat geplant werden. Auch reale Anwendungsszenen oder Tischvorschauen benötigen eine eigene Freigabe. Es werden jetzt keine Produktionsaufträge oder solchen Szenen erzeugt.
+Freihandzeichnen, das Aufziehen neuer Formen, individuelle Pfadbearbeitung, das Verbinden oder Ausschneiden von Formen sowie fertigungsbezogene Dateiausgaben benötigen eine eigene Freigabe. Echte Zahlungen und automatische Fertigung bleiben außerhalb dieses Ausbaus.
 
 ## Annahmen
 
-- „Rund 40 Vorlagen insgesamt“ wird als Ziel von 40 eigenständigen Vorlagen einschließlich der bestehenden sechs verstanden. Die Aufteilung 16 / 14 / 10 und die genannten Themen konkretisieren die bestätigte Priorität Holz, Metall und universell.
-- Andere Materialien erhalten vorerst die universellen Vorlagen. Eine gleich große eigene Kollektion für jedes Material ist nicht vorgesehen.
-- Rohlingform, freigegebene Fläche und erlaubte Inhalte entscheiden, welche Vorlagen angeboten werden. Nicht jede Vorlage eignet sich für jede Größe.
-- Kontur und Schatten beziehen sich auf Texte. Eine automatische Konturerkennung oder Umrandung des freigestellten Motivs in beliebigen Fotos und Logos ist nicht enthalten; dekorative Rahmen können solche Motive umgeben.
-- Schatten sind ausschließlich scharf begrenzte, versetzte Gravurelemente. Weiche Schatten, Farbverläufe und physikalische Materialsimulationen sind nicht enthalten.
-- Rahmen und Ornamente sind vorbereitete, zusammenhängende Gestaltungselemente. Ein freier Zeicheneditor und das Bearbeiten einzelner Pfadpunkte sind nicht vorgesehen.
-- Vorlagen-Dekorationen sind zunächst gesperrt. Effekte und Formen werden erst im bewusst geöffneten freien Editor individuell veränderbar.
-- Die Grenze von zwölf Ebenen umfasst auch Dekorationen. Kontur und Schatten bleiben Eigenschaften ihrer Textebene und benötigen keine zusätzlichen Ebenen.
-- Die Gravurtauglichkeit eines konkreten Materials oder einer Detailstärke wird durch die Vorschau nicht verbindlich zugesichert. Eine Fertigungsfreigabe bleibt ein separater Vorgang.
-- Für diesen Ausbau sind keine neuen externen KI-Dienste oder Zugangsdaten erforderlich. Die fehlende OpenAI-Einrichtung betrifft weiterhin ausschließlich die optionale GPT-Freistellung.
-- Nur Phase 1 ist Gegenstand der aktuellen Freigabe.
+- Die Frage nach dem Einsatzort wurde übersprungen. Als Standard gelten deshalb **Vorlagenverwaltung und freies Kundenstudio**; eingeschränkte Personalisierungsvorlagen erhalten keine Formenwerkzeuge.
+- Linie, Kreis, Rechteck, Herz sowie zusätzlich Dreieck und Stern wurden ausdrücklich ausgewählt. Weitere Formen folgen nur nach gesonderter Freigabe.
+- Das Einfügen per Klick mit anschließender Anpassung wurde ausdrücklich ausgewählt. Ein Zeichenmodus zum Aufziehen mit Maus oder Finger ist nicht vorgesehen.
+- Die Wahl zwischen gefüllt und Kontur gilt für alle geschlossenen Grundformen, nicht ausschließlich für den Kreis. Linien erhalten nur die Einstellung ihrer Strichstärke.
+- Dreieck bedeutet zunächst gleichseitig, Stern zunächst fünfzackig. Eckenzahl, Sternspitzen und einzelne Pfadpunkte sind nicht einstellbar.
+- Rechtecke dürfen in Breite und Höhe getrennt verändert werden. Kreis, Herz, Dreieck und Stern behalten ihre beschriebenen Proportionen.
+- Die neuen Grundformen benötigen keine Veröffentlichung in der Dekorationsbibliothek und keine zusätzliche Freigabeliste je Artikel. Für ihre Nutzung gelten der freie Bearbeitungsmodus und die vorhandene Gravurfläche. Hochgeladene eigene Dekorationen behalten ihre separate Freigabelogik.
+- Größen und Strichstärken bleiben Gestaltungswerte der Arbeitsfläche. Die Vorschau macht keine verbindliche Zusage zu Mindestlinienbreite, Materialtauglichkeit, Gravurtiefe oder fertigungsgerechten Millimetermaßen einzelner Elemente.
+- Die vorhandene Ebenengrenze von zwölf wird nicht erhöht. Formen und Texteffekte führen keine zusätzlichen Schriftfamilien, KI-Aufrufe oder externen Dienste ein.
+- Die neue Grundformenauswahl ersetzt weder die sechs schlichten Vorlagen noch die eigene Dekorationsbibliothek. Sie ist ein kompakter zusätzlicher Werkzeugsatz.
+- Nur Phase 1 ist Gegenstand dieser Freigabe.

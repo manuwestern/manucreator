@@ -99,5 +99,13 @@ app.include_router(font_router)
 app.include_router(text_router)
 from studio.decorations import router as decorations_router
 app.include_router(decorations_router)
+from studio.decoration_library import router as decoration_library_router,public as decoration_assets_router
+app.include_router(decoration_library_router)
+app.include_router(decoration_assets_router)
+from studio.article_templates import router as article_templates_router,public as article_templates_public
+app.include_router(article_templates_router)
+app.include_router(article_templates_public)
+from studio.shapes import router as shapes_router
+app.include_router(shapes_router)
 from studio.templates import router as templates_router
 app.include_router(templates_router)

@@ -49,6 +49,8 @@ async def file_bytes(identity:str,guest=Depends(guest_id)):
 async def save_draft(design:Design,guest=Depends(guest_id)):
     product=await get_product(design.product_id)
     if design.elements is not None:
+        from .article_templates import enforce_customer_template
+        await enforce_customer_template(design,guest)
         validate_elements(design,product)
         texts=[e.text for e in design.elements if e.kind=='text' and not e.hidden]
         design.text=texts[0] if texts else '';design.subtitle=texts[1][:36] if len(texts)>1 else ''
@@ -87,6 +89,8 @@ async def save_draft(design:Design,guest=Depends(guest_id)):
     blank=await blank_bytes(product)
     if design.elements is not None:
         assets={identity:(await read_file(identity,guest))[0] for identity in {str(e.asset_id) for e in images}}
+        from .article_templates import decoration_assets
+        assets.update(await decoration_assets(design,guest))
         font_paths={e.font:await font_path(e.font) for e in design.elements if e.kind=='text'}
         for e in design.elements:
             if e.kind=='text':validate_chars(font_paths[e.font],e.text)

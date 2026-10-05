@@ -1,0 +1,64 @@
+{
+  "summary": "Focused retest for iteration19 completed on requested fixes and interrupted admin/customer own-template flow. Most regressions now pass; one functional gap remains for creating fixed (non-editable) text in admin template editor.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "/api/studio/uploads (within test_restricted_template_apply_and_forged_save_rejections)",
+        "issue": "One transient read-timeout occurred in full backend suite run; immediate retry passed (flaky network/preview latency)."
+      }
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "AdminTemplateEditor / TemplateFieldSettings",
+        "issue": "`field-customer-editable` checkbox did not reliably toggle off while creating second text layer, preventing deterministic setup of one fixed text + one required customer text in the same template.",
+        "selector": "[data-testid='field-customer-editable']",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Admin custom-template authoring (fixed+required text mix)",
+        "issue": "Because checkbox toggle failed in repeated runs, final template ended up with two customer text fields instead of one fixed + one customer-required field.",
+        "affected_selectors": [
+          "[data-testid='field-customer-editable']",
+          "[data-testid^='template-field-field-']"
+        ]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_studio_iteration18_templates_decorations.py",
+    "/app/test_reports/pytest/pytest_results_iteration19_backend.xml",
+    "/app/test_reports/pytest/pytest_results_iteration19_backend_retry.xml",
+    "/root/.emergent/automation_output/20261005_073416/console_20261005_073416.log",
+    "/root/.emergent/automation_output/20261005_073840/console_20261005_073840.log"
+  ],
+  "action_items": [
+    "Fix admin customer-editable toggle stability so text layer can be converted from customer field to fixed layer every time.",
+    "After fix, re-run a short admin-template authoring check to verify one fixed + one required field is enforceable and shown correctly in customer simple mode.",
+    "Optional hardening: add UI test for `field-customer-editable` state transition (checked->unchecked->checked)."
+  ],
+  "critical_code_review_comments": [
+    "PASS: Font controls row alignment is now exact at tested breakpoints; top/bottom bounds matched across weight/style/size outer controls.",
+    "PASS: Template picker image containment/overlap regression resolved at 390 and 844x390; all six basic cards visible and non-overlapping.",
+    "PASS: Duplicate React key warning root-cause fix appears effective; no duplicate-key console warnings observed during add/switch/duplicate layer operations.",
+    "PASS: Back navigation from template editor returns to `/verwaltung/artikel/{id}?tab=templates` in tested flows.",
+    "PASS: Positive admin->customer->cart->testcheckout->archive->reopen historical draft flow succeeded (run7) for own-template with custom decoration and protected mode."
+  ],
+  "updated_files": [
+    "/app/test_reports/iteration_19.json"
+  ],
+  "success_rate": {
+    "backend": "100% after one retry (9/9 passed; 1 flaky timeout observed then passed)",
+    "frontend": "~93% (all requested regressions pass except fixed-text toggle reliability)"
+  },
+  "seed_data_creation": "Created temporary TEST_UI_I19* admin fixtures (templates/decorations), then archived test decoration/template records used in successful run7.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Use existing archived draft id `6b5b7073-3ed2-4ec3-b3a4-183d02a6c03f` as historical-rendering reference. Core fixed regressions passed. Remaining gap is deterministic `field-customer-editable` toggle behavior during admin authoring.",
+  "rca of the issue": "RCA (remaining bug): while editing a selected text layer in AdminTemplateEditor, clicking `field-customer-editable` can leave checked state unchanged. This blocks reliable conversion to fixed content. Reproduction: create template -> add second text layer -> click customer-editable checkbox to disable -> state can remain checked. Mitigation: verify controlled checkbox binding and selected-layer state updates in TemplateFieldSettings/update path; add assertion test for state transition persistence."
+}

@@ -1,10 +1,11 @@
 import { ArrowDown, ArrowUp, Copy, Eye, EyeOff, Image, LockKeyhole, LockKeyholeOpen, Trash2, Type, Shapes } from 'lucide-react';
+import { shapeNames } from '@/lib/studioShapes';
 
 export const LayerList = ({ elements, selected, onSelect, updateElement, reorder, duplicate, remove, disabled }) =>
   <section className="layer-list" aria-label="Ebenen"><div className="layer-heading"><h2>Ebenen</h2><span data-testid="layer-count">{elements.length} / 12</span></div>
     {[...elements].reverse().map(e => {
-      const index=elements.findIndex(item=>item.id===e.id),Icon=e.kind==='text'?Type:e.kind==='decoration'?Shapes:Image;
-      const name=e.kind==='text'?e.text||'Leerer Text':e.kind==='decoration'?e.field_label||'Dekoration':'Bild / Logo';
+      const index=elements.findIndex(item=>item.id===e.id),Icon=e.kind==='text'?Type:['decoration','shape'].includes(e.kind)?Shapes:Image;
+      const name=e.kind==='text'?e.text||'Leerer Text':e.kind==='shape'?shapeNames[e.shape_type]:e.kind==='decoration'?e.field_label||'Dekoration':'Bild / Logo';
       return <div key={e.id} className={`layer-row ${selected===e.id?'is-selected':''} ${e.hidden?'is-hidden':''}`} data-testid={`layer-${e.id}`}>
         <button className="layer-select" onClick={()=>onSelect(e.id)} disabled={disabled} aria-pressed={selected===e.id} data-testid={`layer-select-${e.id}`}><Icon size={16}/><span>{name}</span></button>
         <div className="layer-actions"><button onClick={()=>updateElement(e.id,{hidden:!e.hidden})} disabled={disabled} title={e.hidden?'Einblenden':'Ausblenden'} aria-label={e.hidden?'Ebene einblenden':'Ebene ausblenden'} data-testid={`layer-visibility-${e.id}`}>{e.hidden?<EyeOff size={14}/>:<Eye size={14}/>}</button><button onClick={()=>updateElement(e.id,{locked:!e.locked})} disabled={disabled} aria-pressed={e.locked} title={e.locked?'Entsperren':'Sperren'} aria-label={e.locked?'Ebene entsperren':'Ebene sperren'} data-testid={`layer-lock-${e.id}`}>{e.locked?<LockKeyhole size={14}/>:<LockKeyholeOpen size={14}/>}</button></div>

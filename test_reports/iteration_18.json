@@ -1,0 +1,76 @@
+{
+  "summary": "Executed backend+frontend verification for the reported template/image modal fix, new font-size control behavior, admin decoration/template workflows, and updated 6-basic-template regression expectations.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Font controls row (customer + admin editors)",
+        "issue": "Weight/style/size controls are not perfectly aligned on one row by control bounding-box top; measured Y-offsets remained (customer mobile 390x844: ~14px, admin desktop: ~9px).",
+        "selector": "[data-testid='font-style-size-row']",
+        "priority": "HIGH"
+      },
+      {
+        "component": "Admin UI list rendering",
+        "issue": "Console repeatedly logs React warning 'Encountered two children with the same key' while running admin decoration/template flow.",
+        "selector": "admin decoration/template views",
+        "priority": "MEDIUM"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Admin template editor -> back navigation",
+        "issue": "After saving draft and clicking [data-testid='template-editor-back'], route returned to product info tab; automation expecting template-list pane timed out. Behavior may be intentional but should be clarified for UX/testability.",
+        "affected_selectors": [
+          "[data-testid='template-editor-back']",
+          "[data-testid='article-templates']"
+        ]
+      }
+    ],
+    "design_issues": [
+      {
+        "screen": "/gestalten and /verwaltung/.../vorlagen editor",
+        "issues": [
+          "Font size field appears visually lower than weight/style controls; does not satisfy strict same-row alignment intent from user requirement."
+        ]
+      }
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_studio_iteration18_templates_decorations.py",
+    "/app/backend/tests/test_studio_phase1_regression.py",
+    "/app/test_reports/pytest/pytest_results_iteration18_backend.xml",
+    "/app/test_reports/pytest/pytest_results_iteration18_phase1.xml",
+    "/root/.emergent/automation_output/20261005_071946/console_20261005_071946.log",
+    "/root/.emergent/automation_output/20261005_072110/console_20261005_072110.log",
+    "/root/.emergent/automation_output/20261005_072148/console_20261005_072148.log"
+  ],
+  "action_items": [
+    "Adjust CSS/grid alignment so weight, style, and size input top/baseline align in one row for both customer and admin editors.",
+    "Investigate duplicate React key warnings in admin decoration/template UI lists and ensure stable unique keys per rendered sibling list.",
+    "Clarify/confirm intended destination of template-editor-back (product info vs template list); update UX or test hook accordingly.",
+    "Optional: run additional manual WebKit-specific verification for template modal layout if a WebKit runtime is available in environment."
+  ],
+  "critical_code_review_comments": [
+    "Outdated 40-template regression expectation was still present in test_studio_phase1_regression.py; updated to approved 6 basics and own-template coexistence checks.",
+    "Template modal overlap/cropping regression appears fixed: across 320/390/844-landscape/768/1024/1440, cards did not overlap, image naturalWidth>0, object-fit=contain, and final row remained visible.",
+    "Font-size validation behavior is correct functionally: preset 32, manual 27, decimal 24.5 apply; invalid <4/>200/non-numeric do not mutate canvas; oversize in-bounds check triggers existing error and keeps last valid design state."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_studio_phase1_regression.py",
+    "/app/tests/assets/iteration18-safe.svg",
+    "/app/tests/assets/iteration18-unsafe.svg",
+    "/app/test_reports/iteration_18.json"
+  ],
+  "success_rate": {
+    "backend": "100% (14/14 tests passed across iteration18 templates/decorations + phase1 regression suite after expectation update)",
+    "frontend": "~85% (priority user bug fixed and most controls/flows passed; alignment+console issues remain)"
+  },
+  "seed_data_creation": "Created temporary TEST_UI* admin decoration/template fixtures during UI testing; cleaned up by deleting TEST_UI-prefixed records from MongoDB.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Verified explicit user bug: template picker cards/images are fully visible and non-overlapping across requested responsive sizes including mobile landscape; search + replace confirm/cancel + undo still work. Verified no [data-testid='font-example'], size dropdown/input logic works in customer and admin editors. Remaining concern is strict one-row vertical alignment requirement and duplicate-key console warnings in admin flow. WebKit-specific run was not executed in this container tooling.",
+  "rca of the issue": "Row-alignment issue likely originates from mixed control box metrics in .curated-variants/.font-size-combobox styles (different margins/padding/line-heights), causing size input top offset versus weight/style selects. Duplicate-key warning indicates at least one rendered sibling list receives non-unique key values during admin flow refresh; likely list hydration/state merge timing around decoration/template reloads."
+}

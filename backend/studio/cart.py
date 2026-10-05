@@ -78,6 +78,9 @@ async def check_available(draft):
     try:
         design=Design.model_validate(draft['design'])
         if design.elements is not None:
+            from .article_templates import enforce_customer_template,decoration_assets
+            await enforce_customer_template(design,draft['guest'])
+            await decoration_assets(design,draft['guest'])
             validate_elements(design,current)
             for element in design.elements:
                 if element.kind=='text':await font_path(element.font)

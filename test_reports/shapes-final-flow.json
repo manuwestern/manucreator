@@ -1,0 +1,46 @@
+{
+  "checks": [
+    {
+      "check": "shape-specific boundary feedback preserves last state",
+      "passed": true
+    },
+    {
+      "check": "admin UI publishes protected template with circle,line,heart and required text",
+      "passed": true,
+      "template_id": "4e32c43e-c6b1-4e0b-87ff-7aca67735a6c"
+    },
+    {
+      "check": "customer personalizes only approved text and saves exact shape snapshot",
+      "passed": true,
+      "draft_id": "d6093158-941c-4ecc-bdea-903a66eb08fb"
+    },
+    {
+      "check": "800x800 full exports pixel-identical at100 and250percent plus pan",
+      "passed": true,
+      "rgba_sha256": "ad2c7223e2a2539dea00fe57638ab8ed7f3dbe8f0d26e00edb5ff66af8b333a4"
+    },
+    {
+      "check": "large product preview uses identical shapes and text",
+      "passed": true
+    },
+    {
+      "check": "saved draft reopen restores exact geometry and pixel-identical full export",
+      "passed": true
+    },
+    {
+      "check": "complete customer cart/test-checkout preserves all shape properties",
+      "passed": true,
+      "reference": "TEST-8DA366DE"
+    },
+    {
+      "check": "archived template keeps historical draft and export pixel-identical",
+      "passed": true
+    },
+    {
+      "check": "archiving removes new selection; permitted historical personalization remains saveable without changing shapes",
+      "passed": true
+    }
+  ],
+  "template_id": "4e32c43e-c6b1-4e0b-87ff-7aca67735a6c",
+  "mocked_apis": false
+}

@@ -87,3 +87,4 @@ android-sdk/
 .browser-testing/lib/python3.11/site-packages/playwright/driver/node
 frontend/node_modules/.cache/default-development/5.pack
 frontend/node_modules/.cache/default-development/4.pack
+frontend/node_modules/.cache/default-development/11.pack

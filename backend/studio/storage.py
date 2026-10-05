@@ -36,7 +36,7 @@ async def operation(method, path, data=None, content_type=None):
 
 async def save_file(guest, content, kind, mime='image/png', extra=None):
     identity = str(uuid.uuid4())
-    suffix = 'png' if mime == 'image/png' else 'webp'
+    suffix = {'image/png':'png','image/webp':'webp','image/svg+xml':'svg'}.get(mime,'bin')
     path = f"{os.environ['STUDIO_APP_PREFIX']}/uploads/{guest}/{identity}.{suffix}"
     try:
         response = await operation('PUT', path, content, mime)

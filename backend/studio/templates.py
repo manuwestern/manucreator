@@ -20,7 +20,9 @@ from .engraving_effects import effect_args
 from .transform_geometry import inside
 from .ornaments import ROUND, BY_ID as ORNAMENTS
 from .layer_rendering import render_layers
-from .template_catalog import TEMPLATES, BY_ID
+from .template_catalog import UNIVERSAL, BY_ID
+TEMPLATES=UNIVERSAL[:6]
+for _template in TEMPLATES:_template['collection']='universell'
 
 router=APIRouter(prefix='/api/studio/templates',tags=['Gestaltungsvorlagen'])
 
@@ -98,18 +100,19 @@ def make_design(template,product):
 
 @router.get('')
 async def list_templates(product_id:str):
-    product=await get_product(product_id);items=[]
-    for template in TEMPLATES:
+    from .article_templates import public_items
+    product=await get_product(product_id);items=await public_items(product)
+    for template in TEMPLATES if product.get('show_basic_templates',True) else []:
         if not compatible(template,product):continue
         try:await asyncio.to_thread(make_design,template,product)
         except HTTPException:continue
         items.append({key:template[key] for key in ('id','name','subtitle','requires','collection','occasion')} | {'version':2,'compact':compact_product(product),'preview':f"/api/studio/templates/{template['id']}/preview?product_id={product_id}&v={product['version']}"})
-    return {'items':items,'product_id':product_id,'catalog_count':40,'collections':{'holz':16,'metall':14,'universell':10}}
+    return {'items':items,'product_id':product_id,'catalog_count':6}
 
 @router.post('/{identity}/apply',response_model=Design)
 async def apply_template(identity:str,payload:ApplyRequest,guest=Depends(guest_id)):
     product=await get_product(payload.product_id);template=BY_ID.get(identity)
-    if not template or not compatible(template,product):raise HTTPException(422,'Diese Vorlage ist mit dem Rohling nicht vereinbar.')
+    if not template or identity not in {t['id'] for t in TEMPLATES} or not product.get('show_basic_templates',True) or not compatible(template,product):raise HTTPException(422,'Diese Vorlage ist mit dem Rohling nicht vereinbar.')
     return await asyncio.to_thread(make_design,template,product)
 
 def placeholder_png():
@@ -132,7 +135,7 @@ def preview_png(design_json,product_json,blank):
 @router.get('/{identity}/preview')
 async def template_preview(identity:str,product_id:str):
     product=await get_product(product_id);template=BY_ID.get(identity)
-    if not template or not compatible(template,product):raise HTTPException(404,'Vorlage nicht verfügbar.')
+    if not template or identity not in {t['id'] for t in TEMPLATES} or not product.get('show_basic_templates',True) or not compatible(template,product):raise HTTPException(404,'Vorlage nicht verfügbar.')
     design=await asyncio.to_thread(make_design,template,product)
     png=await asyncio.to_thread(preview_png,design.model_dump_json(),json.dumps(product,sort_keys=True),await blank_bytes(product))
     return Response(png,media_type='image/png',headers={'Cache-Control':'public, max-age=180'})

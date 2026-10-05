@@ -4,6 +4,7 @@ import { isInside } from '@/lib/transformGeometry';
 export const DecorationProperties=({element:e,product,update,disabled})=>{
   const [error,setError]=useState('');
   useEffect(()=>setError(''),[e]);
+  if(e.decoration_id)return <p className="property-status" data-testid="custom-decoration-name">{e.field_label||'Eigenes Motiv'} · Originale Liniengestaltung</p>;
   const stroke=value=>{
     const delta=value-(e.stroke_width??1.5),next={...e,stroke_width:value,x:e.x-delta/2,y:e.y-delta/2,w:e.w+delta,h:e.h+delta};
     if(!isInside(next,product.area,0)){setError('Diese Strichstärke passt nicht vollständig in die Gravurfläche. Die bisherige Einstellung bleibt erhalten.');return;}

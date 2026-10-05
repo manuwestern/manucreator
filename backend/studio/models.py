@@ -31,9 +31,15 @@ Font = Literal['modern','classic','bold','sans','sans-bold','sans-italic','serif
 
 class Element(Box, TextEffects):
     id: str = Field(min_length=1, max_length=60, pattern=r'^[a-zA-Z0-9_-]+$')
-    kind: Literal['text','image','decoration']
+    kind: Literal['text','image','decoration','shape']
+    shape_type: Literal['line','circle','rectangle','heart','triangle','star'] | None = None
+    shape_mode: Literal['filled','outline'] = 'filled'
+    shape_proportional: bool = True
     ornament: str | None = Field(default=None,max_length=40)
     stroke_width: float = Field(default=1.5,ge=.1,le=12,allow_inf_nan=False)
+    decoration_id: UUID | None = None
+    field_required: bool = False
+    field_max_length: int | None = Field(default=None,ge=1,le=60)
     text: str = Field(default='',max_length=60)
     font: str = Field(default='sans',max_length=80,pattern=r'^(modern|classic|bold|sans|sans-bold|sans-italic|serif|serif-italic|mono|narrow|fs:[a-f0-9]{32}|curated:[a-z0-9-]+:[1-9][0-9]{2}:normal|curated:[a-z0-9-]+:[1-9][0-9]{2}:italic)$')
     font_size: float = Field(default=0,ge=0,le=200,allow_inf_nan=False)
@@ -68,6 +74,8 @@ class Design(StrictModel):
     editor_mode: Literal['free','simple'] = 'free'
     template_id: str | None = Field(default=None,max_length=40)
     template_version: int | None = Field(default=None,ge=1)
+    template_revision_id: UUID | None = None
+    allow_free_edit: bool = True
     font_catalog_version: str = Field(default='manucreator-curated-1',max_length=50)
 
 class CartAdd(StrictModel):

@@ -21,6 +21,10 @@ async def initialize(database):
     await database.studio_drafts.create_index([('guest', 1), ('fingerprint', 1)], unique=True)
     await database.studio_cart.create_index([('guest', 1), ('draft_id', 1)], unique=True)
     await database.studio_orders.create_index([('guest', 1), ('request_id', 1)], unique=True)
+    for collection in ['studio_decorations','studio_article_templates','studio_template_revisions']:
+        await database[collection].create_index('id',unique=True)
+    await database.studio_template_uses.create_index([('guest',1),('revision_id',1)],unique=True)
+    await database.studio_decoration_grants.create_index([('guest',1),('decoration_id',1)],unique=True)
     try:
         await init_storage()
     except Exception:

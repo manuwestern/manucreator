@@ -1,0 +1,48 @@
+import { useEffect,useState,useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft,Save,Check,Eye } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Dialog,DialogContent,DialogTitle,DialogDescription } from '@/components/ui/dialog';
+import { adminApi } from '@/lib/adminApi';
+import { emptyDesign } from '@/lib/studioApi';
+import { newLayer } from '@/lib/studioLayers';
+import { fitElement,isInside } from '@/lib/transformGeometry';
+import { getTextPreview } from '@/lib/textPreview';
+import { DesignCanvas } from './DesignCanvas';
+import { LayerList } from './LayerList';
+import { LayerProperties } from './LayerProperties';
+import { ElementTools } from './ElementTools';
+import { TemplateFieldSettings } from './TemplateFieldSettings';
+import { AdminDecorationLibrary } from './AdminDecorationLibrary';
+import { AdminCustomerPreview } from './AdminCustomerPreview';
+import { AdminTemplateToolbar } from './AdminTemplateToolbar';
+import { createShape } from '@/lib/studioShapes';
+
+export const AdminTemplateEditor=({product,identity})=>{
+  const [item,setItem]=useState(null),[name,setName]=useState('Neue Vorlage'),[free,setFree]=useState(true),[design,setDesign]=useState({...emptyDesign(product.id),editor_mode:'free',elements:[]});
+  const [selected,setSelected]=useState(null),[history,setHistory]=useState([]),[future,setFuture]=useState([]),[busy,setBusy]=useState(false),[pending,setPending]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[library,setLibrary]=useState(false),[preview,setPreview]=useState(false),[imageType,setImageType]=useState(product.templates.includes('photo')?'photo':'logo');
+  const designRef=useRef(design);designRef.current=design;
+  useEffect(()=>{if(identity==='neu')return;let alive=true;setBusy(true);adminApi(`/article-templates/${identity}`).then(data=>{if(alive){setItem(data);setDesign({...data.design,editor_mode:'free'});setName(data.name);setFree(data.allow_free_edit);setSelected(data.design.elements[0]?.id||null);}}).catch(e=>{if(alive)setError(e.message);}).finally(()=>{if(alive)setBusy(false);});return()=>{alive=false;};},[identity]);
+  const commit=updater=>{const previous=designRef.current,next=typeof updater==='function'?updater(previous):updater;designRef.current=next;setHistory(old=>[...old.slice(-29),previous]);setFuture([]);setDesign(next);setNotice('');};
+  const update=(id,changes)=>commit(current=>({...current,elements:current.elements.map(e=>{if(e.id!==id)return e;const next={...e,...changes};if(e.template_slot&&!Object.prototype.hasOwnProperty.call(changes,'template_slot')){const dx=next.x+next.w/2-e.x-e.w/2,dy=next.y+next.h/2-e.y-e.h/2;next.template_slot={...e.template_slot,x:e.template_slot.x+dx,y:e.template_slot.y+dy};}return next;})}));
+  const add=async kind=>{if(design.elements.length>=12)return;setBusy(true);setError('');try{let e=newLayer(kind,product,{text:kind==='text'?'Dein Text':'',field_label:kind==='text'?'Vorname':imageType==='photo'?'Dein Foto':'Dein Logo',template_field:`field-${crypto.randomUUID().slice(0,8)}`,field_required:true,field_max_length:product.max_text,placeholder:kind==='image',image_type:imageType});const slot={x:e.x,y:e.y,w:e.w,h:e.h};if(kind==='text'){const rendered=await getTextPreview(e);e={...e,x:e.x+(e.w-rendered.width)/2,y:e.y+(e.h-rendered.height)/2,w:rendered.width,h:rendered.height};}e.template_slot=slot;commit({...design,elements:[...design.elements,e]});setSelected(e.id);}catch(e){setError(e.message);}finally{setBusy(false);}};
+  const addDecoration=d=>{const a=product.area,w=Math.min(a.w*.7,a.h*.7*d.ratio),h=w/d.ratio;const e=fitElement(newLayer('decoration',product,{ornament:'custom',decoration_id:d.id,field_label:d.name,x:a.x+(a.w-w)/2,y:a.y+(a.h-h)/2,w,h,locked:false}),a);commit({...design,elements:[e,...design.elements]});setSelected(e.id);setLibrary(false);};
+  const addShape=type=>{if(designRef.current.elements.length>=12||busy)return;const e=createShape(type,product);if(!isInside(e,product.area,0)){setError('Diese Form passt nicht in die Gravurfläche.');return;}commit(current=>({...current,elements:[...current.elements,e]}));setSelected(e.id);};
+  const duplicate=id=>{const e=design.elements.find(e=>e.id===id),copy={...e,id:crypto.randomUUID(),locked:false,template_field:e.template_field?`field-${crypto.randomUUID().slice(0,8)}`:null};commit({...design,elements:[...design.elements,copy]});setSelected(copy.id);};
+  const reorder=(id,delta)=>{const elements=[...design.elements],i=elements.findIndex(e=>e.id===id);if(i+delta<0||i+delta>=elements.length)return;[elements[i],elements[i+delta]]=[elements[i+delta],elements[i]];commit({...design,elements});};
+  const prepared=()=>({...design,allow_free_edit:free,elements:design.elements.map(e=>e.template_field?{...e,template_slot:e.template_slot||{x:e.x,y:e.y,w:e.w,h:e.h}}:e)});
+  const save=async()=>{const result=await adminApi(`/article-templates${item?'/'+item.id:''}`,{method:item?'PUT':'POST',body:{name,design:prepared(),allow_free_edit:free,sort_order:item?.sort_order||0,revision:item?.revision||1}});setItem(result);return result;};
+  const run=async publish=>{setBusy(true);setError('');setNotice('');try{const saved=await save();if(publish){const result=await adminApi(`/article-templates/${saved.id}/publish`,{method:'POST',body:{revision:saved.revision}});setItem(result);setNotice('Vorlage veröffentlicht. Neue Kundengestaltungen verwenden diese Version.');}else setNotice('Entwurf gespeichert. Eine bisherige Veröffentlichung bleibt unverändert.');}catch(e){setError(e.message);}finally{setBusy(false);}};
+  const active=design.elements.find(e=>e.id===selected),disabled=busy||pending,invalid=design.elements.some(e=>!isInside(e,product.area));
+  return <section className="admin-template-editor" data-testid="admin-template-editor"><div className="admin-editor-top"><Link to={`/verwaltung/artikel/${product.id}?tab=templates`} data-testid="template-editor-back"><ArrowLeft size={16}/>{product.name} · Vorlagen</Link><label>Vorlagenname<input value={name} maxLength={80} onChange={e=>setName(e.target.value)} data-testid="admin-template-name"/></label><span data-testid="admin-template-publication-state">{item?.published_revision_id?'Veröffentlichte Version vorhanden':'Entwurf'}</span></div><div className="admin-editor-options"><label className="admin-check"><input type="checkbox" checked={free} onChange={e=>setFree(e.target.checked)} data-testid="admin-template-allow-free"/>„Frei bearbeiten“ für Kunden anbieten</label><Button variant="outline" disabled={disabled||!design.elements.length} onClick={()=>setPreview(true)} data-testid="admin-template-customer-preview"><Eye size={16}/>Kundenvorschau</Button><Button variant="outline" disabled={disabled||name.trim().length<2} onClick={()=>run(false)} data-testid="admin-template-save"><Save size={16}/>Entwurf speichern</Button><Button disabled={disabled||invalid||!design.elements.length||name.trim().length<2} onClick={()=>run(true)} data-testid="admin-template-publish"><Check size={16}/>Veröffentlichen</Button></div>
+    {(error||invalid)&&<p role="alert" className="studio-error" data-testid="admin-template-editor-error">{error||'Mindestens ein Element liegt außerhalb der aktuellen Gravurfläche.'}</p>}{notice&&<p role="status" className="admin-notice" data-testid="admin-template-editor-notice">{notice}</p>}
+    <div className="admin-template-workspace">
+      <aside className="admin-template-layers"><LayerList elements={design.elements} selected={selected} onSelect={setSelected} updateElement={update} reorder={reorder} duplicate={duplicate} remove={id=>{commit({...design,elements:design.elements.filter(e=>e.id!==id)});setSelected(null);}} disabled={disabled}/></aside>
+      <section className="admin-template-stage">
+        <AdminTemplateToolbar product={product} imageType={imageType} setImageType={setImageType} disabled={disabled} count={design.elements.length} onText={()=>add('text')} onImage={()=>add('image')} onDecoration={()=>setLibrary(true)} onShape={addShape} canUndo={!!history.length} canRedo={!!future.length} onUndo={()=>{setFuture(old=>[design,...old]);setDesign(history.at(-1));setHistory(old=>old.slice(0,-1));}} onRedo={()=>{setHistory(old=>[...old,design]);setDesign(future[0]);setFuture(old=>old.slice(1));}}/>
+        <div className="admin-editor-canvas"><DesignCanvas product={product} design={design} guides adminMode selected={selected} onSelect={setSelected} updateElement={update} disabled={disabled}/></div>
+      </section>
+      <aside className="admin-template-properties">{active?<><TemplateFieldSettings key={`fields-${active.id}`} element={active} product={product} update={changes=>update(active.id,changes)} disabled={busy}/>{active.kind==='image'?<ElementTools element={active} product={product} update={changes=>update(active.id,changes)} disabled={disabled}/>:<LayerProperties key={`properties-${active.id}`} element={active} product={product} update={changes=>update(active.id,changes)} disabled={busy} onPending={setPending}/>}</>:<p data-testid="admin-template-no-selection">Wähle eine Ebene.</p>}</aside>
+    </div>
+    <Dialog open={library} onOpenChange={setLibrary}><DialogContent className="admin-library-dialog" data-testid="admin-template-library-dialog"><DialogTitle>Eigene Dekoration wählen</DialogTitle><DialogDescription>Bestätigte Motive aus deiner Bibliothek</DialogDescription><AdminDecorationLibrary onChoose={addDecoration}/></DialogContent></Dialog>{preview&&<AdminCustomerPreview design={prepared()} product={product} onClose={()=>setPreview(false)}/>}</section>;
+};

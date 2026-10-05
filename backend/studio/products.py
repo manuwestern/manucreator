@@ -40,6 +40,8 @@ class ProductInput(StrictModel):
     active: bool = True
     is_sample: bool = True
     version: int = Field(default=1, ge=1)
+    show_basic_templates: bool = True
+    decoration_ids: list[str] = Field(default_factory=list,max_length=100)
 
 class ProductResponse(ProductInput):
     model_config = ConfigDict(extra='ignore')
@@ -108,6 +110,9 @@ async def product_image(identity: str):
 
 async def checked_values(payload, old=None):
     values = payload.model_dump()
+    if values['decoration_ids']:
+        count=await db().studio_decorations.count_documents({'id':{'$in':values['decoration_ids']},'state':'published','confirmed':True})
+        if count!=len(set(values['decoration_ids'])):raise HTTPException(422,'Bitte ausschließlich veröffentlichte eigene Dekorationen freigeben.')
     if payload.image_file_id:
         record = await db().studio_files.find_one({'id': payload.image_file_id, 'guest': 'product-catalog', 'kind': 'product_blank', 'is_deleted': False}, {'_id': 0})
         if not record:

@@ -1,0 +1,27 @@
+/* Content-sized tracks: the bounded dialog scrolls rather than shrinking rows. */
+.template-picker-dialog .template-options{grid-auto-rows:max-content;align-content:start;overflow-y:auto;overflow-x:hidden}
+.template-picker-dialog .template-options>button{display:block;height:auto;min-height:0;align-self:start}
+.template-card-image{display:block;position:relative;width:100%;aspect-ratio:1;overflow:hidden;background:#f1f4eb}
+.template-options .template-card-image>img{position:absolute;inset:0;display:block;width:100%;height:100%;max-height:none;aspect-ratio:auto;object-fit:contain;object-position:center}
+.template-options .template-card-meta{display:block;min-height:64px}
+.layer-properties .curated-variants.has-size{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(66px,.85fr);gap:7px;align-items:start}
+.layer-properties .curated-variants.legacy-size{grid-template-columns:minmax(0,1fr)}
+.layer-properties .curated-variants>label,.layer-properties .font-size-field{min-width:0;margin-bottom:15px}
+.layer-properties .curated-variants select{padding-left:7px;padding-right:3px;font-size:12px;height:41px;min-height:41px;max-width:100%}
+.layer-properties .font-size-field>label{margin-bottom:8px}
+.font-size-combobox{display:flex;align-items:stretch;height:41px;min-height:41px;min-width:0;border:1px solid #d7e1cd;background:white;border-radius:4px;overflow:hidden}
+.layer-properties .font-size-combobox>input{flex:1;min-width:0;width:0;height:100%;min-height:0;margin:0;border:0;border-radius:0;padding:7px;font-size:12px;background:transparent;box-shadow:none}
+.font-size-combobox:focus-within{outline:2px solid #a7bd94;outline-offset:1px}
+.font-size-combobox>button{width:25px;flex:0 0 25px;display:grid;place-items:center;color:#637d51;background:#f5f8ef;border-left:1px solid #e1e8d9;transition:background-color .15s}
+.font-size-combobox>button:hover{background:#e5efda}
+.font-size-menu{width:128px;padding:5px;background:#fbfcf8;border:1px solid #cbd9bf;border-radius:5px;color:#415a33}
+.font-size-menu [role=listbox]{max-height:min(250px,45dvh);overflow-y:auto;overscroll-behavior:contain}
+.font-size-menu [role=option]{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:35px;padding:8px 10px;font-size:12px;border-radius:3px;text-align:left;transition:background-color .15s}
+.font-size-menu [role=option]:hover,.font-size-menu [role=option]:focus-visible,.font-size-menu [aria-selected=true]{background:#e6efdb;outline:none}
+.layer-properties .font-size-field .property-error{font-size:10px;line-height:1.5;overflow-wrap:anywhere;padding:7px;margin-top:8px}
+.layer-properties .curated-variants .font-control-field{display:grid;grid-template-rows:16px 40px auto;row-gap:6px;align-content:start;min-width:0;margin:0 0 15px}
+.layer-properties .curated-variants .font-control-field>label{display:block;margin:0;padding:0;height:16px;line-height:16px;font-size:11px}
+.layer-properties .curated-variants .font-control-field>select,.layer-properties .curated-variants .font-control-field>.font-size-combobox{grid-row:2;box-sizing:border-box;height:40px;min-height:40px;margin:0;width:100%;font-size:12px}
+.font-size-combobox #text-font-size{box-sizing:border-box;flex:1;min-width:0;width:0;height:100%;min-height:0;margin:0;border:0;border-radius:0;padding:6px 7px;font-size:12px;line-height:normal;box-shadow:none}
+@media(max-width:760px){.layer-properties .curated-variants select,.font-size-combobox{height:44px;min-height:44px}.layer-properties .curated-variants select{font-size:14px}.layer-properties .font-size-combobox>input{font-size:14px}.font-size-combobox>button{flex-basis:27px;width:27px}.font-size-menu [role=option]{min-height:41px;font-size:14px}}
+@media(max-width:760px){.layer-properties .curated-variants .font-control-field{grid-template-rows:16px 44px auto}.layer-properties .curated-variants .font-control-field>select,.layer-properties .curated-variants .font-control-field>.font-size-combobox{height:44px;min-height:44px;font-size:14px}.font-size-combobox #text-font-size{font-size:14px}}

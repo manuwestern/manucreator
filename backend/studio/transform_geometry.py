@@ -6,7 +6,7 @@ def corners(box):
     return [(cx+u*c-v*s,cy+u*s+v*c) for u,v in [(-box['w']/2,-box['h']/2),(box['w']/2,-box['h']/2),(box['w']/2,box['h']/2),(-box['w']/2,box['h']/2)]]
 
 def inside(box,area,tolerance=.12):
-    if box.get('kind')=='decoration' and box.get('ornament') in {'circle-frame','double-circle'}:
+    if (box.get('kind')=='shape' and box.get('shape_type')=='circle') or (box.get('kind')=='decoration' and box.get('ornament') in {'circle-frame','double-circle'}):
         # Outer circular contour already includes stroke; bounding-square corners are not ink.
         if abs(box['w']-box['h'])>.1:return False
         cx,cy=box['x']+box['w']/2,box['y']+box['h']/2;r=box['w']/2

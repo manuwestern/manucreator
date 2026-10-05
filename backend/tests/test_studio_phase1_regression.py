@@ -102,9 +102,9 @@ def test_templates_list_preview_and_apply_protection(api_client):
     assert listed.status_code == 200
     payload = listed.json()
     items = payload["items"]
-    assert payload["catalog_count"] == 40
-    assert payload["collections"] == {"holz": 16, "metall": 14, "universell": 10}
-    assert len(items) == 26
+    assert payload["catalog_count"] == 6
+    basic_items = [item for item in items if not item.get("own")]
+    assert len(basic_items) == 6
     ids = [item["id"] for item in items]
     assert len(ids) == len(set(ids))
 
