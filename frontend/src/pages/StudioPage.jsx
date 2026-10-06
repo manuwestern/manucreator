@@ -18,6 +18,8 @@ import { createShape } from '@/lib/studioShapes';
 import { configKey, emptyDesign, price, studioApi } from '@/lib/studioApi';
 import { migrateDesign, newLayer, reframe, summarized } from '@/lib/studioLayers';
 import { fitElement,imageFrame,isValidElement } from '@/lib/transformGeometry';
+import { MobileStudio } from '@/components/studio/MobileStudio';
+const useIsMobile=()=>{const [mobile,setMobile]=useState(()=>window.matchMedia('(max-width: 760px)').matches);useEffect(()=>{const q=window.matchMedia('(max-width: 760px)'),h=e=>setMobile(e.matches);q.addEventListener('change',h);return()=>q.removeEventListener('change',h);},[]);return mobile;};
 import '@/styles/studio-editor.css';
 import '@/styles/studio-layers.css';
 import '@/styles/studio-precision.css';
@@ -28,20 +30,21 @@ const LOCAL = 'manucreator-studio-design';
 const stored = () => { try { return JSON.parse(localStorage.getItem(LOCAL)) || {}; } catch { return {}; } };
 
 export default function StudioPage() {
-  const { products, setCart } = useStudio(), navigate = useNavigate(), [params] = useSearchParams();
+  const { products, setCart } = useStudio(), navigate = useNavigate(), [params] = useSearchParams(), mobile=useIsMobile();
   const restoreId = useRef(stored().draftId);
   const [design, setDesign] = useState(() => { const previous=stored().design;const raw = previous || emptyDesign(products[0]?.id || 'holzscheibe'); const p = products.find(p => p.id === raw.product_id) || products[0]; return p ? previous?reframe(migrateDesign(raw,p),p):{...raw,editor_mode:'free',elements:[newLayer('text',p,{text:'Dein Unikat'.slice(0,p.max_text)})]} : { ...raw, elements: [] }; });
   const [draft, setDraft] = useState(null), [selected, setSelected] = useState(()=>design.elements.at(-1)?.id||null), [history, setHistory] = useState([]), [future, setFuture] = useState([]);
   const [candidate,setCandidate]=useState(null),[textPending,setTextPending]=useState(false),[mobilePanel,setMobilePanel]=useState('properties');
   const [simpleInvalid,setSimpleInvalid]=useState(false),[largePreview,setLargePreview]=useState(false),[templateRevision,setTemplateRevision]=useState(0);
   const [guides, setGuides] = useState(true), [action, setAction] = useState(''), [error, setError] = useState(''), [canvasReady, setCanvasReady] = useState(false);
-  const canvasRef = useRef(null), saving = useRef(null), operation = useRef({id:0,type:null}), product = products.find(p => p.id === design.product_id) || products[0], busy = !!action||!!candidate;
+  const canvasRef = useRef(null), saving = useRef(null), operation = useRef({id:0,type:null}), designRef=useRef(design), product = products.find(p => p.id === design.product_id) || products[0], busy = !!action||!!candidate;
+  designRef.current=design;
   const key = configKey(summarized(design)), active = design.elements.find(e => e.id === selected);
   const invalidElements=design.elements.filter(e=>!isValidElement(e)||(e.kind==='text'&&e.text.length>(product?.max_text||60))||(e.kind==='image'&&product&&!product.templates.includes(e.image_type))||(e.kind==='image'&&e.image_ratio>0&&Math.abs(e.w/e.h/(e.image_ratio*e.crop.w/e.crop.h)-1)>.012));
   const incomplete=design.elements.some(e=>e.kind==='image'&&(e.placeholder||!e.asset_id));
   const valid = !invalidElements.length&&!incomplete&&!simpleInvalid&&design.elements.some(e => !e.hidden && (e.kind === 'text' ? e.text.trim() : e.kind==='shape'?e.shape_type:e.kind==='decoration'?e.ornament:e.asset_id));
   const simple=design.editor_mode==='simple'&&!!design.template_id;
-  useEffect(() => { document.title = 'Dein Gestaltungsstudio · ManuCreator'; document.body.classList.add('precision-workspace');const resize=()=>document.documentElement.style.setProperty('--studio-vh',`${window.visualViewport?.height||window.innerHeight}px`);resize();window.visualViewport?.addEventListener('resize',resize);window.addEventListener('resize',resize);return()=>{document.body.classList.remove('precision-workspace');window.visualViewport?.removeEventListener('resize',resize);window.removeEventListener('resize',resize);}; }, []);
+  useEffect(() => { document.title = 'Dein Gestaltungsstudio · ManuCreator'; if(!mobile)document.body.classList.add('precision-workspace');const resize=()=>document.documentElement.style.setProperty('--studio-vh',`${window.visualViewport?.height||window.innerHeight}px`);resize();window.visualViewport?.addEventListener('resize',resize);window.addEventListener('resize',resize);return()=>{document.body.classList.remove('precision-workspace');window.visualViewport?.removeEventListener('resize',resize);window.removeEventListener('resize',resize);}; }, [mobile]);
   useEffect(() => { localStorage.setItem(LOCAL, JSON.stringify({ design, draftId: draft?.key === key ? draft.id : null })); }, [design,draft,key]);
   useEffect(() => { if (selected&&!design.elements.some(e=>e.id===selected))setSelected(design.elements.at(-1)?.id||null); }, [design.elements, selected]);
   useEffect(() => {
@@ -59,8 +62,8 @@ export default function StudioPage() {
     }).catch(e => { if (alive) setError(e.message); }).finally(() => { if (alive) setAction(''); });
     return () => { alive = false; };
   }, [params,products]);
-  const commit = next => { setHistory(old => [...old.slice(-29),design]); setFuture([]); setDesign(next); setError(''); };
-  const updateElement = (id, changes) => commit({ ...design, elements: design.elements.map(e => e.id === id ? { ...e,...changes } : e) });
+  const commit = next => { const previous=designRef.current,value=typeof next==='function'?next(previous):next; designRef.current=value; setHistory(old => [...old.slice(-29),previous]); setFuture([]); setDesign(value); setError(''); };
+  const updateElement = (id, changes) => commit(current=>({ ...current, elements: current.elements.map(e => e.id === id ? { ...e,...changes } : e) }));
   const naturalSize=useCallback((id,w,h)=>{setDesign(old=>{const element=old.elements.find(e=>e.id===id);if(!element||element.kind!=='image'||element.image_ratio>0)return old;return{...old,elements:old.elements.map(e=>e.id===id?{...e,image_ratio:w/h}:e)};});},[]);
   const select=id=>{if(busy||textPending||simple)return;setSelected(id);if(id)setMobilePanel('properties');};
   const addText = () => { const e = newLayer('text',product); commit({ ...design,elements:[...design.elements,e] }); setSelected(e.id); };
@@ -96,6 +99,7 @@ export default function StudioPage() {
   if (!product) return <main className="studio-loading"><p data-testid="studio-no-products">Aktuell sind keine Rohlinge verfügbar.</p></main>;
   const viewDesign=candidate&&!candidate.showOriginal?{...design,elements:design.elements.map(e=>e.id===candidate.elementId?{...e,asset_id:candidate.result.id}:e)}:design;
   const editBusy=busy||textPending;
+  if (mobile) return <MobileStudio products={products} product={product} design={design} viewDesign={viewDesign} selected={selected} select={select} active={active} commit={commit} updateElement={updateElement} addText={addText} addImage={addImage} addShape={addShape} addDecoration={addDecoration} duplicate={duplicate} remove={remove} undo={undo} redo={redo} history={history} future={future} run={run} action={action} setAction={setAction} valid={valid} canvasReady={canvasReady} setCanvasReady={setCanvasReady} canvasRef={canvasRef} saved={draft?.key===key} error={error} setError={setError} editBusy={editBusy} simple={simple} naturalSize={naturalSize} setTextPending={setTextPending} setCart={setCart} onProduct={p=>{commit(reframe(design,p));setDraft(null);}} onTemplate={next=>{commit(next);setSelected(next.elements[0]?.id||null);setTemplateRevision(v=>v+1);setSimpleInvalid(false);}}/>;
   return <main className={`precision-editor ${simple?'simple-editor':''}`} data-testid="precision-editor" data-editor-mode={simple?'simple':'free'}><div className="precision-topbar"><div className="workspace-title"><span className="eyebrow">MANUCREATOR STUDIO</span><h1 data-testid="studio-title">Dein Unikat.</h1></div><BlankPicker products={products} product={product} onSelect={p=>{commit(reframe(design,p));setDraft(null);}} disabled={editBusy}/><TemplatePicker product={product} hasDesign={design.elements.length>0} disabled={editBusy} onApply={next=>{commit(next);setSelected(next.elements[0]?.id||null);setMobilePanel('properties');setTemplateRevision(v=>v+1);setSimpleInvalid(false);}}/><span className="editor-live-label" data-testid="studio-preview-mode"><span/>{simple?'Einfach gestalten':'Frei gestalten'}</span></div>
     <div className="precision-workarea" data-mobile-panel={simple?'properties':mobilePanel}><aside className="precision-layers" data-testid="workspace-layers">{!simple&&<LayerList elements={design.elements} selected={selected} onSelect={select} updateElement={updateElement} reorder={reorder} duplicate={duplicate} remove={remove} disabled={editBusy}/>}</aside>
       <section className="precision-canvas" data-testid="workspace-canvas"><div className="editor-toolbar">{!simple&&<><button className="editor-add-button" title="Text hinzufügen" aria-label="Text hinzufügen" onClick={()=>{addText();setMobilePanel('properties');}} disabled={editBusy||design.elements.length>=12} data-testid="add-text-layer"><Type size={16}/><span>Text hinzufügen</span></button>{product.templates.some(t=>t!=='text')&&<LayerUpload disabled={editBusy||design.elements.length>=12} onUpload={addImage} onBusy={v=>setAction(v?'upload':'')} onError={setError}/>}<DecorationPicker product={product} disabled={editBusy||design.elements.length>=12} onAdd={addDecoration}/><ShapePicker disabled={editBusy||design.elements.length>=12} onAdd={addShape}/></>}{simple&&<span className="simple-toolbar-label" data-testid="simple-mode-label">Deine Vorlage · feste Gestaltung</span>}<div className="editor-history"><button onClick={undo} disabled={editBusy||!history.length} title="Rückgängig" aria-label="Rückgängig" data-testid="design-undo"><Undo2 size={17}/></button><button onClick={redo} disabled={editBusy||!future.length} title="Wiederholen" aria-label="Wiederholen" data-testid="design-redo"><Redo2 size={17}/></button></div></div>

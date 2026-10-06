@@ -1,6 +1,6 @@
 import { useCallback,useRef,useState } from 'react';
 
-export const useCanvasCamera=(stage,size,initialHand=false)=>{
+export const useCanvasCamera=(stage,size,initialHand=false,touchPan=false)=>{
   const [view,setView]=useState({zoom:1,x:0,y:0}),[hand,setHand]=useState(initialHand),current=useRef(view),gesture=useRef(null);
   current.current=view;
   const apply=useCallback(value=>{const zoom=Math.max(.5,Math.min(4,value.zoom)),limit=Math.max(0,(size*zoom-size)/2);const next={zoom,x:Math.max(-limit,Math.min(limit,value.x)),y:Math.max(-limit,Math.min(limit,value.y))};current.current=next;setView(next);},[size]);
@@ -11,7 +11,7 @@ export const useCanvasCamera=(stage,size,initialHand=false)=>{
   const down=event=>{
     const points=touches(event);
     if(points.length>=2){event.evt.preventDefault();const center={x:(points[0].x+points[1].x)/2,y:(points[0].y+points[1].y)/2};stage.current.find('Group').forEach(n=>{if(n.isDragging())n.stopDrag();});gesture.current={kind:'pinch',distance:Math.hypot(points[0].x-points[1].x,points[0].y-points[1].y),model:toModel(center),zoom:current.current.zoom};return;}
-    if(hand){const p=stage.current.getPointerPosition();if(p)gesture.current={kind:'pan',point:p,view:{...current.current}};}
+    if(hand||(touchPan&&event.evt.touches&&event.target===stage.current&&current.current.zoom>1.001)){const p=stage.current.getPointerPosition();if(p)gesture.current={kind:'pan',point:p,view:{...current.current}};}
   };
   const move=event=>{
     const g=gesture.current;if(!g)return;event.evt.preventDefault();

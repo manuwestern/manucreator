@@ -64,6 +64,7 @@ class Element(Box, TextEffects):
     asset_id: UUID | None = None
     original_asset_id: UUID | None = None
     image_type: Literal['photo','logo'] = 'photo'
+    image_shape: Literal['rect','circle','ellipse','heart'] = 'rect'
     image_ratio: float = Field(default=0,ge=0,le=10000,allow_inf_nan=False)
     crop: Crop = Field(default_factory=Crop)
     locked: bool = False

@@ -1,127 +1,130 @@
-# ManuCreator – Gravurmaske und Aussparungen am Artikel
+# ManuCreator – komfortabler Smartphone-Designer
 
-Gestaltungselemente dürfen über die Gravurfläche hinausragen; sichtbar bleibt ausschließlich der Teil innerhalb der tatsächlich freigegebenen Fläche.
-In der Verwaltung lassen sich Löcher und andere Aussparungen direkt auf dem Rohlingfoto als nicht gravierbare Ausschlussbereiche einzeichnen.
+Das bestehende Kundenstudio erhält eine auf Touch-Bedienung zugeschnittene Oberfläche nach dem bereitgestellten ManuCreator-Bedienkonzept: große Produktansicht, Objektaktionen und Einstellpanels von unten.
+Häufige Änderungen werden direkt erreichbar, weitere Einstellungen erscheinen bei Bedarf; bestehende Gestaltungen und Funktionen bleiben erhalten.
 
 ## Für wen
-
-- Den Betreiber, der die nutzbare Gravurfläche seiner Artikel einschließlich Löchern und Aussparungen festlegt.
-- Kundinnen und Kunden, die Motive im freien Studio ohne störende Begrenzung beim Verschieben gestalten möchten.
-- Gestaltungen auf Schlüsselanhängern, Metallplaketten und anderen Artikeln, bei denen nicht die gesamte sichtbare Oberfläche gravierbar ist.
+- Kundinnen und Kunden, die Gravuren auf einem Smartphone gestalten oder Vorlagen personalisieren.
+- Gelegentliche Nutzer, die Texte und Bilder ohne dauerhaft sichtbare Fachparameter platzieren möchten.
+- Der Betreiber verwendet weiterhin die bestehende Verwaltung. Desktop- und Admin-Oberflächen erhalten keinen neuen Aufbau.
 
 ## Kernfunktionen und Erlebnis
 
-### 1. Abschneiden statt Bewegungen an der Gravurgrenze stoppen
+### Grundaufbau nach dem Bedienkonzept „Gestalten“
+- Oben eine schmale ManuCreator-Kopfzeile mit Speicherstatus („Gespeichert“ bzw. „Ungespeicherte Änderungen“). Gespeichert wird weiterhin bewusst über die vorhandene Funktion; es gibt keine neue automatische Speicherung.
+- Darunter eine Artikelzeile mit Miniatur, Name, Material und Maß. Ein Tipp öffnet die Artikelauswahl.
+- Die Arbeitsfläche steht im Mittelpunkt: Rückgängig und Wiederholen links, „Ansicht einpassen“ rechts. Dauerhaft sichtbare Seitenbereiche entfallen.
+- Ohne Auswahl zeigt die Fläche den Hinweis „Tippe ein Element zum Bearbeiten.“ Unten liegt die feste Hauptleiste **Text · Bild · Motive · Vorlagen · Ebenen**, darunter Preis und die Schaltfläche **Vorschau**.
+- „Motive“ enthält die freigegebenen Dekorationen und die sechs Grundformen. „Vorlagen“ bietet die bisherigen Grundvorlagen und veröffentlichten Artikelvorlagen.
 
-- Texte, Bilder, eigene Dekorationen und die sechs Grundformen dürfen über die Gravurfläche hinausragen.
-- Außerhalb der freigegebenen Fläche werden die Motivteile ausgeblendet. Das gilt ebenso für Textkonturen, versetzte Gravurschatten sowie Linien- und Formkonturen.
-- Es erfolgt keine automatische Verkleinerung, Verschiebung oder Verzerrung, um Elemente passend zu machen.
-- Das Abschneiden ist nicht destruktiv: Die vollständigen Inhalte bleiben erhalten. Beim Zurückschieben in einen freigegebenen Bereich werden die zuvor verdeckten Teile wieder sichtbar.
-- Das Rohlingfoto bleibt unverändert. Ausgeblendet wird ausschließlich das darüberliegende Gravurmotiv.
+### Objektaktionen bei Auswahl
+- Ein Tipp auf ein Element öffnet unten das Panel „… ausgewählt“ mit einem Raster großer Aktionskacheln und „Fertig“.
+- Text: **Bearbeiten · Wölbung · Duplizieren · Anordnen · Sperren · Löschen**. Löschen ist farblich abgesetzt und steht in der unteren Reihe, getrennt von den Textwerkzeugen.
+- Bild: **Zuschneiden · Form · Ersetzen · Anordnen · Sperren · Löschen** sowie **Mehr** für seltener benötigte Einstellungen.
+- Form und Motiv: **Bearbeiten (Größe, Füllung/Kontur) · Duplizieren · Anordnen · Sperren · Löschen**.
+- Unter dem Raster steht der Hinweis „Verschieben: direkt auf dem Holz“ – Verschieben erfolgt immer direkt auf der Arbeitsfläche, nicht über Panelwerte. Drehen über den Griff oberhalb der Auswahl.
+- Jedes Panel hat einen Griff zum Vergrößern oder Zuziehen, bleibt kompakt und lässt die Arbeitsfläche sichtbar. Änderungen wirken sofort; „Fertig“ schließt nur das Panel.
+- Gesperrte oder geschützte Vorlagenelemente zeigen nur die erlaubten Aktionen. Der neue Aufbau schaltet keine gesperrten Funktionen frei.
 
-### 2. Gravurfläche und Ausschlussbereiche direkt am Artikel
+### Text bearbeiten
+- Panel „Text bearbeiten“ mit den Reitern **Text · Schrift · Position**.
+- Text: Eingabefeld mit Löschkreuz, Zeichenlimit des Artikels sichtbar.
+- Schrift: Schriftart als Kachelauswahl mit Vorschau („Aa“) der 25 Schriftfamilien, verfügbare Fett-/Kursivvarianten, Schriftgröße mit Voreinstellungen, Zahleneingabe und Plus/Minus; zusätzlich **Breite in Millimetern** als Schieberegler, umgerechnet aus dem hinterlegten realen Gravurmaß des Artikels.
+- Position: horizontal/vertikal zentrieren, Drehung, bei Bedarf genaue Werte.
+- „Weitere Optionen“ führt zu Kontur und Versatzschatten.
+- **Wölbung** als eigenes Panel: **Nach unten · Gerade · Nach oben**, Bogen-Schieberegler mit Plus/Minus und Gradanzeige sowie „Wölbung zurücksetzen“.
 
-Die vorhandene **Verwaltung → Artikel → Gravurfläche** wird um Ausschlussbereiche ergänzt.
+### Bild hinzufügen und bearbeiten
+- „Bild“ öffnet das Panel **Bild hinzufügen** mit „Foto auswählen“, „Kamera öffnen“ und „Datei auswählen“. Das Foto wird als neues Element eingefügt; auf der Fläche erscheint die Gravurvorschau.
+- **Zuschneiden** als Vollbildansicht: Ausschnittrahmen mit Verhältnissen **Frei · 1:1 · 4:3 · 3:4**, Zoom-Regler, „90° drehen“ und „Ausschnitt zurücksetzen“.
+- **Form & Kanten**: Bildrahmen als **Rechteck · Kreis · Oval · Herz** mit „Bild in Form ausrichten“ und „Form zurücksetzen“.
+- **Gravur anpassen** mit Umschalter **Original · Gravur** auf der Arbeitsfläche. Die konkreten Regler richten sich nach den bereits vorhandenen Bildeinstellungen des Studios; in Phase 1 werden keine neuen Bildfilter eingeführt.
+- **Freistellen** erscheint als Kachel nur, wenn die Hintergrundentfernung freigeschaltet ist; ohne API-Zugang bleibt sie ausgeblendet.
 
-- Pro Artikel bleibt eine äußere Gravurfläche als Rechteck oder Kreis bestehen.
-- Innerhalb dieser Fläche können mehrere **kreisförmige oder rechteckige Ausschlussbereiche** angelegt werden, beispielsweise für das Loch eines Schlüsselanhängers oder einen Schlitz.
-- Nach Wahl von Kreis oder Rechteck wird der Ausschlussbereich direkt auf dem Rohlingfoto aufgezogen. Anschließend lassen sich Position und Größe über Griffe oder Zahlenwerte anpassen.
-- Kreise bleiben rund und erhalten einen Durchmesser. Rechtecke haben getrennte Breite und Höhe und können gedreht werden.
-- Ausschlussbereiche lassen sich auswählen, verständlich benennen und löschen. Eine Liste hält auch kleine oder überlappende Aussparungen erreichbar.
-- Ein gewünschter Abstand zum Lochrand lässt sich durch einen entsprechend größer eingezeichneten Ausschlussbereich berücksichtigen.
-- Sich überlagernde Ausschlussbereiche wirken gemeinsam. Ein über den äußeren Gravurrand hinausragender Ausschlussbereich wirkt nur auf den Teil, der die Gravurfläche tatsächlich überlappt.
-- Der Artikel muss eine nutzbare Restgravurfläche behalten. Eine vollständig ausgeschlossene Gravurfläche kann nicht als nutzbare Fläche freigegeben werden.
+### Ebenen und Reihenfolge
+- „Ebenen“ öffnet das Panel **Reihenfolge** mit dem Hinweis „Oben liegt vorne.“: Liste aller Elemente mit Miniatur, Name, Sichtbarkeit und Sperre, per Griff verschiebbar.
+- Schaltflächen **Eine Ebene vor · Ganz nach vorne · Eine Ebene zurück · Ganz nach hinten** für das gewählte Element. „Anordnen“ im Objektpanel führt in dasselbe Panel.
+- Auch überlagerte oder vollständig maskierte Elemente bleiben dort auswählbar.
 
-### 3. Tatsächlich sichtbare Gravurfläche
+### Rückmeldungen
+- Kurze dunkle Hinweisleiste über der Hauptleiste, zum Beispiel „Kopie gelöscht“ mit direktem **Rückgängig**. Löschen fragt nicht zusätzlich nach, ist aber sofort rückgängig zu machen.
 
-Die nutzbare Fläche entspricht der äußeren Gravurfläche **abzüglich aller Ausschlussbereiche**.
+### Vorschau und Warenkorb
+- „Vorschau“ führt zur Seite **Deine Vorschau** mit großer Produktabbildung ohne Bearbeitungsmarkierungen, Artikelzeile, Preis und **In den Warenkorb**. „Bearbeiten“ führt zurück zur Gestaltung.
+- Der Warenkorb bleibt der bestehende Testabschluss ohne Zahlung.
 
-- Liegt beispielsweise eine Textzeile über dem Loch eines Metallanhängers, ist der entsprechende Textteil dort nicht sichtbar.
-- Ein Bild oder Rahmen kann über das Loch hinweg positioniert werden. Sichtbar bleiben nur die Teile auf der freigegebenen Oberfläche.
-- Aussparungen werden nicht als weiße Flecken oder zusätzliche Motive über die Gestaltung gelegt. An diesen Stellen bleibt das originale Rohlingfoto sichtbar.
-- Die Aussparungen gehören zum Artikel. Kunden können sie weder verschieben noch entfernen oder deaktivieren.
-- Ausschlussbereiche zählen nicht als Gestaltungsebenen. Die Grenze von zwölf Motivebenen bleibt für Texte, Bilder, Dekorationen und Grundformen bestehen.
+### Hilfslinien und sanftes Einrasten
+- Beim Verschieben erscheinen passende Hilfslinien für die horizontale und vertikale Mitte der Gravurfläche.
+- Weitere Hilfslinien unterstützen das Ausrichten an Mittellinien und Kanten anderer sichtbarer Objekte.
+- In unmittelbarer Nähe eines passenden Ziels rastet das bewegte Objekt sanft ein. Weiterziehen löst es wieder; die Bewegung wird nicht dauerhaft blockiert.
+- Die Einrasthilfe ist abschaltbar. Hilfslinien erscheinen nur während der Bewegung und nicht in Vorschauen oder Downloads.
+- Gravurmasken und Aussparungen behalten ihr nicht-destruktives Verhalten. Ausrichtungshilfen ersetzen keine Maske und zwingen kein Objekt vollständig in die Gravurfläche.
 
-### 4. Ausschließlich das sichtbare Ergebnis zählt
+### Eindeutige Touch-Gesten und stabiler Zoom
+- Ein Finger auf einem ausgewählten Objekt verschiebt dieses. Ein Tipp wählt ein Objekt aus; ein Tipp auf eine freie Stelle hebt die Auswahl auf.
+- Auf einer freien Stelle lässt sich die vergrößerte Arbeitsansicht mit einem Finger verschieben.
+- Zwei Finger auf der Zeichenfläche zoomen und verschieben ausschließlich die Arbeitsansicht. Die Geste verändert keine Objektgröße und dreht kein Objekt.
+- Der Zoom orientiert sich an der Stelle zwischen den Fingern. „Ansicht einpassen“ bringt das vollständige Produkt zurück.
+- Touch-Bedienung auf der Zeichenfläche soll nicht versehentlich die gesamte Webseite vergrößern oder wegscrollen. Der normale Browser-Zoom außerhalb der Zeichenfläche bleibt aus Gründen der Barrierefreiheit erhalten.
+- Texteingaben sollen keinen ungewollten Seitenzoom auslösen. Beim Öffnen der Bildschirmtastatur bleiben das aktive Feld und der Abschluss der Eingabe erreichbar.
 
-- Entsprechend der ausdrücklichen Nutzerwahl erscheinen **keine Warnungen und keine zusätzlichen Bestätigungen wegen angeschnittener Motivteile**.
-- Teilweise abgeschnittene Motive dürfen gespeichert, heruntergeladen und im bestehenden Testabschluss verwendet werden.
-- Einzelne vollständig verdeckte Ebenen bleiben erhalten und in der Ebenenliste auswählbar. Sie können über Positionseinstellungen oder vorhandene Ausrichtungsfunktionen wieder verschoben werden.
-- Eine insgesamt vollständig unsichtbare Gestaltung gilt nicht als fertiges Gravurmotiv für den Testabschluss.
-- Bestehende Pflichtfelder, Zeichenlimits, Uploadanforderungen und Vorlagenfreigaben bleiben bestehen. Nur das Hinausragen über die äußere Gravurfläche oder in eine Aussparung führt nicht mehr zur bisherigen Begrenzung oder Fehlermeldung.
-
-### 5. Gleiche Darstellung in allen Ansichten
-
-- Arbeitsfläche, große Produktvorschau, Vorlagenvorschauen, gespeicherte Gestaltung, vollständiger Entwurfsdownload und Testabschluss berücksichtigen dieselbe nutzbare Gravurfläche.
-- Zoom, Verschieben der Ansicht und die Größe des Browserfensters verändern weder Aussparungen noch das vollständige Ergebnis.
-- Gespeicherte Ergebnisse und bereits vorhandene Testbestellungen werden nicht nachträglich überschrieben. Für einen neu gespeicherten Bearbeitungsstand ist die dabei sichtbare Gesamtvorschau maßgeblich.
-- Hochgeladene Originalbilder und Originaldekorationen bleiben unverändert erhalten. Der Download einer Originaldatei wird dadurch nicht zu einem zugesicherten Produktions- oder Vektorexport.
-
-### 6. Vorlagenschutz und bestehende Bedienung erhalten
-
-- Die neue Darstellung gilt im freien Kundenstudio und im artikelbezogenen Admin-Vorlageneditor.
-- Im einfachen Personalisierungsmodus bleiben ausschließlich die freigegebenen Inhaltsfelder bearbeitbar. Feste Vorlagenelemente und Artikel-Aussparungen können dort nicht verändert werden.
-- Ist „Frei bearbeiten“ für eine Vorlage ausgeschlossen, bleibt diese Einschränkung bestehen. Die neue Gravurmaske hebt keine Vorlagensperren auf.
-- Auswahlrahmen und Griffe bleiben als Bearbeitungshilfen verfügbar. Sie sind kein Bestandteil des Gravurergebnisses und erscheinen nicht im Entwurfsdownload.
-- Die sechs Grundformen werden weiterhin per Klick eingefügt. Das neue Aufziehen von Bereichen betrifft ausschließlich die Ausschlussbereiche in der Verwaltung.
-- Ebenenfunktionen, Rückgängig/Wiederholen, 25 Schriftfamilien, Textbogen, Kontur, scharfer Versatzschatten, Bildzuschnitt und Zoom bleiben erhalten.
-- Schriftstärke, Stil und Größe bleiben in einer Zeile; die entfernte zusätzliche Textvorschau bleibt entfernt. Vorlagenbilder bleiben vollständig sichtbar und die Auswahl scrollbar.
-- Die Auswahl bleibt bei sechs schlichten Grundvorlagen und eigenen veröffentlichten Artikelvorlagen. Die früheren Materialkollektionen und die Sammlung von 18 Ornamenten werden nicht zurückgebracht.
+### Zuverlässige Schriftgrößenwahl
+- Der gemeldete Fehler der gelegentlich nicht übernommenen Dropdown-Schriftgröße wird im Kundenstudio und im Admin-Vorlageneditor behoben.
+- Voreinstellung, freie Zahleneingabe und Darstellung auf der Arbeitsfläche müssen denselben übernommenen Wert wiedergeben.
+- Bei schneller Auswahl mehrerer Werte gilt die zuletzt gewählte Größe. Eine noch laufende Vorschau darf sie nicht durch einen älteren Stand ersetzen.
+- Nicht übernehmbare Werte erhalten eine verständliche Rückmeldung; eine Auswahl darf nicht stillschweigend ignoriert werden. Die Ursache des bisherigen Fehlers wird nicht vorweggenommen.
 
 ## Nutzerablauf
-
-### Betreiber
-
-1. Unter **Verwaltung → Artikel → Gravurfläche** den gewünschten Rohling öffnen.
-2. Die äußere Gravurfläche als Rechteck oder Kreis auf dem Foto festlegen oder anpassen.
-3. Für ein Loch oder eine Aussparung einen kreisförmigen beziehungsweise rechteckigen Ausschlussbereich aufziehen.
-4. Position, Größe und gegebenenfalls Drehung anpassen; bei Bedarf weitere Ausschlussbereiche ergänzen.
-5. Die Artikelvorschau mit der verbleibenden nutzbaren Fläche kontrollieren und die Einstellungen speichern.
-6. Eigene Vorlagen wie bisher auf dem Artikel gestalten und bewusst veröffentlichen. Auch diese Vorschauen berücksichtigen die Aussparungen.
-
-### Kunden
-
-1. Einen Artikel frei gestalten oder eine passende veröffentlichte Vorlage auswählen.
-2. Freigegebene Inhalte bearbeiten beziehungsweise im freien Modus Elemente positionieren, skalieren und drehen.
-3. Das sichtbare Ergebnis betrachten: Motivteile außerhalb der Gravurfläche oder über Aussparungen erscheinen nicht.
-4. Bei Bedarf eine Ebene erneut auswählen und verschieben, ohne dass ihre verdeckten Inhalte verloren gegangen sind.
-5. Den Entwurf speichern, vollständig herunterladen oder den bestehenden Testabschluss durchlaufen – ohne zusätzliche Bestätigung wegen angeschnittener Inhalte.
+1. Artikel oder Vorlage wählen; das Produkt erscheint eingepasst, unten die Hauptleiste mit Preis und „Vorschau“.
+2. Über **Text**, **Bild** oder **Motive** ein Element einfügen oder ein vorhandenes antippen.
+3. Im Panel „… ausgewählt“ die gewünschte Aktion wählen, zum Beispiel „Bearbeiten“ oder „Wölbung“, und im Unterpanel anpassen; „Fertig“ schließt.
+4. Element direkt auf dem Produkt verschieben, dabei an Hilfslinien einrasten; mit zwei Fingern bei Bedarf die Ansicht vergrößern, „Ansicht einpassen“ zurück.
+5. Reihenfolge, Sichtbarkeit und Sperren über **Ebenen** regeln.
+6. **Vorschau** öffnen, prüfen, speichern oder **In den Warenkorb** (Testabschluss) legen.
 
 ## UI/UX-Gefühl
-
-- Die Artikelverwaltung bleibt der zentrale Ort für die Freigabe der nutzbaren Gravurfläche.
-- Äußere Gravurfläche und Ausschlussbereiche sind beim Bearbeiten durch unterschiedliche Markierungen klar erkennbar. Benannte Aussparungen bleiben über eine kompakte Liste auswählbar.
-- Bearbeitungsmarkierungen erscheinen nicht in der Kundenvorschau oder im fertigen Entwurfsdownload.
-- Die Kundengestaltung wirkt ruhiger: keine Stopps am Gravurrand, keine Warnungen wegen angeschnittener Inhalte und keine zusätzlichen Bestätigungsdialoge.
-- Der Rohling und das tatsächliche Gesamtmotiv bleiben im Mittelpunkt. Mobil bleiben Eigenschaften und Ebenen separat erreichbar, ohne eine neue dauerhafte Werkzeugspalte.
-- Website, Hero-Effekt und das übrige Erscheinungsbild bleiben unverändert.
+- Gestaltung wie in den bereitgestellten Entwürfen: dunkelgrüne Kopfzeile mit ManuCreator-Schriftzug, helle Cremeflächen, weiße Karten mit zarten Rändern, grüne Auswahlrahmen und Griffe.
+- Große, quadratische Aktionskacheln mit Symbol und kurzer deutscher Beschriftung; aktive Kachel hellgrün hinterlegt; Löschen in gedämpftem Rot.
+- Panels gleiten dezent von unten ein, besitzen Griff und „Fertig“; die Produktansicht behält Größe und Position.
+- Fingerfreundliche Schaltflächen und Griffe; kleine Objekte bleiben zusätzlich über „Ebenen“ bedienbar. Tastatur, Browserleisten und unterer Bildschirmrand werden berücksichtigt.
+- Gute Bedienbarkeit auf kleinen Smartphones und im Querformat. Systemseitig reduzierte Bewegung wird respektiert.
 
 ## Umsetzungsphasen
 
 ### Phase 1 – MVP, jetzt vorgesehen
+- Neuer Smartphone-Aufbau des Kundenstudios nach dem Bedienkonzept: Kopfzeile mit Speicherstatus, Artikelzeile, Arbeitsfläche, Hauptleiste, Preis und Vorschau.
+- Objektaktionen-Panels für Text, Bild, Form und Motiv; Panels „Text bearbeiten“ (Text · Schrift · Position), „Wölbung“, „Reihenfolge“, „Bild hinzufügen“, „Zuschneiden“ und „Form & Kanten“ mit den vorhandenen Bild- und Formfunktionen.
+- Vorschauseite mit „In den Warenkorb“ (Testabschluss) und Hinweisleiste mit Rückgängig.
+- Klar getrennte Touch-Gesten, arbeitsflächenbezogener Zoom, „Ansicht einpassen“, Hilfslinien mit abschaltbarem Einrasten.
+- Behebung der Schriftgrößenübernahme in Kundenstudio und Admin-Vorlageneditor; Schriftgröße zusätzlich als Breite in Millimetern.
+- Bestehende Masken, Aussparungen, Vorlagenrechte, Effekte und Speicher-/Exportfunktionen bleiben erhalten.
 
-Nicht destruktives Abschneiden sämtlicher Motivarten an der äußeren Gravurfläche sowie manuell eingezeichnete Kreis- und Rechteckausschlüsse pro Artikel. Dazu gehören deren Positionierung, Größenänderung, Benennung, Löschung und bei Rechtecken Drehung, die geschützte artikelbezogene Freigabe sowie die einheitliche Darstellung in allen vorhandenen Ansichten und im Testabschluss.
+### Phase 2 – zusätzliche Komfortfunktionen, nicht Teil dieses Auftrags
+- „Gravur anpassen“ mit Helligkeit, Kontrast, Details und Invertieren als neue Bildaufbereitung, inklusive serverseitig gleicher Ausgabe.
+- Weiche Kante für Bildformen, Spiegeln, weitere Rahmenformen.
+- Freistellen mit automatischer Hintergrundentfernung, sobald ein geeigneter API-Zugang bereitsteht.
+- Mehrfachauswahl und gleichmäßige Verteilung von Objekten.
 
-Es gilt ausschließlich das sichtbare Ergebnis, ohne Warnungen oder zusätzliche Bestätigungen wegen angeschnittener Inhalte. Bestehende Feldvorgaben, Vorlagensperren und vollständig erhaltene Originalinhalte bleiben bestehen.
-
-### Phase 2 – Weitere Bereichsformen, nicht Teil der aktuellen Umsetzung
-
-Zusätzliche Formen für Gravur- oder Ausschlussbereiche, etwa Ellipsen oder Polygone, können bei Bedarf separat freigegeben werden. Es entsteht jetzt keine beliebig erweiterbare Zeichensammlung für diese Bereiche.
-
-### Phase 3 – Komplexe Konturen und Produktionsunterstützung, nicht Teil der aktuellen Umsetzung
-
-Freihändig gezeichnete Begrenzungen, individuelle Pfadpunktbearbeitung, Import komplexer Flächenmasken, automatische Erkennung von Löchern sowie fertigungsbezogene Dateiausgaben benötigen eine eigene Planung und Freigabe.
+### Phase 3 – erweiterte mobile Arbeitsabläufe, nicht Teil dieses Auftrags
+- Manuelles Nachbessern der Freistellung mit Pinsel („Entfernen“/„Zurückholen“, Pinselgröße, Original ansehen).
+- Eigenständige Touch-Optimierung des Admin-Vorlageneditors und der Maskenverwaltung.
+- Gruppierte, wiederverwendbare Motivkombinationen.
 
 ## Annahmen
-
-- „Ausschließlich sichtbare Ergebnisse“ bedeutet: keine Warnung und keine zusätzliche Bestätigung allein wegen abgeschnittener Motivteile. Andere bestehende Anforderungen wie Pflichtfelder und Rechte an hochgeladenen Bildern bleiben bestehen.
-- „In der Verwaltung mit einzeichnen“ wird zunächst als Aufziehen und anschließendes Bearbeiten von **mehreren Kreisen und Rechtecken** auf dem Produktfoto verstanden, nicht als Freihand- oder Pfadeditor.
-- Die äußere Gravurfläche bleibt zunächst ein Rechteck oder Kreis. Rechteckige Ausschlussbereiche dürfen gedreht werden; Kreisbereiche bleiben rund.
-- Löcher werden vom Betreiber manuell gekennzeichnet. Aus dem Rohlingfoto erfolgt keine automatische oder verbindliche Erkennung der realen Lochkontur.
-- Position und Größe auf dem Foto bleiben Gestaltungswerte. Reale Maße in Millimetern werden weiterhin separat erfasst; Mindestabstände, Gravurtiefe und tatsächliche Materialtauglichkeit werden durch die Vorschau nicht zugesichert.
-- Ausgeschlossene Motivteile werden nicht gelöscht. Auch vollständig verdeckte Ebenen bleiben erhalten und zählen weiterhin zur Grenze von zwölf Motivebenen.
-- Der Artikel benötigt eine nutzbare Restgravurfläche; eine vollständig unsichtbare Gesamtgestaltung ist kein fertiges Motiv für den Testabschluss.
-- Die bestehende geschützte Verwaltung und die vorhandenen Zugriffsrechte werden weiterverwendet. Diese Änderung erweitert keine Anmelde- oder Domainfreigaben.
-- Es werden keine neuen KI-Dienste, automatische Freistellung oder sonstige Anbieter eingeführt. Die optionale GPT-Freistellung bleibt ohne geeigneten eigenen Zugang nicht eingerichtet.
-- Der Abschluss bleibt ein Test ohne echte Zahlung, automatische Fertigung oder Produktionsfreigabe.
-- Nur Phase 1 ist Gegenstand dieses Plans. Vor der Freigabe werden keine Funktionen umgebaut.
+- Die bereitgestellten Entwürfe gelten als Leitlinie für Aufbau, Benennung und Anmutung; Abweichungen sind nur dort vorgesehen, wo eine gezeigte Funktion heute nicht existiert oder von einem externen Dienst abhängt.
+- Phase 1 ordnet die vorhandenen Funktionen in das neue Konzept ein. Neue Bildaufbereitungen (Gravur anpassen, weiche Kante, Spiegeln) und Freistellen gehören bewusst zu späteren Phasen, damit Vorschau und spätere Fertigungsausgabe nicht auseinanderlaufen.
+- „Vereinfachen“ bedeutet weniger gleichzeitig sichtbare Funktionen, nicht das Entfernen bestehender Gestaltungsmöglichkeiten: häufige Funktionen direkt, weitere unter „Mehr“/„Weitere Optionen“.
+- „Gespeichert“ zeigt den Zustand des bestehenden Speicherns; es gibt keine neue automatische Speicherung.
+- Die Breite in Millimetern wird aus dem hinterlegten Gravurmaß des Artikels umgerechnet und ist eine Gestaltungshilfe, keine fertigungstechnische Zusicherung.
+- Die Smartphone-Oberfläche wird bei schmaler verfügbarer Bildschirmbreite verwendet. Breite Desktop- und Verwaltungsansichten bleiben strukturell unverändert; die Fehlerkorrektur der Schriftgrößen gilt in beiden Editoren.
+- Neue Ausrichtungshilfen gehören in Phase 1 zum mobilen Kundenstudio. Eine zusätzliche Einführung dieser Hilfen im Desktop- oder Admineditor ist nicht Bestandteil dieses Auftrags.
+- Zentrierung bezieht sich auf die äußere Gravurfläche, nicht auf das Produktfoto oder die nach Abzug von Aussparungen verbleibende Restfläche.
+- Für gedrehte Objekte dienen die umschließenden Objektbegrenzungen als Ausrichtreferenz, nicht einzelne Buchstaben- oder Motivkonturen. Versteckte und vollständig maskierte Objekte erzeugen keine Ausrichtziele; sichtbare gesperrte Objekte dürfen als Referenz dienen.
+- Mehrfinger-Gesten verändern nur die Ansicht. Objektrotation und Objektgröße werden über ihre dafür vorgesehenen Werkzeuge geändert.
+- Die unterstützten Schriftgrößen, 25 Schriftfamilien mit verfügbaren Varianten, sechs Grundformen, zwölf Ebenen und Vorlagenfreigaben bleiben bestehen. Nicht jede Schrift bietet Fett und Kursiv an.
+- Die Vorlagenauswahl bleibt bei den sechs schlichten Grundlagen und eigenen veröffentlichten Artikelvorlagen. Frühere, entfernte Vorlagen- oder Ornamentkollektionen werden nicht zurückgebracht.
+- Keine neuen Konten, keine neuen externen Dienste und keine echten Zahlungen in diesem Ausbau.
+- Hintergrundentfernung bleibt bei fehlendem API-Zugang deaktiviert. Der bestehende Warenkorb bleibt ein Testabschluss ohne Zahlung oder Fertigungsfreigabe.
+- Browser-Zoom wird nicht auf der gesamten Webseite abgeschaltet. Das Zoomproblem wird durch die Trennung von Arbeitsflächen-Gesten und normaler Seitennutzung adressiert.
+- Der Ausbau betrifft den beschriebenen Designer. Website, allgemeine Navigation, Kontaktfunktionen und Rechtstexte erhalten keine Neugestaltung.
+- Nur Phase 1 wird nach Freigabe umgesetzt. Die weiteren Phasen sind nicht Teil des aktuellen Umfangs.

@@ -67,6 +67,16 @@ def render_layers(design, product, blank, assets, font_paths=None):
             image=Image.open(io.BytesIO(assets[str(e.asset_id)])).convert('RGBA')
             c=e.crop; image=image.crop((c.x*image.width,c.y*image.height,(c.x+c.w)*image.width,(c.y+c.h)*image.height))
             image=ImageOps.contain(image,(max(1,round(e.w)),max(1,round(e.h))),Image.Resampling.LANCZOS)
+            if e.image_shape!='rect':
+                shape=Image.new('L',(image.width*4,image.height*4),0);painter=ImageDraw.Draw(shape);W,H=shape.size
+                if e.image_shape=='heart':
+                    import math
+                    pts=[(16*math.sin(t)**3,-(13*math.cos(t)-5*math.cos(2*t)-2*math.cos(3*t)-math.cos(4*t))) for t in [i/240*math.tau for i in range(240)]]
+                    painter.polygon([((x+16)/32*W,(y+17)/30*H) for x,y in pts],fill=255)
+                else:
+                    r=min(W,H)/2;cx,cy=W/2,H/2
+                    painter.ellipse((cx-(r if e.image_shape=='circle' else W/2),cy-(r if e.image_shape=='circle' else H/2),cx+(r if e.image_shape=='circle' else W/2),cy+(r if e.image_shape=='circle' else H/2)),fill=255)
+                image.putalpha(ImageChops.multiply(image.getchannel('A'),shape.resize(image.size,Image.Resampling.LANCZOS)))
             gray=ImageOps.invert(image.convert('RGB').convert('L')).point(lambda v: round(v*.78))
             alpha=ImageChops.multiply(gray,image.getchannel('A'))
             ink=Image.new('RGBA',image.size,product['ink']);ink.putalpha(alpha)

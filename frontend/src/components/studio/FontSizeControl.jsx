@@ -7,7 +7,7 @@ const display=value=>String(Math.round(value*10)/10);
 
 export const FontSizeControl=({value,onChange})=>{
   const [text,setText]=useState(display(value)),[open,setOpen]=useState(false),[error,setError]=useState('');
-  useEffect(()=>{setText(display(value));setError('');},[value]);
+  useEffect(()=>{setText(old=>Number(old.replace(',','.'))===Math.round(value*10)/10?old:display(value));setError('');},[value]);
   const valid=raw=>/^\d+(?:[.,]\d+)?$/.test(raw)&&Number(raw.replace(',','.'))>=4&&Number(raw.replace(',','.'))<=200;
   const type=raw=>{setText(raw);setError('');if(valid(raw))onChange(Number(raw.replace(',','.')));};
   const commit=()=>{if(!valid(text)){setError('Bitte eine Größe von 4 bis 200 px eingeben.');return;}onChange(Number(text.replace(',','.')));};

@@ -1,6 +1,7 @@
 import { useCallback,useEffect,useRef,useState } from 'react';
-import { Stage,Layer,Group,Image as KImage,Transformer } from 'react-konva';
+import { Stage,Layer,Group,Image as KImage,Line,Transformer } from 'react-konva';
 import { EngravingMask,MaskGuide } from './EngravingMask';
+import { snapCandidate } from '@/lib/snapGuides';
 import { useCanvasAssets } from '@/hooks/useCanvasAssets';
 import { useCanvasSize } from '@/hooks/useCanvasSize';
 import { useCanvasCamera } from '@/hooks/useCanvasCamera';
@@ -8,9 +9,12 @@ import { CanvasElement } from './CanvasElement';
 import { CameraControls } from './CameraControls';
 import { visualKey } from '@/lib/textPreview';
 
-export const DesignCanvas=({product,design,guides,canvasRef,updateElement,selected,onSelect,disabled,onReady,onNaturalSize,readOnly=false,adminMode=false})=>{
+export const DesignCanvas=({product,design,guides,canvasRef,updateElement,selected,onSelect,disabled,onReady,onNaturalSize,readOnly=false,adminMode=false,snap=false,touchPan=false})=>{
   const [wrap,size]=useCanvasSize(true),stage=useRef(),root=useRef(),transformer=useRef(),nodes=useRef({});
-  const {blank,error:blankError,loaded,retry}=useCanvasAssets(product.image),camera=useCanvasCamera(stage,size,readOnly),a=product.area;
+  const {blank,error:blankError,loaded,retry}=useCanvasAssets(product.image),camera=useCanvasCamera(stage,size,readOnly,touchPan),a=product.area;
+  const [snapLines,setSnapLines]=useState([]);
+  const snapper=useCallback((candidate,element)=>{if(!snap)return null;const scale=size/800*camera.view.zoom;const result=snapCandidate({...element,...candidate},design.elements,a,6/scale);setSnapLines(result.guides);return result;},[snap,size,camera.view.zoom,design.elements,a]);
+  const snapEnd=useCallback(()=>setSnapLines([]),[]);
   const [previewAttempt,setPreviewAttempt]=useState(0);
   const [imageStates,setImageStates]=useState({});
   const [boundaryMessage,setBoundaryMessage]=useState('');
@@ -36,7 +40,8 @@ export const DesignCanvas=({product,design,guides,canvasRef,updateElement,select
   const start=e=>{camera.handlers.onMouseDown(e);if(!camera.hand&&!readOnly&&e.target===e.target.getStage())onSelect?.(null);};
   return <div className={`studio-canvas-wrap konva-wrap ${camera.hand?'camera-hand':''}`} ref={wrap} data-testid={readOnly?'product-preview-canvas':'design-canvas'} data-loaded={loaded} data-elements={JSON.stringify(design.elements)} data-selected={selected||''} data-camera={JSON.stringify(camera.view)} aria-label={`Gestaltungsfläche: ${product.name}`}>
     <Stage style={{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)'}} width={size} height={size} ref={stage} {...camera.handlers} onMouseDown={start}><Layer><Group ref={root} x={size/2+camera.view.x} y={size/2+camera.view.y} offsetX={400} offsetY={400} scaleX={size/800*camera.view.zoom} scaleY={size/800*camera.view.zoom}><KImage image={blank} width={800} height={800} listening={false}/>
-      <EngravingMask product={product}>{design.elements.map(element=><CanvasElement key={element.id} element={element} product={product} adminMode={adminMode} previewAttempt={previewAttempt} disabled={disabled||readOnly||camera.hand} onLoadState={imageState} onNaturalSize={onNaturalSize} onSelect={onSelect} onChange={changes=>updateElement?.(element.id,changes)} nodeRef={node=>{nodes.current[element.id]=node;}} toModel={camera.toModel} toScreen={camera.toScreen} onBoundary={setBoundaryMessage}/>)}</EngravingMask>
+      <EngravingMask product={product}>{design.elements.map(element=><CanvasElement key={element.id} element={element} product={product} adminMode={adminMode} previewAttempt={previewAttempt} disabled={disabled||readOnly||camera.hand} onLoadState={imageState} onNaturalSize={onNaturalSize} onSelect={onSelect} onChange={changes=>updateElement?.(element.id,changes)} nodeRef={node=>{nodes.current[element.id]=node;}} toModel={camera.toModel} toScreen={camera.toScreen} onBoundary={setBoundaryMessage} snap={snapper} onSnapEnd={snapEnd}/>)}</EngravingMask>
+      {snapLines.map(line=><Line key={`${line.axis}-${line.pos}`} name="editor-decoration" points={line.axis==='x'?[line.pos,0,line.pos,800]:[0,line.pos,800,line.pos]} stroke="#c2642f" strokeWidth={1.2/(size/800*camera.view.zoom)} dash={[6,4]} listening={false}/>)}
       {guides&&!readOnly&&<><MaskGuide zone={a} scale={size/800*camera.view.zoom}/>{(product.exclusions||[]).map(zone=><MaskGuide key={zone.id} zone={zone} exclusion scale={size/800*camera.view.zoom}/>)}</>}
       {!readOnly&&<Transformer name="editor-decoration" ref={transformer} rotateEnabled rotationSnaps={[0,45,90,135,180,225,270,315]} rotateAnchorOffset={24} flipEnabled={false} keepRatio={!lineSelected&&!freeRectangle} enabledAnchors={lineSelected?['middle-left','middle-right']:freeRectangle?['top-left','top-center','top-right','middle-left','middle-right','bottom-left','bottom-center','bottom-right']:['top-left','top-right','bottom-left','bottom-right']} anchorSize={11} anchorCornerRadius={3} borderStroke="#496d35" anchorStroke="#496d35" anchorFill="#fff"/>}
     </Group></Layer></Stage><CameraControls camera={camera} prefix={readOnly?'preview':'canvas'} readOnly={readOnly}/>
