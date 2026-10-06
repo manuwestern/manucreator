@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fontWeight, isShape, MM_TO_UNITS } from './editorCatalog';
+import { ImageArtwork } from './ImageArtwork';
 
 export const Branch = ({ strokeWidth = 2.4 }) => <g fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
   <path d="M-95 23 Q-30-12 94-17 M-62 9 Q-62-15-75-22 M-38 0 Q-31-25-17-37 M-7-7 Q4-35 25-45 M26-13 Q44-33 62-38 M50-16 Q68-8 79 6 M16-12 Q28 11 40 21 M-18-5 Q-13 19 4 29 M-48 5 Q-41 29-23 37" />
@@ -47,7 +48,7 @@ export const ObjectArtwork = ({ object: o, preview = false }) => {
   if (isShape(o)) return <ShapeArtwork object={o} prefix={prefix} />;
   if (o.type === 'heart') return <path d="M0 21 C-5 10-28-7-18-20 C-10-29-1-17 0-10 C4-27 17-29 21-18 C27-5 8 11 0 21Z" fill={o.filled ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={strokeWidth(o)} strokeLinejoin="round" />;
   if (o.type === 'branch') return <Branch strokeWidth={strokeWidth(o)} />;
-  if (o.type === 'image') return <image href={o.src} x="-85" y="-85" width="170" height="170" preserveAspectRatio="xMidYMid meet" />;
+  if (o.type === 'image') return <ImageArtwork object={o} preview={preview} />;
   return <TextArtwork object={o} prefix={prefix} />;
 };
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pencil, Copy, Layers, LockKeyhole, UnlockKeyhole, Trash2, Move, Plus, ImagePlus, Heart, Leaf, SlidersHorizontal } from 'lucide-react';
+import { Pencil, Copy, Layers, LockKeyhole, UnlockKeyhole, Trash2, Move, Plus, ImagePlus, Heart, Leaf, SlidersHorizontal, ScanLine } from 'lucide-react';
 import { toast } from 'sonner';
 import { CurveIcon } from './CurvaturePanel';
 import { initialObjects } from '../../hooks/useEditor';
@@ -10,8 +10,8 @@ export const ObjectActions = ({ editor, setPanel }) => {
   const o = editor.selected;
   if (!o) return <div className="empty-panel" data-testid="empty-selection"><Move size={30} /><h3>Dein nächster Feinschliff</h3><p>Wähle ein Element auf dem Holz oder füge etwas Neues hinzu.</p><button className="outline-button" data-testid="add-first-text" onClick={() => { editor.add('text', { text: 'Dein Text', curve: 0 }); setPanel('edit'); }}><Plus size={18} />Text hinzufügen</button></div>;
   const actions = [
-    ['edit', 'Bearbeiten', Pencil, () => setPanel(o.type === 'text' ? 'edit' : 'properties'), o.locked],
-    [o.type === 'text' ? 'curve' : 'properties', o.type === 'text' ? 'Wölbung' : 'Stil & Größe', o.type === 'text' ? null : SlidersHorizontal, () => setPanel(o.type === 'text' ? 'curve' : 'properties'), o.locked],
+    ['edit', 'Bearbeiten', Pencil, () => setPanel(o.type === 'text' ? 'edit' : o.type === 'image' ? 'photo' : 'properties'), o.locked],
+    [o.type === 'text' ? 'curve' : o.type === 'image' ? 'background' : 'properties', o.type === 'text' ? 'Wölbung' : o.type === 'image' ? 'Freistellen' : 'Stil & Größe', o.type === 'text' ? null : o.type === 'image' ? ScanLine : SlidersHorizontal, () => setPanel(o.type === 'text' ? 'curve' : o.type === 'image' ? 'cutout' : 'properties'), o.locked],
     ['duplicate', 'Duplizieren', Copy, editor.duplicate, false],
     ['arrange', 'Anordnen', Layers, () => setPanel('layers'), false],
     ['lock', o.locked ? 'Entsperren' : 'Sperren', o.locked ? UnlockKeyhole : LockKeyhole, () => editor.patchObject(o.id, { locked: !o.locked }), false],
@@ -40,7 +40,7 @@ export const ImagePanel = ({ editor, setPanel }) => {
     try {
       const probe = await createImageBitmap(file); probe.close();
       const asset = await storeImage(file);
-      editor.add('image', { ...asset, name: file.name }); setPanel('actions');
+      editor.add('image', { ...asset, name: file.name, imageView: 'engraving', scale: 2.3 }); setPanel('photo');
     } catch (_) { toast.error('Das Bild konnte nicht geöffnet oder auf diesem Gerät gespeichert werden. Bitte wähle eine gültige PNG-, JPG- oder WebP-Datei.'); }
     finally { setUploading(false); }
   };

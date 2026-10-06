@@ -10,6 +10,7 @@ export const initialObjects = [
   { id: 'heart', type: 'heart', name: 'Herz', x: 300, y: 184, scale: 1, rotation: 0, visible: true, locked: false },
 ];
 const STORAGE_KEY = 'manucreator-design-v1';
+const imageFields = [['assetId', 'src'], ['cutoutAssetId', 'cutoutSrc']];
 function restore() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
@@ -29,12 +30,15 @@ export const useEditor = () => {
   current.current = objects;
   useEffect(() => {
     let cancelled = false;
-    const assets = [...new Set(current.current.filter(o => o.assetId).map(o => o.assetId))];
+    const assets = [...new Set(current.current.flatMap(o => imageFields.map(([asset]) => o[asset]).filter(Boolean)))];
     assets.forEach(async id => {
       try {
         const src = await loadImage(id);
         if (cancelled) { URL.revokeObjectURL(src); return; }
-        setObjects(previous => previous.map(o => o.assetId === id ? { ...o, src } : o));
+        setObjects(previous => previous.map(o => {
+          const patch = Object.fromEntries(imageFields.filter(([asset]) => o[asset] === id).map(([, source]) => [source, src]));
+          return Object.keys(patch).length ? { ...o, ...patch } : o;
+        }));
       } catch (_) { if (!cancelled) toast.error('Ein gespeichertes Bild konnte nicht geladen werden. Bitte lade es erneut hoch.'); }
     });
     return () => { cancelled = true; };
@@ -42,7 +46,14 @@ export const useEditor = () => {
   useEffect(() => {
     setSaveState('saving');
     const timeout = setTimeout(() => {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(objects.map(o => o.assetId ? { ...o, src: undefined } : o))); setSaveState('saved'); }
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(objects.map(o => {
+          const saved = { ...o };
+          imageFields.forEach(([asset, source]) => { if (o[asset]) delete saved[source]; });
+          return saved;
+        })));
+        setSaveState('saved');
+      }
       catch (_) { setSaveState('unavailable'); }
     }, 650);
     return () => clearTimeout(timeout);
@@ -93,5 +104,6 @@ export const useEditor = () => {
     const [item] = list.splice(index, 1);
     list.splice(Math.max(0, Math.min(target, list.length)), 0, item); return list;
   });
-  return { objects, selectedId, select: setSelectedId, selected: objects.find(o => o.id === selectedId), saveState, update, patchObject, begin, end, undo, redo, canUndo: !!past.length, canRedo: !!future.length, add, duplicate, remove, reorder };
+  const getObject = id => current.current.find(o => o.id === id);
+  return { objects, selectedId, select: setSelectedId, selected: objects.find(o => o.id === selectedId), getObject, saveState, update, patchObject, begin, end, undo, redo, canUndo: !!past.length, canRedo: !!future.length, add, duplicate, remove, reorder };
 };

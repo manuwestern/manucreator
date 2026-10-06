@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
+from image_processing import router as image_router
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
@@ -67,6 +68,7 @@ async def get_status_checks():
     return status_checks
 
 # Include the router in the main app
+api_router.include_router(image_router)
 app.include_router(api_router)
 
 app.add_middleware(

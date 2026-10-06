@@ -1,0 +1,56 @@
+.image-mode-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; background: #f0f2eb; padding: 4px; border: 1px solid #e9ecdf; border-radius: 8px; }
+.image-mode-toggle button { display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; border: 1px solid transparent; border-radius: 5px; background: transparent; color: #8b957d; font-size: 12px; }
+.image-mode-toggle button.active { background: #fff; border-color: #d7e0c9; color: #4c603b; box-shadow: 0 1px 4px #32402706; }
+.image-mode-toggle button:hover:not(:disabled) { color: #344a26; background: #f8faf4; }
+.engraving-info { display: flex; gap: 9px; align-items: flex-start; color: #7d8b6b; padding: 16px 2px 19px; }
+.engraving-info > svg { flex-shrink: 0; margin-top: 2px; }
+.engraving-info strong { font-size: 11px; font-weight: 500; color: #677c53; }
+.engraving-info p { margin: 5px 0 0; font-size: 10px; color: #99a18d; line-height: 1.7; }
+.image-tool-card { display: flex; align-items: center; width: 100%; gap: 13px; min-height: 70px; padding: 13px; border-radius: 8px; border: 1px solid #e2e8d7; color: #758765; background: #fafbf6; margin: 0 0 11px; text-align: left; }
+.image-tool-card > span { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 0; }
+.image-tool-card > svg { flex-shrink: 0; }
+.image-tool-card strong { font-size: 12px; font-weight: 500; color: #465b35; }
+.image-tool-card small { font-size: 9px; font-weight: 400; color: #99a18d; }
+.image-tool-card:hover:not(:disabled) { border-color: #a9bb93; background: #f0f4e8; }
+.image-tool-card.primary { background: var(--forest); color: #d5dfc9; border-color: var(--forest); }
+.image-tool-card.primary strong { color: white; }
+.image-tool-card.primary small { color: #afbea1; }
+.image-tool-card.primary:hover:not(:disabled) { background: #435438; }
+.image-preservation-note { display: flex; align-items: center; gap: 7px; font-size: 9px; color: #97a189; margin: 18px 0 3px; }
+.cutout-status { display: flex; align-items: flex-start; gap: 10px; color: #829570; margin-bottom: 19px; }
+.cutout-status > svg { flex-shrink: 0; margin-top: 2px; }
+.cutout-status strong { color: #5b7247; font-size: 12px; font-weight: 500; line-height: 1.6; }
+.cutout-status p { margin: 4px 0 0; color: #9aa38f; font-size: 10px; line-height: 1.7; }
+.cutout-wide-button { width: 100%; min-height: 44px; margin-bottom: 10px; }
+.cutout-secondary-actions { display: flex; flex-direction: column; gap: 8px; }
+.cutout-secondary-actions > button { min-height: 44px; font-size: 11px; }
+.cutout-secondary-actions > button.selected { background: #edf2e4; border-color: #a8b897; }
+.image-processing-error { background: #fbf1ea; color: #956243; border: 1px solid #eedbcf; border-radius: 6px; padding: 11px; font-size: 11px; line-height: 1.7; margin: 0 0 13px; }
+.checkerboard { background-color: #f6f7f3; background-image: conic-gradient(#e4e7df 25%, transparent 0 50%, #e4e7df 0 75%, transparent 0); background-size: 22px 22px; }
+.cutout-stage { flex: 1; min-height: 0; min-width: 0; position: relative; border-radius: 11px; border: 1px solid #e2e6d9; overflow: hidden; margin: 13px 0; }
+.cutout-stage-image { position: absolute; top: 17px; left: 17px; width: calc(100% - 34px); height: calc(100% - 34px); object-fit: contain; object-position: center; }
+.cutout-stage-caption { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: #f9fbf5ed; border: 1px solid #dce5d2; color: #829170; font-size: 9px; padding: 5px 10px; border-radius: 18px; pointer-events: none; }
+.cutout-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 12px; color: #7d8b6d; }
+.cutout-processing-overlay { position: absolute; inset: 0; background: #f5f7ef55; display: flex; align-items: center; justify-content: center; }
+.cutout-processing-overlay > span { display: flex; align-items: center; gap: 9px; background: #f8faf2ed; color: #61784b; padding: 13px 17px; border-radius: 9px; border: 1px solid #dce5cf; font-size: 11px; }
+.cutout-context-bar { flex: 0 0 89px; padding: 15px 32px; display: flex; align-items: center; gap: 13px; background: #fff; border-bottom: 1px solid var(--line); }
+.cutout-context-bar > button { width: 44px; height: 44px; display: grid; place-items: center; background: #f7f9f2; border: 1px solid #e4e9da; border-radius: 8px; color: #748564; }
+.cutout-context-bar > strong { font-size: 15px; font-weight: 600; }
+.cutout-context-bar > span { margin-left: auto; font-size: 10px; color: #98a28d; }
+.canvas-workspace.is-cutout .canvas-kicker { margin-left: 0; }
+@media (max-width: 760px) {
+  .image-edit-panel > .panel-description { display: none; }
+  .engraving-info { padding: 11px 2px 13px; }
+  .engraving-info p { margin-top: 3px; }
+  .image-tool-card { min-height: 61px; padding: 10px 12px; margin-bottom: 8px; }
+  .image-tool-card small { font-size: 10px; }
+  .image-preservation-note { margin-top: 11px; }
+  .cutout-status { margin-bottom: 12px; }
+  .cutout-panel .property-footnote { margin-top: 12px; }
+  .cutout-context-bar { flex-basis: 68px; padding: 9px 14px; gap: 11px; }
+  .cutout-context-bar > strong { font-size: 13px; }
+  .cutout-context-bar > span { display: none; }
+  .canvas-workspace.is-cutout { padding-top: 52px; }
+  .cutout-stage { margin: 7px 0 9px; }
+  .cutout-stage-image { top: 10px; left: 10px; width: calc(100% - 20px); height: calc(100% - 20px); }
+}
