@@ -1,0 +1,19 @@
+{
+  "case": "Mobile curvature slider endpoint precision",
+  "status": "passed",
+  "resolves": "/app/test_reports/iteration_1.json: frontend_issues.ui_bugs[0]",
+  "method": "External preview, Playwright screenshot tool, real CDP Input.dispatchTouchEvent gestures in responsive iframes. Outer screenshot viewport 1920x800.",
+  "mobile_sizes": ["390x844", "375x667", "320x568"],
+  "assertions_passed_for_each_size": [
+    "Touch swipe reaches exactly -180 degrees within left track boundary",
+    "Touch swipe reaches exactly +180 degrees within right track boundary",
+    "One undo restores pre-swipe -180 degrees",
+    "Redo restores +180 degrees",
+    "ArrowLeft changes +180 to +179 degrees without snapping",
+    "Entire engraving SVG bottom is above tool panel top",
+    "Document width does not exceed viewport width"
+  ],
+  "screenshot": "/tmp/manucreator-mobile-verified.jpg",
+  "production_build": "yarn build passed",
+  "remaining_issues": []
+}
