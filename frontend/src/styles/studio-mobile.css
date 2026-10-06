@@ -18,6 +18,7 @@ body.mobile-designer .studio-header,body.mobile-designer .studio-test-banner{dis
 .ms-layers{display:flex;flex-direction:column;gap:6px}.ms-layer{display:flex;align-items:center;gap:10px;border:1px solid var(--ms-line);border-radius:10px;padding:8px 10px;background:#fff}.ms-layer[aria-pressed=true]{border-color:#9bb286;background:var(--ms-accent)}.ms-layer>span{flex:1;font-size:13px;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ms-layer i{width:28px;height:28px;border-radius:6px;background:#f0f2ea;display:grid;place-items:center;font-style:normal;font-size:10px;color:#5d6d53}.ms-layer button{width:36px;height:36px;display:grid;place-items:center;color:#5d6d53}
 .ms-preview{position:absolute;inset:0;z-index:6;background:var(--ms-cream);display:flex;flex-direction:column}.ms-preview .ms-stage .studio-canvas-wrap{width:min(100%,calc(var(--studio-vh,100dvh) - 260px))}.ms-preview .ms-sheet-head{padding:12px 16px}
 .ms-sheet .property-error,.ms-sheet .studio-error{font-size:12px;margin-top:8px;color:#9b3c33}.ms-sheet .engraving-effects h3{font-size:13px;margin:12px 0 8px}.ms-sheet .engraving-effects label,.ms-sheet .engraving-effects .effect-mode button{font-size:13px;min-height:40px}
+.mobile-studio .canvas-camera-controls{display:none}
 .mobile-studio .precision-error{position:absolute;left:12px;right:12px;top:8px;z-index:7;font-size:12px}
 @keyframes ms-rise{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
 @media(prefers-reduced-motion:reduce){.ms-sheet,.ms-notice{animation:none}}

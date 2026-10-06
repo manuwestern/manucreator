@@ -1,0 +1,64 @@
+[
+  {
+    "check": "tap opens object panel",
+    "passed": true
+  },
+  {
+    "check": "curve applied",
+    "passed": true,
+    "curvature": 60,
+    "w": 131
+  },
+  {
+    "check": "snap to centre with transient guides",
+    "passed": true,
+    "guides": 2
+  },
+  {
+    "check": "snap toggle off allows free placement",
+    "passed": true,
+    "centre_offset": 10.695187165775394
+  },
+  {
+    "check": "pinch zooms view only",
+    "passed": true,
+    "zoom": 3.1
+  },
+  {
+    "check": "one-finger pan on empty area",
+    "passed": true,
+    "cam": {
+      "zoom": 3.1,
+      "x": 48,
+      "y": -154.62002563476574
+    }
+  },
+  {
+    "check": "fit view resets",
+    "passed": true
+  },
+  {
+    "check": "circle image shape masks corners in canvas",
+    "passed": true,
+    "corner": 0,
+    "centre": 176
+  },
+  {
+    "check": "delete notice with undo restores",
+    "passed": true
+  },
+  {
+    "check": "server render masks circle image shape identically",
+    "passed": true,
+    "draft": "edc3e98f-5e37-4c07-8e68-ccf1a2fb2d0a"
+  },
+  {
+    "check": "mobile test order completed",
+    "passed": true,
+    "reference": "TEST-FA337744"
+  },
+  {
+    "check": "viewports without horizontal overflow",
+    "passed": true
+  }
+]

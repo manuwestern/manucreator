@@ -1,0 +1,40 @@
+{
+  "summary": "Verified font-size dropdown fix (bug reported by user) on desktop /gestalten AND admin template editor /verwaltung/artikel/holzscheibe/vorlagen/neu with rapid 12->48->20 within 300ms, type-then-pick, and 10x randomized flakiness runs. Backend image_shape validation (rect/circle/ellipse/heart accepted; triangle/oval/empty/square/RECT rejected) and existing P0 masks suite pass. Mobile MobileStudio renders at 390x844 with no horizontal overflow and expected ms-* bottom bar tiles.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_studio_iteration25_image_shape.py",
+    "/app/backend/tests/test_studio_iteration23_masks_p0.py",
+    "/app/test_reports/pytest/pytest_iter25.xml",
+    "/app/test_reports/pytest/pytest_iter25_shape.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "PASS: TextProperties now uses refs (latest/updateRef/valuesRef) + functional commit, so rapid dropdown picks and interleaved typing+dropdown resolve to the last chosen value in both canvas data-elements and the text-font-size input.",
+    "PASS: FontSizeControl choose() path commits value synchronously via onChange and clamps display text, preserving numeric parity with element font_size.",
+    "PASS: StudioPage.updateElement uses commit(current=>...) functional form so concurrent debounced updates do not revert state.",
+    "PASS: Draft Element model enforces image_shape literal rect/circle/ellipse/heart; invalid values (incl. uppercase/empty) 422 at API boundary.",
+    "NOTE: Did not re-run full iteration24 customer flow (not required per request). Mobile iterations covered only a smoke of layout/overflow and bottom bar presence; deeper interactive mobile touch/gesture scenarios (pinch zoom, snap-to-centre during drag, Zuschneiden crop pixel comparison) were not executed in this iteration."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_studio_iteration25_image_shape.py",
+    "/app/test_reports/iteration_25.json"
+  ],
+  "success_rate": {
+    "backend": "100% (7/7 masks P0 + 9/9 image_shape validation)",
+    "frontend": "100% on the targeted font-size regression (10/10 desktop /gestalten + 10/10 admin editor + rapid + type-then-pick); mobile smoke OK."
+  },
+  "test_credentials": "Admin info@manucreator.de (password in /app/memory/test_credentials.md). Guest session via POST /api/studio/session.",
+  "seed_data_creation": "Ephemeral guest drafts created against product 'holzscheibe' with image_shape variations; no admin product mutations.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Font-size regression is covered by Playwright flow against desktop /gestalten and admin template editor. If a deeper mobile sweep is requested (pinch zoom, snap guides, Zuschneiden crop, image_shape mask corner-pixel verification, test checkout from mobile), extend /app/tests/studio_iteration24_customer_flow.py or add a new Playwright test; the current ms-* testids are confirmed present (mobile-studio, ms-save-state, ms-article, ms-undo, ms-redo, ms-snap-toggle, ms-fit-view, ms-bar-text/image/motifs/templates/layers, ms-price, ms-preview-open). Image_shape backend tests exist in /app/backend/tests/test_studio_iteration25_image_shape.py.",
+  "rca of the issue": "User bug 'Textgrößenänderung wird manchmal nicht angewendet' originated from stale closures in TextProperties.edit (captured old values/update between renders) and non-functional setState in StudioPage.updateElement, causing a debounced write with old base to overwrite the just-chosen font_size. Fix now uses valuesRef/latestRef/updateRef and functional commit; FontSizeControl's choose() calls onChange synchronously, so rapid picks always commit the last chosen size. Verified across 20 scripted flakiness rounds + rapid chain + typing/dropdown interleave on both desktop studio and admin template editor; input and canvas font_size matched the final chosen value every time."
+}
