@@ -1,4 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { SHAPES, OBJECT_ICONS, shapeDefaults } from '../components/editor/editorCatalog';
+import { loadImage } from '../lib/imageStorage';
+import { toast } from 'sonner';
+import { newId } from '../lib/newId';
 
 export const initialObjects = [
   { id: 'branch', type: 'branch', name: 'Zweig', x: 300, y: 405, scale: 1, rotation: 0, visible: true, locked: false },
@@ -9,7 +13,7 @@ const STORAGE_KEY = 'manucreator-design-v1';
 function restore() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (Array.isArray(saved) && saved.every(o => o.id && ['text', 'heart', 'branch', 'image'].includes(o.type))) return saved;
+    if (Array.isArray(saved) && saved.every(o => o.id && Object.hasOwn(OBJECT_ICONS, o.type))) return saved.map(o => ({ ...shapeDefaults(o.type), ...o }));
   } catch (_) { /* A fresh design remains available when browser storage is unavailable. */ }
   return initialObjects;
 }
@@ -24,9 +28,21 @@ export const useEditor = () => {
   const gesture = useRef(null);
   current.current = objects;
   useEffect(() => {
+    let cancelled = false;
+    const assets = [...new Set(current.current.filter(o => o.assetId).map(o => o.assetId))];
+    assets.forEach(async id => {
+      try {
+        const src = await loadImage(id);
+        if (cancelled) { URL.revokeObjectURL(src); return; }
+        setObjects(previous => previous.map(o => o.assetId === id ? { ...o, src } : o));
+      } catch (_) { if (!cancelled) toast.error('Ein gespeichertes Bild konnte nicht geladen werden. Bitte lade es erneut hoch.'); }
+    });
+    return () => { cancelled = true; };
+  }, []);
+  useEffect(() => {
     setSaveState('saving');
     const timeout = setTimeout(() => {
-      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(objects)); setSaveState('saved'); }
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(objects.map(o => o.assetId ? { ...o, src: undefined } : o))); setSaveState('saved'); }
       catch (_) { setSaveState('unavailable'); }
     }, 650);
     return () => clearTimeout(timeout);
@@ -63,12 +79,12 @@ export const useEditor = () => {
     current.current = next; setObjects(next);
   };
   const add = (type, extra = {}) => {
-    const item = { id: `${type}-${Date.now()}`, type, name: { text: 'Dein Text', heart: 'Herz', branch: 'Zweig', image: 'Mein Bild' }[type], x: 300, y: 300, scale: 1, rotation: 0, visible: true, locked: false, ...extra };
+    const item = { id: `${type}-${newId()}`, type, name: SHAPES.find(s => s.type === type)?.label || { text: 'Dein Text', heart: 'Herz', branch: 'Zweig', image: 'Mein Bild' }[type], x: 300, y: 300, scale: 1, rotation: 0, visible: true, locked: false, ...shapeDefaults(type), ...extra };
     update(old => [...old, item]); setSelectedId(item.id); return item.id;
   };
   const duplicate = () => {
     const source = current.current.find(o => o.id === selectedId);
-    if (source) add(source.type, { ...source, id: `${source.type}-${Date.now()}`, name: `${source.name} Kopie`, x: source.x + 15, y: source.y + 20, locked: false });
+    if (source) add(source.type, { ...source, id: `${source.type}-${newId()}`, name: `${source.name} Kopie`, x: source.x + 15, y: source.y + 20, locked: false });
   };
   const remove = () => { update(old => old.filter(o => o.id !== selectedId)); setSelectedId(null); };
   const reorder = (id, target) => update(old => {

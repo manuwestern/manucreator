@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { Type, ImagePlus, Shapes, PanelsTopLeft, Layers, CheckCircle2, CircleHelp, ChevronRight, Undo2, Redo2, Maximize, Minimize, Eye, Leaf, Move, ArrowLeft, Download, Check, Loader2 } from 'lucide-react';
+import { Type, ImagePlus, Shapes, PanelsTopLeft, Layers, CheckCircle2, CircleHelp, ChevronRight, Undo2, Redo2, Maximize, Minimize, Eye, Leaf, Move, ArrowLeft, Download, Check, Loader2, Magnet, Grid3X3 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './components/ui/dialog';
 import { Toaster, toast } from './components/ui/sonner';
 import { ToolPanel } from './components/editor/ToolPanel';
 import { EngravingCanvas } from './components/editor/EngravingCanvas';
 import { useEditor } from './hooks/useEditor';
 import './App.css';
+import './components/editor/EditorTools.css';
 
-const tools = [['edit', 'Text', Type], ['image', 'Bild', ImagePlus], ['motifs', 'Motive', Shapes], ['templates', 'Vorlagen', PanelsTopLeft], ['layers', 'Ebenen', Layers]];
+const tools = [['edit', 'Text', Type], ['image', 'Bild', ImagePlus], ['motifs', 'Elemente', Shapes], ['templates', 'Vorlagen', PanelsTopLeft], ['layers', 'Ebenen', Layers]];
 
 function App() {
   const editor = useEditor();
@@ -15,6 +16,8 @@ function App() {
   const [expanded, setExpanded] = useState(false);
   const [modal, setModal] = useState(null);
   const [downloading, setDownloading] = useState(false);
+  const [snapEnabled, setSnapEnabled] = useState(true);
+  const [gridEnabled, setGridEnabled] = useState(false);
   const openTool = tool => {
     setExpanded(false);
     if (tool === 'edit' && editor.selected?.type !== 'text') {
@@ -42,15 +45,15 @@ function App() {
     } catch (_) { toast.error('Das Herunterladen hat nicht geklappt. Bitte versuche es erneut.'); }
     finally { setDownloading(false); }
   };
-  return <div className={`editor-app ${panel && !expanded ? 'is-editing' : ''} ${expanded ? 'is-expanded' : ''}`} data-testid="editor-app">
+  return <div className={`editor-app ${panel && !expanded ? 'is-editing' : ''} ${expanded ? 'is-expanded' : ''}`} data-testid="editor-app" data-panel={panel || 'none'}>
     <header className="app-header"><div className="brand-lockup"><span className="wordmark" data-testid="brand-logo">ManuCreator</span><span className="brand-tagline" data-testid="brand-tagline">DAS WIRD DEIN UNIKAT.</span></div><div className="header-center" data-testid="studio-label"><span />Dein kleines Kreativstudio</div><div className="header-right"><span className="save-status" data-testid="save-status" title="Lokal auf diesem Gerät gespeichert">{editor.saveState === 'saved' ? <CheckCircle2 size={17} /> : editor.saveState === 'saving' ? <Loader2 size={16} className="spin" /> : <CircleHelp size={17} />}<span>{editor.saveState === 'saved' ? 'Gespeichert' : editor.saveState === 'saving' ? 'Speichert …' : 'Nicht gespeichert'}</span></span><button className="header-help" data-testid="help-button" aria-label="Hilfe öffnen" onClick={() => setModal('help')}><CircleHelp size={20} /></button></div></header>
     <div className="editor-body">
       <nav className="tool-navigation" aria-label="Gestaltungswerkzeuge" data-testid="tool-navigation"><span className="nav-caption" data-testid="tools-label">GESTALTEN</span>{tools.map(([id, name, Icon]) => <button className={`nav-tool ${(panel === id || (id === 'edit' && ['curve', 'actions'].includes(panel) && editor.selected?.type === 'text')) ? 'active' : ''}`} key={id} data-testid={`nav-${id}`} onClick={() => openTool(id)} aria-pressed={panel === id}><Icon size={23} strokeWidth={1.5} /><span>{name}</span></button>)}<div className="nav-bottom-mark"><Leaf size={23} strokeWidth={1.2} /></div></nav>
       <main className="workspace" data-testid="workspace">
         <button className="product-bar" data-testid="product-details-button" onClick={() => setModal('product')}><span className="product-thumbnail"><img src="/images/wood-slice.webp" alt="Naturbelassene Holzscheibe" /></span><span className="product-info"><strong data-testid="product-name">Holzscheibe</strong><span data-testid="product-material">Birkenholz <span className="dot">·</span> Ø 22 cm</span></span><span className="product-natural" data-testid="natural-product-badge"><Leaf size={14} />Ein Stück Natur</span><span className="product-details-text">Produktdetails</span><ChevronRight size={18} /></button>
         <section className="canvas-workspace" data-testid="canvas-workspace">
-          <div className="canvas-toolbar"><div className="history-buttons"><button className="canvas-button" data-testid="undo-button" aria-label="Rückgängig" title="Rückgängig" disabled={!editor.canUndo} onClick={editor.undo}><Undo2 size={20} /></button><button className="canvas-button" data-testid="redo-button" aria-label="Wiederholen" title="Wiederholen" disabled={!editor.canRedo} onClick={editor.redo}><Redo2 size={20} /></button></div><span className="canvas-kicker" data-testid="canvas-kicker">DEINE IDEE NIMMT FORM AN</span><button className="canvas-button expand-button" data-testid="expand-button" aria-label={expanded ? 'Zur Bearbeitung zurückkehren' : 'Arbeitsfläche vergrößern'} title={expanded ? 'Zur Bearbeitung' : 'Arbeitsfläche vergrößern'} onClick={() => setExpanded(!expanded)}>{expanded ? <Minimize size={20} /> : <Maximize size={20} />}</button></div>
-          <EngravingCanvas editor={editor} onSelect={o => { if (!panel || (panel === 'curve' && o.type !== 'text')) { setPanel('actions'); setExpanded(false); } }} />
+          <div className="canvas-toolbar"><div className="history-buttons"><button className="canvas-button" data-testid="undo-button" aria-label="Rückgängig" title="Rückgängig" disabled={!editor.canUndo} onClick={editor.undo}><Undo2 size={20} /></button><button className="canvas-button" data-testid="redo-button" aria-label="Wiederholen" title="Wiederholen" disabled={!editor.canRedo} onClick={editor.redo}><Redo2 size={20} /></button></div><span className="canvas-kicker" data-testid="canvas-kicker">DEINE IDEE NIMMT FORM AN</span><div className="canvas-view-buttons"><button className={`canvas-button ${gridEnabled ? 'active' : ''}`} data-testid="grid-toggle" aria-label="Raster anzeigen" aria-pressed={gridEnabled} title="Raster anzeigen / ausblenden" onClick={() => setGridEnabled(!gridEnabled)}><Grid3X3 size={19} /></button><button className={`canvas-button ${snapEnabled ? 'active' : ''}`} data-testid="snap-toggle" aria-label="Einrasten an Hilfslinien und Raster" aria-pressed={snapEnabled} title="Einrasten ein / aus" onClick={() => setSnapEnabled(!snapEnabled)}><Magnet size={19} /></button><button className="canvas-button expand-button" data-testid="expand-button" aria-label={expanded ? 'Zur Bearbeitung zurückkehren' : 'Arbeitsfläche vergrößern'} title={expanded ? 'Zur Bearbeitung' : 'Arbeitsfläche vergrößern'} onClick={() => setExpanded(!expanded)}>{expanded ? <Minimize size={20} /> : <Maximize size={20} />}</button></div></div>
+          <EngravingCanvas editor={editor} snapEnabled={snapEnabled} gridEnabled={gridEnabled} onSelect={o => { if (!panel || (['curve', 'fonts', 'edit'].includes(panel) && o.type !== 'text') || ['motifs', 'templates', 'image'].includes(panel)) { setPanel('actions'); setExpanded(false); } }} />
           <div className="canvas-caption" data-testid="canvas-caption"><span><Move size={14} />Elemente direkt auf dem Holz verschieben</span><span className="size-label">Ø 22 cm <span>·</span> Originalgröße angepasst</span></div>
         </section>
       </main>

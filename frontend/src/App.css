@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;450;500;550;600;650;700&family=Italianno&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;450;500;550;600;650;700&family=Italianno&family=Roboto:wght@400&family=Open+Sans:wght@400&family=Lato:wght@400&family=Montserrat:wght@400&family=Poppins:wght@400&family=Oswald:wght@400&family=Playfair+Display:wght@400&family=Merriweather:wght@400&family=Dancing+Script:wght@400&family=Caveat:wght@400&family=Pacifico&display=swap');
 
 :root { --forest: #303d29; --forest-dark: #243020; --ink: #292e25; --muted: #84877e; --line: #e7e8df; --paper: #fff; --cream: #f6f5ef; --sage: #edf0e5; --accent: #78866a; }
 * { box-sizing: border-box; }

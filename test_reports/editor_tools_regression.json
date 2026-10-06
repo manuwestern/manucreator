@@ -1,0 +1,32 @@
+{
+  "case": "Fonts, shapes, unlimited sizing, engraving clipping, alignment and mobile regression",
+  "status": "passed",
+  "resolves": [
+    "iteration_2.json centre guides overshadowed by nearby object anchors",
+    "iteration_2.json grid+snap axis quantization conflict",
+    "iteration_2.json incomplete mobile navigation/screenshots",
+    "randomUUID unsupported in embedded preview: replaced by getRandomValues IDs"
+  ],
+  "mobile_viewports": ["390x844", "375x667", "320x568"],
+  "checks_passed_at_all_viewports": [
+    "Curve > actions > edit > font-picker navigation",
+    "Font selection with real own-text preview",
+    "Outlined text and adjustable stroke",
+    "Rectangle creation and property controls",
+    "Wood canvas stays entirely above tool panel",
+    "No horizontal document overflow",
+    "Real CDP touch drag near product centre shows two centre guides and snaps exactly to300,300",
+    "Real touch drag with grid+snap quantizes both axes to340,340",
+    "Snapping toggle changes state",
+    "One undo/redo reverses/restores full drag"
+  ],
+  "additional_regressions": [
+    "Actual scaling-handle drag enlarges text to250percent, undo restores100percent",
+    "Actual scaling-handle drag enlarges line to270mm, beyond old170mm limit",
+    "320x568 real touch curvature endpoints -180/+180 and grouped undo/redo",
+    "350mm line accepted and actual artwork clipped to engraving area"
+  ],
+  "previous_test_agent_passes": "See iteration_2.json for fonts, shapes, uploads and IndexedDB persistence tests.",
+  "screenshots": ["/tmp/manu-mobile-font-matrix.jpg", "/tmp/manu-mobile-outline-matrix.jpg", "/tmp/manu-mobile-shapes-matrix.jpg", "/tmp/manu-alignment-clipping.jpg"],
+  "remaining_reported_issues": []
+}

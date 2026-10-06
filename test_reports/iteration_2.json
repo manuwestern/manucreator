@@ -1,0 +1,68 @@
+{
+  "summary": "Frontend-only regression testing executed on public URL for desktop and mobile (focused runs). Verified: font inventory/load, text outline workflow, shape creation/default positions, large-size limits, thin-line hit area selection, object guides, upload size/format handling, localStorage+IndexedDB persistence, preview/export trigger, and mobile layout constraints (390x844).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Smart center alignment guides",
+        "issue": "Center guides did not appear during real drag when moving thin line near visual center target in desktop run; object guides appeared normally.",
+        "selector": "[data-testid^='alignment-guide-'][data-kind='centre']",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [
+      {
+        "flow": "Grid + snap movement quantization",
+        "issue": "With grid enabled and snap enabled, dragged line position had non-quantized Y coordinate (x quantized, y not), contrary to expected full grid quantization away from smart anchors.",
+        "affected_selectors": [
+          "[data-testid='grid-toggle']",
+          "[data-testid='snap-toggle']",
+          "[data-testid^='object-line-']"
+        ]
+      },
+      {
+        "flow": "Mobile screenshot evidence collection for font picker/shape properties/outline",
+        "issue": "Automation could not reliably transition from mobile curve/actions state into font picker panel using current scripted selector path; required screenshots for all requested mobile states remain partial.",
+        "affected_selectors": [
+          "[data-testid='font-picker-open']",
+          "[data-testid='panel-back']",
+          "[data-testid='action-edit']"
+        ]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/test_reports/iteration_1.json",
+    "/app/test_reports/slider_regression.json",
+    "/app/tests/create_upload_fixtures.py"
+  ],
+  "action_items": [
+    "Investigate center-guide trigger conditions in drag path so [data-kind='centre'] appears reliably at canvas center.",
+    "Review alignObject/grid interaction so grid+snap yields quantized coordinates consistently when not intentionally snapped to non-grid smart anchors.",
+    "Provide/confirm deterministic mobile panel navigation state for automated capture of font picker, shape-properties, and outlined-text screenshots.",
+    "Re-run full mobile matrix (390x844, 375x667, 320x568) once mobile panel path is stabilized."
+  ],
+  "critical_code_review_comments": [
+    "State-dependent panel routing on mobile (curve/actions/edit/fonts) is difficult to drive deterministically in automation; consider explicit test ids/state hooks for direct panel transitions.",
+    "Quantization behavior appears sensitive to simultaneous smart-anchor detection; expected/actual priority between smart guides and grid snapping should be clarified in code/comments and tests.",
+    "No backend/API dependency observed for tested flows; storage and editor state are correctly local-first (localStorage + IndexedDB)."
+  ],
+  "updated_files": [
+    "/app/tests/create_upload_fixtures.py",
+    "/app/test_reports/iteration_2.json"
+  ],
+  "success_rate": {
+    "backend": "N/A (frontend-only scope)",
+    "frontend": "88%"
+  },
+  "test_credentials": "No auth flow in current scope. /app/memory/test_credentials.md exists but contains placeholders only.",
+  "seed_data_creation": "Created local test fixtures only: /app/tests/fixtures (valid_under10_a.jpg, valid_9mb.jpg (>10MB), malformed_fake.png).",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Strongly validated passes: 15 fonts present; document.fonts loaded 14/14 Google/target faces; outline/fill and curve interactions work; shape defaults at translate(300 345); line width accepts 350mm; thin-line hit area >=44px and offset drag works; object guides appear; upload acceptance/rejection and persistence passed; preview excludes guides/grid and has clipping defs; export download trigger passed. Partial/failed: centre guides and grid+snap quantization expectation; mobile screenshot capture path remained unstable in scripted navigation.",
+  "rca of the issue": "RCA-1 (centre guides): During drag, alignObject may select nearest object anchors and skip center alignment unless delta threshold and anchor index conditions are met simultaneously, causing no [data-kind='centre'] guide even near center. Repro: add line, drag near canvas center, inspect alignment-guide selectors while pointer down. RCA-2 (grid+snap): When both snap and grid are enabled, a nearest non-center anchor may partially override grid quantization for one axis; observed y retained decimal units while x snapped to grid. Repro: add long line, enable grid+snap, drag near other object anchors, inspect transform translate values."
+}
